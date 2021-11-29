@@ -33,7 +33,7 @@ typedef struct Tmatrice{ // Struct Tmatrice
     }
 
     ~Tmatrice(){ // Distruttore matrice
-        delete[] mat;
+        delete mat;
     }
 
     void stampa() const { // Stampa matrice
