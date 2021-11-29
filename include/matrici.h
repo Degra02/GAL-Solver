@@ -7,7 +7,7 @@ using namespace std;
 #define __MATRICI_H__
 
 typedef struct Tmatrice{ // Struct Tmatrice 
-    float *mat;
+    float **mat;
     int nr;
     int nc;
 
@@ -23,10 +23,11 @@ typedef struct Tmatrice{ // Struct Tmatrice
     Tmatrice(int _nr, int _nc, int min, int max){ // Costruttore matrice con numeri casuali
         nr = _nr;
         nc = _nc;
-        mat = new float[nr*nc];
+        mat = new float*[nr];
         for(int i = 0; i < nr; i++){
+            *(mat + i) = new float[nc];
             for(int j = 0; j < nc; j++){
-                *((mat + i) + j) = (rand() % (max*10 - min*10 + 1) + min*10)/10.0;
+                *( *(mat + i) + j) = (rand() % (max*10 - min*10 + 1) + min*10)/10.0;
             }
         }
     }
@@ -38,7 +39,7 @@ typedef struct Tmatrice{ // Struct Tmatrice
     void stampa() const { // Stampa matrice
         for(int i = 0; i < nr; i++){
             for(int j = 0; j < nc; j++){
-                printf(" %2.1f ", *((mat + i) + j));
+                printf(" %2.1f ", *( *(mat + i) + j));
             }
             cout << endl;
         }

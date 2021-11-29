@@ -13,9 +13,9 @@ float sarrus(Matrice m){ // Metodo di Sarrus per il calcolo del determinante
         for(int i = 0; i < m.nr; i++){
             for(int j = 0; j < m.nc*2; j++){
                 if(j < m.nr){
-                    full[i][j] = *((m.mat + i) + j);
+                    full[i][j] = *( *(m.mat + i) + j);
                 } else {
-                    full[i][j] = *((m.mat + i) + j - m.nc);
+                    full[i][j] = *( *(m.mat + i) + j - m.nc);
                 }
                 printf("%5.1f", full[i][j]);
             }
