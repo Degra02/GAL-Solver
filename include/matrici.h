@@ -6,89 +6,47 @@ using namespace std;
 #ifndef __MATRICI_H__
 #define __MATRICI_H__
 
-#define MAXN 100
+typedef struct Tmatrice{ // Struct Tmatrice 
+    float *mat;
+    int nr;
+    int nc;
 
-typedef struct Triga{
-    float valori[MAXN];
-    int n;
-
-    Triga(){
-        n = 0;
+    Tmatrice(){ // Costruttore di default
+        nr = nc = 0;
     }
 
-    Triga(int _n){
-        n = _n;
+    Tmatrice(int _nr, int _nc){ // Inizializza matrice
+        nr = _nr;
+        nc = _nc;
     }
 
-    Triga(int min, int max){
-        for(int i = 0; i < n; i++){
-            valori[i] = rand() % (max - min + 1) + min;
-        }
-    }
-
-    ~Triga(){}
-
-
-} Triga;
-
-typedef struct Tcolonna{
-    float valori[MAXN];
-    int n;
-
-    Tcolonna(){
-        n = 0;
-    }
-
-    Tcolonna(int _n){
-        n = _n;
-    }
-
-    Tcolonna(int min, int max){
-        for(int i = 0; i < n; i++){
-            valori[i] = rand() % (max - min + 1) + min;
-        }
-    }
-
-    ~Tcolonna() {}
-
-}Tcolonna;
-
-typedef struct Tmatrice{
-    Triga *r;
-    Tcolonna *c;
-
-    Tmatrice(){
-        r = new Triga[0];
-        c = new Tcolonna[0];
-    }
-
-    Tmatrice(int nr, int nc, int min, int max){
-        r = new Triga[nr];
-        c = new Tcolonna[nc];
+    Tmatrice(int _nr, int _nc, int min, int max){ // Costruttore matrice con numeri casuali
+        nr = _nr;
+        nc = _nc;
+        mat = new float[nr*nc];
         for(int i = 0; i < nr; i++){
-            r[i] = Triga(nr);
-            r[i] = Triga(min, max);
-        }
-
-        for(int i = 0; i < nr; i++){
-            c[i] = Tcolonna(nr);
-            c[i] = Tcolonna(min, max);
-        }
-    }
-
-    ~Tmatrice(){
-        delete[] r, c;
-    }
-
-    void stampa() const{
-        for(int i = 0; i < r->n; i++){
-            for(int j = 0; j < c->n; j++){
-                printf("%3.1f", c->valori[j]);
+            for(int j = 0; j < nc; j++){
+                *((mat + i) + j) = (rand() % (max*10 - min*10 + 1) + min*10)/10.0;
             }
         }
     }
 
+    ~Tmatrice(){ // Distruttore matrice
+        delete[] mat;
+    }
+
+    void stampa() const { // Stampa matrice
+        for(int i = 0; i < nr; i++){
+            for(int j = 0; j < nc; j++){
+                printf(" %2.1f ", *((mat + i) + j));
+            }
+            cout << endl;
+        }
+    }
+
 } Tmatrice;
+
+typedef Tmatrice Matrice; // Tipo Matrice di tipo Tmatrice per rendere più chiara la scrittura
 
 
 #endif
