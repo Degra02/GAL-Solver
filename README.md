@@ -1,2 +1,2 @@
 # GAL-Library
-Libraries to solve Linear Algebra excercises
+A WIP project regarding libraries to solve Linear Algebra excercises
