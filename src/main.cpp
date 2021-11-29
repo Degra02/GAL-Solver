@@ -18,7 +18,16 @@ int main()
 	Matrice m(3, 3, 0, 10);
 	m.stampa();
 	printf("\nDet = %.1f", sarrus(m));
+	
+	int dim;
+	cout << endl << "Dim array = "; cin >> dim;
+	float valori[dim];
+	for(int i = 0; i < dim; i++){
+		cin >> valori[i];
+	}
 
+	Vettore v(valori, dim);
+	v.stampa();
 	
 	return 0;
 }
