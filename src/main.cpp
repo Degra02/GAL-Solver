@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <ctime>
 #include "matrici.h"
+#include "determinanti.h"
+#include "vettori.h"
 using namespace std;
 
 /* 
@@ -15,6 +17,8 @@ int main()
 	srand(time(NULL));
 	Matrice m(3, 3, 0, 10);
 	m.stampa();
+	printf("\nDet = %.1f", sarrus(m));
 
+	
 	return 0;
 }
