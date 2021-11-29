@@ -5,7 +5,7 @@
 #include "determinanti.h"
 using namespace std;
 
-float sarrus(Matrice m){
+float sarrus(Matrice m){ // Metodo di Sarrus per il calcolo del determinante
     if(m.nr == m.nc && m.nc <= 3 && m.nc > 0){
         float det;
         float full[m.nr][m.nc*2];
