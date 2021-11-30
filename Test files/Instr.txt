@@ -1,2 +1,41 @@
 Inserire qui i file da testare e correggere,
 per poi essere implementati nella libreria
+
+Matrice RiduzioneMatrice(Matrice *m, int riga, int colonna){
+    Matrice md(m->nr - 1, m->nc - 1);
+
+    int counterR = 0, counterC = 0;
+
+    for (int i = 0; i < m->nr; i++){
+        for (int j = 0; j < m->nc; j++){
+            if (i != riga && j != colonna){
+                if (counterC == md.nc){
+                    counterC = 0;
+                    counterR++;
+                }
+                md.mat[counterR][counterC++] = m->mat[i][j];
+            }
+        }
+    }
+
+    return md;
+}
+
+float det(Matrice *m){
+    if (m->nc == m->nr && m->nc > 2){ 
+        float d = 0.0;
+        for (int i = 0; i < m->nr; i++){
+            Matrice md = RiduzioneMatrice(m, i, 0);
+            d += pow(-1, i) * m->mat[i][0] * det(&md); 
+        }
+        return d;
+
+    } else {
+        if (m->nc == 1) return m->mat[0][0];
+        printf("%f\n", m->mat[1][1] * m->mat [1][1]);
+        printf("%f\n", m->mat[0][1] * m->mat [1][0]);
+        printf("%f\n", m->mat[0][0] * m->mat [1][1] - m->mat[0][1] * m->mat [1][0]);
+        if (m->nc == 2) return  m->mat[0][0] * m->mat [1][1] - m->mat[0][1] * m->mat [1][0];
+        return 0;
+    }
+} 
