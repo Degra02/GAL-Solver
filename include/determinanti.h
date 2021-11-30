@@ -7,6 +7,6 @@ using namespace std;
 #ifndef __DETERMINANTI_H__
 #define __DETERMINANTI_H__
 
-float sarrus(Matrice m);
+float sarrus(Tmatrice m);
 
 #endif

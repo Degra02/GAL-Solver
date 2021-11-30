@@ -15,9 +15,14 @@ using namespace std;
 int main()
 {
 	srand(time(NULL));
-	Matrice m(3, 3, 0, 10);
+	Tmatrice m(3, 3, 0, 10);
 	m.stampa();
-	printf("\nDet = %.1f", sarrus(m));
+	printf("\nDet con Sarrus = %.1f", sarrus(m));
+
+	Tmatrice somma;
+	matrix_sum(&somma, &m, &m);
+	cout << endl << "Matrice + Matrice:" << endl;
+	somma.stampa();
 	
 	int dim;
 	cout << endl << "Dim array = "; cin >> dim;

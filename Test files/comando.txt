@@ -1,0 +1,1 @@
+g++ -std=c++17 -Wall -Wextra -g -Iinclude ./src/"programmi.cpp" -o ./output/main.exe

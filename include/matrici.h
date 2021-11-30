@@ -50,7 +50,7 @@ typedef struct Tmatrice{ // Struct Tmatrice
 
 } Tmatrice;
 
-typedef Tmatrice Matrice; // Tipo Matrice di tipo Tmatrice per rendere più chiara la scrittura
-
+void matrix_sum(Tmatrice *sum, Tmatrice *a, Tmatrice *b);
+Tmatrice matrix_multiplication(Tmatrice *a, Tmatrice *b);
 
 #endif
