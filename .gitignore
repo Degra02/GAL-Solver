@@ -1,4 +1,13 @@
 # Unnecessary files
+
+# object files in the source directory
 /src/*.o
+
+# text editor garbage
 .vscode/
+
+# project essentials
 Makefile
+
+# output folder
+output/
