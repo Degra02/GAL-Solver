@@ -18,6 +18,10 @@ typedef struct Tmatrice{ // Struct Tmatrice
     Tmatrice(int _nr, int _nc){ // Inizializza matrice
         nr = _nr;
         nc = _nc;
+        mat = new float*[nr];
+        for(int i = 0; i < nr; i++){
+            mat[i] = new float[nc];
+        }
     }
 
     Tmatrice(int _nr, int _nc, int min, int max){ // Costruttore matrice con numeri casuali
@@ -42,7 +46,7 @@ typedef struct Tmatrice{ // Struct Tmatrice
     void stampa() const { // Stampa matrice
         for(int i = 0; i < nr; i++){
             for(int j = 0; j < nc; j++){
-                printf(" %2.1f ", *( *(mat + i) + j));
+                printf(" %2.1f ", mat[i][j]);
             }
             cout << endl;
         }
@@ -58,7 +62,9 @@ typedef struct Tmatrice{ // Struct Tmatrice
 
 } Tmatrice;
 
+typedef Tmatrice* Matriceptr;
+
 void matrix_sum(Tmatrice *sum, Tmatrice *a, Tmatrice *b);
-Tmatrice matrix_multiplication(Tmatrice *a, Tmatrice *b);
+Matriceptr matrix_multiplication(Matriceptr a, Matriceptr b);
 
 #endif

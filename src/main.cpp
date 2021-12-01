@@ -24,7 +24,12 @@ int main()
 	cout << endl << "Matrice + Matrice:" << endl;
 	somma.stampa();
 	
-	int dim;
+	Matriceptr multipl;
+	multipl = matrix_multiplication(&m, &m);
+	cout << endl << "Matrice * matrice:";
+	cout << endl << endl; multipl->stampa();
+
+	/*int dim;
 	cout << endl << "Dim array = "; cin >> dim;
 	float valori[dim];
 	for(int i = 0; i < dim; i++){
@@ -32,7 +37,7 @@ int main()
 	}
 
 	Vettore v(valori, dim);
-	v.stampa();
+	v.stampa();*/
 	
 	return 0;
 }
