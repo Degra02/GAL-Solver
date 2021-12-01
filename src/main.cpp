@@ -19,8 +19,8 @@ int main()
 	m.stampa();
 	printf("\nDet con Sarrus = %.1f", sarrus(m));
 
-	Tmatrice somma;
-	matrix_sum(&somma, &m, &m);
+	Tmatrice somma(3, 3, 0, 10);
+	somma.sum(&m);
 	cout << endl << "Matrice + Matrice:" << endl;
 	somma.stampa();
 	

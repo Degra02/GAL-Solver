@@ -1,5 +1,9 @@
-Inserire qui i file da testare e correggere,
-per poi essere implementati nella libreria
+____________________________________________
+                                            |
+Inserire qui i file da testare e correggere,|
+per poi essere implementati nella libreria  |
+____________________________________________|
+
 
 Matrice RiduzioneMatrice(Matrice *m, int riga, int colonna){
     Matrice md(m->nr - 1, m->nc - 1);

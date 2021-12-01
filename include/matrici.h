@@ -48,6 +48,14 @@ typedef struct Tmatrice{ // Struct Tmatrice
         }
     }
 
+    void sum(Tmatrice *b){ //Sums a new matrix to the current one
+        for(int i = 0; i < nr; i++){
+            for(int j = 0; j < nc; j++){
+                mat[i][j] = b->mat[i][j] + b->mat[i][j];
+            }
+        }
+    }
+
 } Tmatrice;
 
 void matrix_sum(Tmatrice *sum, Tmatrice *a, Tmatrice *b);
