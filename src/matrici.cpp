@@ -25,3 +25,14 @@ Matrix matrix_multiplication(Matrix a, Matrix b){
         exit(1);
     }
 }
+
+void S(Matrix m, int a, int b){
+    Vector v = new Tvettore(m->mat[a-1], m->nc);
+    m->mat[a-1] = m->mat[b-1];
+    m->mat[b-1] = v->array;
+}
+
+void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
+    Vector v = new Tvettore(m->mat[d-1], m->nc);
+    m->mat[d-1]; //Completa
+}

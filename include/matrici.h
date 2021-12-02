@@ -37,6 +37,18 @@ typedef struct Tmatrice{ // Struct Tmatrice
         }
     }
 
+    void copy_matrix(Tmatrice *a){
+        nr = a->nr;
+        nc = a->nc;
+        mat = new float*[nr];
+        for(int i = 0; i < nr; i++){
+            mat[i] = new float[nc];
+            for(int j = 0; j < nc; j++){
+                mat[i][j] = a->mat[i][j];
+            }
+        }
+    }
+
     ~Tmatrice(){ // Distruttore matrice
         for(int i = 0; i < nr; i++)
             delete[] mat[i];
@@ -67,5 +79,7 @@ typedef Tmatrice* Matrix;
 
 void matrix_sum(Tmatrice *sum, Tmatrice *a, Tmatrice *b);
 Matrix matrix_multiplication(Matrix a, Matrix b);
+void S(Matrix m, int d, int s); // Change rows operation
+void E(Matrix m, int d, int s, float lambda); // Add a row to another, multiplied by lambda
 
 #endif

@@ -46,6 +46,6 @@ typedef struct Tvettore{ // Struct Tvettore
 
 }Tvettore;
 
-typedef Tvettore Vettore; // rendere più semplice la lettura
+typedef Tvettore *Vector; // rendere più semplice la lettura
 
 #endif

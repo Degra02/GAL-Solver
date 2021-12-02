@@ -15,10 +15,17 @@ using namespace std;
 int main()
 {
 	srand(time(NULL));
-	Matrix m = new Tmatrice(3, 3, 0, 10);
+	Matrix m = new Tmatrice(4, 4, 0, 10);
 	m->stampa();
-	printf("det=%f", det(m));
-	printf("det sarrus=%f", sarrus(m));
+	printf("det=%.1f", det(m)); cout << endl;
+	printf("det sarrus=%.1f", sarrus(m));
+
+	S(m, 1, 2);
+	cout << endl; m->stampa();
+
+	Matrix c = new Tmatrice;
+	c->copy_matrix(m);
+	c->stampa();
 	
 	return 0;
 }
