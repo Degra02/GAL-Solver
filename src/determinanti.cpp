@@ -11,7 +11,7 @@ float det(Matrix m) {
         if (m->nr == 2) return m->mat[0][0]*m->mat[1][1]-m->mat[0][1]*m->mat[1][0];
 
         float determinante = 0.0;
-        // Defined sub-matrix sub_m (n-1)x(n-1)
+        // Defined the sub-matrix sub_m (n-1)x(n-1)
 		Matrix sub_m = new Tmatrix(m->nr-1, m->nc-1); 
 		sub_m->mat = new float*[sub_m->nr];
         for (int j=0; j<sub_m->nr; j++)
