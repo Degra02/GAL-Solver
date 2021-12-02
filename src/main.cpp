@@ -12,9 +12,6 @@ using namespace std;
 	di opzioni che l'utente potrà scegliere
 */
 
-
-
-
 int main()
 {
 	srand(time(NULL));

@@ -6,7 +6,6 @@
 using namespace std;
 
 float det(Matrix m) {
-	printf("%f\n", *( *(m->mat + 0) + 0));
     if (m->nr == m->nc) {
         if (m->nr == 1) return m->mat[0][0];
         if (m->nr == 2) return m->mat[0][0]*m->mat[1][1]-m->mat[0][1]*m->mat[1][0];
@@ -30,33 +29,16 @@ float det(Matrix m) {
 						sub_col=c-1;
 
 						sub_m->mat[sub_row][sub_col]=2.0;
-						printf("%f\n", sub_m->mat[sub_row][sub_col]);
-						printf("%f\n", m->mat[r][c]);
 						sub_m->mat[sub_row][sub_col] = m->mat[r][c]; 
-						printf("%f\n", sub_m->mat[sub_row][sub_col]);
 
-						// visualizzare indici di sub_m e m
-						printf("indice riga=%d\n", sub_row);
-						printf("indice colonna=%d\n", sub_col);
-						printf("r=%d\n", r);
-						printf("c=%d\n", c);
                     }
                 }
 			}
-	
-			// visualizzazione matrice sub_m
-			sub_m->stampa();
             determinante += pow(-1.0, i)*m->mat[i][0]*det(sub_m);
-			// error
-			printf("%f\n", m->mat[i][0]); 
-			printf("%f\n", pow(-1.0, i));
-			printf("determinamnte=%f\n", determinante);
-
-			// fino alla prima iterazione i calcoli sono corretti 
-			// la funzione si blocca all'inizio della seconda iterazione
         }
         return determinante;
     } else {
+        cout << endl << "Determinante non calcolabile";
         return 0.0;
     }
 }
