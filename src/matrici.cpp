@@ -39,10 +39,11 @@ void D(Matrix m, int a, float lambda){
 }
 
 void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
-    D(m, s, lambda);
+    Vector v = new Tvettore(m->mat[s-1], m->nc);
+    v->multiply(lambda);
     for(int j = 0; j < m->nc; j++){
-        m->mat[d-1][j] = m->mat[d-1][j] - m->mat[s-1][j];
+        m->mat[d-1][j] = m->mat[d-1][j] + v->array[j];
     }
-    float mu = 1/lambda;
-    D(m, s, mu);
+    
+    v->~Tvettore();
 }

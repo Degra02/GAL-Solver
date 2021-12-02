@@ -44,6 +44,12 @@ typedef struct Tvettore{ // Struct Tvettore
         }
     }
 
+    void multiply(float lambda){
+        for(int i = 0; i < n; i++){
+            array[i] *= lambda;
+        }
+    }
+
 }Tvettore;
 
 typedef Tvettore *Vector; // rendere più semplice la lettura
