@@ -11,13 +11,13 @@ float det(Matrix m) {
         if (m->nr == 2) return m->mat[0][0]*m->mat[1][1]-m->mat[0][1]*m->mat[1][0];
 
         float determinante = 0.0;
-        // Definisco la sottomatrice sub_m (n-1)x(n-1)
+        // Defined sub-matrix sub_m (n-1)x(n-1)
 		Matrix sub_m = new Tmatrix(m->nr-1, m->nc-1); 
 		sub_m->mat = new float*[sub_m->nr];
         for (int j=0; j<sub_m->nr; j++)
             *(sub_m->mat + j) = new float[sub_m->nc];
 
-        // Riempio la sottomatrice sub_m sottraendo la riga i e la colonna 0 della matrice m
+        // Fill the sub-matrix sub_m by removing the i-row and the 0-column of the m matrix
         for (int i=0; i<m->nr; i++) {
             for (int r=0; r<m->nr; r++) {
                 for (int c=1; c<m->nc; c++) {
@@ -25,17 +25,17 @@ float det(Matrix m) {
                 }
 			}
 
-            // Uso il teorema Laplace per determinare il determinante
+            // Laplace's theorem to calculate the determinant
             determinante += pow(-1.0, i)*m->mat[i][0]*det(sub_m);
         }
         return determinante;
     } else {
-        cout << "You couldn't calculate determinant" << endl;
+        cout << "Cannot calculate the matrix determinant" << endl;
         return 0.0;
     }
 }
 
-float sarrus(Matrix m){ // Metodo di Sarrus per il calcolo del determinante
+float sarrus(Matrix m){ // Sarrus' method to calculare the determinant
     if(m->nr == m->nc && m->nc <= 3 && m->nc > 0){
         float det;
         float full[m->nr][m->nc*2];
@@ -62,7 +62,7 @@ float sarrus(Matrix m){ // Metodo di Sarrus per il calcolo del determinante
         
         return det;
     } else {
-        printf("\nRegola di Sarrus non applicabile");
+        printf("\nCannot use Sarrus' rule");
     }
 
     return 1;

@@ -32,6 +32,12 @@ void S(Matrix m, int a, int b){
     m->mat[b-1] = v->array;
 }
 
+void D(Matrix m, int a, float lambda){
+    for(int j = 0; j < m->nc; j++){
+        m->mat[a][j] = m->mat[a][j] * lambda;
+    }
+}
+
 void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
     Vector v = new Tvettore(m->mat[d-1], m->nc);
     m->mat[d-1]; 
