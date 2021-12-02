@@ -7,7 +7,7 @@ using namespace std;
 #ifndef __DETERMINANTI_H__
 #define __DETERMINANTI_H__
 
-//float det(Tmatrice m);
+float det(Matrix m);
 float sarrus(Matrix m);
 
 #endif
