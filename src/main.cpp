@@ -15,17 +15,18 @@ using namespace std;
 int main()
 {
 	srand(time(NULL));
-	Tmatrice m(3, 3, 0, 10);
-	m.stampa();
+	Matrix m = new Tmatrice(3, 3, 0, 10);
+	m->stampa();
 	printf("\nDet con Sarrus = %.1f", sarrus(m));
+	 cout << endl; m->stampa(); cout << endl;
 
 	Tmatrice somma(3, 3, 0, 10);
-	somma.sum(&m);
+	somma.sum(m);
 	cout << endl << "Matrice + Matrice:" << endl;
 	somma.stampa();
 	
-	Matriceptr multipl;
-	multipl = matrix_multiplication(&m, &m);
+	Matrix multipl;
+	multipl = matrix_multiplication(m, m);
 	cout << endl << "Matrice * matrice:";
 	cout << endl << endl; multipl->stampa();
 

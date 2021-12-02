@@ -62,9 +62,9 @@ typedef struct Tmatrice{ // Struct Tmatrice
 
 } Tmatrice;
 
-typedef Tmatrice* Matriceptr;
+typedef Tmatrice* Matrix;
 
 void matrix_sum(Tmatrice *sum, Tmatrice *a, Tmatrice *b);
-Matriceptr matrix_multiplication(Matriceptr a, Matriceptr b);
+Matrix matrix_multiplication(Matrix a, Matrix b);
 
 #endif

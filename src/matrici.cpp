@@ -6,8 +6,8 @@
 #include "vettori.h"
 using namespace std;
 
-Matriceptr matrix_multiplication(Matriceptr a, Matriceptr b){
-    Matriceptr multi;
+Matrix matrix_multiplication(Matrix a, Matrix b){
+    Matrix multi;
     if(a->nc == b->nr){
         multi = new Tmatrice(a->nr, b->nc);
         for(int i = 0; i < multi->nr; i++){
