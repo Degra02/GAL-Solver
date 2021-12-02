@@ -21,7 +21,7 @@ Matrix matrix_multiplication(Matrix a, Matrix b){
     return multi;
 
     } else {
-        cout << "Impossible to multiplicate the given functions";
+        cout << "Impossible to multiply the given functions";
         exit(1);
     }
 }
