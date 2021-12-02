@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
+#include <string>
 using namespace std;
 
 #ifndef __MATRICI_H__
@@ -73,6 +74,17 @@ typedef struct Tmatrix{ // Struct Tmatrix
         }
     }
 
+    void Id_n(int n){
+        nr = nc = n;
+        mat = new float*[n];
+        for(int i = 0; i < n; i++){
+            mat[i] = new float[n];
+            for(int j = 0; j < n; j++){
+
+            }
+        }
+    }
+
 } Tmatrix;
 
 typedef Tmatrix* Matrix; 
@@ -84,5 +96,7 @@ Matrix matrix_scalat_multiplication(Matrix a, float lambda);
 void S(Matrix m, int d, int s); // Change rows operation
 void D(Matrix m, int a, float lambda);
 void E(Matrix m, int d, int s, float lambda); // Add a row to another, multiplied by lambda
+void print_fract_matrix(Matrix m);
+void findFraction(string s);
 
 #endif

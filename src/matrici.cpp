@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <bits/stdc++.h>
 #include "matrici.h"
 #include "determinanti.h"
 #include "vettori.h"
@@ -67,4 +68,112 @@ Matrix matrix_transpose(Matrix m) {
     }
 
     return T;
+}
+
+void print_fract_matrix(Matrix m){
+    for(int i = 0; i < m->nr; i++){
+        for(int j = 0; j < m->nc; j++){
+            cout << "   "; findFraction(to_string(m->mat[i][j]));
+        }
+        cout << endl << endl;
+    }
+}
+
+void findFraction(string s){
+    // Initialize variables
+    string be_deci = "",
+           af_deci = "",
+           reccu = "";
+ 
+    bool x = true, y = false,
+         z = false;
+ 
+    // Traverse the floating string
+    for (int i = 0; i < s.size(); ++i) {
+ 
+        // Check if decimal part exist
+        if (s[i] == '.') {
+            x = false;
+            y = true;
+            continue;
+        }
+ 
+        // Check if recurrence
+        // sequence exist
+        if (s[i] == '(') {
+            z = true;
+            y = false;
+            continue;
+        }
+ 
+        // Retrieve decimal part
+        // and recurrence re sequence
+        if (x)
+            be_deci += s[i];
+ 
+        if (y)
+            af_deci += s[i];
+ 
+        if (z) {
+ 
+            // Traverse the string
+            for (; i < s.size()
+                   && s[i] != ')';
+                 ++i)
+                reccu += s[i];
+            break;
+        }
+    }
+ 
+    // Convert string to integer
+    int num_be_deci = stoi(be_deci);
+    int num_af_deci = 0;
+ 
+    // If no recurrence sequence exist
+    if (af_deci.size() != 0)
+        num_af_deci = stoi(af_deci);
+ 
+    // Initialize numerator & denominator
+    int numr = num_be_deci
+                   * pow(10, af_deci.size())
+               + num_af_deci;
+ 
+    int deno = pow(10, af_deci.size());
+ 
+    // No reccuring term
+    if (reccu.size() == 0) {
+        int gd = __gcd(numr, deno);
+ 
+        // Print the result
+        cout << numr / gd << "/"
+             << deno / gd;
+    }
+ 
+    // If reccuring term exist
+    else {
+ 
+        // Convert reccuring term to integer
+        int reccu_num = stoi(reccu);
+ 
+        // reccu.size() is num of
+        // digit in reccur term
+        int numr1
+            = numr
+                  * pow(10, reccu.size())
+              + reccu_num;
+ 
+        int deno1 = deno
+                    * pow(10, reccu.size());
+ 
+        // eq 2 - eq 1
+        int res_numr = numr1 - numr,
+            res_deno = deno1 - deno;
+ 
+        int gd = __gcd(res_numr,
+                       res_deno);
+ 
+        // Print the result
+        cout << res_numr / gd << "/"
+             << res_deno / gd;
+    }
 }

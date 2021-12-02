@@ -15,37 +15,8 @@ int main()
 	srand(time(NULL));
 	Matrix m = new Tmatrix(4, 4, 0, 10);
 	m->stampa();
-	printf("det=%.1f", det(m)); cout << endl;
-	printf("det sarrus=%.1f", sarrus(m));
+	cout << endl << endl;
+	print_fract_matrix(m);
 
-	cout << endl << "S(1,2)" << endl;
-	S(m, 1, 2);
-	cout << endl; m->stampa();
-
-	cout << endl << "copy_matrix" << endl;
-	Matrix c = new Tmatrix;
-	c->copy_matrix(m);
-	c->stampa();
-
-	cout << endl << "D(4)[10]" << endl;
-	D(m, 4, 10.0);
-	cout << endl; m->stampa();
-
-	cout << endl << "E(1,3)[1]";
-	E(m, 1, 3, 1);
-	cout << endl;
-	m->stampa();
-
-	cout << endl << "trasposta di m:"; 
-	Matrix T = matrix_transpose(m);
-	cout << endl;
-	T->stampa();
-
-	cout << endl << "inversa di m:"; 
-	Matrix A = reverse_matrix_det(m);
-	cout << endl;
-	A->stampa();
-	cout << endl;
-	
 	return 0;
 }
