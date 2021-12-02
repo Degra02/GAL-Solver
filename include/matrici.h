@@ -59,9 +59,9 @@ typedef struct Tmatrix{ // Struct Tmatrix
     void stampa() const { // print f.
         for(int i = 0; i < nr; i++){
             for(int j = 0; j < nc; j++){
-                printf(" %2.1f ", mat[i][j]);
+                printf(" %5.1f ", mat[i][j]);
             }
-            cout << endl;
+            cout << endl << endl;
         }
     }
 

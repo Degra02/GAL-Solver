@@ -34,11 +34,15 @@ void S(Matrix m, int a, int b){
 
 void D(Matrix m, int a, float lambda){
     for(int j = 0; j < m->nc; j++){
-        m->mat[a][j] = m->mat[a][j] * lambda;
+        m->mat[a-1][j] = m->mat[a-1][j]*lambda;
     }
 }
 
 void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
-    Vector v = new Tvettore(m->mat[d-1], m->nc);
-    m->mat[d-1]; 
+    D(m, s, lambda);
+    for(int j = 0; j < m->nc; j++){
+        m->mat[d-1][j] = m->mat[d-1][j] - m->mat[s-1][j];
+    }
+    float mu = 1/lambda;
+    D(m, s, mu);
 }

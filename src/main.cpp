@@ -28,6 +28,13 @@ int main()
 	Matrix c = new Tmatrix;
 	c->copy_matrix(m);
 	c->stampa();
-	
+
+	D(m, 4, 10.0);
+	cout << endl; m->stampa();
+
+	E(m, 1, 3, 0);
+	cout << endl;
+	m->stampa();
+
 	return 0;
 }
