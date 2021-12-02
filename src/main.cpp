@@ -1,9 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "matrici.h"
-#include "determinanti.h"
-#include "vettori.h"
+#include "all-headers.h"
 using namespace std;
 
 /* 
