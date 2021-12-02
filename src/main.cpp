@@ -29,10 +29,12 @@ int main()
 	c->copy_matrix(m);
 	c->stampa();
 
+	cout << endl << "D(4)[10]" << endl;
 	D(m, 4, 10.0);
 	cout << endl; m->stampa();
 
-	E(m, 1, 3, 0);
+	cout << endl << "E(1,3)[1]";
+	E(m, 1, 3, 1);
 	cout << endl;
 	m->stampa();
 
