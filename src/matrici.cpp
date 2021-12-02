@@ -47,3 +47,14 @@ void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
     
     v->~Tvettore();
 }
+
+Matrix matrix_transpose(Matrix m) {
+    Matrix T = new Tmatrix(m->nr, m->nc);
+    for (int i=0; i<m->nr; i++) {
+        for (int j=0; j<m->nc; j++) {
+            T->mat[j][i] = m->mat[i][j];
+        }
+    }
+
+    return T;
+}

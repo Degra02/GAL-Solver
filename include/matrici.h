@@ -77,6 +77,7 @@ typedef struct Tmatrix{ // Struct Tmatrix
 
 typedef Tmatrix* Matrix; 
 
+Matrix matrix_transpose(Matrix m);
 void matrix_sum(Tmatrix *sum, Tmatrix *a, Tmatrix *b);
 Matrix matrix_multiplication(Matrix a, Matrix b);
 void S(Matrix m, int d, int s); // Change rows operation

@@ -36,5 +36,10 @@ int main()
 	cout << endl;
 	m->stampa();
 
+	cout << endl << "trasposta di m:"; 
+	Matrix T = matrix_transpose(m);
+	cout << endl;
+	T->stampa();
+
 	return 0;
 }

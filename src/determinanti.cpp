@@ -13,9 +13,6 @@ float det(Matrix m) {
         float determinante = 0.0;
         // Defined the sub-matrix sub_m (n-1)x(n-1)
 		Matrix sub_m = new Tmatrix(m->nr-1, m->nc-1); 
-		sub_m->mat = new float*[sub_m->nr];
-        for (int j=0; j<sub_m->nr; j++)
-            *(sub_m->mat + j) = new float[sub_m->nc];
 
         // Fill the sub-matrix sub_m by removing the i-row and the 0-column of the m matrix
         for (int i=0; i<m->nr; i++) {
