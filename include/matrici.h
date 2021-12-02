@@ -7,16 +7,16 @@ using namespace std;
 #ifndef __MATRICI_H__
 #define __MATRICI_H__
 
-typedef struct Tmatrice{ // Struct Tmatrice 
+typedef struct Tmatrix{ // Struct Tmatrix 
     float **mat;
     int nr;
     int nc;
 
-    Tmatrice(){ // Costruttore di default
+    Tmatrix(){ // default constructor
         nr = nc = 0;
     }
 
-    Tmatrice(int _nr, int _nc){ // Inizializza matrice
+    Tmatrix(int _nr, int _nc){ // Matrix init
         nr = _nr;
         nc = _nc;
         mat = new float*[nr];
@@ -25,7 +25,7 @@ typedef struct Tmatrice{ // Struct Tmatrice
         }
     }
 
-    Tmatrice(int _nr, int _nc, int min, int max){ // Costruttore matrice con numeri casuali
+    Tmatrix(int _nr, int _nc, int min, int max){ // Random number init constructor
         nr = _nr;
         nc = _nc;
         mat = new float*[nr];
@@ -37,7 +37,7 @@ typedef struct Tmatrice{ // Struct Tmatrice
         }
     }
 
-    void copy_matrix(Tmatrice *a){
+    void copy_matrix(Tmatrix *a){ // Initializes the current matrix by copying a new one
         nr = a->nr;
         nc = a->nc;
         mat = new float*[nr];
@@ -49,14 +49,14 @@ typedef struct Tmatrice{ // Struct Tmatrice
         }
     }
 
-    ~Tmatrice(){ // Distruttore matrice
+    ~Tmatrix(){ // Destroy f.
         for(int i = 0; i < nr; i++)
             delete[] mat[i];
 
         delete[] mat;
     }
 
-    void stampa() const { // Stampa matrice
+    void stampa() const { // print f.
         for(int i = 0; i < nr; i++){
             for(int j = 0; j < nc; j++){
                 printf(" %2.1f ", mat[i][j]);
@@ -65,7 +65,7 @@ typedef struct Tmatrice{ // Struct Tmatrice
         }
     }
 
-    void sum(Tmatrice *b){ //Sums a new matrix to the current one
+    void sum(Tmatrix *b){ //Sums a new matrix to the current one
         for(int i = 0; i < nr; i++){
             for(int j = 0; j < nc; j++){
                 mat[i][j] = b->mat[i][j] + b->mat[i][j];
@@ -73,11 +73,11 @@ typedef struct Tmatrice{ // Struct Tmatrice
         }
     }
 
-} Tmatrice;
+} Tmatrix;
 
-typedef Tmatrice* Matrix; 
+typedef Tmatrix* Matrix; 
 
-void matrix_sum(Tmatrice *sum, Tmatrice *a, Tmatrice *b);
+void matrix_sum(Tmatrix *sum, Tmatrix *a, Tmatrix *b);
 Matrix matrix_multiplication(Matrix a, Matrix b);
 void S(Matrix m, int d, int s); // Change rows operation
 void E(Matrix m, int d, int s, float lambda); // Add a row to another, multiplied by lambda

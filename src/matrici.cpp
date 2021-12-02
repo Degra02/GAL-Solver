@@ -9,7 +9,7 @@ using namespace std;
 Matrix matrix_multiplication(Matrix a, Matrix b){
     Matrix multi;
     if(a->nc == b->nr){
-        multi = new Tmatrice(a->nr, b->nc);
+        multi = new Tmatrix(a->nr, b->nc);
         for(int i = 0; i < multi->nr; i++){
             for(int j = 0; j < multi->nc; j++){
                 multi->mat[i][j] = 0;
@@ -21,7 +21,7 @@ Matrix matrix_multiplication(Matrix a, Matrix b){
     return multi;
 
     } else {
-        cout << "Moltiplicazione non possibile fra queste due matrici";
+        cout << "Impossible to multiplicate the given functions";
         exit(1);
     }
 }
@@ -34,5 +34,5 @@ void S(Matrix m, int a, int b){
 
 void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
     Vector v = new Tvettore(m->mat[d-1], m->nc);
-    m->mat[d-1]; //Completa
+    m->mat[d-1]; 
 }

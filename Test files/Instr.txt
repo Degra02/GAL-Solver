@@ -48,7 +48,7 @@ float det(Matrice *m){
 
 --------------------------------------------------------------------------
 
-float det(Tmatrice *m, int car) {
+float det(Tmatrix *m, int car) {
     float determinante = 0.0;
     // Cardinalità uno
     if (car == 1) determinante = m->mat[0][0];
@@ -59,7 +59,7 @@ float det(Tmatrice *m, int car) {
     else {
         for (int row = 0; row < car; row++) {
             // Istanzio la sotto-matrice
-            Tmatrice sub_m = Tmatrice(m->nr, m->nc);
+            Tmatrix sub_m = Tmatrix(m->nr, m->nc);
             sub_m.mat = new float*[sub_m.nr];
             for(int i = 0; i < sub_m.nr; i++){
                 *(sub_m.mat + i) = new float[sub_m.nc];
