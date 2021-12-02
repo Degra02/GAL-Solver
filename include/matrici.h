@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 using namespace std;
 
 #ifndef __MATRICI_H__
@@ -57,6 +58,8 @@ typedef struct Tmatrice{ // Struct Tmatrice
     }
 
 } Tmatrice;
+
+typedef Tmatrice* Matrix; 
 
 void matrix_sum(Tmatrice *sum, Tmatrice *a, Tmatrice *b);
 Tmatrice matrix_multiplication(Tmatrice *a, Tmatrice *b);

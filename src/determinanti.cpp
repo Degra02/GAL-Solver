@@ -5,23 +5,25 @@
 #include "determinanti.h"
 using namespace std;
 
-float sarrus(Tmatrice m){ // Metodo di Sarrus per il calcolo del determinante
-    if(m.nr == m.nc && m.nc <= 3 && m.nc > 0){
+
+
+float sarrus(Matrix m){ // Metodo di Sarrus per il calcolo del determinante
+    if(m->nr == m->nc && m->nc <= 3 && m->nc > 0){
         float det;
-        float full[m.nr][m.nc*2];
+        float full[m->nr][m->nc*2];
         
-        for(int i = 0; i < m.nr; i++){
-            for(int j = 0; j < m.nc*2; j++){
-                if(j < m.nr){
-                    full[i][j] = *( *(m.mat + i) + j);
+        for(int i = 0; i < m->nr; i++){
+            for(int j = 0; j < m->nc*2; j++){
+                if(j < m->nr){
+                    full[i][j] = *( *(m->mat + i) + j);
                 } else {
-                    full[i][j] = *( *(m.mat + i) + j - m.nc);
+                    full[i][j] = *( *(m->mat + i) + j - m->nc);
                 }
             }
         }
 
         det = 0;
-        for(int j = 0; j < ((m.nc*2) - 1); j++){
+        for(int j = 0; j < ((m->nc*2) - 1); j++){
             if(j <= 2){
                 det += (full[0][j]*full[1][j+1]*full[2][j+2]);
             } 
@@ -37,3 +39,4 @@ float sarrus(Tmatrice m){ // Metodo di Sarrus per il calcolo del determinante
 
     return 1;
 }
+
