@@ -96,7 +96,8 @@ Matrix matrix_scalat_multiplication(Matrix a, float lambda);
 void S(Matrix m, int d, int s); // Change rows operation
 void D(Matrix m, int a, float lambda);
 void E(Matrix m, int d, int s, float lambda); // Add a row to another, multiplied by lambda
-void print_fract_matrix(Matrix m);
 void findFraction(string s);
+void print_fract_matrix(Matrix m);
+
 
 #endif
