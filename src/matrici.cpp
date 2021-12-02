@@ -48,6 +48,16 @@ void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
     v->~Tvettore();
 }
 
+Matrix matrix_multiplication_scalar(Matrix a, float lambda) {
+    for (int i=0; i<a->nr; i++) {
+        for (int j=0; j<a->nc; j++) {
+            a->mat[i][j] = lambda*a->mat[i][j];
+        }
+    }
+
+    return a;
+}
+
 Matrix matrix_transpose(Matrix m) {
     Matrix T = new Tmatrix(m->nr, m->nc);
     for (int i=0; i<m->nr; i++) {

@@ -32,6 +32,29 @@ float det(Matrix m) {
     }
 }
 
+Matrix reverse_matrix_det(Matrix m) { // try
+    Matrix mat_cofactor = new Tmatrix(m->nr, m->nc);
+    Matrix sub_m = new Tmatrix(m->nr-1, m->nc-1); 
+
+    for (int i=0; i<m->nr; i++) {
+        for (int j=0; j<m->nc; j++) {
+
+            
+            for (int r=0; r<m->nr; r++) {
+                for (int c=1; c<m->nc; c++) {
+                    if (r != i) sub_m->mat[r<i ? r : r-1][c<j ? c : c-1] = m->mat[r][c]; 
+                }
+            }
+            
+
+            mat_cofactor->mat[i][j] = pow(-1.0, i+j)*det(sub_m);
+            
+        }
+    }
+
+    return matrix_multiplication_scalar(matrix_transpose(mat_cofactor), 1/det(m));
+}
+
 float sarrus(Matrix m){ // Sarrus' method to calculare the determinant
     if(m->nr == m->nc && m->nc <= 3 && m->nc > 0){
         float det;

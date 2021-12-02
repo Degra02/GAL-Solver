@@ -8,6 +8,7 @@ using namespace std;
 #define __DETERMINANTI_H__
 
 float det(Matrix m);
+Matrix reverse_matrix_det(Matrix m);
 float sarrus(Matrix m);
 
 #endif

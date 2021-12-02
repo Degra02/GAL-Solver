@@ -41,5 +41,11 @@ int main()
 	cout << endl;
 	T->stampa();
 
+	cout << endl << "inversa di m:"; 
+	Matrix A = reverse_matrix_det(m);
+	cout << endl;
+	A->stampa();
+	cout << endl;
+	
 	return 0;
 }
