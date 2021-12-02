@@ -17,6 +17,10 @@ int main()
 	m->stampa();
 	cout << endl << endl;
 	print_fract_matrix(m);
-
+	printf("det=%f\n", det(m));
+	cout << endl;
+	Matrix i = reverse_matrix_det(m);
+	i->stampa();
+	
 	return 0;
 }
