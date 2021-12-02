@@ -52,7 +52,7 @@ Matrix reverse_matrix_det(Matrix m) { // try
         }
     }
 
-    return matrix_multiplication_scalar(matrix_transpose(mat_cofactor), 1/det(m));
+    return matrix_scalat_multiplication(matrix_transpose(mat_cofactor), 1/det(m));
 }
 
 float sarrus(Matrix m){ // Sarrus' method to calculare the determinant

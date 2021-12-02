@@ -80,7 +80,7 @@ typedef Tmatrix* Matrix;
 Matrix matrix_transpose(Matrix m);
 void matrix_sum(Tmatrix *sum, Tmatrix *a, Tmatrix *b);
 Matrix matrix_multiplication(Matrix a, Matrix b);
-Matrix matrix_multiplication_scalar(Matrix a, float lambda);
+Matrix matrix_scalat_multiplication(Matrix a, float lambda);
 void S(Matrix m, int d, int s); // Change rows operation
 void D(Matrix m, int a, float lambda);
 void E(Matrix m, int d, int s, float lambda); // Add a row to another, multiplied by lambda

@@ -48,7 +48,7 @@ void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
     v->~Tvettore();
 }
 
-Matrix matrix_multiplication_scalar(Matrix a, float lambda) {
+Matrix matrix_scalat_multiplication(Matrix a, float lambda) {
     for (int i=0; i<a->nr; i++) {
         for (int j=0; j<a->nc; j++) {
             a->mat[i][j] = lambda*a->mat[i][j];
