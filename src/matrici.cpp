@@ -128,3 +128,40 @@ void print_fract_matrix(Matrix m){
         cout << endl << endl;
     }
 }
+
+void gauss_jordan(Matrix m){
+    int c = 0;
+    float lambda = 0;
+
+    for(int i = 0; i < m->nr; i++){
+        if(m->mat[i][c]){
+
+            for(int k = i+1; k < m->nr; k++){
+                if(m->mat[k][c]){
+                    lambda = -(m->mat[k][c] / m->mat[i][c]);
+                    E(m, k, i, lambda);
+
+                } else {
+                    continue;
+                }
+
+            }
+            if(c < m->nc){
+                c++;
+            }
+        } else {
+            if(i < m->nr-1){
+                for(int k = i+1; k < m->nr; k++){
+                    if(m->mat[k][c]){
+                        S(m, i+1, i);
+                    }
+                }
+            }
+
+            if(c < m->nc){
+                c++;
+            }
+        }
+
+    }
+}

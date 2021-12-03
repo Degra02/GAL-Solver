@@ -16,11 +16,17 @@ int main()
 	Matrix m = new Tmatrix(4, 4, 0, 10);
 	m->stampa();
 	cout << endl << endl;
-	print_fract_matrix(m);
+
+	/*print_fract_matrix(m);
 	printf("det=%f\n", det(m));
 	cout << endl;
 	Matrix i = reverse_matrix_det(m);
-	i->stampa();
+	i->stampa();*/
+
+	gauss_jordan(m);
+	m->stampa();
+
+	
 	
 	return 0;
 }
