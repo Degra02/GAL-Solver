@@ -81,17 +81,17 @@ void gauss_jordan_stairs(Matrix m){
 
 int rg(Matrix m) { 
     int counter = 0;
-    Matrix m_copy = m;
+    Matrix m_copy = new Tmatrix;
+    m_copy->copy_matrix(m);
     gauss_jordan_stairs(m_copy);
-    for (int i=0; i<m->nr; i++) {
-        for (int j=0; j<m->nc; j++) {
-            if (m->mat[i][j] != 0.0) {
+    for (int i=0; i<m_copy->nr; i++) {
+        for (int j=0; j<m_copy->nc; j++) {
+            if (m_copy->mat[i][j] != 0.0) {
                 counter++;
-                j = m->nc;
+                j = m_copy->nc;
             }
         }
     }
-
     return counter;
 }
 
@@ -112,7 +112,6 @@ void rref(Matrix m){
             c--; 
         }
     }
-    
 }
 
 Matrix matrix_scalar_multiplication(Matrix a, float lambda) {

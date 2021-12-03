@@ -29,6 +29,7 @@ typedef struct Tvettore{ // Struct Tvettore
 
     Tvettore(int _n, int min, int max){ // Inizializzazione vettore con _n valori casuali
         n = _n;
+        array = new float[n];
         for(int i = 0; i < n; i++){
             array[i] = (rand() % (max*10 - min*10 + 1) + min*10)/10.0;
         }

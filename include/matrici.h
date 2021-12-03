@@ -109,7 +109,7 @@ void matrix_sum(Tmatrix *sum, Tmatrix *a, Tmatrix *b);
 Matrix matrix_multiplication(Matrix a, Matrix b);
 Matrix matrix_scalar_multiplication(Matrix a, float lambda);
 void S(Matrix m, int d, int s); // Change rows operation
-void D(Matrix m, int a, float lambda);
+void D(Matrix m, int a, float lambda); // Multiply a row by a real number
 void E(Matrix m, int d, int s, float lambda); // Add a row to another, multiplied by lambda
 string findFraction(string s);
 void print_fract_matrix(Matrix m);

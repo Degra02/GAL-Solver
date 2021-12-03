@@ -13,13 +13,24 @@ using namespace std;
 int main()
 {	
 	srand(time(NULL));
-	Matrix m = new Tmatrix(4, 4);
-	m->init();
+	Matrix m = new Tmatrix(4, 4, 1, 5);
 	m->stampa();
 	cout << endl << endl;
 
-	printf("%d\n", rg(m));
-	m->stampa();
+	Vector vec = new Tvettore(m->nc, 1, 5);
+	cout << "Known terms: ";
+	vec->stampa();
+	Linear_System ls = new Tlisys(m, vec);
+	to_matrix(ls);
+
+	cout << endl << endl;
+	cout << "Linear system:" << endl;
+	ls->stampa();
+
+	Matrix m2;
+	m2 = to_matrix(ls);
+	cout << endl << endl << "to_matrix:" << endl;
+	m2->stampa();
 	
 	return 0;
 }

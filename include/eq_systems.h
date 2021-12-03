@@ -1,6 +1,6 @@
 #include <iostream>
-#include "matrici.h"
-#include "vettori.h"
+#include "all-headers.h"
+
 #ifndef __EQ_SYSTEMS_H__
 #define __EQ_SYSTEMS_H__
 using namespace std;
@@ -14,17 +14,17 @@ typedef struct Tlisys {
         b = new Tvettore();
     }
 
-    Tlisys(int num_variables, int num_eq) {
-        A = new Tmatrix(num_eq, num_variables);
-        A->init(); // da modificare 
-        b = new Tvettore(num_eq);
-        b->init(); // da modificare 
-    }
-
     Tlisys(Matrix _A, Vector _b) {
         A = _A;
         b = _b;
     }
+
+    /*Tlisys(int num_variables, int num_eq) {
+        A = new Tmatrix(num_eq, num_variables);
+        A->init(); // da modificare 
+        b = new Tvettore(num_eq);
+        b->init(); // da modificare 
+    }*/
 
     void stampa() {
         for(int i = 0; i < A->nr; i++){
@@ -38,5 +38,6 @@ typedef struct Tlisys {
 } Tlisys; 
 
 typedef Tlisys* Linear_System;
+Matrix to_matrix(Linear_System ls);
 
 #endif
