@@ -28,25 +28,61 @@ Matrix matrix_multiplication(Matrix a, Matrix b){
 }
 
 void S(Matrix m, int a, int b){
-    Vector v = new Tvettore(m->mat[a-1], m->nc);
-    m->mat[a-1] = m->mat[b-1];
-    m->mat[b-1] = v->array;
+    Vector v = new Tvettore(m->mat[a], m->nc);
+    m->mat[a] = m->mat[b];
+    m->mat[b] = v->array;
 }
 
 void D(Matrix m, int a, float lambda){
     for(int j = 0; j < m->nc; j++){
-        m->mat[a-1][j] = m->mat[a-1][j]*lambda;
+        m->mat[a][j] = m->mat[a][j]*lambda;
     }
 }
 
 void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
-    Vector v = new Tvettore(m->mat[s-1], m->nc);
+    Vector v = new Tvettore(m->mat[s], m->nc);
     v->multiply(lambda);
     for(int j = 0; j < m->nc; j++){
-        m->mat[d-1][j] = m->mat[d-1][j] + v->array[j];
+        m->mat[d][j] = m->mat[d][j] + v->array[j];
     }
     
     v->~Tvettore();
+}
+
+void gauss_jordan_stairs(Matrix m){
+    int c = 0;
+    float lambda = 0;
+
+    while(c < m->nc){
+        for(int i = 0; i < m->nr; i++){
+            if(m->mat[i][c]){
+
+                for(int k = i+1; k < m->nr; k++){
+                    if(m->mat[k][c]){
+                        lambda = -(m->mat[k][c] / m->mat[i][c]);
+                        E(m, k, i, lambda);
+
+                    } else {
+                        continue;
+                    }
+
+                }
+                c++;
+
+            } else {
+                if(i < m->nr-1){
+                    for(int k = i+1; k < m->nr; k++){
+                        if(m->mat[k][c]){
+                            S(m, i, i);
+                        }
+                    }
+                }
+                c++;
+            }
+
+        }
+    }
+    
 }
 
 Matrix matrix_scalar_multiplication(Matrix a, float lambda) {
@@ -126,42 +162,5 @@ void print_fract_matrix(Matrix m){
             cout << setw(10) << num;
         }
         cout << endl << endl;
-    }
-}
-
-void gauss_jordan(Matrix m){
-    int c = 0;
-    float lambda = 0;
-
-    for(int i = 0; i < m->nr; i++){
-        if(m->mat[i][c]){
-
-            for(int k = i+1; k < m->nr; k++){
-                if(m->mat[k][c]){
-                    lambda = -(m->mat[k][c] / m->mat[i][c]);
-                    E(m, k, i, lambda);
-
-                } else {
-                    continue;
-                }
-
-            }
-            if(c < m->nc){
-                c++;
-            }
-        } else {
-            if(i < m->nr-1){
-                for(int k = i+1; k < m->nr; k++){
-                    if(m->mat[k][c]){
-                        S(m, i+1, i);
-                    }
-                }
-            }
-
-            if(c < m->nc){
-                c++;
-            }
-        }
-
     }
 }

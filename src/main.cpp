@@ -13,30 +13,25 @@ using namespace std;
 int main()
 {	
 	srand(time(NULL));
-	Matrix m = new Tmatrix(4, 4, 0, 10);
+	Matrix m = new Tmatrix(4, 4, 0, 1);
 	m->stampa();
 	cout << endl << endl;
-<<<<<<< HEAD
 
-	/*print_fract_matrix(m);
-	printf("det=%f\n", det(m));
-	cout << endl;
-	Matrix i = reverse_matrix_det(m);
-	i->stampa();*/
+	/*D(m, 1, 10);
+	m->stampa();
+	cout << endl << endl;
+	
 
-	gauss_jordan(m);
+	E(m, 2, 1, -2);
+	m->stampa();
+	cout << endl << endl;
+	
+	S(m, 1, 2);
+	m->stampa();
+	gauss_jordan(m);*/
+
+	gauss_jordan_stairs(m);
 	m->stampa();
 
-	
-=======
-	System S = System(3, 4);
-
-	Matrix m1 = new Tmatrix(3, 3); 
-	m1->init();
-	m1->stampa();
-
-	S.stampa();
->>>>>>> b1f66410aaf7dbfe94435d9b8f44c2b4af75b365
-	
 	return 0;
 }

@@ -19,7 +19,7 @@ typedef struct Tvettore{ // Struct Tvettore
         array = new float[n];
     }
 
-    Tvettore(float values[], int dim){ // Inizializzazione vettore con "dim" values inserite da utente
+    Tvettore(float *values, int dim){ // Inizializzazione vettore con "dim" values inserite da utente
         n = dim;
         array = new float[n];
         for(int i = 0; i < n; i++){
