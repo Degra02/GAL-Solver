@@ -17,19 +17,6 @@ int main()
 	m->stampa();
 	cout << endl << endl;
 
-	/*D(m, 1, 10);
-	m->stampa();
-	cout << endl << endl;
-	
-
-	E(m, 2, 1, -2);
-	m->stampa();
-	cout << endl << endl;
-	
-	S(m, 1, 2);
-	m->stampa();
-	gauss_jordan(m);*/
-
 	gauss_jordan_stairs(m);
 	m->stampa();
 

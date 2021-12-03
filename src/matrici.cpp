@@ -140,11 +140,17 @@ string findFraction(string s){
  
     int deno = pow(10, af_deci.size());
     int gd = __gcd(numr, deno);
- 
+    
     string num = to_string(numr/gd);
     string den = to_string(deno/gd);
-    string full = num.append("/").append(den);
-    return full;
+
+    if((numr == 0) || ((deno/gd) == 1)){
+        return num;
+    } else {
+        string full = num.append("/").append(den);
+        return full;
+    }
+    
     
     // Print the result
     /*if(deno == gd){

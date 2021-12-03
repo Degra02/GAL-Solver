@@ -60,7 +60,11 @@ typedef struct Tmatrix{ // Struct Tmatrix
     void stampa() const { // print f.
         for(int i = 0; i < nr; i++){
             for(int j = 0; j < nc; j++){
-                printf(" %5.1f ", mat[i][j]);
+                if(mat[i][j] == 0){
+                    printf(" %6d", 0);
+                } else {
+                    printf(" %5.1f ", mat[i][j]);
+                }
             }
             cout << endl << endl;
         }
@@ -74,7 +78,7 @@ typedef struct Tmatrix{ // Struct Tmatrix
         }
     }
 
-    void Id_n(int n){
+    /*void Id_n(int n){
         nr = nc = n;
         mat = new float*[n];
         for(int i = 0; i < n; i++){
@@ -83,14 +87,14 @@ typedef struct Tmatrix{ // Struct Tmatrix
 
             }
         }
-    }
+    }*/
 
     void init() {
         float coe;
-        printf("initialization matrix:\n");
+        printf("Matrix init:\n");
         for (int i=0; i<nr; i++) {
             for (int j=0; j<nc; j++) {
-                printf("insert number in [%d, %d]: ", i+1, j+1); scanf("%f", &coe);
+                printf("Pos [%d, %d]: ", i+1, j+1); scanf("%f", &coe);
                 mat[i][j] = coe;
             }
         }
