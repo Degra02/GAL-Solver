@@ -21,7 +21,6 @@ float det(Matrix m) {
                     if (r != i) sub_m->mat[r<i ? r : r-1][c-1] = m->mat[r][c]; 
                 }
 			}
-
             // Laplace's theorem to calculate the determinant
             determinante += pow(-1.0, i)*m->mat[i][0]*det(sub_m);
         }
@@ -32,27 +31,33 @@ float det(Matrix m) {
     }
 }
 
-Matrix reverse_matrix_det(Matrix m) { // try
-    Matrix mat_cofactor = new Tmatrix(m->nr, m->nc);
-    Matrix sub_m = new Tmatrix(m->nr-1, m->nc-1); 
-
-    for (int i=0; i<m->nr; i++) {
-        for (int j=0; j<m->nc; j++) {
-
-            
-            for (int r=0; r<m->nr; r++) {
-                for (int c=1; c<m->nc; c++) {
-                    if (r != i) sub_m->mat[r<i ? r : r-1][c<j ? c : c-1] = m->mat[r][c]; 
+Matrix reverse_matrix_det(Matrix m) {
+    if (reverse_matrix_validation(m)) {
+        // definisco la mia matrice di cofattori e la sua sottomatrice
+        Matrix mat_cofactor = new Tmatrix(m->nr, m->nc);
+        Matrix sub_m = new Tmatrix(m->nr-1, m->nc-1); 
+    
+        for (int i=0; i<m->nr; i++) {
+            for (int j=0; j<m->nc; j++) {
+                // riempio la sottomatrice per trovare il suo det
+                for (int r=0; r<m->nr; r++) {
+                    for (int c=0; c<m->nc; c++) {
+                        if (r != i) sub_m->mat[r<i ? r : r-1][c<j ? c : c-1] = m->mat[r][c]; 
+                    }
                 }
+                // calcolo cofattore usando il determinante della sottomatrice
+                mat_cofactor->mat[i][j] = pow(-1.0, i+j)*det(sub_m);
             }
-            
-
-            mat_cofactor->mat[i][j] = pow(-1.0, i+j)*det(sub_m);
-            
         }
+        return matrix_scalar_multiplication(matrix_transpose(mat_cofactor), 1/det(m));
+    } else {
+        cout << "matrice non invertibile" << endl;
+        return m;
     }
+}
 
-    return matrix_scalat_multiplication(matrix_transpose(mat_cofactor), 1/det(m));
+bool reverse_matrix_validation(Matrix m) {
+    return (det(m) != 0);
 }
 
 float sarrus(Matrix m){ // Sarrus' method to calculare the determinant

@@ -9,6 +9,7 @@ using namespace std;
 
 float det(Matrix m);
 Matrix reverse_matrix_det(Matrix m);
+bool reverse_matrix_validation(Matrix m);
 float sarrus(Matrix m);
 
 #endif
