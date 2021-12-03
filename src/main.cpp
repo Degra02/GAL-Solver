@@ -13,11 +13,17 @@ using namespace std;
 int main()
 {	
 	srand(time(NULL));
-	Matrix m = new Tmatrix(4, 4, 0, 1);
+	Matrix m = new Tmatrix(4, 4, 0, 10);
 	m->stampa();
 	cout << endl << endl;
 
+	cout << "Riduzione a scalini:" << endl << endl;
 	gauss_jordan_stairs(m);
+	m->stampa();
+	cout << endl << endl;
+
+	cout << "rref(m):" << endl << endl;;
+	rref(m);
 	m->stampa();
 
 	return 0;

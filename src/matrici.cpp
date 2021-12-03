@@ -69,7 +69,7 @@ void gauss_jordan_stairs(Matrix m){
                 if(i < m->nr-1){
                     for(int k = i+1; k < m->nr; k++){
                         if(m->mat[k][c]){
-                            S(m, i, i);
+                            S(m, k, i);
                         }
                     }
                 }
@@ -77,6 +77,26 @@ void gauss_jordan_stairs(Matrix m){
             }
         }
     }
+}
+
+void rref(Matrix m){
+    float lambda = 0;
+    int c = m->nc-1;
+
+    while(c >= 0){
+        for(int i = m->nr - 1; i >= 0; i--){
+            for(int k = i-1; k >= 0; k--){
+                if(m->mat[k][c]){
+                    lambda = -(m->mat[k][c] / m->mat[i][c]);
+                    E(m, k, i, lambda);
+                } else {
+                    continue;
+                }
+            }
+            c--; 
+        }
+    }
+    
 }
 
 Matrix matrix_scalar_multiplication(Matrix a, float lambda) {
@@ -90,14 +110,14 @@ Matrix matrix_scalar_multiplication(Matrix a, float lambda) {
 }
 
 Matrix matrix_transpose(Matrix m) {
-    Matrix T = new Tmatrix(m->nr, m->nc);
+    Matrix mT = new Tmatrix(m->nr, m->nc);
     for (int i=0; i<m->nr; i++) {
         for (int j=0; j<m->nc; j++) {
-            T->mat[j][i] = m->mat[i][j];
+            mT->mat[j][i] = m->mat[i][j];
         }
     }
 
-    return T;
+    return mT;
 }
 
 string findFraction(string s){

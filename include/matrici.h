@@ -114,6 +114,7 @@ void E(Matrix m, int d, int s, float lambda); // Add a row to another, multiplie
 string findFraction(string s);
 void print_fract_matrix(Matrix m);
 void gauss_jordan_stairs(Matrix m);
+void rref(Matrix m);
 
 
 #endif
