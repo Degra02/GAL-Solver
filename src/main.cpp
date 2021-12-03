@@ -16,11 +16,13 @@ int main()
 	Matrix m = new Tmatrix(4, 4, 0, 10);
 	m->stampa();
 	cout << endl << endl;
-	print_fract_matrix(m);
-	printf("det=%f\n", det(m));
-	cout << endl;
-	Matrix i = reverse_matrix_det(m);
-	i->stampa();
+	System S = System(3, 4);
+
+	Matrix m1 = new Tmatrix(3, 3); 
+	m1->init();
+	m1->stampa();
+
+	S.stampa();
 	
 	return 0;
 }

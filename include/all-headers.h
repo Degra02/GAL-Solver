@@ -4,5 +4,6 @@
 #include "matrici.h"
 #include "determinanti.h"
 #include "vettori.h"
+#include "eq_sistemi.h"
 
 #endif
