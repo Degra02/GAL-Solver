@@ -11,7 +11,7 @@ using namespace std;
 */
 
 int main()
-{
+{	
 	srand(time(NULL));
 	Matrix m = new Tmatrix(4, 4, 0, 10);
 	m->stampa();
