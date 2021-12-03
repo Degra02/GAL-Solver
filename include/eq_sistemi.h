@@ -5,16 +5,16 @@
 #define __EQ_SISTEMI_H__
 using namespace std;
 
-typedef struct System {
+typedef struct Tlisys {
     Matrix A;
     Vector b; 
 
-    System() {
+    Tlisys() {
         A = new Tmatrix();
         b = new Tvettore();
     }
 
-    System(int num_variables, int num_eq) {
+    Tlisys(int num_variables, int num_eq) {
         A = new Tmatrix(num_eq, num_variables);
         A->init(); // da modificare 
         b = new Tvettore(num_eq-1);
@@ -30,6 +30,8 @@ typedef struct System {
             cout << endl << endl;
         }
     }
-} System; 
+} Tlisys; 
+
+typedef Tlisys* Linear_System;
 
 #endif
