@@ -50,6 +50,13 @@ typedef struct Tvettore{ // Struct Tvettore
         }
     }
 
+    void init() {
+        float coe;
+        for (int i=0; i<n; i++) {
+            printf("insert number in [%d]: ", i+1); scanf("%f", &coe);
+            array[i] = coe;
+        }
+    }
 }Tvettore;
 
 typedef Tvettore *Vector; // rendere più semplice la lettura

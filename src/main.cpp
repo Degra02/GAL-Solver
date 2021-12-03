@@ -16,6 +16,7 @@ int main()
 	Matrix m = new Tmatrix(4, 4, 0, 10);
 	m->stampa();
 	cout << endl << endl;
+<<<<<<< HEAD
 
 	/*print_fract_matrix(m);
 	printf("det=%f\n", det(m));
@@ -27,6 +28,15 @@ int main()
 	m->stampa();
 
 	
+=======
+	System S = System(3, 4);
+
+	Matrix m1 = new Tmatrix(3, 3); 
+	m1->init();
+	m1->stampa();
+
+	S.stampa();
+>>>>>>> b1f66410aaf7dbfe94435d9b8f44c2b4af75b365
 	
 	return 0;
 }

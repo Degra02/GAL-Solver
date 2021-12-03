@@ -85,6 +85,17 @@ typedef struct Tmatrix{ // Struct Tmatrix
         }
     }
 
+    void init() {
+        float coe;
+        printf("initialization matrix:\n");
+        for (int i=0; i<nr; i++) {
+            for (int j=0; j<nc; j++) {
+                printf("insert number in [%d, %d]: ", i+1, j+1); scanf("%f", &coe);
+                mat[i][j] = coe;
+            }
+        }
+    }
+
 } Tmatrix;
 
 typedef Tmatrix* Matrix; 
