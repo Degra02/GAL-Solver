@@ -70,7 +70,7 @@ Matrix matrix_transpose(Matrix m) {
     return T;
 }
 
-void findFraction(string s){
+string findFraction(string s){
     // Initialize variables
     string be_deci = "", af_deci = "";
     bool x = true, y = false;
@@ -105,21 +105,25 @@ void findFraction(string s){
     int deno = pow(10, af_deci.size());
     int gd = __gcd(numr, deno);
  
+    string num = to_string(numr/gd);
+    string den = to_string(deno/gd);
+    string full = num.append("/").append(den);
+    return full;
+    
     // Print the result
-    if(deno == gd){
+    /*if(deno == gd){
         cout << numr / gd;
     } else{
         cout << numr / gd << "/" << deno / gd;
-    }
+    }*/
     
 }
 
 void print_fract_matrix(Matrix m){
-    int width;
     for(int i = 0; i < m->nr; i++){
         for(int j = 0; j < m->nc; j++){
-            width = to_string(m->mat[i][j]).size();
-            cout << setw(width); findFraction(to_string(m->mat[i][j]));
+            string num = findFraction(to_string(m->mat[i][j]));
+            cout << setw(10) << num;
         }
         cout << endl << endl;
     }
