@@ -56,19 +56,15 @@ void gauss_jordan_stairs(Matrix m){
     while(c < m->nc){
         for(int i = 0; i < m->nr; i++){
             if(m->mat[i][c]){
-
                 for(int k = i+1; k < m->nr; k++){
                     if(m->mat[k][c]){
                         lambda = -(m->mat[k][c] / m->mat[i][c]);
                         E(m, k, i, lambda);
-
                     } else {
                         continue;
                     }
-
                 }
                 c++;
-
             } else {
                 if(i < m->nr-1){
                     for(int k = i+1; k < m->nr; k++){
@@ -79,10 +75,8 @@ void gauss_jordan_stairs(Matrix m){
                 }
                 c++;
             }
-
         }
     }
-    
 }
 
 Matrix matrix_scalar_multiplication(Matrix a, float lambda) {
