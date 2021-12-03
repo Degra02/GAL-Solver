@@ -1,8 +1,8 @@
 #include <iostream>
 #include "matrici.h"
 #include "vettori.h"
-#ifndef __EQ_SISTEMI_H__
-#define __EQ_SISTEMI_H__
+#ifndef __EQ_SYSTEMS_H__
+#define __EQ_SYSTEMS_H__
 using namespace std;
 
 typedef struct Tlisys {
@@ -17,8 +17,13 @@ typedef struct Tlisys {
     Tlisys(int num_variables, int num_eq) {
         A = new Tmatrix(num_eq, num_variables);
         A->init(); // da modificare 
-        b = new Tvettore(num_eq-1);
+        b = new Tvettore(num_eq);
         b->init(); // da modificare 
+    }
+
+    Tlisys(Matrix _A, Vector _b) {
+        A = _A;
+        b = _b;
     }
 
     void stampa() {

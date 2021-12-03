@@ -115,6 +115,7 @@ string findFraction(string s);
 void print_fract_matrix(Matrix m);
 void gauss_jordan_stairs(Matrix m);
 void rref(Matrix m);
+int rg(Matrix m); // rango
 
 
 #endif

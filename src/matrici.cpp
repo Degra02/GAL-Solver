@@ -51,7 +51,7 @@ void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
 
 void gauss_jordan_stairs(Matrix m){
     int c = 0;
-    float lambda = 0;
+    float lambda = 0.0;
 
     while(c < m->nc){
         for(int i = 0; i < m->nr; i++){
@@ -77,6 +77,22 @@ void gauss_jordan_stairs(Matrix m){
             }
         }
     }
+}
+
+int rg(Matrix m) { 
+    int counter = 0;
+    Matrix m_copy = m;
+    gauss_jordan_stairs(m_copy);
+    for (int i=0; i<m->nr; i++) {
+        for (int j=0; j<m->nc; j++) {
+            if (m->mat[i][j] != 0.0) {
+                counter++;
+                j = m->nc;
+            }
+        }
+    }
+
+    return counter;
 }
 
 void rref(Matrix m){
