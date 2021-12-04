@@ -33,7 +33,7 @@ typedef struct Tmatrix{ // Struct Tmatrix
         for(int i = 0; i < nr; i++){
             *(mat + i) = new float[nc];
             for(int j = 0; j < nc; j++){
-                *( *(mat + i) + j) = (rand() % (max*10 - min*10 + 1) + min*10)/10.0;
+                *( *(mat + i) + j) = (rand() % (max - min + 1) + min)/1.0;
             }
         }
     }

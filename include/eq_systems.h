@@ -35,6 +35,12 @@ typedef struct Tlisys {
             cout << endl << endl;
         }
     }
+
+    ~Tlisys(){
+        A->~Tmatrix();
+        b->~Tvettore();
+    }
+
 } Tlisys; 
 
 typedef Tlisys* Linear_System;

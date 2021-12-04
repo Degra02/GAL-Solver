@@ -31,21 +31,31 @@ float det(Matrix m) {
     }
 }
 
+bool reverse_matrix_validation(Matrix m) {
+    return (det(m) != 0); 
+    /* 
+        would be better to check if the rg of the matrix is 
+        equal to the number of columns instead of calculating 
+        the det because of the higher computational complexity of 
+        the "det" algorithm
+    */
+}
+
 Matrix reverse_matrix_det(Matrix m) {
     if (reverse_matrix_validation(m)) {
-        // definisco la mia matrice di cofattori e la sua sottomatrice
+        // define the cofactor matrix and its sub-matrix
         Matrix mat_cofactor = new Tmatrix(m->nr, m->nc);
         Matrix sub_m = new Tmatrix(m->nr-1, m->nc-1); 
     
         for (int i=0; i<m->nr; i++) {
             for (int j=0; j<m->nc; j++) {
-                // riempio la sottomatrice per trovare il suo det
+                // fill the sub-matrix to find its det
                 for (int r=0; r<m->nr; r++) {
                     for (int c=0; c<m->nc; c++) {
                         if (r != i) sub_m->mat[r<i ? r : r-1][c<j ? c : c-1] = m->mat[r][c]; 
                     }
                 }
-                // calcolo cofattore usando il determinante della sottomatrice
+                // calculate the cofactor using the det of the matrix
                 mat_cofactor->mat[i][j] = pow(-1.0, i+j)*det(sub_m);
             }
         }
@@ -54,10 +64,6 @@ Matrix reverse_matrix_det(Matrix m) {
         cout << "matrice non invertibile" << endl;
         return m;
     }
-}
-
-bool reverse_matrix_validation(Matrix m) {
-    return (det(m) != 0);
 }
 
 float sarrus(Matrix m){ // Sarrus' method to calculare the determinant
