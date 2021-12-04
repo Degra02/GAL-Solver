@@ -1,9 +1,9 @@
 #ifndef __ALL_HEADERS_H__
 #define __ALL_HEADERS_H__
 
-#include "matrici.h"
-#include "determinanti.h"
-#include "vettori.h"
+#include "matrix.h"
+#include "determinant.h"
+#include "vector.h"
 #include "eq_systems.h"
 
 #endif

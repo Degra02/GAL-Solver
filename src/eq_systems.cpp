@@ -18,3 +18,40 @@ Matrix to_matrix(Linear_System ls){
 
     return m;
 }
+
+void ls_stairs_form(Matrix m){
+    int c = 0;
+    float lambda = 0;
+
+    while(c < m->nc-1){
+        for(int i = 0; i < m->nr; i++){
+            if(m->mat[i][c]){
+                for(int k = i+1; k < m->nr; k++){
+                    if(m->mat[k][c]){
+                        lambda = -(m->mat[k][c] / m->mat[i][c]);
+                        E(m, k, i, lambda);
+                    } else {
+                        continue;
+                    }
+                }
+                c++;
+            } else {
+                if(i < m->nr-1){
+                    for(int k = i+1; k < m->nr; k++){
+                        if(m->mat[k][c]){
+                            S(m, k, i);
+                        }
+                    }
+                }
+                c++;
+            }
+        }
+    }
+}
+
+Matrix ls_rref(Linear_System ls){
+    Matrix sol = to_matrix(ls);
+    ls_stairs_form(sol);
+
+    return sol;
+}

@@ -21,7 +21,6 @@ int main()
 	cout << "Known terms: ";
 	vec->stampa();
 	Linear_System ls = new Tlisys(m, vec);
-	to_matrix(ls);
 
 	cout << endl << endl;
 	cout << "Linear system:" << endl;
@@ -31,6 +30,9 @@ int main()
 	m2 = to_matrix(ls);
 	cout << endl << endl << "to_matrix:" << endl;
 	m2->stampa();
-	
+
+	cout << endl << endl << "stairs_form:" << endl;
+	m2 = ls_rref(ls);
+	m2 ->stampa();
 	return 0;
 }

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "matrici.h"
+#include "matrix.h"
 using namespace std;
 
 #ifndef __DETERMINANTI_H__

@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "matrici.h"
-#include "determinanti.h"
+#include "matrix.h"
+#include "determinant.h"
 using namespace std;
 
 float det(Matrix m) {
