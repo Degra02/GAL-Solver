@@ -49,7 +49,7 @@ void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
     v->~Tvettore();
 }
 
-void gauss_jordan_stairs(Matrix m){
+void matrix_stairs_gauss_jordan(Matrix m){
     int c = 0;
     float lambda = 0.0;
 
@@ -83,7 +83,7 @@ int rg(Matrix m) {
     int counter = 0;
     Matrix m_copy = new Tmatrix;
     m_copy->copy_matrix(m);
-    gauss_jordan_stairs(m_copy);
+    matrix_stairs_gauss_jordan(m_copy);
     for (int i=0; i<m_copy->nr; i++) {
         for (int j=0; j<m_copy->nc; j++) {
             if (m_copy->mat[i][j] != 0.0) {
@@ -95,11 +95,11 @@ int rg(Matrix m) {
     return counter;
 }
 
-void rref(Matrix m){
+void matrix_rref_calculator(Matrix m){
     float lambda = 0;
     int c = m->nc-1;
 
-    while(c >= 0){
+    while(c > 0){
         for(int i = m->nr - 1; i >= 0; i--){
             for(int k = i-1; k >= 0; k--){
                 if(m->mat[k][c]){
@@ -112,6 +112,21 @@ void rref(Matrix m){
             c--; 
         }
     }
+    int k = 0;
+    for(int i = 0; i < m->nr; i++){
+        lambda = (1 / m->mat[i][k]);
+        D(m, i, lambda);
+        k++;
+    }
+}
+
+Matrix matrix_rref_full(Matrix m){
+    Matrix temp = new Tmatrix();
+    temp->copy_matrix(m);
+    matrix_stairs_gauss_jordan(temp);
+    matrix_rref_calculator(temp);
+
+    return temp;
 }
 
 Matrix matrix_scalar_multiplication(Matrix a, float lambda) {

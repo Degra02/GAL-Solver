@@ -19,7 +19,7 @@ Matrix to_matrix(Linear_System ls){
     return m;
 }
 
-void ls_stairs_form(Matrix m){
+void ls_stairs_gauss_jordan(Matrix m){
     int c = 0;
     float lambda = 0;
 
@@ -49,9 +49,35 @@ void ls_stairs_form(Matrix m){
     }
 }
 
-Matrix ls_rref(Linear_System ls){
+void ls_rref_calculator(Matrix m){
+    float lambda = 0;
+    int c = m->nc-2;
+
+    while(c > 0){
+        for(int i = m->nr - 1; i >= 0; i--){
+            for(int k = i-1; k >= 0; k--){
+                if(m->mat[k][c]){
+                    lambda = -(m->mat[k][c] / m->mat[i][c]);
+                    E(m, k, i, lambda);
+                } else {
+                    continue;
+                }
+            }
+            c--; 
+        }
+    }
+    int k = 0;
+    for(int i = 0; i < m->nr; i++){
+        lambda = (1 / m->mat[i][k]);
+        D(m, i, lambda);
+        k++;
+    }
+}
+
+Matrix ls_rref_full(Linear_System ls){
     Matrix sol = to_matrix(ls);
-    ls_stairs_form(sol);
+    ls_stairs_gauss_jordan(sol);
+    ls_rref_calculator(sol);
 
     return sol;
 }

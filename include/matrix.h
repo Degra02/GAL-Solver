@@ -63,7 +63,11 @@ typedef struct Tmatrix{ // Struct Tmatrix
                 if(mat[i][j] == 0){
                     printf(" %6d", 0);
                 } else {
-                    printf(" %5.1f ", mat[i][j]);
+                    if(floor(mat[i][j]) == mat[i][j]){
+                        printf(" %6.0f ", mat[i][j]);
+                    } else {
+                        printf(" %5.1f ", mat[i][j]);
+                    }
                 }
             }
             cout << endl << endl;
@@ -113,9 +117,10 @@ void D(Matrix m, int a, float lambda); // Multiply a row by a real number
 void E(Matrix m, int d, int s, float lambda); // Add a row to another, multiplied by lambda
 string findFraction(string s);
 void print_fract_matrix(Matrix m);
-void gauss_jordan_stairs(Matrix m);
-void rref(Matrix m);
 int rg(Matrix m); // rango
+void matrix_stairs_gauss_jordan(Matrix m);
+void matrix_rref_calculator(Matrix m);
+Matrix matrix_rref_full(Matrix m);
 
 
 #endif

@@ -16,6 +16,9 @@ int main()
 	Matrix m = new Tmatrix(4, 4, 1, 5);
 	m->stampa();
 	cout << endl << endl;
+	
+	print_fract_matrix(m);
+	cout << endl << endl;
 
 	Vector vec = new Tvettore(m->nc, 1, 5);
 	cout << "Known terms: ";
@@ -32,7 +35,8 @@ int main()
 	m2->stampa();
 
 	cout << endl << endl << "stairs_form:" << endl;
-	m2 = ls_rref(ls);
+	m2 = ls_rref_full(ls);
 	m2 ->stampa();
+
 	return 0;
 }

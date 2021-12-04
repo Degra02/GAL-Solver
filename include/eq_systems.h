@@ -40,6 +40,8 @@ typedef struct Tlisys {
 typedef Tlisys* Linear_System;
 Matrix to_matrix(Linear_System ls);
 Matrix ls_rref(Linear_System ls);
-void ls_stairs_form(Matrix m);
+void ls_stairs_gauss_jordan(Matrix m);
+void ls_rref_calculator(Matrix m);
+Matrix ls_rref_full(Linear_System ls);
 
 #endif
