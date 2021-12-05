@@ -29,9 +29,25 @@ typedef struct Tlisys {
     void stampa() {
         for(int i = 0; i < A->nr; i++){
             for(int j = 0; j < A->nc; j++){
-                printf(" %5.1f ", A->mat[i][j]);
+                if(A->mat[i][j] == 0){
+                    printf(" %6d", 0);
+                } else {
+                    if(floor(A->mat[i][j]) == A->mat[i][j]){
+                        printf(" %6.0f ", A->mat[i][j]);
+                    } else {
+                        printf(" %5.1f ", A->mat[i][j]);
+                    }
+                }
             }
-            printf(" |  %5.1f ", b->array[i]);
+            if(b->array[i] == 0){
+                printf(" | %6d", 0);
+            } else {
+                if(floor(b->array[i]) == 0){
+                    printf(" | %6.0f", b->array[i]);
+                } else {
+                    printf(" | %5.1f", b->array[i]);
+                }
+            }
             cout << endl << endl;
         }
     }
