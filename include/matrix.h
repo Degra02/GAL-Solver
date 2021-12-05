@@ -93,10 +93,14 @@ typedef struct Tmatrix{ // Struct Tmatrix
         }
     }*/
 
-    void init() {
+    void init(int n_var, int n_eq) {
+        nr = n_eq;
+        nc = n_var;
         float coe;
+        mat = new float*[n_eq];
         printf("Matrix init:\n");
         for (int i=0; i<nr; i++) {
+            mat[i] = new float[n_var];
             for (int j=0; j<nc; j++) {
                 printf("Pos [%d, %d]: ", i+1, j+1); scanf("%f", &coe);
                 mat[i][j] = coe;

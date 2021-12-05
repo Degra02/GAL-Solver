@@ -51,7 +51,9 @@ typedef struct Tvettore{ // Struct Tvettore
         }
     }
 
-    void init() {
+    void init(int _n) {
+        n = _n;
+        array = new float[n];
         float coe;
         for (int i=0; i<n; i++) {
             printf("insert number in [%d]: ", i+1); scanf("%f", &coe);
