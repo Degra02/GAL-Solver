@@ -32,7 +32,8 @@ float det(Matrix m) {
 }
 
 bool reverse_matrix_validation(Matrix m) {
-    return (det(m) != 0); 
+    //return (det(m) != 0); 
+    return (rg(m) == m->nc);
     /* 
         would be better to check if the rg of the matrix is 
         equal to the number of columns instead of calculating 
