@@ -49,6 +49,37 @@ void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
     v->~Tvettore();
 }
 
+bool is_stairs_form(Matrix m) {
+    int zeroCounter = 0; 
+    int highZero = 0;
+    for (int i=1; i<m->nr; i++) {
+        for (int j=0; j<m->nc; j++) {
+            if (i == 1) {
+                if (m->mat[i][j] == 0) {
+                    zeroCounter++;
+                    highZero = zeroCounter;
+                } else {
+                    zeroCounter = 0;
+                    break; 
+                }
+            } else {
+                if (m->mat[i][j] == 0) {
+                    zeroCounter++;
+                } else {
+                    if (zeroCounter <= highZero) {
+                        return false;
+                    }
+                    highZero = zeroCounter;
+                    zeroCounter = 0;
+                    break;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
 void matrix_stairs_gauss_jordan(Matrix m){
     int c = 0;
     float lambda = 0.0;
