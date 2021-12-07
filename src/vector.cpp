@@ -31,6 +31,15 @@ float vector_angle(Vector a, Vector b){
     return acos(angle);
 }
 
-Vector vector_vectorial_multip(Vector a, Vector b){
-
+Vector vector_vectorial_multip(Vector a, Vector b){ // possible only in R3 (or R7)
+    if(a->n == b->n && a->n == 3){
+        Vector c = new Tvettore(a->n);
+        c->array[0] = a->array[1]*b->array[2] - a->array[3]*b->array[2];
+        c->array[1] = a->array[2]*b->array[0] - a->array[0]*b->array[2];
+        c->array[2] = a->array[0]*b->array[1] - a->array[1]*b->array[0];
+        return c;
+    } else {
+        cout << endl << "The vectorial product is only possible in the third (or seventh) dimension" << endl;
+        return;
+    }
 }
