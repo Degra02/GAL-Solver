@@ -52,6 +52,7 @@ void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
 bool is_stairs_form(Matrix m) {
     int zeroCounter = 0; 
     int highZero = 0;
+    if (m->mat[0][0] != 0) return false;
     for (int i=1; i<m->nr; i++) {
         for (int j=0; j<m->nc; j++) {
             if (i == 1) {
