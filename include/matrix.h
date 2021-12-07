@@ -33,7 +33,7 @@ typedef struct Tmatrix{ // Struct Tmatrix
         for(int i = 0; i < nr; i++){
             *(mat + i) = new float[nc];
             for(int j = 0; j < nc; j++){
-                *( *(mat + i) + j) = (rand() % (max - min + 1) + min)/1.0;
+                *( *(mat + i) + j) = floor(((rand() % (max - min + 1) + min)/1.0)*100)/100.0;
             }
         }
     }
@@ -103,6 +103,7 @@ typedef struct Tmatrix{ // Struct Tmatrix
             mat[i] = new float[n_var];
             for (int j=0; j<nc; j++) {
                 printf("Pos [%d, %d]: ", i+1, j+1); scanf("%f", &coe);
+                coe = floor(coe*100)/100.0;
                 mat[i][j] = coe;
             }
         }

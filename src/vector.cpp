@@ -13,7 +13,7 @@ float vector_euclid_scalar_multip(Vector a, Vector b){
         return res;
     } else {
         cout << endl << "The vectors are not from the same vectorial space" << endl;
-        return;
+        return 0;
     }
 }
 
@@ -40,6 +40,6 @@ Vector vector_vectorial_multip(Vector a, Vector b){ // possible only in R3 (or R
         return c;
     } else {
         cout << endl << "The vectorial product is only possible in the third (or seventh) dimension" << endl;
-        return;
+        return NULL;
     }
 }
