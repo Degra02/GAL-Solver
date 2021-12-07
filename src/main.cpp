@@ -23,9 +23,7 @@ int main()
 	cout << endl << endl;
 	m1->stampa();
 
-	cout << endl << endl << round(10.1141*100)/100.0;
-
-	/*Vector vec = new Tvettore(m->nc, 1, 5);
+	Vector vec = new Tvettore(m->nc, 1, 5);
 	cout << "Known terms: ";
 	vec->stampa();
 	Linear_System ls = new Tlisys(m, vec);
@@ -41,7 +39,7 @@ int main()
 
 	cout << endl << endl << "stairs_form:" << endl;
 	m2 = ls_rref_full(ls);
-	m2 ->stampa();*/
+	m2 ->stampa();
 
 	return 0;
 }
