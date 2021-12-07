@@ -108,6 +108,8 @@ void matrix_stairs_gauss_jordan(Matrix m){
             }
         }
     }
+
+    if (is_stairs_form(m)) matrix_stairs_gauss_jordan(m);
 }
 
 int rg(Matrix m) { 
