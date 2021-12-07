@@ -5,5 +5,6 @@
 #include "determinant.h"
 #include "vector.h"
 #include "eq_systems.h"
+#include "fraction.h"
 
 #endif
