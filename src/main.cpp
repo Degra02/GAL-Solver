@@ -41,5 +41,10 @@ int main()
 	m2 = ls_rref_full(ls);
 	m2 ->stampa();
 
+	switch (is_stairs_form(m2)) {
+		case 1: cout << "true" << endl; break;
+		case 0: cout << "false" << endl; break;
+	}
+
 	return 0;
 }

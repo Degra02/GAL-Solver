@@ -126,6 +126,7 @@ int rg(Matrix m); // rango
 void matrix_stairs_gauss_jordan(Matrix m);
 void matrix_rref_calculator(Matrix m);
 Matrix matrix_rref_full(Matrix m);
+bool is_stairs_form(Matrix m);
 
 
 #endif
