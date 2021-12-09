@@ -13,6 +13,11 @@ using namespace std;
 int main()
 {	
 	srand(time(NULL));
+	// fraction 
+	Fraction f1 = new Tfraction(3, -4);
+	Fraction f2 = new Tfraction(2, 3);
+	sum(f1, f2)->print();
+
 	Matrix m = new Tmatrix(4, 4, 1, 5);
 	m->stampa();
 	cout << endl << endl;

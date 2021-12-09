@@ -25,11 +25,17 @@ typedef struct Tfraction{
     }
 
     void print() const{
-        
+        printf("%d/%d\n", num, den);
     }
 
 }Tfraction;
 
-typedef Tfraction Fraction;
+typedef Tfraction* Fraction;
+
+int mcm(int a, int b);
+Fraction sum(Fraction a, Fraction b);
+Fraction difference(Fraction a, Fraction b);
+Fraction product(Fraction a, Fraction b);
+Fraction quotient(Fraction a, Fraction b);
 
 #endif
