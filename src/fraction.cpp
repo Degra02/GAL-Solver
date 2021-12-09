@@ -11,12 +11,11 @@ Fraction sum(Fraction a, Fraction b) {
     if (a->den == b->den) {
         c->den = a->den;
         c->num = a->num + b->num;
-        return c;
     } else {
         c->den = mcm(a->den, b->den);
         c->num = (c->den / a->den)*a->num + (c->den / b->den)*b->num;
-        return c;
     }
+    return c;
 }
 
 int mcm(int a, int b) {
