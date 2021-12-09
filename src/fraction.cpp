@@ -25,7 +25,7 @@ int mcm(int a, int b) {
 
     c = max;
     do {
-        ++c;
+        c += max;
     } while (c % b != 0 || c % a != 0);
 
     return c;

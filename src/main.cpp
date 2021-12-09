@@ -14,8 +14,8 @@ int main()
 {	
 	srand(time(NULL));
 	// fraction 
-	Fraction f1 = new Tfraction(3, -4);
-	Fraction f2 = new Tfraction(2, 3);
+	Fraction f1 = new Tfraction(300, -4);
+	Fraction f2 = new Tfraction(2, 37);
 	sum(f1, f2)->print();
 
 	Matrix m = new Tmatrix(4, 4, 1, 5);
