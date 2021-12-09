@@ -33,7 +33,7 @@ typedef struct Tmatrix{ // Struct Tmatrix
         for(int i = 0; i < nr; i++){
             *(mat + i) = new float[nc];
             for(int j = 0; j < nc; j++){
-                *( *(mat + i) + j) = floor(((rand() % (max - min + 1) + min)/1.0)*100)/100.0;
+                *( *(mat + i) + j) = floor(((rand() % (max*10 - min*10 + 1) + min*10)/10.0)*10)/10.0;
             }
         }
     }
@@ -63,7 +63,7 @@ typedef struct Tmatrix{ // Struct Tmatrix
                 if(mat[i][j] == 0){
                     printf(" %6d", 0);
                 } else {
-                    if(floor(mat[i][j]) == mat[i][j]){
+                    if(round(mat[i][j]) == mat[i][j]){
                         printf(" %6.0f ", mat[i][j]);
                     } else {
                         printf(" %5.1f ", mat[i][j]);
