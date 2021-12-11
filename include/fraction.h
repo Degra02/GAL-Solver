@@ -5,7 +5,7 @@ using namespace std;
 #ifndef __FRACTION_H__
 #define __FRACTION_H__
 
-typedef struct Tfraction{
+typedef struct Tfraction {
     int num;
     int den;
 
@@ -16,7 +16,7 @@ typedef struct Tfraction{
 
     Tfraction(int n, int d){
         num = n;
-        den = d;
+        if (d != 0) den = d;
     }
 
     Tfraction(string n, string d){
@@ -25,7 +25,8 @@ typedef struct Tfraction{
     }
 
     void print() const{
-        printf("%d/%d\n", num, den);
+        if (den == 1) printf("%d\n", num);
+        else printf("%d/%d\n", num, den);
     }
 
 }Tfraction;
@@ -33,9 +34,11 @@ typedef struct Tfraction{
 typedef Tfraction* Fraction;
 
 int mcm(int a, int b);
+Fraction power(Fraction a, int p);
 Fraction sum(Fraction a, Fraction b);
 Fraction difference(Fraction a, Fraction b);
 Fraction product(Fraction a, Fraction b);
 Fraction quotient(Fraction a, Fraction b);
+Fraction simplification(Fraction a);
 
 #endif
