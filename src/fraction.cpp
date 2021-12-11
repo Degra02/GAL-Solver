@@ -58,10 +58,11 @@ Fraction power(Fraction a, int p) {
 }
 
 Fraction simplification(Fraction a) {
-    int min = a->num; 
-    if (a->den < a->num) min = a->den;
+    int abs_num = abs(a->num), abs_den = abs(a->den);
+    int min = abs_num; 
+    if (abs_den < abs_num) min = abs_den;
     for (int i=2; i<=min; i++) {
-        if (a->num % i == 0 && a->den % i == 0) {
+        if (abs_num % i == 0 && abs_den % i == 0) {
             a->num /= i; a->den /= i;
             simplification(a);
             /*serve per velocizzare l'algoritmo quando ormai non serve più iterare*/
@@ -82,4 +83,9 @@ int mcm(int a, int b) {
     } while (c % b != 0 || c % a != 0);
 
     return c;
+}
+
+int abs(int n) {
+    if (n >= 0) return n;
+    return -n;
 }

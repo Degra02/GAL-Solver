@@ -34,6 +34,8 @@ typedef struct Tfraction {
 typedef Tfraction* Fraction;
 
 int mcm(int a, int b);
+int abs(int n);
+
 Fraction power(Fraction a, int p);
 Fraction sum(Fraction a, Fraction b);
 Fraction difference(Fraction a, Fraction b);

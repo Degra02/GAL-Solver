@@ -13,13 +13,17 @@ using namespace std;
 int main() {
 	srand(time(0));
 	// fraction
-	Fraction f1 = new Tfraction(-2, 3);
-	Fraction f2 = new Tfraction(500, 32);
+	Fraction f1 = new Tfraction(-2, 1);
+	Fraction f2 = new Tfraction(500, 25);
+
+	simplification(f1)->print();
+	simplification(f2)->print();
+
 	sum(f1, f2)->print();	
 	difference(f1, f2)->print();
-	product(f1, f2)->print();
-	quotient(f1, f2)->print();
-	power(f1, 6)->print();
-	simplification(f2)->print();
+	simplification(product(f1, f2))->print();
+	simplification(quotient(f1, f2))->print();
+	power(f1, 3)->print();
+	
 	return 0;
 }
