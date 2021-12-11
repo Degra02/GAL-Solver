@@ -1,9 +1,25 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <cmath>
 #include "all-headers.h"
 using namespace std;
+
+Tfraction::Tfraction() {
+    num = 0; den = 1;
+}
+
+Tfraction::Tfraction(int n, int d) {
+    num = n;
+    if (d != 0) den = d;
+    else d = 1;
+}
+
+Tfraction::Tfraction(string n, string d) {
+    num = stoi(n); den = stoi(d);
+}
+
+void Tfraction::print() const {
+    if (den == 1) printf("%d\n", num);
+    else printf("%d/%d\n", num, den);
+}
 
 Fraction sum(Fraction a, Fraction b) {
     Fraction c = new Tfraction();

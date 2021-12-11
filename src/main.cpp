@@ -15,7 +15,7 @@ int main() {
 	// fraction
 	Fraction f1 = new Tfraction(-2, 1);
 	Fraction f2 = new Tfraction(500, 25);
-	simplification(sum(f1, f2))->print();	
+	simplification(sum(f1, f2))->print();
 	simplification(difference(f1, f2))->print();
 	simplification(product(f1, f2))->print();
 	simplification(quotient(f1, f2))->print();

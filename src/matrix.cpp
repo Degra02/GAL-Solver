@@ -45,8 +45,6 @@ void E(Matrix m, int d, int s, float lambda){ // d = destination, s = source;
     for(int j = 0; j < m->nc; j++){
         m->mat[d][j] = m->mat[d][j] + v->array[j];
     }
-    
-    v->~Tvettore();
 }
 
 bool is_stairs_form(Matrix m) {

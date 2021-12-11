@@ -9,8 +9,8 @@ using namespace std;
 #define __MATRICI_H__
 
 typedef struct Tmatrix{ // Struct Tmatrix 
-    float **mat;
-    int nr;
+    float **mat; // Fraction **mat;
+    int nr; 
     int nc;
 
     Tmatrix(){ // default constructor
