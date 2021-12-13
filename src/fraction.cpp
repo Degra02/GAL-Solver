@@ -12,16 +12,29 @@ Tfraction::Tfraction(int n, int d) {
     else d = 1;
 }
 
+Tfraction::Tfraction(float n) {
+    int m = 1;
+    float f = n;
+    while (f > 0) {
+        m *= 10; 
+        f = n; f -= m; 
+    }
+    m *= 10;
+
+    num = round(n*m);
+    den = m;
+}
+
 Tfraction::Tfraction(string n, string d) {
     num = stoi(n); den = stoi(d);
 }
 
 void Tfraction::print() const {
-    if (den == 1) printf("%d\n", num);
-    else printf("%d/%d\n", num, den);
+    if (den == 1) printf("%d", num);
+    else printf("%d/%d", num, den);
 }
 
-Fraction sum(Fraction a, Fraction b) {
+Fraction fraction_sum(Fraction a, Fraction b) {
     Fraction c = new Tfraction();
 
     if (a->den == b->den) {
@@ -34,7 +47,7 @@ Fraction sum(Fraction a, Fraction b) {
     return c;
 }
 
-Fraction difference(Fraction a, Fraction b) {
+Fraction fraction_difference(Fraction a, Fraction b) {
     Fraction c = new Tfraction(); 
 
     if (a->den == b->den) {
@@ -47,7 +60,7 @@ Fraction difference(Fraction a, Fraction b) {
     return c;
 }
 
-Fraction product(Fraction a, Fraction b) {
+Fraction fraction_product(Fraction a, Fraction b) {
     Fraction c = new Tfraction();
 
     c->den = a->den * b->den;
@@ -55,7 +68,7 @@ Fraction product(Fraction a, Fraction b) {
     return c;
 }
 
-Fraction quotient(Fraction a, Fraction b) {
+Fraction fraction_quotient(Fraction a, Fraction b) {
     Fraction c = new Tfraction();
 
     c->den = a->den * b->num;
@@ -63,7 +76,7 @@ Fraction quotient(Fraction a, Fraction b) {
     return c;
 }
 
-Fraction power(Fraction a, int p) {
+Fraction fraction_power(Fraction a, int p) {
     Fraction c = new Tfraction(1, 1);
 
     for (int i=0; i<p; i++) {
@@ -73,14 +86,14 @@ Fraction power(Fraction a, int p) {
     return c;
 }
 
-Fraction simplification(Fraction a) {
+Fraction fraction_simplification(Fraction a) {
     int abs_num = abs(a->num), abs_den = abs(a->den);
     int min = abs_num; 
     if (abs_den < abs_num) min = abs_den;
     for (int i=2; i<=min; i++) {
         if (abs_num % i == 0 && abs_den % i == 0) {
             a->num /= i; a->den /= i;
-            simplification(a);
+            fraction_simplification(a);
             /*serve per velocizzare l'algoritmo quando ormai non serve più iterare*/
             break; 
         }
