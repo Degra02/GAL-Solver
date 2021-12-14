@@ -9,10 +9,23 @@ Tfraction::Tfraction() {
 Tfraction::Tfraction(int n, int d) {
     num = n;
     if (d != 0) den = d;
-    else d = 1;
+    else den = 1;
 }
 
 Tfraction::Tfraction(float n) {
+    set(n);
+}
+
+Tfraction::Tfraction(string n, string d) {
+    num = stoi(n); den = stoi(d);
+}
+
+void Tfraction::print() const {
+    if (den == 1 || num == 0) printf("%d", num);
+    else printf("%d/%d", num, den);
+}
+
+void Tfraction::set(float n) {
     int m = 1;
     float f = n;
     while (f > 0) {
@@ -23,15 +36,6 @@ Tfraction::Tfraction(float n) {
 
     num = round(n*m);
     den = m;
-}
-
-Tfraction::Tfraction(string n, string d) {
-    num = stoi(n); den = stoi(d);
-}
-
-void Tfraction::print() const {
-    if (den == 1) printf("%d", num);
-    else printf("%d/%d", num, den);
 }
 
 Fraction fraction_sum(Fraction a, Fraction b) {

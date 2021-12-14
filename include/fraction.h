@@ -11,6 +11,7 @@ typedef struct Tfraction {
     Tfraction(int n, int d);
     Tfraction(string n, string d);
     void print() const;
+    void set(float n); 
 } Tfraction;
 
 typedef Tfraction* Fraction;

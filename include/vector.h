@@ -3,8 +3,8 @@
 #include <ctime>
 using namespace std;
 
-#ifndef __VETTORI_H__
-#define __VETTORI_H__
+#ifndef __VECTOR_H__
+#define __VECTOR_H__
 
 typedef struct Tvettore{ // Struct Tvettore
     float *array;

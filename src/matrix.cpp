@@ -2,9 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <bits/stdc++.h>
-#include "matrix.h"
-#include "determinant.h"
-#include "vector.h"
+#include "all-headers.h"
 using namespace std;
 
 Matrix matrix_multiplication(Matrix a, Matrix b){
