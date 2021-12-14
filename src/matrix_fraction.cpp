@@ -25,7 +25,7 @@ Tfmatrix::Tfmatrix(int _nr, int _nc, int min, int max) {
     for (int i = 0; i < nr; i++) {
         mat[i] = new Fraction[nc];
         for (int j = 0; j < nc; j++) {
-            fraction_simplification(
+            mat[i][j] = fraction_simplification(
                 mat[i][j] = new Tfraction(
                     rand() % (max - min + 1) + min,
                     rand() % (max - min + 1) + min
@@ -84,6 +84,5 @@ FMatrix fraction_matrix_transpose(FMatrix m) {
             mT->mat[j][i] = m->mat[i][j];
         }
     }
-
     return mT;
 }
