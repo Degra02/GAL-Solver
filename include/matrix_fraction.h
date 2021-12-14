@@ -19,5 +19,6 @@ typedef struct Tfmatrix {
 typedef Tfmatrix* FMatrix; 
 
 FMatrix init(FMatrix m);
+FMatrix fraction_matrix_transpose(FMatrix m);
 
 #endif

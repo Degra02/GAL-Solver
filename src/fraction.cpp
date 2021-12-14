@@ -26,14 +26,12 @@ void Tfraction::print() const {
 }
 
 void Tfraction::set(float n) {
-    int m = 1;
-    float f = n;
+    int m = 1; float f = n;
     while (f > 0) {
         m *= 10; 
         f = n; f -= m; 
     }
     m *= 10;
-
     num = round(n*m);
     den = m;
 }

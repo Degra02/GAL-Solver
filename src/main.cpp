@@ -25,6 +25,9 @@ int main() {
 
 	FMatrix m1 = new Tfmatrix(3, 4, 0, 10);
 	// m1->init(); m1->print();
-	init(m1)->print();
+	m1->print();
+	FMatrix m2 = fraction_matrix_transpose(m1);
+	printf("\n");
+	m2->print();
 	return 0;
 }
