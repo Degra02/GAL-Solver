@@ -21,5 +21,6 @@ typedef Tfmatrix* FMatrix;
 FMatrix init(FMatrix m);
 FMatrix fraction_matrix_transpose(FMatrix m);
 FMatrix fraction_matrix_sum(FMatrix a, FMatrix b);
+FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b);
 
 #endif

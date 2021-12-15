@@ -98,3 +98,28 @@ FMatrix fraction_matrix_sum(FMatrix a, FMatrix b) {
     }
     return sum;
 }
+
+FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
+    if(a->nc == b->nr){
+        FMatrix multi = new Tfmatrix(a->nr, b->nc);
+        for(int i = 0; i < multi->nr; i++){
+            for(int j = 0; j < multi->nc; j++){
+                for(int k = 0; k < multi->nc; k++){
+                    multi->mat[i][j] = fraction_simplification(
+                        fraction_sum(
+                            multi->mat[i][j], 
+                            fraction_product(
+                                a->mat[i][k],
+                                b->mat[k][j]
+                            )
+                        )
+                    );
+                }
+            }
+        }
+    return multi;
+    } else {
+        cout << "Impossible to multiply the given functions";
+        return new Tfmatrix();
+    }
+}
