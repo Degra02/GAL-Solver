@@ -108,10 +108,7 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
                     multi->mat[i][j] = fraction_simplification(
                         fraction_sum(
                             multi->mat[i][j], 
-                            fraction_product(
-                                a->mat[i][k],
-                                b->mat[k][j]
-                            )
+                            fraction_product(a->mat[i][k], b->mat[k][j])
                         )
                     );
                 }
