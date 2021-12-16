@@ -15,11 +15,8 @@ int main() {
 
 	FMatrix m1 = new Tfmatrix(4, 4, 0, 10);
 	FMatrix m2 = new Tfmatrix(4, 4, 0, 10);
-	m1->print(); cout << endl;
-	m2->print(); cout << endl;
-	FMatrix m3 = fraction_matrix_multiplication(m1, m2);
-	m3->print(); cout << endl;
-	FMatrix m4 = fraction_matrix_scalar_multiplication(m1, 1.2);
-	m4->print(); cout << endl;
+	m1->print();
+	fraction_matrix_stairs_gauss_jordan(m1);
+	m1->print();
 	return 0;
 }

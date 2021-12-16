@@ -180,7 +180,7 @@ Matrix matrix_transpose(Matrix m) {
     return mT;
 }
 
-string findFraction(string s){
+string parse_fraction(string s){
     // Initialize variables
     string be_deci = "", af_deci = "";
     bool x = true, y = false;
@@ -238,7 +238,7 @@ string findFraction(string s){
 void print_fract_matrix(Matrix m){
     for(int i = 0; i < m->nr; i++){
         for(int j = 0; j < m->nc; j++){
-            string num = findFraction(to_string(m->mat[i][j]));
+            string num = parse_fraction(to_string(m->mat[i][j]));
             cout << setw(10) << num;
         }
         cout << endl << endl;

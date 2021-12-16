@@ -120,7 +120,7 @@ Matrix matrix_scalar_multiplication(Matrix a, float lambda);
 void S(Matrix m, int d, int s); // Change rows operation
 void D(Matrix m, int a, float lambda); // Multiply a row by a real number
 void E(Matrix m, int d, int s, float lambda); // Add a row to another, multiplied by lambda
-string findFraction(string s);
+string parse_fraction(string s);
 void print_fract_matrix(Matrix m);
 int rg(Matrix m); // rango
 void matrix_stairs_gauss_jordan(Matrix m);

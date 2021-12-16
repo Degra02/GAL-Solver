@@ -15,7 +15,7 @@ typedef struct Tfvector {
     ~Tfvector();
     void print() const;
     void init();
-    void multiply(float lambda);
+    void multiply(Fraction lambda);
 } Tfvector;
 
 typedef Tfvector* FVector;
