@@ -20,6 +20,6 @@ int main() {
 	FMatrix m3 = fraction_matrix_multiplication(m1, m2);
 	m3->print(); cout << endl;
 	FMatrix m4 = fraction_matrix_scalar_multiplication(m1, 1.2);
-	m4->print();
+	m4->print(); cout << endl;
 	return 0;
 }

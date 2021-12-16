@@ -130,3 +130,24 @@ FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda) {
     }
     return a;
 }
+
+void S(FMatrix m, int a, int b) {
+    FVector v = new Tfvector(m->mat[a], m->nc);
+    m->mat[a] = m->mat[b]; m->mat[b] = v->array;
+}
+
+void D(FMatrix m, int a, float lambda) {
+    for(int j = 0; j < m->nc; j++){
+        m->mat[a][j] = fraction_simplification(
+            fraction_product(m->mat[a][j], new Tfraction(lambda))
+        );
+    }
+}
+
+void E(FMatrix m, int d, int s, float lambda) { 
+    FVector v = new Tfvector(m->mat[s], m->nc);
+    v->multiply(lambda);
+    for(int j = 0; j < m->nc; j++){
+        m->mat[d][j] = fraction_sum(m->mat[d][j], v->array[j]);
+    }
+}

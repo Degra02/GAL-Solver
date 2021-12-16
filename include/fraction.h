@@ -1,11 +1,11 @@
 #include <iostream>
-using namespace std;
-
 #ifndef __FRACTION_H__
 #define __FRACTION_H__
+using namespace std;
 
 typedef struct Tfraction {
     int num; int den;
+
     Tfraction();
     Tfraction(float n);
     Tfraction(int n, int d);

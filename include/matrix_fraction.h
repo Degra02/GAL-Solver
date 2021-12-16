@@ -8,6 +8,7 @@ using namespace std;
 typedef struct Tfmatrix {
     Fraction **mat;
     int nr; int nc;
+
     Tfmatrix();
     Tfmatrix(int _nr, int _nc);
     Tfmatrix(int _nr, int _nc, int min, int max);
@@ -23,5 +24,9 @@ FMatrix fraction_matrix_transpose(FMatrix m);
 FMatrix fraction_matrix_sum(FMatrix a, FMatrix b);
 FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b);
 FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda);
+
+void S(FMatrix m, int a, int b);
+void D(FMatrix m, int a, float lambda);
+void E(FMatrix m, int d, int s, float lambda);
 
 #endif
