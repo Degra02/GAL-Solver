@@ -120,3 +120,13 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
         return new Tfmatrix();
     }
 }
+
+FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda) {
+    Fraction l = new Tfraction(lambda);
+    for (int i=0; i<a->nr; i++) {
+        for (int j=0; j<a->nc; j++) {
+            a->mat[i][j] = fraction_simplification(fraction_product(l, a->mat[i][j]));
+        }
+    }
+    return a;
+}
