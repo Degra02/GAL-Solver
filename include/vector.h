@@ -67,5 +67,6 @@ float vector_euclid_scalar_multip(Vector a, Vector b);
 float vector_norm(Vector a);
 float vector_angle(Vector a, Vector b);
 Vector vector_vectorial_multip(Vector a, Vector b);
+Vector vector_pr(Vector i, Vector pr);
 
 #endif

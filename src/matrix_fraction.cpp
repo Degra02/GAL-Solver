@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+// Methods
+
 Tfmatrix::Tfmatrix() {
     nr = nc = 0;
 }
@@ -61,6 +63,8 @@ Tfmatrix::~Tfmatrix() {
     }
     delete[] mat;
 }
+
+// Functions
 
 FMatrix init(FMatrix m) {
     float coe;
