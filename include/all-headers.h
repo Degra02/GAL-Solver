@@ -8,5 +8,6 @@
 
 #include "fraction.h"
 #include "matrix_fraction.h"
+#include "vector_fraction.h"
 
 #endif
