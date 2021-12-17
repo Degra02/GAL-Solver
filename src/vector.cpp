@@ -43,3 +43,7 @@ Vector vector_vectorial_multip(Vector a, Vector b){ // possible only in R3 (or R
         return NULL;
     }
 }
+
+Vector vector_pr(Vector i, Vector pr){
+    
+}
