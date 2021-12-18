@@ -3,6 +3,7 @@
 #include <ctime>
 #include <cmath>
 #include <string>
+#include "all-headers.h"s
 using namespace std;
 
 #ifndef __MATRICI_H__
@@ -127,6 +128,9 @@ void matrix_stairs_gauss_jordan(Matrix m);
 void matrix_rref_calculator(Matrix m);
 Matrix matrix_rref_full(Matrix m);
 bool is_stairs_form(Matrix m);
+bool matrix_is_square(Matrix m);
+bool matrix_is_base(Matrix m);
+Matrix matrix_orthonormal_base(Matrix v);
 
 
 #endif

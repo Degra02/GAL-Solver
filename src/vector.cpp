@@ -51,3 +51,28 @@ Vector vector_pr(Vector i, Vector pr){
     res->multiply(lambda);
     return res;
 }
+
+bool vector_same_dimension(Vector a, Vector b){
+    return (a->n == b->n);
+}
+
+Vector vector_copy_vector(Vector dest, Vector src){
+    if(! vector_same_dimension(dest, src)){
+        return dest;
+    }
+
+    for(int i = 0; i < src->n; i++){
+        dest->array[i] = src->array[i];
+    }
+
+    return dest;
+}
+
+Vector matrix_row_to_vector(Matrix m, int row){
+    Vector res = new Tvettore(m->nc);
+    for(int j = 0; j < m->nc; j++){
+        res[j] = m->mat[row][j];
+    }
+
+    return res;
+}

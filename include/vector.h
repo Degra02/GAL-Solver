@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include "all-headers.h"
 using namespace std;
 
 #ifndef __VECTOR_H__
@@ -68,5 +69,8 @@ float vector_norm(Vector a);
 float vector_angle(Vector a, Vector b);
 Vector vector_vectorial_multip(Vector a, Vector b);
 Vector vector_pr(Vector i, Vector pr);
+bool vector_same_dimension(Vector a, Vector b);
+Vector vector_copy_vector(Vector dest, Vector src);
+Vector matrix_row_to_vector(Matrix m, int row);
 
 #endif
