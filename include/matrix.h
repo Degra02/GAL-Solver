@@ -3,7 +3,7 @@
 #include <ctime>
 #include <cmath>
 #include <string>
-#include "all-headers.h"s
+#include "all-headers.h"
 using namespace std;
 
 #ifndef __MATRICI_H__

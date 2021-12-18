@@ -245,25 +245,3 @@ void print_fract_matrix(Matrix m){
     }
 }
 
-bool matrix_is_square(Matrix m){ // returns true if it's a square matrix
-    return (m->nc == m->nr);
-}
-
-bool matrix_is_base(Matrix m){ // returns true if the vectors are independent
-    return ((matrix_is_square(m)) && (rg(m) == m->nr));
-}
-
-Matrix matrix_orthonormal_base(Matrix m){ // only works if the vectors are independent
-    Matrix a = new Tmatrix(m->nr, m->nc);
-    Vector temp;
-
-    if(matrix_is_base(m)){
-        for(int i = 0; i < m->nr; i++){
-            if(m->nr == 0){
-                temp = matrix_row_to_vector(m, 0); // DA CONTINUARE
-            }
-        }
-    }
-
-    return a;
-}
