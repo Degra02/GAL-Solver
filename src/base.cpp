@@ -17,6 +17,7 @@ Vector matrix_column_to_vector(Matrix m, int c){
     for(int i = 0; i < m->nr; i++){
         res->array[i] = m->mat[i][c];
     }
+    return res;
 }
 
 void matrix_init_column(Matrix m, Vector v, int c){
@@ -25,25 +26,38 @@ void matrix_init_column(Matrix m, Vector v, int c){
     }
 }
 
+Matrix gram_schmidt(Matrix m, Vector v){
+    Matrix a1 = new Tmatrix(m->nr, m->nc); 
+    Vector tmp = new Tvettore(v->n);
+    Vector res = new Tvettore(v->n);
 
-Matrix gram_schmidt(Matrix m, Matrix a, Vector v, int c){
-    if(c == 0){
-        v = matrix_column_to_vector(m, 0);
-        matrix_init_column(m, v, 0);
-        return m;
-    } else {
-        v = matrix_column_to_vector(m, c) - ();
-         // DA COMPLETARE ABBASTANZA COMPLICATO
-        
+    for(int i = 0; i < m->nc; i++){
+        if(i == 0){
+            v = vector_copy_vector(v, matrix_column_to_vector(m, 0));
+            matrix_init_column(a1, v, 0);
+        } else {
+            v = matrix_column_to_vector(m, i);
+            for(int j = 0; j < i; j++){
+                tmp = vector_pr(v, matrix_column_to_vector(a1, j));
+                res = vector_subtraction(v, tmp);
+            }
+            matrix_init_column(a1, res, i);
+        }
     }
 
+    return a1;
 }
 
 Matrix matrix_orthonormal_base(Matrix m){ // only works if the vectors are independent
+    Vector v = new Tvettore(m->nr);
     Matrix a = new Tmatrix(m->nr, m->nc);
+    a = gram_schmidt(m, v); // needs to be normalized
 
-    if(matrix_is_base(m)){
-        gram_schmidt(m, a, m->nr-1);
+    for(int i = 0; i < a->nc; i++){
+        v = matrix_column_to_vector(a, i);
+        v->multiply( (1 / pow(vector_norm(v), 2)));
+
+        matrix_init_column(a, v, i);
     }
 
     return a;

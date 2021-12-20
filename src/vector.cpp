@@ -4,6 +4,24 @@
 #include "all-headers.h"
 using namespace std;
 
+Vector vector_sum(Vector a, Vector b){
+    Vector res = new Tvettore(a->n);
+    for(int i = 0; i < a->n; i++){
+        res->array[i] = a->array[i] + b->array[i];
+    }
+
+    return res;
+}
+
+Vector vector_subtraction(Vector a, Vector b){
+    Vector res = new Tvettore(a->n);
+    for(int i = 0; i < a->n; i++){
+        res->array[i] = a->array[i] - b->array[i];
+    }
+
+    return res;
+}
+
 float vector_euclid_scalar_multip(Vector a, Vector b){
     int res = 0;
     if(a->n == b->n){

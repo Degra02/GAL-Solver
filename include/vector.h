@@ -64,6 +64,8 @@ typedef struct Tvettore{ // Struct Tvettore
 }Tvettore;
 
 typedef Tvettore *Vector;
+Vector vector_sum(Vector a, Vector b);
+Vector vector_subtraction(Vector a, Vector b);
 float vector_euclid_scalar_multip(Vector a, Vector b);
 float vector_norm(Vector a);
 float vector_angle(Vector a, Vector b);
