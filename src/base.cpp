@@ -13,7 +13,7 @@ bool matrix_is_base(Matrix m){ // returns true if the vectors are independent
 }
 
 Vector matrix_column_to_vector(Matrix m, int c){
-    Vector res;
+    Vector res = new Tvettore(m->nc);
     for(int i = 0; i < m->nr; i++){
         res->array[i] = m->mat[i][c];
     }
