@@ -38,9 +38,10 @@ Matrix gram_schmidt(Matrix m, Vector v){
             matrix_init_column(a1, v, 0);
         } else {
             v = matrix_column_to_vector(m, i);
+            res = v;
             for(int j = 0; j < i; j++){
                 tmp = vector_pr(v, matrix_column_to_vector(a1, j));
-                res = vector_subtraction(v, tmp);
+                res = vector_subtraction(res, tmp);
             }
             matrix_init_column(a1, res, i);
         }
@@ -56,7 +57,7 @@ Matrix matrix_orthonormal_base(Matrix m){ // only works if the vectors are indep
 
     for(int i = 0; i < a->nc; i++){
         v = matrix_column_to_vector(a, i);
-        v->multiply( (1 / pow(vector_norm(v), 2)));
+        v->multiply(1 / vector_norm(v));
 
         matrix_init_column(a, v, i);
     }

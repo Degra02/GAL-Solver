@@ -63,10 +63,12 @@ Vector vector_vectorial_multip(Vector a, Vector b){ // possible only in R3 (or R
 }
 
 Vector vector_pr(Vector i, Vector pr){
-    Vector res;
+    Vector res = new Tvettore(i->n);
+    res = vector_copy_vector(res, pr);
     float lambda;
     lambda = (vector_euclid_scalar_multip(i, pr)/(pow(vector_norm(pr), 2)));
     res->multiply(lambda);
+    
     return res;
 }
 

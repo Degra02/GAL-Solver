@@ -17,10 +17,18 @@ int main() {
 	cout << "Normal matrix" << endl;
 	m->stampa();
 
+	cout << endl << endl;
+	print_fract_matrix(m);
+	cout << endl << endl;
+
 	m = matrix_orthonormal_base(m);
 
 	cout << endl << endl << "Orthonormal base" << endl;
 	m->stampa();
+
+	cout << endl << endl;
+	print_fract_matrix(m);
+	cout << endl << endl;
 	
-	
+	return 0;
 }
