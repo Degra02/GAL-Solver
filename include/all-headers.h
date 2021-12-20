@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "matrix.h"
+#include "base.h"
 #include "determinant.h"
 #include "vector.h"
 #include "eq_systems.h"
