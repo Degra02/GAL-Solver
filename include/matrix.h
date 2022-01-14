@@ -13,12 +13,23 @@ typedef struct Tmatrix{ // Struct Tmatrix
     float **mat; // Fraction **mat;
     int nr; 
     int nc;
+    string name;
 
     Tmatrix(){ // default constructor
         nr = nc = 0;
     }
 
     Tmatrix(int _nr, int _nc){ // Matrix init
+        nr = _nr;
+        nc = _nc;
+        mat = new float*[nr];
+        for(int i = 0; i < nr; i++){
+            mat[i] = new float[nc];
+        }
+    }
+
+    Tmatrix(string _name, int _nr, int _nc){ // Matrix init
+        name = _name;
         nr = _nr;
         nc = _nc;
         mat = new float*[nr];
@@ -57,23 +68,6 @@ typedef struct Tmatrix{ // Struct Tmatrix
 
         delete[] mat;
     }
-    
-    void stampa() const { // print f.
-        for(int i = 0; i < nr; i++){
-            for(int j = 0; j < nc; j++){
-                if(mat[i][j] == 0){
-                    printf(" %6d", 0);
-                } else {
-                    if(round(mat[i][j]) == mat[i][j]){
-                        printf(" %6.0f ", mat[i][j]);
-                    } else {
-                        printf(" %5.1f ", mat[i][j]);
-                    }
-                }
-            }
-            cout << endl << endl;
-        }
-    }
 
     void sum(Tmatrix *b){ //Sums a new matrix to the current one
         for(int i = 0; i < nr; i++){
@@ -99,6 +93,7 @@ typedef struct Tmatrix{ // Struct Tmatrix
 typedef Tmatrix* Matrix; 
 
 Matrix init_matrix();
+void print_matrix(Matrix m);
 Matrix matrix_transpose(Matrix m);
 void matrix_sum(Tmatrix *sum, Tmatrix *a, Tmatrix *b);
 Matrix matrix_multiplication(Matrix a, Matrix b);

@@ -14,7 +14,7 @@ int main() {
 	srand(time(0));
 
 	Matrix m = init_matrix();
-	m->stampa();
+	print_matrix(m);
 
 	/*cout << "Vettore termini noti" << endl;
 	b->stampa();

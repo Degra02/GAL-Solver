@@ -19,10 +19,10 @@ typedef struct Tlisys {
         b = _b;
     }
 
-    Tlisys(int n_var, int n_eq) {
+    /*Tlisys() {
         A = init_matrix();
         b->init(A->nr);
-    }
+    }*/
 
     void stampa() {
         for(int i = 0; i < A->nr; i++){

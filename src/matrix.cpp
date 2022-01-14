@@ -170,7 +170,7 @@ Matrix matrix_scalar_multiplication(Matrix a, float lambda) {
 }
 
 Matrix matrix_transpose(Matrix m) {
-    Matrix mT = new Tmatrix(m->nr, m->nc);
+    Matrix mT = new Tmatrix(m->name + "T", m->nr, m->nc);
     for (int i=0; i<m->nr; i++) {
         for (int j=0; j<m->nc; j++) {
             mT->mat[j][i] = m->mat[i][j];
@@ -247,14 +247,39 @@ void print_fract_matrix(Matrix m){
 
 Matrix init_matrix(){
     int r, c;
-	cout << "righe= "; cin >> r;
-	cout << "colonne= "; cin >> c;
-    Matrix m = new Tmatrix(r, c);
+    string name;
+    cout << "name= "; cin >> name;
+	cout << "rows= "; cin >> r;
+	cout << "columns= "; cin >> c;
+    cout << endl;
+    Matrix m = new Tmatrix(name, r, c);
     for(int i = 0; i < m->nr; i++){
         cout << "   ";
         for(int j = 0; j < m->nc; j++){
             scanf("%f", &m->mat[i][j]);
         }
     }
+    cout << endl << endl;
     return m;
+}
+
+void print_matrix(Matrix m){
+    cout << "\x1b[38;5;50m" << m->name << "\x1b[0m";
+    cout << endl << endl;
+
+    for(int i = 0; i < m->nr; i++){
+        for(int j = 0; j < m->nc; j++){
+            if(m->mat[i][j] == 0){
+                printf("\x1b[38;5;239m %3d \x1b[0m",0);
+            } else {
+                if(m->mat[i][j] == (int)m->mat[i][j]){
+                    printf(" %3.0f ", m->mat[i][j]);
+                } else {
+                    printf(" %3.1f ", m->mat[i][j]);
+                }
+            }
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
 }
