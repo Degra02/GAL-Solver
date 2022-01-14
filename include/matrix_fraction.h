@@ -22,7 +22,6 @@ typedef struct Tfmatrix {
 typedef Tfmatrix* FMatrix; 
 
 FMatrix init_fmatrix();
-Fraction str_to_fraction(string value);
 FMatrix fraction_matrix_transpose(FMatrix m);
 FMatrix fraction_matrix_sum(FMatrix a, FMatrix b);
 FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b);
