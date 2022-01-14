@@ -20,8 +20,8 @@ typedef struct Tlisys {
     }
 
     Tlisys(int n_var, int n_eq) {
-        A->init(n_var, n_eq);
-        b->init(n_eq);
+        A = init_matrix();
+        b->init(A->nr);
     }
 
     void stampa() {

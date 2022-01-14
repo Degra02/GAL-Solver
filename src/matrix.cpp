@@ -245,3 +245,16 @@ void print_fract_matrix(Matrix m){
     }
 }
 
+Matrix init_matrix(){
+    int r, c;
+	cout << "righe= "; cin >> r;
+	cout << "colonne= "; cin >> c;
+    Matrix m = new Tmatrix(r, c);
+    for(int i = 0; i < m->nr; i++){
+        cout << "   ";
+        for(int j = 0; j < m->nc; j++){
+            scanf("%f", &m->mat[i][j]);
+        }
+    }
+    return m;
+}

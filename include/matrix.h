@@ -94,26 +94,11 @@ typedef struct Tmatrix{ // Struct Tmatrix
         }
     }*/
 
-    void init(int n_var, int n_eq) {
-        nr = n_eq;
-        nc = n_var;
-        float coe;
-        mat = new float*[n_eq];
-        printf("Matrix init:\n");
-        for (int i=0; i<nr; i++) {
-            mat[i] = new float[n_var];
-            for (int j=0; j<nc; j++) {
-                printf("Pos [%d, %d]: ", i+1, j+1); scanf("%f", &coe);
-                coe = floor(coe*100)/100.0;
-                mat[i][j] = coe;
-            }
-        }
-    }
-
 } Tmatrix;
 
 typedef Tmatrix* Matrix; 
 
+Matrix init_matrix();
 Matrix matrix_transpose(Matrix m);
 void matrix_sum(Tmatrix *sum, Tmatrix *a, Tmatrix *b);
 Matrix matrix_multiplication(Matrix a, Matrix b);
@@ -131,6 +116,7 @@ bool is_stairs_form(Matrix m);
 bool matrix_is_square(Matrix m);
 bool matrix_is_base(Matrix m);
 Matrix matrix_orthonormal_base(Matrix v);
+
 
 
 #endif
