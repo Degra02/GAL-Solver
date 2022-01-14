@@ -35,5 +35,8 @@ int main() {
 	m2 = ls_rref_full(ls);
 	m2->stampa();*/
 	
+	cout << endl << endl;
+	print_fract_matrix(m);
+	cout << endl << endl;
 	return 0;
 }

@@ -16,6 +16,7 @@ typedef struct Tfraction {
 
 typedef Tfraction* Fraction;
 
+/* operazioni base delle frazioni */
 Fraction fraction_power(Fraction a, int p);
 Fraction fraction_sum(Fraction a, Fraction b);
 Fraction fraction_difference(Fraction a, Fraction b);
