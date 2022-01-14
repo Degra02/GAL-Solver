@@ -2,7 +2,7 @@
 #include "all-headers.h"
 using namespace std;
 
-/* metodi della struttura Tfraction */
+// Methods
 
 /* costruttore di default */
 Tfraction::Tfraction() {
@@ -45,6 +45,8 @@ void Tfraction::set(float n) {
     if (num == 0) den = 1;
     else den = m;
 }
+
+// Functions
 
 /* funzione che prese due strutture Tfraction restituisce un'altra Tfraction 
 somma delle precedenti */

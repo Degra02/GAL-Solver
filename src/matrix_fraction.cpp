@@ -109,11 +109,9 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
         for(int i = 0; i < multi->nr; i++){
             for(int j = 0; j < multi->nc; j++){
                 for(int k = 0; k < multi->nc; k++){
-                    multi->mat[i][j] = fraction_simplification(
-                        fraction_sum(
-                            multi->mat[i][j], 
-                            fraction_product(a->mat[i][k], b->mat[k][j])
-                        )
+                    multi->mat[i][j] = fraction_sum(
+                        multi->mat[i][j], 
+                        fraction_product(a->mat[i][k], b->mat[k][j])
                     );
                 }
             }
@@ -129,9 +127,7 @@ FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda) {
     Fraction l = new Tfraction(lambda);
     for (int i=0; i<a->nr; i++) {
         for (int j=0; j<a->nc; j++) {
-            a->mat[i][j] = fraction_simplification(
-                fraction_product(l, a->mat[i][j])
-            );
+            a->mat[i][j] = fraction_product(l, a->mat[i][j]);
         }
     }
     return a;
@@ -143,32 +139,16 @@ void fraction_S(FMatrix m, int a, int b) {
 }
 
 void fraction_D(FMatrix m, int a, Fraction lambda) {
-    for(int j = 0; j < m->nc; j++){
-        m->mat[a][j] = fraction_simplification(
-            fraction_product(m->mat[a][j], lambda)
-        );
-    }
+    for(int j = 0; j < m->nc; j++)
+        m->mat[a][j] = fraction_product(m->mat[a][j], lambda);
 }
 
 void fraction_E(FMatrix m, int d, int s, Fraction lambda) { 
     FVector v = new Tfvector(m->mat[s], m->nc);
     v->multiply(lambda);
     for(int j = 0; j < m->nc; j++){
-        m->mat[d][j] = fraction_simplification(
-            fraction_sum(m->mat[d][j], v->array[j])
-        );
+        m->mat[d][j] = fraction_sum(m->mat[d][j], v->array[j]);
     }
 }
 
-void fraction_matrix_gauss_jordan(FMatrix m) {
-    int row_index = 0;
-    if (m->nr == 0 || m->nc == 0) exit(1);
-    // iteratività
-    while (m->mat[row_index][0]->num == 0) {
-        row_index++;
-    }
-    // if (row_index >= m->nr) // next column
-    if (row_index != 0) fraction_S(m, 0, row_index);
-    
-
-}
+void fraction_matrix_gauss_jordan(FMatrix m) {}
