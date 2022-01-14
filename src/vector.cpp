@@ -4,6 +4,24 @@
 #include "all-headers.h"
 using namespace std;
 
+Vector vector_sum(Vector a, Vector b){
+    Vector res = new Tvettore(a->n);
+    for(int i = 0; i < a->n; i++){
+        res->array[i] = a->array[i] + b->array[i];
+    }
+
+    return res;
+}
+
+Vector vector_subtraction(Vector a, Vector b){
+    Vector res = new Tvettore(a->n);
+    for(int i = 0; i < a->n; i++){
+        res->array[i] = a->array[i] - b->array[i];
+    }
+
+    return res;
+}
+
 float vector_euclid_scalar_multip(Vector a, Vector b){
     int res = 0;
     if(a->n == b->n){
@@ -42,4 +60,39 @@ Vector vector_vectorial_multip(Vector a, Vector b){ // possible only in R3 (or R
         cout << endl << "The vectorial product is only possible in the third (or seventh) dimension" << endl;
         return NULL;
     }
+}
+
+Vector vector_pr(Vector i, Vector pr){
+    Vector res = new Tvettore(i->n);
+    res = vector_copy_vector(res, pr);
+    float lambda;
+    lambda = (vector_euclid_scalar_multip(i, pr)/(pow(vector_norm(pr), 2)));
+    res->multiply(lambda);
+    
+    return res;
+}
+
+bool vector_same_dimension(Vector a, Vector b){
+    return (a->n == b->n);
+}
+
+Vector vector_copy_vector(Vector dest, Vector src){
+    if(! vector_same_dimension(dest, src)){
+        return dest;
+    }
+
+    for(int i = 0; i < src->n; i++){
+        dest->array[i] = src->array[i];
+    }
+
+    return dest;
+}
+
+Vector matrix_row_to_vector(Matrix m, int row){
+    Vector res = new Tvettore(m->nc);
+    for(int j = 0; j < m->nc; j++){
+        res[j] = m->mat[row][j];
+    }
+
+    return res;
 }

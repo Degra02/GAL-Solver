@@ -3,6 +3,7 @@
 #include <ctime>
 #include <cmath>
 #include <string>
+#include "all-headers.h"
 using namespace std;
 
 #ifndef __MATRICI_H__
@@ -33,7 +34,7 @@ typedef struct Tmatrix{ // Struct Tmatrix
         for(int i = 0; i < nr; i++){
             *(mat + i) = new float[nc];
             for(int j = 0; j < nc; j++){
-                *( *(mat + i) + j) = floor(((rand() % (max*10 - min*10 + 1) + min*10)/10.0)*10)/10.0;
+                *( *(mat + i) + j) = (rand() % (max - min + 1) + min);
             }
         }
     }
@@ -127,6 +128,9 @@ void matrix_stairs_gauss_jordan(Matrix m);
 void matrix_rref_calculator(Matrix m);
 Matrix matrix_rref_full(Matrix m);
 bool is_stairs_form(Matrix m);
+bool matrix_is_square(Matrix m);
+bool matrix_is_base(Matrix m);
+Matrix matrix_orthonormal_base(Matrix v);
 
 
 #endif

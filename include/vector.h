@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include "all-headers.h"
 using namespace std;
 
 #ifndef __VECTOR_H__
@@ -63,9 +64,15 @@ typedef struct Tvettore{ // Struct Tvettore
 }Tvettore;
 
 typedef Tvettore *Vector;
+Vector vector_sum(Vector a, Vector b);
+Vector vector_subtraction(Vector a, Vector b);
 float vector_euclid_scalar_multip(Vector a, Vector b);
 float vector_norm(Vector a);
 float vector_angle(Vector a, Vector b);
 Vector vector_vectorial_multip(Vector a, Vector b);
+Vector vector_pr(Vector i, Vector pr);
+bool vector_same_dimension(Vector a, Vector b);
+Vector vector_copy_vector(Vector dest, Vector src);
+Vector matrix_row_to_vector(Matrix m, int row);
 
 #endif
