@@ -20,6 +20,19 @@ Tfmatrix::Tfmatrix(int _nr, int _nc) {
     }
 }
 
+Tfmatrix::Tfmatrix(string _name, int _nr, int _nc) {
+    nr = _nr;
+    nc = _nc;
+    name = _name;
+    mat = new Fraction*[nr];
+    for (int i = 0; i < nr; i++) {
+        mat[i] = new Fraction[nc];
+        for (int j = 0; j < nc; j++) {
+            mat[i][j] = new Tfraction();
+        }
+    }
+}
+
 Tfmatrix::Tfmatrix(int _nr, int _nc, int min, int max) {
     nr = _nr;
     nc = _nc;
@@ -69,16 +82,50 @@ Tfmatrix::~Tfmatrix() {
 
 // Functions
 
-FMatrix init(FMatrix m) {
-    float coe;
-    for (int i = 0; i < m->nr; i++) {
-        for (int j = 0; j < m->nc; j++) {
-            printf("insert in position [%d, %d]: ", i+1, j+1); scanf("%f", &coe);
-            m->mat[i][j]->set(coe);
-            m->mat[i][j] = fraction_simplification(m->mat[i][j]);
+FMatrix init_fmatrix() {
+    int r, c;
+    string name;
+    cout << "name= "; cin >> name;
+	cout << "rows= "; cin >> r;
+	cout << "columns= "; cin >> c;
+    cout << endl;
+    FMatrix m = new Tfmatrix(name, r, c);
+    Fraction f;
+
+    string value;
+    for(int i = 0; i < m->nr; i++){
+        cout << "   ";
+        for(int j = 0; j < m->nc; j++){
+            cin >> value;
+            //value = parse_fraction(value);
+            f = str_to_fraction(value);
+            m->mat[i][j]->num = f->num;
+            m->mat[i][j]->den = f->den;
         }
     }
+    cout << endl << endl;
+
     return m;
+}
+
+Fraction str_to_fraction(string value){
+    int i = 0;
+    string snum, sden;
+    while(value[i] != '/'){
+        snum[i] = value[i];
+        i++;
+    }
+    snum[i] = '\0';
+    i++;
+    while(value[i] != '\0'){
+        sden[i] = value[i];
+        i++;
+    }
+    sden[i] = '\0';
+
+    Fraction f = new Tfraction(stoi(snum), stoi(sden));
+
+    return f;
 }
 
 FMatrix fraction_matrix_transpose(FMatrix m) {
@@ -151,4 +198,4 @@ void fraction_E(FMatrix m, int d, int s, Fraction lambda) {
     }
 }
 
-void fraction_matrix_gauss_jordan(FMatrix m) {}
+//void fraction_matrix_gauss_jordan(FMatrix m) {}

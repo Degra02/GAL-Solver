@@ -264,7 +264,7 @@ Matrix init_matrix(){
 }
 
 void print_matrix(Matrix m){
-    cout << "\x1b[38;5;50m" << m->name << "\x1b[0m";
+    cout << "Name: " << "\x1b[38;5;50m" << m->name << "\x1b[0m";
     cout << endl << endl;
 
     for(int i = 0; i < m->nr; i++){
