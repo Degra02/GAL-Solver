@@ -12,11 +12,14 @@ using namespace std;
 
 int main() {
 	srand(time(0));
+	Fraction f1 = new Tfraction(1.2);
+	Fraction f2 = new Tfraction(2.4);
+	fraction_simplification(f1)->print(); cout << endl;
+	fraction_simplification(f2)->print(); cout << endl;
+	fraction_sum(f1, f2)->print(); cout << endl;
+	fraction_difference(f1, f2)->print(); cout << endl;
+	fraction_product(f1, f2)->print(); cout << endl;
+	fraction_quotient(f1, f2)->print(); cout << endl;
 
-	FMatrix m1 = new Tfmatrix(4, 4, 0, 10);
-	FMatrix m2 = new Tfmatrix(4, 4, 0, 10);
-	m1->print();
-	fraction_matrix_stairs_gauss_jordan(m1);
-	m1->print();
 	return 0;
 }

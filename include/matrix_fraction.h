@@ -26,10 +26,10 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b);
 FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda);
 
 void fraction_S(FMatrix m, int a, int b);
-void fraction_D(FMatrix m, int a, float lambda);
+void fraction_D(FMatrix m, int a, Fraction lambda);
 void fraction_E(FMatrix m, int d, int s, Fraction lambda);
 
 bool fraction_is_stairs_form(FMatrix m);
-void fraction_matrix_stairs_gauss_jordan(FMatrix m);
+void fraction_matrix_gauss_jordan(FMatrix m);
 
 #endif

@@ -2,29 +2,38 @@
 #include "all-headers.h"
 using namespace std;
 
+/* metodi della struttura Tfraction */
+
+/* costruttore di default */
 Tfraction::Tfraction() {
     num = 0; den = 1;
 }
 
+/* costruttore dati due numeri interi, uno diventa numeratore e l'altro denominatore */
 Tfraction::Tfraction(int n, int d) {
     num = n;
     if (d != 0) den = d;
     else den = 1;
 }
 
+/* costruttore dato un numero decimale lo trasforma in frazione richiamando il metodo set */
 Tfraction::Tfraction(float n) {
     set(n);
 }
 
+/* costruttore date due stringhe li convete in numeratore e denominatore */
 Tfraction::Tfraction(string n, string d) {
     num = stoi(n); den = stoi(d);
 }
 
+/* metodo di stampa della frazione */
 void Tfraction::print() const {
     if (den == 1 || num == 0) printf("%d", num);
     else printf("%d/%d", num, den);
 }
 
+/* metodo che prende un numero decimale e con arrotondamento 2 cifre dopo la virgola lo 
+trasforma in frazione */
 void Tfraction::set(float n) {
     int m = 1; float f = n;
     while (f > 0) {
@@ -33,9 +42,12 @@ void Tfraction::set(float n) {
     }
     m *= 10;
     num = round(n*m);
-    den = m;
+    if (num == 0) den = 1;
+    else den = m;
 }
 
+/* funzione che prese due strutture Tfraction restituisce un'altra Tfraction 
+somma delle precedenti */
 Fraction fraction_sum(Fraction a, Fraction b) {
     Fraction c = new Tfraction();
 
@@ -49,6 +61,8 @@ Fraction fraction_sum(Fraction a, Fraction b) {
     return c;
 }
 
+/* funzione che prese due strutture Tfraction restituisce un'altra Tfraction 
+defferenza delle precedenti */
 Fraction fraction_difference(Fraction a, Fraction b) {
     Fraction c = new Tfraction(); 
 
@@ -62,22 +76,28 @@ Fraction fraction_difference(Fraction a, Fraction b) {
     return c;
 }
 
+/* funzione che prese due strutture Tfraction restituisce un'altra Tfraction 
+prodotto delle precedenti */
 Fraction fraction_product(Fraction a, Fraction b) {
     Fraction c = new Tfraction();
 
     c->den = a->den * b->den;
     c->num = a->num * b->num;
-    return c;
+    return fraction_simplification(c);
 }
 
+/* funzione che prese due strutture Tfraction restituisce un'altra Tfraction 
+quoziente delle precedenti */
 Fraction fraction_quotient(Fraction a, Fraction b) {
     Fraction c = new Tfraction();
 
     c->den = a->den * b->num;
     c->num = a->num * b->den;
-    return c;
+    return fraction_simplification(c);
 }
 
+/* funzione che presa una struttura Tfraction e un numero intero restituisce un'altra
+Tfraction alevata alla potenza data */
 Fraction fraction_power(Fraction a, int p) {
     Fraction c = new Tfraction(1, 1);
 
@@ -85,9 +105,10 @@ Fraction fraction_power(Fraction a, int p) {
         c->num *= a->num;
         c->den *= a->den;
     }
-    return c;
+    return fraction_simplification(c);
 }
 
+/* semplifica la Tfraction data */ 
 Fraction fraction_simplification(Fraction a) {
     int abs_num = abs(a->num), abs_den = abs(a->den);
     int min = abs_num; 
@@ -95,14 +116,14 @@ Fraction fraction_simplification(Fraction a) {
     for (int i=2; i<=min; i++) {
         if (abs_num % i == 0 && abs_den % i == 0) {
             a->num /= i; a->den /= i;
-            fraction_simplification(a);
-            /*serve per velocizzare l'algoritmo quando ormai non serve più iterare*/
-            break; 
+            fraction_simplification(a); 
+            break; /*serve per velocizzare l'algoritmo quando ormai non serve più iterare*/
         }
     }
     return a;
 }
 
+/* presi due numeri interi restituisce il minimo comune divisore */
 int mcm(int a, int b) {
     int max = a, c;
     if (a < b) max = b;
@@ -116,6 +137,7 @@ int mcm(int a, int b) {
     return c;
 }
 
+/* restituisce il modulo di un numero intero */
 int abs(int n) {
     if (n >= 0) return n;
     return -n;
