@@ -144,3 +144,23 @@ int abs(int n) {
     if (n >= 0) return n;
     return -n;
 }
+
+Fraction str_to_fraction(string value){
+    int i = 0;
+    string snum, sden;
+    while(value[i] != '/'){
+        snum[i] = value[i];
+        i++;
+    }
+    snum[i] = '\0';
+    i++;
+    while(value[i] != '\0'){
+        sden[i] = value[i];
+        i++;
+    }
+    sden[i] = '\0';
+
+    Fraction f = new Tfraction(stoi(snum), stoi(sden));
+
+    return f;
+}
