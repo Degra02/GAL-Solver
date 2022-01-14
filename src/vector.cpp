@@ -13,13 +13,10 @@ Vector vector_sum(Vector a, Vector b){
     return res;
 }
 
-Vector vector_subtraction(Vector a, Vector b){
-    Vector res = new Tvettore(a->n);
+void vector_subtraction(Vector a, Vector b){
     for(int i = 0; i < a->n; i++){
-        res->array[i] = a->array[i] - b->array[i];
+        a->array[i] = a->array[i] - b->array[i];
     }
-
-    return res;
 }
 
 float vector_euclid_scalar_multip(Vector a, Vector b){
@@ -64,7 +61,7 @@ Vector vector_vectorial_multip(Vector a, Vector b){ // possible only in R3 (or R
 
 Vector vector_pr(Vector i, Vector pr){
     Vector res = new Tvettore(i->n);
-    res = vector_copy_vector(res, pr);
+    vector_copy_vector(res, pr);
     float lambda;
     lambda = (vector_euclid_scalar_multip(i, pr)/(pow(vector_norm(pr), 2)));
     res->multiply(lambda);
@@ -76,16 +73,12 @@ bool vector_same_dimension(Vector a, Vector b){
     return (a->n == b->n);
 }
 
-Vector vector_copy_vector(Vector dest, Vector src){
-    if(! vector_same_dimension(dest, src)){
-        return dest;
+void vector_copy_vector(Vector dest, Vector src){
+    if(vector_same_dimension(dest, src)){
+        for(int i = 0; i < src->n; i++){
+            dest->array[i] = src->array[i];
+        }
     }
-
-    for(int i = 0; i < src->n; i++){
-        dest->array[i] = src->array[i];
-    }
-
-    return dest;
 }
 
 Vector matrix_row_to_vector(Matrix m, int row){

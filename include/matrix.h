@@ -57,7 +57,7 @@ typedef struct Tmatrix{ // Struct Tmatrix
 
         delete[] mat;
     }
-
+    
     void stampa() const { // print f.
         for(int i = 0; i < nr; i++){
             for(int j = 0; j < nc; j++){

@@ -13,6 +13,7 @@ typedef struct Tvettore{ // Struct Tvettore
 
     Tvettore(){ // Costruttore di default
         n = 0;
+        array = NULL;
     }
 
     Tvettore(int _n){ // Costruttore per dimensione vettore
@@ -65,14 +66,14 @@ typedef struct Tvettore{ // Struct Tvettore
 
 typedef Tvettore *Vector;
 Vector vector_sum(Vector a, Vector b);
-Vector vector_subtraction(Vector a, Vector b);
+void vector_subtraction(Vector a, Vector b);
 float vector_euclid_scalar_multip(Vector a, Vector b);
 float vector_norm(Vector a);
 float vector_angle(Vector a, Vector b);
 Vector vector_vectorial_multip(Vector a, Vector b);
 Vector vector_pr(Vector i, Vector pr);
 bool vector_same_dimension(Vector a, Vector b);
-Vector vector_copy_vector(Vector dest, Vector src);
+void vector_copy_vector(Vector dest, Vector src);
 Vector matrix_row_to_vector(Matrix m, int row);
 
 #endif
