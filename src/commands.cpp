@@ -4,40 +4,40 @@
 
 using namespace std;
 
-/*void parse_user_input(vector <string> *userinput){
+void parse_user_input(vector <string> *userinput){
+    if(userinput->size() != 0){
+        for(int i = userinput->size() - 1; i >= 0; i--){
+            userinput->pop_back();
+        }
+    }
     string input, call;
-    cout << "function: "; cin >> input;
-    vector <string> tokens;
-    stringstream check1(input);
+    cout << "function: "; fflush(stdin); getline(cin, input);
+    stringstream check(input);
 
-    while(getline(check1, call, ' ')){
-        tokens.push_back(call);
+    while(getline(check, call, ' ')){
+        (*userinput).push_back(call);
     }
     
-}*/
+}
 
 void function_call(Nodeptr matList){
-    string input, call;
+    string end;
     vector <string> userinput;
-    do{
-        cout << "function: "; getline(cin, input);
-        stringstream check(input);
-        while(getline(check, call, ' ')){
-            userinput.push_back(call);
-        }
+    do{ 
+        parse_user_input(&userinput);
 
-        if(userinput.at(0) == "input"){
-            if(userinput.at(1) == "matrix"){
+        if(userinput[0] == "input"){
+            if(userinput[1] == "matrix"){
                 matList = insert(matList);
-                print_matrix(matList->m);
             }
-            else if(userinput.at(1) == "vector"){
-
+            else if(userinput[1] == "vector"){
+                continue;
+            }
+            else{
+                continue;
             }
         }
 
-
-
-        userinput.clear();
-    }while(userinput[0] != "end");
+        end = userinput[0];
+    }while(end != "end");
 }
