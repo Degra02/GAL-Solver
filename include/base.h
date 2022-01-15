@@ -11,5 +11,6 @@ void matrix_column_to_vector(Vector v, Matrix m, int c);
 Matrix gram_schmidt(Matrix m);
 Matrix matrix_orthonormal_base(Matrix m);
 void matrix_init_column(Matrix m, Vector v, int c);
+Matrix base_change(Matrix a, Matrix b);
 
 #endif

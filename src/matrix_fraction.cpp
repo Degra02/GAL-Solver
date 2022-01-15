@@ -99,8 +99,8 @@ FMatrix init_fmatrix() {
             cin >> value;
             //value = parse_fraction(value);
             f = str_to_fraction(value);
-            m->mat[i][j]->num = f->num;
-            m->mat[i][j]->den = f->den;
+            m->mat[i][j] = new Tfraction(f->num, f->den);
+            m->mat[i][j] = fraction_simplification(m->mat[i][j]);
         }
     }
     cout << endl << endl;
