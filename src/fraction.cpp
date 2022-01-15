@@ -14,6 +14,10 @@ Tfraction::Tfraction(int n, int d) {
     num = n;
     if (d != 0) den = d;
     else den = 1;
+    if (n >= 0 && d < 0) {
+        num = -n;
+        den = -d;
+    }
 }
 
 /* costruttore dato un numero decimale lo trasforma in frazione richiamando il metodo set */

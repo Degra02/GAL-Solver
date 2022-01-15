@@ -7,15 +7,8 @@ using namespace std;
 int main() {
 	srand(time(0));
 
-	//FMatrix m = init_fmatrix();
-
-
-	Matrix m = init_matrix();
-	print_matrix(m);
-
-	Matrix mt = matrix_transpose(m);
-	cout << endl;
-	print_matrix(mt);
+	FMatrix m1 = init_fmatrix();
+	print_fmatrix(m1);
 
 	return 0;
 }

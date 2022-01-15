@@ -90,17 +90,14 @@ FMatrix init_fmatrix() {
 	cout << "columns= "; cin >> c;
     cout << endl;
     FMatrix m = new Tfmatrix(name, r, c);
-    Fraction f;
 
-    string value;
+    float value;
     for(int i = 0; i < m->nr; i++){
         cout << "   ";
         for(int j = 0; j < m->nc; j++){
             cin >> value;
-            //value = parse_fraction(value);
-            f = str_to_fraction(value);
-            m->mat[i][j]->num = f->num;
-            m->mat[i][j]->den = f->den;
+            m->mat[i][j]->set(value);
+            m->mat[i][j] = fraction_simplification(m->mat[i][j]);
         }
     }
     cout << endl << endl;
@@ -108,24 +105,94 @@ FMatrix init_fmatrix() {
     return m;
 }
 
-Fraction str_to_fraction(string value){
-    int i = 0;
-    string snum, sden;
-    while(value[i] != '/'){
-        snum[i] = value[i];
-        i++;
-    }
-    snum[i] = '\0';
-    i++;
-    while(value[i] != '\0'){
-        sden[i] = value[i];
-        i++;
-    }
-    sden[i] = '\0';
+// Fraction str_to_fraction(string value){
+//     int i = 0;
+//     string snum, sden;
+//     while(value[i] != '/'){
+//         snum[i] = value[i];
+//         i++;
+//     }
+//     snum[i] = '\0';
+//     i++;
+//     while(value[i] != '\0'){
+//         sden[i] = value[i];
+//         i++;
+//     }
+//     sden[i] = '\0';
 
-    Fraction f = new Tfraction(stoi(snum), stoi(sden));
+//     Fraction f = new Tfraction(stoi(snum), stoi(sden));
 
-    return f;
+//     return f;
+// }
+
+void print_fmatrix(FMatrix m) {
+    int figures_num[m->nc];
+    int figures_den[m->nc];
+
+    cout << "Name: " << "\x1b[38;5;50m" << m->name << "\x1b[0m";
+    cout << endl << endl;
+
+    for (int j = 0; j < m->nc; ++j) {
+        figures_num[j] = find_max_figures_column(m, j, 'n');
+        figures_den[j] = find_max_figures_column(m, j, 'd');
+    }
+
+    for (int i = 0; i < m->nr; ++i) {
+        cout << "   ";
+        for (int j = 0; j < m->nc; ++j) {
+            print_format_fraction(m->mat[i][j], figures_num[j], figures_den[j]);
+        }
+        printf("\n");
+    }
+    
+    cout << endl << endl;
+}
+
+void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den) {
+    int space_num, space_den;
+    if (f->den == 1) {
+        int space = figures(abs(f->num));
+        space_num = space / 2;
+        space_den = (space - 1) / 2;
+    } else {
+        space_num = figures(abs(f->num));
+        space_den = figures(f->den);
+    }
+    if (f->num < 0) ++space_num;
+
+    print_space(max_figures_num - space_num); f->print(); 
+    print_space(max_figures_den - space_den);
+    
+    cout << " ";
+}
+
+void print_space(int dim) {
+    for (int i = 0; i < dim; ++i) cout << " ";
+}
+
+int find_max_figures_column(FMatrix m, int column, char type) {
+    int max_c = 0, n, space;
+    bool control = (type == 'n');
+    for (int i = 0; i < m->nr; ++i) {
+        n = (control ? m->mat[i][column]->num : m->mat[i][column]->den);
+        space = figures(abs(n));
+        if (m->mat[i][column]->den == 1) 
+            space = (control ? (space / 2) : (space - 1) / 2);
+        if (n < 0) ++space;
+
+        if (space > max_c) max_c = space;
+    }
+
+    return max_c;
+}
+
+int figures(int n) {
+    int c = 1, counter = 0;
+    do {
+        ++counter; c *= 10;
+    } while (n / c >= 1);
+
+    return counter;
 }
 
 FMatrix fraction_matrix_transpose(FMatrix m) {
