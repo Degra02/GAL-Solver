@@ -36,6 +36,8 @@ void function_call(Nodeptr matList){
             else{
                 continue;
             }
+        } else if(userinput[0] == "calculate"){
+            
         }
 
         end = userinput[0];

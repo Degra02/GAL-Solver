@@ -62,7 +62,7 @@ Nodeptr insert(Nodeptr n){
     if(! isPresent(n, m->name)){
         n = insertFirst(n, m);
     } else {
-        cout << "Matrix with same name already saved";
+        cout << "Matrix with same name already saved\n";
     }
     return n;
 }
