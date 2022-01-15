@@ -19,6 +19,8 @@ typedef struct Tnode{
         next = _next;
     }
 
+    ~Tnode(){}
+
 }Tnode;
 
 typedef Tnode *Nodeptr;

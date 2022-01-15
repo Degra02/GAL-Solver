@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
 	srand(time(0));
-	Nodeptr matList = new Tnode();
+	Nodeptr matList = NULL;
 	function_call(matList);
 	
 

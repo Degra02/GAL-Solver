@@ -60,7 +60,7 @@ bool isPresent(Nodeptr n, string name){
 Nodeptr insert(Nodeptr n){
     Matrix m = init_matrix();
     if(! isPresent(n, m->name)){
-        return insertFirst(n, m);
+        n = insertFirst(n, m);
     } else {
         cout << "Matrix with same name already saved";
     }

@@ -18,20 +18,26 @@ using namespace std;
 
 void function_call(Nodeptr matList){
     string input, call;
-    cout << "function: "; cin >> input;
     vector <string> userinput;
-    stringstream check1(input);
+    do{
+        cout << "function: "; getline(cin, input);
+        stringstream check(input);
+        while(getline(check, call, ' ')){
+            userinput.push_back(call);
+        }
 
-    while(getline(check1, call, ' ')){
-        userinput.push_back(call);
-    }
+        if(userinput.at(0) == "input"){
+            if(userinput.at(1) == "matrix"){
+                matList = insert(matList);
+                print_matrix(matList->m);
+            }
+            else if(userinput.at(1) == "vector"){
 
-    if(userinput[0] == "input_matrix"){
-        insert(matList);
-        print_matrix(matList->m);
-    }
-    
+            }
+        }
 
 
 
+        userinput.clear();
+    }while(userinput[0] != "end");
 }
