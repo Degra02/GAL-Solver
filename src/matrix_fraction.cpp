@@ -126,6 +126,7 @@ Fraction str_to_fraction(string value){
     return f;
 }
 
+/* prende in input un puntatore a Tfmatrix e la visualizza sul prompt */
 void print_fmatrix(FMatrix m) {
     int figures_num[m->nc];
     int figures_den[m->nc];
