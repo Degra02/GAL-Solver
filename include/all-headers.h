@@ -2,6 +2,9 @@
 #define __ALL_HEADERS_H__
 
 #include <cmath>
+#include <cstring>
+#include <iomanip>
+#include <cstdlib>
 
 #include "matrix.h"
 #include "base.h"
@@ -12,5 +15,8 @@
 #include "fraction.h"
 #include "matrix_fraction.h"
 #include "vector_fraction.h"
+
+#include "matrix_list.h"
+#include "commands.h"
 
 #endif
