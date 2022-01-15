@@ -96,13 +96,10 @@ FMatrix init_fmatrix() {
         cout << "   ";
         for(int j = 0; j < m->nc; j++){
             cin >> value;
-<<<<<<< HEAD
             m->mat[i][j]->set(value);
-=======
             //value = parse_fraction(value);
             f = str_to_fraction(value);
             m->mat[i][j] = new Tfraction(f->num, f->den);
->>>>>>> 486855c55ab140cd95d3792fc8ab2a50ff6b545f
             m->mat[i][j] = fraction_simplification(m->mat[i][j]);
         }
     }
@@ -111,26 +108,25 @@ FMatrix init_fmatrix() {
     return m;
 }
 
-<<<<<<< HEAD
-// Fraction str_to_fraction(string value){
-//     int i = 0;
-//     string snum, sden;
-//     while(value[i] != '/'){
-//         snum[i] = value[i];
-//         i++;
-//     }
-//     snum[i] = '\0';
-//     i++;
-//     while(value[i] != '\0'){
-//         sden[i] = value[i];
-//         i++;
-//     }
-//     sden[i] = '\0';
+Fraction str_to_fraction(string value){
+    int i = 0;
+    string snum, sden;
+    while(value[i] != '/'){
+        snum[i] = value[i];
+        i++;
+    }
+    snum[i] = '\0';
+    i++;
+    while(value[i] != '\0'){
+        sden[i] = value[i];
+        i++;
+    }
+    sden[i] = '\0';
 
-//     Fraction f = new Tfraction(stoi(snum), stoi(sden));
+    Fraction f = new Tfraction(stoi(snum), stoi(sden));
 
-//     return f;
-// }
+    return f;
+}
 
 void print_fmatrix(FMatrix m) {
     int figures_num[m->nc];
