@@ -22,6 +22,12 @@ typedef struct Tfmatrix {
 typedef Tfmatrix* FMatrix; 
 
 FMatrix init_fmatrix();
+void print_fmatrix(FMatrix m);
+int figures(int n);
+void print_space(int dim);
+void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den);
+int find_max_figures_column(FMatrix m, int colummn, char type);
+
 FMatrix fraction_matrix_transpose(FMatrix m);
 FMatrix fraction_matrix_sum(FMatrix a, FMatrix b);
 FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b);
@@ -31,7 +37,6 @@ void fraction_S(FMatrix m, int a, int b);
 void fraction_D(FMatrix m, int a, Fraction lambda);
 void fraction_E(FMatrix m, int d, int s, Fraction lambda);
 
-bool fraction_is_stairs_form(FMatrix m);
 void fraction_matrix_gauss_jordan(FMatrix m);
 
 #endif
