@@ -24,6 +24,8 @@ Fraction fraction_product(Fraction a, Fraction b);
 Fraction fraction_quotient(Fraction a, Fraction b);
 Fraction fraction_simplification(Fraction a);
 
+Fraction str_to_fraction(string value);
+
 int mcm(int a, int b);
 int abs(int n);
 

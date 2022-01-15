@@ -1,6 +1,4 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
 #include <bits/stdc++.h>
 #include "all-headers.h"
 using namespace std;

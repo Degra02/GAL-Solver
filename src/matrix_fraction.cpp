@@ -96,7 +96,13 @@ FMatrix init_fmatrix() {
         cout << "   ";
         for(int j = 0; j < m->nc; j++){
             cin >> value;
+<<<<<<< HEAD
             m->mat[i][j]->set(value);
+=======
+            //value = parse_fraction(value);
+            f = str_to_fraction(value);
+            m->mat[i][j] = new Tfraction(f->num, f->den);
+>>>>>>> 486855c55ab140cd95d3792fc8ab2a50ff6b545f
             m->mat[i][j] = fraction_simplification(m->mat[i][j]);
         }
     }
@@ -105,6 +111,7 @@ FMatrix init_fmatrix() {
     return m;
 }
 
+<<<<<<< HEAD
 // Fraction str_to_fraction(string value){
 //     int i = 0;
 //     string snum, sden;
@@ -195,6 +202,8 @@ int figures(int n) {
     return counter;
 }
 
+=======
+>>>>>>> 486855c55ab140cd95d3792fc8ab2a50ff6b545f
 FMatrix fraction_matrix_transpose(FMatrix m) {
     FMatrix mT = new Tfmatrix(m->nc, m->nr);
     for (int i = 0; i < m->nr; i++) {
