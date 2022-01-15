@@ -90,14 +90,12 @@ FMatrix init_fmatrix() {
 	cout << "columns= "; cin >> c;
     cout << endl;
     FMatrix m = new Tfmatrix(name, r, c);
-
-    float value;
+    Fraction f;
+    string value;
     for(int i = 0; i < m->nr; i++){
         cout << "   ";
         for(int j = 0; j < m->nc; j++){
             cin >> value;
-            m->mat[i][j]->set(value);
-            //value = parse_fraction(value);
             f = str_to_fraction(value);
             m->mat[i][j] = new Tfraction(f->num, f->den);
             m->mat[i][j] = fraction_simplification(m->mat[i][j]);
@@ -198,8 +196,6 @@ int figures(int n) {
     return counter;
 }
 
-=======
->>>>>>> 486855c55ab140cd95d3792fc8ab2a50ff6b545f
 FMatrix fraction_matrix_transpose(FMatrix m) {
     FMatrix mT = new Tfmatrix(m->nc, m->nr);
     for (int i = 0; i < m->nr; i++) {
