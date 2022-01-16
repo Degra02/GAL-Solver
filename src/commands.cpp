@@ -22,19 +22,19 @@ void parse_user_input(vector <string> *userinput){
 
 void function_call(Lists list){
     Matrix m;
-    string end;
+    string end, name;
     vector <string> userinput;
     do{ 
         parse_user_input(&userinput);
 
         if(userinput[0] == "new"){
             if(userinput[1] == "matrix"){
-                string name;
                 cout << "name= "; cin >> name;
                 list->Mlist = insertM(list->Mlist, name);
             }
             else if(userinput[1] == "vector"){
-                continue;
+                cout << "name= "; cin >> name;
+                list->Vlist = insertV(list->Vlist, name);
             }
             else{
                 continue;

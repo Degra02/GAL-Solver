@@ -22,6 +22,12 @@ typedef struct Tvettore{ // Struct Tvettore
         array = new float[n];
     }
 
+    Tvettore(int _n, string _name){
+        n = _n;
+        name = _name;
+        array = new float[n];
+    }
+
     Tvettore(float *values, int dim){ // Inizializzazione vettore con "dim" values inserite da utente
         n = dim;
         array = new float[n];

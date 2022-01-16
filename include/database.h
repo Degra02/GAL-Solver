@@ -1,5 +1,6 @@
 #include <iostream>
 #include "matrix_list.h"
+#include "vector_list.h"
 using namespace std;
 
 #ifndef __DATABASE_H__
@@ -7,9 +8,11 @@ using namespace std;
 
 typedef struct Tlists{
     MNodeptr Mlist;
+    VNodeptr Vlist;
 
     Tlists(){
         Mlist = NULL;
+        Vlist = NULL;
     }
 
     ~Tlists(){}
