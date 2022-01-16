@@ -55,10 +55,9 @@ bool isPresent(MNodeptr n, string name){
     return false;
 }
 
-MNodeptr insert(MNodeptr n, string name){
+MNodeptr insertM(MNodeptr n, string name){
     if(! isPresent(n, name)){
-        Matrix m = init_matrix(name);
-        n = insertFirst(n, m);
+        n = insertFirst(n, init_matrix(name));
     } else {
         cout << "Matrix with same name already saved" << endl << endl;
     }

@@ -18,6 +18,7 @@
 
 #include "database.h"
 #include "matrix_list.h"
+#include "vector_list.h"
 #include "commands.h"
 
 #endif

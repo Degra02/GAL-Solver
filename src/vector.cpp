@@ -89,3 +89,14 @@ Vector matrix_row_to_vector(Matrix m, int row){
 
     return res;
 }
+
+Vector init_vector(string name){
+    int n;
+    cout << "n. of elements: "; cin >> n; cout << "    ";
+    Vector v = new Tvettore(n, name);
+    for(int i = 0; i < n; i++){
+        scanf("%f", &v->array[i]);
+    }
+
+    return v;
+}
