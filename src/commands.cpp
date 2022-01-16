@@ -11,7 +11,7 @@ void parse_user_input(vector <string> *userinput){
         }
     }
     string input, call;
-    cout << "function: "; fflush(stdin); getline(cin, input);
+    printf("\x01b[1;38;5;3mFunction: \x1b[0m"); fflush(stdin); getline(cin, input);
     stringstream check(input);
 
     while(getline(check, call, ' ')){
@@ -21,6 +21,7 @@ void parse_user_input(vector <string> *userinput){
 }
 
 void function_call(Lists list){
+    Matrix m;
     string end;
     vector <string> userinput;
     do{ 
@@ -56,8 +57,11 @@ void function_call(Lists list){
             }
         } else if(userinput[0] == "print"){
             if(userinput[1] == "matrix"){
-                Matrix m = get_search(list->Mlist, userinput[2]);
-                print_matrix(m);
+                if((m = get_search(list->Mlist, userinput[2])) != NULL){
+                    print_matrix(m);
+                } else {
+                    cout << endl << "Matrix not found" << endl << endl;
+                }
             } else if(userinput[1] == "vector"){
 
             }
