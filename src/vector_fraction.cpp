@@ -81,38 +81,3 @@ FVector init(FVector m) {
     }
     return m;
 }
-
-// Fraction get_fraction(string s){
-//     string num = "", den = "";
-//     bool x = true, y = false;
- 
-//     // Traverse the floating string
-//     for (int i = 0; i < s.size(); ++i) {
-//         if (s[i] == '/') { // Check if denominator part exist
-//             x = false;
-//             y = true;
-//             continue;
-//         }
-
-//         //get num and den
-//         if (x) 
-//             num += s[i];
- 
-//         if (y)
-//             den += s[i];
-//     }
- 
-//     // Convert string to integer
-//     int numerator = stoi(num);
-//     int denominator = 0;
- 
-//     // Initialize numerator & denominator
-//     int numerator = numerator * pow(10, den.size()) + numerator;
- 
-//     int denominator = pow(10, den.size());
-//     int gd = __gcd(numerator, denominator);
-    
-//     string num = to_string(numerator/gd);
-//     string den = to_string(denominator/gd);
-//     // to end
-// }

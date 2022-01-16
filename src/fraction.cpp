@@ -129,26 +129,28 @@ Fraction str_to_fraction(string value){
     int i = 0;
     string snum;
     while (value[i] != '\0') {
-        snum += value[i]; i++;
 
         if (value[i] == '/') {
-            string sden;
+            ++i; string sden;
             while (value[i] != '\0') {
                 sden += value[i];
-                i++;
+                ++i;
             }
             return new Tfraction(stoi(snum), stoi(sden));
         }
 
         if (value[i] == '.') {
+            ++i; 
             while (value[i] != '\0') {
                 snum += value[i];
-                i++;
+                ++i;
             }
             return new Tfraction(stof(snum));
         }
-    }
 
+        snum += value[i];
+        ++i;
+    }
     return new Tfraction(stoi(snum), 1);
 }
 

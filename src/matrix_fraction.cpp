@@ -200,16 +200,19 @@ FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda) {
     return a;
 }
 
+/* prende in input un puntatore a Tfmatrix e due indici interi di due righe della matrice, e restituisce la matrice stessa con le righe scambiate */
 void fraction_S(FMatrix m, int a, int b) {
     FVector v = new Tfvector(m->mat[a], m->nc);
     m->mat[a] = m->mat[b]; m->mat[b] = v->array;
 }
 
+/* prende in input un puntatore a Tfmatrix, un indice intero di una riga della matrice e un puntatore a Tfraction, e restituisce la matrice stessa con la riga indicizza moltiplicata per la Tfraction puntata */
 void fraction_D(FMatrix m, int a, Fraction lambda) {
     for(int j = 0; j < m->nc; j++)
         m->mat[a][j] = fraction_product(m->mat[a][j], lambda);
 }
 
+/*  */
 void fraction_E(FMatrix m, int d, int s, Fraction lambda) { 
     FVector v = new Tfvector(m->mat[s], m->nc);
     v->multiply(lambda);
