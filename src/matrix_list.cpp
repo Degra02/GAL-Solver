@@ -38,7 +38,11 @@ Matrix get_search (MNodeptr n, string name){ // returns the matrix with the give
     while((t != NULL) && (t->m->name != name)){
         t = t->next;
     }
-    return t->m;
+    if(t == NULL){
+        return NULL;
+    } else {
+        return t->m;
+    }  
 }
 
 bool isPresent(MNodeptr n, string name){

@@ -42,7 +42,7 @@ void function_call(Lists list){
         } else if(userinput[0] == "calculate"){
             if(userinput[1] == "matrix"){
                 if(userinput[2] == "product"){
-
+                    
                 } else if(userinput[2] == "sum"){
 
                 } else if(userinput[2] == ""){
