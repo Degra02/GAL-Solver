@@ -139,8 +139,7 @@ Fraction str_to_fraction(string value){
             return new Tfraction(stoi(snum), stoi(sden));
         }
 
-        if (value[i] == '.') {
-            ++i; 
+        if (value[i] == '.') { 
             while (value[i] != '\0') {
                 snum += value[i];
                 ++i;

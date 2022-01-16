@@ -9,8 +9,8 @@ int main() {
 	
 	FMatrix m = init_fmatrix();
 	print_fmatrix(m);
-	fraction_D(m, 0, new Tfraction(2, 1));
+	fraction_S(m, 0, 1);
 	print_fmatrix(m);
-	
+
 	return 0;
 }
