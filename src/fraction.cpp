@@ -161,8 +161,5 @@ Fraction str_to_fraction(string value){
         sden += value[i];
         i++;
     }
-
-    Fraction f = new Tfraction(stoi(snum), stoi(sden));
-
-    return f;
+    return new Tfraction(stoi(snum), stoi(sden));
 }

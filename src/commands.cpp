@@ -26,7 +26,7 @@ void function_call(Nodeptr matList){
     do{ 
         parse_user_input(&userinput);
 
-        if(userinput[0] == "input"){
+        if(userinput[0] == "new"){
             if(userinput[1] == "matrix"){
                 matList = insert(matList);
             }
@@ -37,7 +37,21 @@ void function_call(Nodeptr matList){
                 continue;
             }
         } else if(userinput[0] == "calculate"){
-            
+            if(userinput[1] == "matrix"){
+                if(userinput[2] == "product"){
+
+                } else if(userinput[2] == "sum"){
+
+                } else if(userinput[2] == ""){
+
+                }
+            }
+            else if(userinput[1] == "vector"){
+
+            }
+            else {
+                continue;
+            }
         }
 
         end = userinput[0];
