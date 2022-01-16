@@ -36,8 +36,7 @@ void Tfraction::print() const {
     else printf("%d/%d", num, den);
 }
 
-/* metodo che prende un numero decimale e con arrotondamento 2 cifre dopo la virgola lo 
-trasforma in frazione */
+/* metodo che prende un numero decimale e con arrotondamento 2 cifre dopo la virgola lo trasforma in frazione */
 void Tfraction::set(float n) {
     int m = 1; float f = n;
     while (f > 0) {
@@ -52,8 +51,7 @@ void Tfraction::set(float n) {
 
 // Functions
 
-/* funzione che prese due strutture Tfraction restituisce un'altra Tfraction 
-somma delle precedenti */
+/* funzione che prese due strutture Tfraction restituisce un'altra Tfraction somma delle precedenti */
 Fraction fraction_sum(Fraction a, Fraction b) {
     Fraction c = new Tfraction();
 
@@ -67,8 +65,7 @@ Fraction fraction_sum(Fraction a, Fraction b) {
     return c;
 }
 
-/* funzione che prese due strutture Tfraction restituisce un'altra Tfraction 
-defferenza delle precedenti */
+/* funzione che prese due strutture Tfraction restituisce un'altra Tfraction defferenza delle precedenti */
 Fraction fraction_difference(Fraction a, Fraction b) {
     Fraction c = new Tfraction(); 
 
@@ -82,8 +79,7 @@ Fraction fraction_difference(Fraction a, Fraction b) {
     return c;
 }
 
-/* funzione che prese due strutture Tfraction restituisce un'altra Tfraction 
-prodotto delle precedenti */
+/* funzione che prese due strutture Tfraction restituisce un'altra Tfraction prodotto delle precedenti */
 Fraction fraction_product(Fraction a, Fraction b) {
     Fraction c = new Tfraction();
 
@@ -92,8 +88,7 @@ Fraction fraction_product(Fraction a, Fraction b) {
     return fraction_simplification(c);
 }
 
-/* funzione che prese due strutture Tfraction restituisce un'altra Tfraction 
-quoziente delle precedenti */
+/* funzione che prese due strutture Tfraction restituisce un'altra Tfraction quoziente delle precedenti */
 Fraction fraction_quotient(Fraction a, Fraction b) {
     Fraction c = new Tfraction();
 
@@ -102,8 +97,7 @@ Fraction fraction_quotient(Fraction a, Fraction b) {
     return fraction_simplification(c);
 }
 
-/* funzione che presa una struttura Tfraction e un numero intero restituisce un'altra
-Tfraction alevata alla potenza data */
+/* funzione che presa una struttura Tfraction e un numero intero restituisce un'altra Tfraction alevata alla potenza data */
 Fraction fraction_power(Fraction a, int p) {
     Fraction c = new Tfraction(1, 1);
 
@@ -123,32 +117,14 @@ Fraction fraction_simplification(Fraction a) {
         if (abs_num % i == 0 && abs_den % i == 0) {
             a->num /= i; a->den /= i;
             fraction_simplification(a); 
-            break; /*serve per velocizzare l'algoritmo quando ormai non serve più iterare*/
+            /* serve per velocizzare l'algoritmo quando ormai non serve più iterare */
+            break; 
         }
     }
     return a;
 }
 
-/* presi due numeri interi restituisce il minimo comune divisore */
-int mcm(int a, int b) {
-    int max = a, c;
-    if (a < b) max = b;
-    if (max % a == 0 && max % b == 0) return b;
-
-    c = max;
-    do {
-        c += max;
-    } while (c % b != 0 || c % a != 0);
-
-    return c;
-}
-
-/* restituisce il modulo di un numero intero */
-int abs(int n) {
-    if (n >= 0) return n;
-    return -n;
-}
-
+/* prende in input una stringa value e lo converte in un puntatore a Tfraction */
 Fraction str_to_fraction(string value){
     int i = 0;
     string snum;
@@ -174,4 +150,23 @@ Fraction str_to_fraction(string value){
     }
 
     return new Tfraction(stoi(snum), 1);
+}
+
+/* prende in input un puntatore a Tfraction e due valori interi che determinano il massimo numero di spazi dati al numeratore e al denominatore per essere stampati, e stampa Tfraction seguendo questo formato */
+void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den) {
+    int space_num, space_den;
+    if (f->den == 1) {
+        int space = figures(abs(f->num));
+        space_num = space / 2;
+        space_den = (space - 1) / 2;
+    } else {
+        space_num = figures(abs(f->num));
+        space_den = figures(f->den);
+    }
+    if (f->num < 0) ++space_num;
+
+    print_space(max_figures_num - space_num); f->print(); 
+    print_space(max_figures_den - space_den);
+    
+    cout << " ";
 }

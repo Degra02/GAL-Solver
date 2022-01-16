@@ -25,8 +25,6 @@ Fraction fraction_quotient(Fraction a, Fraction b);
 Fraction fraction_simplification(Fraction a);
 
 Fraction str_to_fraction(string value);
-
-int mcm(int a, int b);
-int abs(int n);
+void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den);
 
 #endif

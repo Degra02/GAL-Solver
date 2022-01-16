@@ -21,4 +21,6 @@
 #include "vector_list.h"
 #include "commands.h"
 
+#include "utilities.h"
+
 #endif

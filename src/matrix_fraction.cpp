@@ -82,6 +82,7 @@ Tfmatrix::~Tfmatrix() {
 
 // Functions
 
+/* inizializza una matrice chiedendo il nome, il numero di riche, il numero di colonne e facendo inserire i valori manualmente di tutti i tipi possibili (float, Tfraction o int) */
 FMatrix init_fmatrix() {
     int r, c;
     string name;
@@ -130,28 +131,7 @@ void print_fmatrix(FMatrix m) {
     cout << endl << endl;
 }
 
-void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den) {
-    int space_num, space_den;
-    if (f->den == 1) {
-        int space = figures(abs(f->num));
-        space_num = space / 2;
-        space_den = (space - 1) / 2;
-    } else {
-        space_num = figures(abs(f->num));
-        space_den = figures(f->den);
-    }
-    if (f->num < 0) ++space_num;
-
-    print_space(max_figures_num - space_num); f->print(); 
-    print_space(max_figures_den - space_den);
-    
-    cout << " ";
-}
-
-void print_space(int dim) {
-    for (int i = 0; i < dim; ++i) cout << " ";
-}
-
+/* prende in input una matrie m, l'identificatore intero di una colonna e un tipo char per determinare se studiare il denominatore o il numeratore, e restituisce il numero massimo di cifre usate in quella colonna della matrice dal numeratore o denominatore */
 int find_max_figures_column(FMatrix m, int column, char type) {
     int max_c = 0, n, space;
     bool control = (type == 'n');
@@ -166,15 +146,6 @@ int find_max_figures_column(FMatrix m, int column, char type) {
     }
 
     return max_c;
-}
-
-int figures(int n) {
-    int c = 1, counter = 0;
-    do {
-        ++counter; c *= 10;
-    } while (n / c >= 1);
-
-    return counter;
 }
 
 FMatrix fraction_matrix_transpose(FMatrix m) {

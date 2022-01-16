@@ -23,9 +23,6 @@ typedef Tfmatrix* FMatrix;
 
 FMatrix init_fmatrix();
 void print_fmatrix(FMatrix m);
-int figures(int n);
-void print_space(int dim);
-void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den);
 int find_max_figures_column(FMatrix m, int colummn, char type);
 
 FMatrix fraction_matrix_transpose(FMatrix m);
