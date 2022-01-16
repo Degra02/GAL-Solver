@@ -10,6 +10,7 @@ using namespace std;
 typedef struct Tvettore{ // Struct Tvettore
     float *array;
     int n;
+    string name;
 
     Tvettore(){ // Costruttore di default
         n = 0;
@@ -65,6 +66,8 @@ typedef struct Tvettore{ // Struct Tvettore
 }Tvettore;
 
 typedef Tvettore *Vector;
+
+Vector init_vector(string name);
 Vector vector_sum(Vector a, Vector b);
 void vector_subtraction(Vector a, Vector b);
 float vector_euclid_scalar_multip(Vector a, Vector b);

@@ -25,6 +25,8 @@ typedef struct TVnode{
 
 typedef TVnode *VNodeptr;
 
-VNodeptr insertFirst(VNodeptr n, Vector v);
+VNodeptr insertFirstV(VNodeptr n, Vector v);
+bool isPresentV(VNodeptr n, string name);
+VNodeptr insertV(VNodeptr n, string name);
 
 #endif

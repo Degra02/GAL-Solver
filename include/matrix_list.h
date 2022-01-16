@@ -30,7 +30,7 @@ MNodeptr remove_search(MNodeptr n);
 Matrix get(MNodeptr n);
 Matrix get_search(MNodeptr n, string name);
 bool isPresent(MNodeptr n, string name);
-MNodeptr insert(MNodeptr n, string name);
+MNodeptr insertM(MNodeptr n, string name);
 
 
 #endif

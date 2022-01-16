@@ -31,7 +31,7 @@ void function_call(Lists list){
             if(userinput[1] == "matrix"){
                 string name;
                 cout << "name= "; cin >> name;
-                list->Mlist = insert(list->Mlist, name);
+                list->Mlist = insertM(list->Mlist, name);
             }
             else if(userinput[1] == "vector"){
                 continue;
@@ -57,7 +57,8 @@ void function_call(Lists list){
             }
         } else if(userinput[0] == "print"){
             if(userinput[1] == "matrix"){
-                if((m = get_search(list->Mlist, userinput[2])) != NULL){
+                m = get_search(list->Mlist, userinput[2]);
+                if(m != NULL){
                     print_matrix(m);
                 } else {
                     cout << endl << "Matrix not found" << endl << endl;
