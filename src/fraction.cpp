@@ -62,6 +62,7 @@ Fraction fraction_sum(Fraction a, Fraction b) {
         c->den = mcm(a->den, b->den);
         c->num = (c->den / a->den)*a->num + (c->den / b->den)*b->num;
     }
+    if (c->num == 0) c->den = 1;
     return c;
 }
 
@@ -76,6 +77,7 @@ Fraction fraction_difference(Fraction a, Fraction b) {
         c->den = mcm(a->den, b->den);
         c->num = (c->den / a->den)*a->num - (c->den / b->den)*b->num;
     }
+    if (c->num == 0) c->den = 1;
     return c;
 }
 

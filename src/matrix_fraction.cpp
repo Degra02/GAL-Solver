@@ -102,7 +102,7 @@ FMatrix init_fmatrix() {
             m->mat[i][j] = fraction_simplification(m->mat[i][j]);
         }
     }
-    cout << endl << endl;
+    fflush(stdin); cout << endl << endl;
 
     return m;
 }
@@ -136,7 +136,11 @@ int find_max_figures_column(FMatrix m, int column, char type) {
     int max_c = 0, n, space;
     bool control = (type == 'n');
     for (int i = 0; i < m->nr; ++i) {
-        n = (control ? m->mat[i][column]->num : m->mat[i][column]->den);
+        if (m->mat[i][column]->den != 1) {
+             n = (control ? m->mat[i][column]->num : m->mat[i][column]->den);
+        } else {
+            n = m->mat[i][column]->num;
+        } 
         space = figures(abs(n));
         if (m->mat[i][column]->den == 1) 
             space = (control ? (space / 2) : (space - 1) / 2);
@@ -212,13 +216,34 @@ void fraction_D(FMatrix m, int a, Fraction lambda) {
         m->mat[a][j] = fraction_product(m->mat[a][j], lambda);
 }
 
-/*  */
+/* prendo in  input un puntatore a Tfmatrix, due indici interi di due righe della matrice e un puntatore a Tfraction, e restituisce la matrice stessa con la prima riga indicizzata sommata all'altra riga indicata dal secondo indice moltoplicata per la Tfraction puntata */
 void fraction_E(FMatrix m, int d, int s, Fraction lambda) { 
     FVector v = new Tfvector(m->mat[s], m->nc);
     v->multiply(lambda);
-    for(int j = 0; j < m->nc; j++){
+    for(int j = 0; j < m->nc; j++) 
         m->mat[d][j] = fraction_sum(m->mat[d][j], v->array[j]);
-    }
 }
 
-//void fraction_matrix_gauss_jordan(FMatrix m) {}
+void fraction_matrix_gauss_jordan(FMatrix m) {
+    int zero_column = 0; Fraction lambda;
+    for (int j = 0; j < m->nc; ++j) {
+        int i = (j - zero_column);
+        while (i < m->nr && m->mat[i][j]->num == 0) ++i;
+        if (i == m->nr) {
+            ++zero_column;
+            continue; // passa alla prossima colonna 
+        }
+        if (i != (j - zero_column)) fraction_S(m, i, (j - zero_column)); 
+        i = (j - zero_column);
+        for (int r = i + 1; r < m->nr; ++r) {
+            if (m->mat[r][j]->num != 0) {
+                lambda = fraction_quotient(
+                    fraction_product(new Tfraction(-1, 1), m->mat[r][j]),
+                    m->mat[i][j]
+                );
+
+                fraction_E(m, r, i, lambda);
+            }
+        }
+    }
+}

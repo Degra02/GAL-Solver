@@ -9,7 +9,7 @@ int main() {
 	
 	FMatrix m = init_fmatrix();
 	print_fmatrix(m);
-	fraction_S(m, 0, 1);
+	fraction_matrix_gauss_jordan(m);
 	print_fmatrix(m);
 
 	return 0;

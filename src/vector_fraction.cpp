@@ -59,9 +59,7 @@ void Tfvector::init() {
 
 void Tfvector::multiply(Fraction lambda) {
     for(int i = 0; i < n; i++){
-        array[i] = fraction_simplification(
-            fraction_product(array[i], lambda)
-        );
+        array[i] = fraction_product(array[i], lambda);
     }
 }
 

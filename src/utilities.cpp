@@ -7,7 +7,7 @@ using namespace std;
 int mcm(int a, int b) {
     int max = a, c;
     if (a < b) max = b;
-    if (max % a == 0 && max % b == 0) return b;
+    if (max % a == 0 && max % b == 0) return max;
 
     c = max;
     do {
@@ -22,6 +22,7 @@ int abs(int n) {
     if (n >= 0) return n;
     return -n;
 }
+
 
 /* prende in input un valore intero e restituisce il suo numero di cifre */ 
 int figures(int n) {
