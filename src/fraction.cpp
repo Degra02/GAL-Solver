@@ -32,7 +32,10 @@ Tfraction::Tfraction(string n, string d) {
 
 /* metodo di stampa della frazione */
 void Tfraction::print() const {
-    if (den == 1 || num == 0) printf("%d", num);
+    if (den == 1) {
+        if (num == 0) printf("\x1b[38;5;239m%d\x1b[0m", 0);
+        else printf("%d", num);
+    }
     else printf("%d/%d", num, den);
 }
 
