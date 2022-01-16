@@ -92,12 +92,12 @@ FMatrix init_fmatrix() {
     FMatrix m = new Tfmatrix(name, r, c);
     Fraction f;
     string value;
-    for(int i = 0; i < m->nr; i++){
+    for(int i = 0; i < m->nr; i++) {
         cout << "   ";
-        for(int j = 0; j < m->nc; j++){
+        for(int j = 0; j < m->nc; j++) {
             cin >> value;
             f = str_to_fraction(value);
-            m->mat[i][j] = new Tfraction(f->num, f->den);
+            m->mat[i][j] = f;
             m->mat[i][j] = fraction_simplification(m->mat[i][j]);
         }
     }

@@ -151,15 +151,27 @@ int abs(int n) {
 
 Fraction str_to_fraction(string value){
     int i = 0;
-    string snum, sden;
-    while(value[i] != '/'){
-        snum += value[i];
-        i++;
+    string snum;
+    while (value[i] != '\0') {
+        snum += value[i]; i++;
+
+        if (value[i] == '/') {
+            string sden;
+            while (value[i] != '\0') {
+                sden += value[i];
+                i++;
+            }
+            return new Tfraction(stoi(snum), stoi(sden));
+        }
+
+        if (value[i] == '.') {
+            while (value[i] != '\0') {
+                snum += value[i];
+                i++;
+            }
+            return new Tfraction(stof(snum));
+        }
     }
-    i++;
-    while(value[i] != '\0'){
-        sden += value[i];
-        i++;
-    }
-    return new Tfraction(stoi(snum), stoi(sden));
+
+    return new Tfraction(stoi(snum), 1);
 }
