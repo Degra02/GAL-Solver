@@ -20,7 +20,7 @@ void parse_user_input(vector <string> *userinput){
     
 }
 
-void function_call(Nodeptr matList){
+void function_call(Lists list){
     string end;
     vector <string> userinput;
     do{ 
@@ -28,7 +28,9 @@ void function_call(Nodeptr matList){
 
         if(userinput[0] == "new"){
             if(userinput[1] == "matrix"){
-                matList = insert(matList);
+                string name;
+                cout << "name= "; cin >> name;
+                list->Mlist = insert(list->Mlist, name);
             }
             else if(userinput[1] == "vector"){
                 continue;
@@ -51,6 +53,13 @@ void function_call(Nodeptr matList){
             }
             else {
                 continue;
+            }
+        } else if(userinput[0] == "print"){
+            if(userinput[1] == "matrix"){
+                Matrix m = get_search(list->Mlist, userinput[2]);
+                print_matrix(m);
+            } else if(userinput[1] == "vector"){
+
             }
         }
 

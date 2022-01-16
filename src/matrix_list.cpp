@@ -3,22 +3,22 @@
 #include "all-headers.h"
 using namespace std;
 
-Nodeptr insertFirst(Nodeptr n, Matrix m){
-    return new Tnode(m, n);
+MNodeptr insertFirst(MNodeptr n, Matrix m){
+    return new TMnode(m, n);
 }
 
-Nodeptr remove_search(Nodeptr n){
+MNodeptr remove_search(MNodeptr n){
     string name; 
     cout << "name= "; cin >> name;
     if(n == NULL){
         return NULL;
     }
-    Nodeptr t = n;
+    MNodeptr t = n;
     while((t->next != NULL) && (t->next->m->name != name)){
         t = t->next;
     }
     if(t->next != NULL){
-        Nodeptr r = t->next;
+        MNodeptr r = t->next;
         t->next = t->next->next;
         delete r;
         return n;
@@ -26,28 +26,26 @@ Nodeptr remove_search(Nodeptr n){
     return n;
 }
 
-Matrix get(Nodeptr n){
+Matrix get(MNodeptr n){
     return n->m;
 }
 
-Matrix get_search(Nodeptr n){ // returns the matrix with the given name, NULL otherwise
-    string name; 
-    cout << "name= "; cin >> name;
+Matrix get_search (MNodeptr n, string name){ // returns the matrix with the given name, NULL otherwise
     if(n == NULL){
         return NULL;
     }
-    Nodeptr t = n;
+    MNodeptr t = n;
     while((t != NULL) && (t->m->name != name)){
         t = t->next;
     }
     return t->m;
 }
 
-bool isPresent(Nodeptr n, string name){
+bool isPresent(MNodeptr n, string name){
     if(n == NULL){
         return false;
     }
-    Nodeptr t = n;
+    MNodeptr t = n;
     while((t != NULL)){
         if(t->m->name == name){
             return true;
@@ -57,12 +55,12 @@ bool isPresent(Nodeptr n, string name){
     return false;
 }
 
-Nodeptr insert(Nodeptr n){
-    Matrix m = init_matrix();
-    if(! isPresent(n, m->name)){
+MNodeptr insert(MNodeptr n, string name){
+    if(! isPresent(n, name)){
+        Matrix m = init_matrix(name);
         n = insertFirst(n, m);
     } else {
-        cout << "Matrix with same name already saved\n";
+        cout << "Matrix with same name already saved" << endl << endl;
     }
     return n;
 }

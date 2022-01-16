@@ -92,7 +92,7 @@ typedef struct Tmatrix{ // Struct Tmatrix
 
 typedef Tmatrix* Matrix; 
 
-Matrix init_matrix();
+Matrix init_matrix(string name);
 void print_matrix(Matrix m);
 Matrix matrix_transpose(Matrix m);
 void matrix_sum(Tmatrix *sum, Tmatrix *a, Tmatrix *b);

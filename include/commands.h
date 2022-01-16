@@ -7,7 +7,7 @@ using namespace std;
 #define __COMMANDS_H__
 
 void parse_user_input(vector <string> *userinput);
-void function_call(Nodeptr matList);
+void function_call(Lists lists);
 
 
 #endif

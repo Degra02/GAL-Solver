@@ -5,32 +5,32 @@ using namespace std;
 #ifndef __MATRIX_LIST__
 #define __MATRIX_LIST__
 
-typedef struct Tnode{
+typedef struct TMnode{
     Matrix m;
-    Tnode *next;
+    TMnode *next;
 
-    Tnode(){
+    TMnode(){
         m = NULL;
         next = NULL;
     }
 
-    Tnode(Matrix _m, Tnode *_next){
+    TMnode(Matrix _m, TMnode *_next){
         m = _m;
         next = _next;
     }
 
-    ~Tnode(){}
+    ~TMnode(){}
 
-}Tnode;
+}TMnode;
 
-typedef Tnode *Nodeptr;
+typedef TMnode *MNodeptr;
 
-Nodeptr insertFirst(Nodeptr n, Matrix m);
-Nodeptr remove_search(Nodeptr n);
-Matrix get(Nodeptr n);
-Matrix get_search(Nodeptr n);
-bool isPresent(Nodeptr n, string name);
-Nodeptr insert(Nodeptr n);
+MNodeptr insertFirst(MNodeptr n, Matrix m);
+MNodeptr remove_search(MNodeptr n);
+Matrix get(MNodeptr n);
+Matrix get_search(MNodeptr n, string name);
+bool isPresent(MNodeptr n, string name);
+MNodeptr insert(MNodeptr n, string name);
 
 
 #endif

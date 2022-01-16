@@ -243,10 +243,8 @@ void print_fract_matrix(Matrix m){
     }
 }
 
-Matrix init_matrix(){
+Matrix init_matrix(string name){
     int r, c;
-    string name;
-    cout << "name= "; cin >> name;
 	cout << "rows= "; cin >> r;
 	cout << "columns= "; cin >> c;
     cout << endl;
