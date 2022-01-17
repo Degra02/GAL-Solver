@@ -66,7 +66,7 @@ Fraction fraction_sum(Fraction a, Fraction b) {
         c->den = mcm(a->den, b->den);
         c->num = (c->den / a->den)*a->num + (c->den / b->den)*b->num;
     }
-    zero_control(c);
+    zero_control(c); sign_control(c);
     return fraction_simplification(c);
 }
 
@@ -81,7 +81,7 @@ Fraction fraction_difference(Fraction a, Fraction b) {
         c->den = mcm(a->den, b->den);
         c->num = (c->den / a->den)*a->num - (c->den / b->den)*b->num;
     }
-    zero_control(c);
+    zero_control(c); sign_control(c);
     return fraction_simplification(c);
 }
 
@@ -186,6 +186,9 @@ void zero_control(Fraction f) {
 
 void sign_control(Fraction f) {
     if (f->num < 0 && f->den < 0) {
+        f->num = (-1) * f->num;
+        f->den = (-1) * f->den;
+    } else if (f->den < 0) {
         f->num = (-1) * f->num;
         f->den = (-1) * f->den;
     }

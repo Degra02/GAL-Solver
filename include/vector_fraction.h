@@ -22,8 +22,10 @@ typedef struct Tfvector {
 
 typedef Tfvector* FVector;
 
-void print_fvector(FVector v);
-FVector init(FVector m);
 FVector init_fvector(string name);
+void print_fvector(FVector v);
+
+FVector init(FVector m);
+
 
 #endif
