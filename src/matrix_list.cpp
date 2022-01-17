@@ -192,3 +192,17 @@ MNodeptr command_matrix_scalar_mult(MNodeptr n){
     print_fmatrix(t);
     return insertFirst(n, t);
 }
+
+MNodeptr command_matrix_rref(MNodeptr n){
+    string name;
+    cout << "Matrix name: "; fflush(stdin); cin >> name;
+    FMatrix m = get_search(n, name); FMatrix r;
+    if(m != NULL){
+        r = fraction_matrix_rref(m);
+        r->name = m->name + "rf"; // means row reduced echelon form
+    } else {
+        cout << "No such matrix" << endl << endl;
+    }
+    print_fmatrix(r);
+    return insertFirst(n, r);
+}
