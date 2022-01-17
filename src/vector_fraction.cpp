@@ -102,5 +102,7 @@ FVector init_fvector(string name){
 }
 
 void print_fvector(FVector v){
-
+    for(int i = 0; i < v->n; i++){
+        
+    }
 }
