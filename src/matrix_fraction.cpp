@@ -345,7 +345,7 @@ FMatrix fraction_matrix_copy(FMatrix m){
 }
 
 /* prende in input un puntatore a Tfmatrix e restituisce il suo rango */
-int fraction_matrix_rg(FMatrix m) {
+int fraction_matrix_rank(FMatrix m) {
     int counter = 0;
     FMatrix my_copy = fraction_matrix_gauss_jordan(m);
     for (int i = 0; i < my_copy->nr; ++i) {
@@ -357,4 +357,8 @@ int fraction_matrix_rg(FMatrix m) {
     }
 
     return counter;
+}
+
+bool fraction_matrix_is_base(FMatrix m){
+    return(m->nc == fraction_matrix_rank(m));
 }

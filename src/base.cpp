@@ -74,6 +74,6 @@ Matrix matrix_orthonormal_base(Matrix m){ // only works if the vectors are indep
     return a;
 }
 
-Matrix base_change(Matrix a, Matrix b){
+// Matrix base_change(Matrix a, Matrix b){
     
-}
+// }

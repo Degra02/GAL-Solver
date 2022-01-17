@@ -217,6 +217,23 @@ void command_matrix_rank(MNodeptr n){
     string name;
     cout << "Matrix name: "; fflush(stdin); cin >> name;
     FMatrix m = get_search(n, name);
-    cout << "Rank= " << fraction_matrix_rg(m);
-    cout << endl << endl;
+    if(m != NULL){
+        cout << "Rank= " << fraction_matrix_rank(m);
+        cout << endl << endl;
+    } else {
+        cout << "No such matrix" << endl << endl;
+    }
+    
+}
+
+void command_matrix_is_base(MNodeptr n){
+    string name; cout << "Matrix name: "; fflush(stdin); cin >> name;
+    FMatrix m = get_search(n, name);
+    if(m != NULL){ 
+        if(fraction_matrix_is_base(m)){
+            printf("The columns are a base of R%d\n\n", fraction_matrix_rank(m)); 
+        }
+    } else {
+        cout << "No such matrix" << endl << endl;
+    }
 }

@@ -42,6 +42,7 @@ FMatrix fraction_matrix_copy(FMatrix m);
 
 FMatrix fraction_matrix_gauss_jordan(FMatrix m);
 FMatrix fraction_matrix_rref(FMatrix m);
-int fraction_matrix_rg(FMatrix m);
+int fraction_matrix_rank(FMatrix m);
+bool fraction_matrix_is_base(FMatrix m);
 
 #endif

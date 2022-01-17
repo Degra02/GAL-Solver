@@ -54,6 +54,8 @@ void function_call(Lists list){
                     list->Mlist = command_matrix_rref(list->Mlist);
                 } else if(userinput[2] == "rank"){
                     command_matrix_rank(list->Mlist);
+                } else if(userinput[2] == "base"){
+                    command_matrix_is_base(list->Mlist);
                 } else {
                     cout << "Invalid function call" << endl << endl;
                 }
