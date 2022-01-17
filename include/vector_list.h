@@ -31,7 +31,7 @@ bool isPresentV(VNodeptr n, string name);
 VNodeptr insertV(VNodeptr n, string name);
 FVector get_vsearch(VNodeptr n, string name);
 
-void command_print_vector(VNodeptr n, string userinput);
+void command_print_vector(VNodeptr n);
 VNodeptr command_new_vector(VNodeptr n);
 
 #endif

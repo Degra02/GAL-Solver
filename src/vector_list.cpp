@@ -70,7 +70,8 @@ VNodeptr insertV(VNodeptr n, string name){
     return n;
 }
 
-void command_print_vector(VNodeptr n, string userinput){
+void command_print_vector(VNodeptr n){
+    string userinput; cout << "Vector name: "; fflush(stdin); cin >> userinput;
     FVector v = get_vsearch(n, userinput);
     if(v != NULL){
         print_fvector(v);

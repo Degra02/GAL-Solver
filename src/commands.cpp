@@ -61,16 +61,20 @@ void function_call(Lists list){
                 if(userinput[2] == "product"){
 
                 }
+            } else if(userinput[1] == "system"){
+                if(userinput[2] == "solution"){
+                    list->Eqlist = command_system_solution(list->Eqlist, userinput[3]);
+                }
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
         } else if(userinput[0] == "print"){
             if(userinput[1] == "matrix"){
-                command_print_matrix(list->Mlist, userinput[2]);
+                command_print_matrix(list->Mlist);
             } else if(userinput[1] == "vector"){
-                command_print_vector(list->Vlist, userinput[2]);
+                command_print_vector(list->Vlist);
             } else if(userinput[1] == "system"){
-                command_print_system(list->Eqlist, userinput[2]);
+                command_print_system(list->Eqlist);
             } else {
                 cout << "Invalid function call" << endl << endl;
             }

@@ -72,7 +72,9 @@ MNodeptr insertM(MNodeptr n, string name){
     return n;
 }
 
-void command_print_matrix(MNodeptr n, string userinput){
+void command_print_matrix(MNodeptr n){
+    string userinput;
+    cout << "Matrix name: "; fflush(stdin); cin >> userinput;
     FMatrix m = get_search(n, userinput);
     string choice;
     cout << "Print format: "; fflush(stdin); cin >> choice;

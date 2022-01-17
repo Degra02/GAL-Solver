@@ -32,9 +32,9 @@ FEqsys to_feqsys_from_matrix(FMatrix m){ // creates an eq system from a matrix
     return res;
 }
 
-FEqsys feq_sys_stairs_form(FEqsys e){
+FEqsys feq_sys_rref(FEqsys e){
     FMatrix tmp = to_fmatrix(e);
-    tmp = fraction_matrix_gauss_jordan(tmp);
+    tmp = fraction_matrix_rref(tmp);
     return to_feqsys_from_matrix(tmp);
 }
 
@@ -52,7 +52,7 @@ FEqsys init_feqsys(string name){
         eq->b->array[i] = fraction_simplification(eq->b->array[i]);
     }
     cout << endl;
-    
+
     eq->name = name;
     return eq;
 }

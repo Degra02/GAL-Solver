@@ -72,11 +72,12 @@ ENodeptr command_new_system(ENodeptr n){
     return insertE(n, name);
 }
 
-void command_print_system(ENodeptr n, string userinput){
-    string choice;
+void command_print_system(ENodeptr n){
+    string userinput; cout << "System name: "; fflush(stdin); cin >> userinput;
     FEqsys eq = get_esearch(n, userinput);
+    string choice;
     if(eq != NULL){
-         FMatrix tmp = to_fmatrix(eq);
+        FMatrix tmp = to_fmatrix(eq);
         cout << "Print format: "; fflush(stdin); cin >> choice;
         if(choice == "fraction"){
         print_fmatrix(tmp);
@@ -89,4 +90,20 @@ void command_print_system(ENodeptr n, string userinput){
         cout << "System not found" << endl << endl;
     }
    
+}
+
+ENodeptr command_system_solution(ENodeptr n, string userinput){
+    FEqsys eq = get_esearch(n, userinput); FEqsys sol;
+    if(eq != NULL){
+        sol = feq_sys_rref(eq);
+        sol->name = eq->name + "solved";
+    } else {
+        cout << "No such system" << endl << endl;
+    }
+    n = insertFirstE(n, sol);
+    FMatrix m = to_fmatrix(sol);
+    m->name = sol->name;
+    print_fmatrix(m);
+
+    return n;
 }

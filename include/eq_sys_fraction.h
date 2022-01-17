@@ -32,7 +32,7 @@ typedef Tfeqsys *FEqsys;
 
 FEqsys init_feqsys(string name);
 FMatrix to_fmatrix(FEqsys e);
-FEqsys feq_sys_stairs_form(FEqsys e);
+FEqsys feq_sys_rref(FEqsys e);
 FEqsys to_feqsys_from_matrix(FMatrix m);
 
 
