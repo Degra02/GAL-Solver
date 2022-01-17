@@ -107,7 +107,7 @@ FMatrix init_fmatrix(string name) {
     return m;
 }
 
-void print_fmatrix_float(FMatrix m) { // to update (mettere in file i float!!!)
+void print_fmatrix_float(FMatrix m) { 
     int figures[m->nc];
     float** f;
     f = new float*[m->nr];
@@ -117,8 +117,8 @@ void print_fmatrix_float(FMatrix m) { // to update (mettere in file i float!!!)
     cout << "Name: " << "\x1b[38;5;50m" << m->name << "\x1b[0m";
     cout << endl << endl;
 
-    for (int j = 0; j < m->nr; ++j) {
-        for (int i = 0; i < m->nc; ++i) {
+    for (int j = 0; j < m->nc; ++j) {
+        for (int i = 0; i < m->nr; ++i) {
             f[i][j] = 
                 roundf(((float)m->mat[i][j]->num / m->mat[i][j]->den)*100.0)/100.0;
         }
@@ -187,7 +187,7 @@ int float_find_max_figures_column(float** f, int dim, int column) {
     for (int i = 1; i < dim; ++i) {
         space = figures(abs(f[i][column])); 
         if (f[i][column] < 0.0) ++space;
-        
+
         if (space > max_c) max_c = space;
     }
 
