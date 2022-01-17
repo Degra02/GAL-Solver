@@ -307,7 +307,7 @@ FMatrix fraction_matrix_gauss_jordan(FMatrix m) {
     return mg;
 }
 
-/* prende in input un punatore a Tfmatrix e restituisce la sua rref */
+/* prende in input un punatore a Tfmatrix e restituisce la sue rref */
 FMatrix fraction_matrix_rref(FMatrix m) {
     FMatrix mrr = fraction_matrix_gauss_jordan(m); 
     Fraction lambda; int no_pivot_column = 0, i; 
