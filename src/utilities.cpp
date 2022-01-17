@@ -42,5 +42,10 @@ void print_space(int dim) {
 void print_format_float(float f, int max_figures) {
     int space = figures(abs(f));
     if (f < 0) ++space;
-    print_space(max_figures - space); printf("%.2f", f); cout << " ";
+    print_space(max_figures - space); 
+    if(round(f) == 0){
+        printf("\x1b[38;5;239m%3d\x1b[0m", 0); cout << " ";
+    } else {
+        printf("%.2f", f); cout << " ";
+    }
 }

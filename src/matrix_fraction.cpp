@@ -215,6 +215,18 @@ FMatrix fraction_matrix_sum(FMatrix a, FMatrix b) {
     }
     return sum;
 }
+
+FMatrix fraction_matrix_difference(FMatrix a, FMatrix b) {
+    if (a->nr != b->nr || a->nc != b->nc) return new Tfmatrix();
+    int r = a->nr, c = a->nc;
+    FMatrix sum = new Tfmatrix(r, c);
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            sum->mat[i][j] = fraction_difference(a->mat[i][j], b->mat[i][j]);
+        }
+    }
+    return sum;
+}
  
 FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
     if(a->nc == b->nr){

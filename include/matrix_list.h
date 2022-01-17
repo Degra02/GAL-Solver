@@ -34,5 +34,9 @@ MNodeptr insertM(MNodeptr n, string name);
 
 void command_print_matrix(MNodeptr n, string userinput);
 MNodeptr command_new_matrix(MNodeptr n);
+MNodeptr command_matrix_product(MNodeptr n);
+MNodeptr command_matrix_sum(MNodeptr n);
+MNodeptr command_matrix_difference(MNodeptr n);
+MNodeptr command_matrix_traspose(MNodeptr n);
 
 #endif

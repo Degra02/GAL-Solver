@@ -21,7 +21,7 @@ void parse_user_input(vector <string> *userinput){
 }
 
 void function_call(Lists list){
-    string end, name;
+    string name;
     vector <string> userinput;
     do{ 
         parse_user_input(&userinput);
@@ -31,7 +31,7 @@ void function_call(Lists list){
                 list->Mlist = command_new_matrix(list->Mlist);
             }
             else if(userinput[1] == "vector"){
-                cout << "name= "; cin >> name;
+                cout << "name= "; fflush(stdin); cin >> name;
                 list->Vlist = insertV(list->Vlist, name);
             }
             else{
@@ -40,11 +40,13 @@ void function_call(Lists list){
         } else if(userinput[0] == "calculate"){
             if(userinput[1] == "matrix"){
                 if(userinput[2] == "product"){
-                    
+                    list->Mlist = command_matrix_product(list->Mlist);
                 } else if(userinput[2] == "sum"){
-
-                } else if(userinput[2] == ""){
-
+                    list->Mlist = command_matrix_sum(list->Mlist);
+                } else if(userinput[2] == "difference"){
+                    list->Mlist = command_matrix_difference(list->Mlist);
+                } else if(userinput[2] == "transpose"){
+                    list->Mlist = command_matrix_traspose(list->Mlist);
                 }
             }
             else if(userinput[1] == "vector"){
@@ -59,8 +61,10 @@ void function_call(Lists list){
             } else if(userinput[1] == "vector"){
 
             }
+        } else {
+            if(userinput[0] != "END")
+                cout << "No such function" << endl << endl;
         }
 
-        end = userinput[0];
-    }while(end != "END");
+    }while(userinput[0] != "END");
 }
