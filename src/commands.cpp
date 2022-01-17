@@ -48,10 +48,12 @@ void function_call(Lists list){
                 } else if(userinput[2] == "scalar"){
                     list->Mlist = command_matrix_scalar_mult(list->Mlist);
                 } else if(userinput[2] == "stairs"){
-                    //list->Mlist = command_matrix_stairs(list->Mlist);
+                    list->Mlist = command_matrix_stairs(list->Mlist);
                 }
             } else if(userinput[1] == "vector"){
+                if(userinput[2] == "product"){
 
+                }
             } else {
                 continue;
             }
