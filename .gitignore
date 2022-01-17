@@ -2,7 +2,6 @@
 
 # object files in the source directory
 /src/*.o
-/src/main.cpp
 
 # text editor garbage
 .vscode/
@@ -12,3 +11,4 @@ Makefile
 
 # output folder
 output/
+src/main.cpp
