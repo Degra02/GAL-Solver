@@ -250,13 +250,13 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
 
 /* prende in input un puntatore a Tfmatrix e un numero razionale che viene moltiplicato per ogni elemento della matrice */ 
 FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda) {
-    Fraction l = new Tfraction(lambda);
-    for (int i = 0; i < a->nr; i++) {
-        for (int j = 0; j < a->nc; j++) {
-            a->mat[i][j] = fraction_product(l, a->mat[i][j]);
+    FMatrix m = a; Fraction l = new Tfraction(lambda);
+    for (int i = 0; i < m->nr; i++) {
+        for (int j = 0; j < m->nc; j++) {
+            m->mat[i][j] = fraction_product(l, m->mat[i][j]);
         }
     }
-    return a;
+    return m;
 }
 
 /* prende in input un puntatore a Tfmatrix e due indici interi di due righe della matrice, e restituisce la matrice stessa con le righe scambiate */
