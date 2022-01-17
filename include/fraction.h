@@ -27,5 +27,6 @@ Fraction fraction_simplification(Fraction a);
 Fraction str_to_fraction(string value);
 void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den);
 void zero_control(Fraction f);
+void sign_control(Fraction f);
 
 #endif

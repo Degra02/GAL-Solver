@@ -91,7 +91,7 @@ Fraction fraction_product(Fraction a, Fraction b) {
 
     c->den = a->den * b->den;
     c->num = a->num * b->num;
-    zero_control(c);
+    zero_control(c); sign_control(c);
     return fraction_simplification(c);
 }
 
@@ -101,7 +101,7 @@ Fraction fraction_quotient(Fraction a, Fraction b) {
 
     c->den = a->den * b->num;
     c->num = a->num * b->den;
-    zero_control(c);
+    zero_control(c); sign_control(c);
     return fraction_simplification(c);
 }
 
@@ -182,4 +182,11 @@ void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den)
 
 void zero_control(Fraction f) {
     if (f->num == 0) f->den = 1;
+}
+
+void sign_control(Fraction f) {
+    if (f->num < 0 && f->den < 0) {
+        f->num = (-1) * f->num;
+        f->den = (-1) * f->den;
+    }
 }

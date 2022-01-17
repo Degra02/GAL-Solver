@@ -41,5 +41,7 @@ void fraction_E(FMatrix m, int d, int s, Fraction lambda);
 FMatrix fraction_matrix_copy(FMatrix m);
 
 FMatrix fraction_matrix_gauss_jordan(FMatrix m);
+FMatrix fraction_matrix_rref(FMatrix m);
+int fraction_matrix_rg(FMatrix m);
 
 #endif
