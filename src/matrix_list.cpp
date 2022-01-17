@@ -88,7 +88,7 @@ void command_print_matrix(MNodeptr n, string userinput){
 
 MNodeptr command_new_matrix(MNodeptr n){
     string name;
-    cout << "name= "; fflush(stdin); cin >> name;
+    cout << "Name= "; fflush(stdin); cin >> name;
     return insertM(n, name);
 }
 

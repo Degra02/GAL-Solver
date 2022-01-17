@@ -6,10 +6,12 @@ using namespace std;
 
 typedef struct Tfvector { 
     Fraction *array; int n;
+    string name;
 
     Tfvector();
     Tfvector(int _n);
     Tfvector(float *values, int dim);
+    Tfvector(int dim, string _name);
     Tfvector(Fraction* values, int dim);
     Tfvector(int _n, int min, int max);
     ~Tfvector();
@@ -20,6 +22,8 @@ typedef struct Tfvector {
 
 typedef Tfvector* FVector;
 
+void print_fvector(FVector v);
 FVector init(FVector m);
+FVector init_fvector(string name);
 
 #endif
