@@ -21,7 +21,6 @@ void parse_user_input(vector <string> *userinput){
 }
 
 void function_call(Lists list){
-    Matrix m;
     string end, name;
     vector <string> userinput;
     do{ 
@@ -29,8 +28,7 @@ void function_call(Lists list){
 
         if(userinput[0] == "new"){
             if(userinput[1] == "matrix"){
-                cout << "name= "; cin >> name;
-                list->Mlist = insertM(list->Mlist, name);
+                list->Mlist = command_new_matrix(list->Mlist);
             }
             else if(userinput[1] == "vector"){
                 cout << "name= "; cin >> name;
@@ -57,17 +55,12 @@ void function_call(Lists list){
             }
         } else if(userinput[0] == "print"){
             if(userinput[1] == "matrix"){
-                m = get_search(list->Mlist, userinput[2]);
-                if(m != NULL){
-                    print_matrix(m);
-                } else {
-                    cout << endl << "Matrix not found" << endl << endl;
-                }
+                command_print_matrix(list->Mlist, userinput[2]);
             } else if(userinput[1] == "vector"){
 
             }
         }
 
         end = userinput[0];
-    }while(end != "end");
+    }while(end != "END");
 }

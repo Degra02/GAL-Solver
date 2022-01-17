@@ -21,7 +21,7 @@ typedef struct Tfmatrix {
 
 typedef Tfmatrix* FMatrix; 
 
-FMatrix init_fmatrix();
+FMatrix init_fmatrix(string name);
 void print_fmatrix(FMatrix m);
 int find_max_figures_column(FMatrix m, int colummn, char type);
 

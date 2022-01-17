@@ -82,11 +82,11 @@ Tfmatrix::~Tfmatrix() {
 
 // Functions
 
-/* inizializza una matrice chiedendo il nome, il numero di riche, il numero di colonne e facendo inserire i valori manualmente di tutti i tipi possibili (float, Tfraction o int) */
-FMatrix init_fmatrix() {
+/* inizializza una matrice chiedendo il nome, il numero di righe, 
+il numero di colonne e facendo inserire i valori manualmente 
+di tutti i tipi possibili (float, Tfraction o int) */
+FMatrix init_fmatrix(string name) {
     int r, c;
-    string name;
-    cout << "name= "; cin >> name;
 	cout << "rows= "; cin >> r;
 	cout << "columns= "; cin >> c;
     cout << endl;

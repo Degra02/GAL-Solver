@@ -3,7 +3,7 @@
 #include "all-headers.h"
 using namespace std;
 
-MNodeptr insertFirst(MNodeptr n, Matrix m){
+MNodeptr insertFirst(MNodeptr n, FMatrix m){
     return new TMnode(m, n);
 }
 
@@ -26,11 +26,11 @@ MNodeptr remove_search(MNodeptr n){
     return n;
 }
 
-Matrix get(MNodeptr n){
+FMatrix get(MNodeptr n){
     return n->m;
 }
 
-Matrix get_search (MNodeptr n, string name){ // returns the matrix with the given name, NULL otherwise
+FMatrix get_search (MNodeptr n, string name){ // returns the matrix with the given name, NULL otherwise
     if(n == NULL){
         return NULL;
     }
@@ -61,10 +61,25 @@ bool isPresent(MNodeptr n, string name){
 
 MNodeptr insertM(MNodeptr n, string name){
     if(! isPresent(n, name)){
-        n = insertFirst(n, init_matrix(name));
+        n = insertFirst(n, init_fmatrix(name));
     } else {
         cout << "Matrix with same name already saved" << endl << endl;
     }
     return n;
+}
+
+void command_print_matrix(MNodeptr n, string userinput){
+    FMatrix m = get_search(n, userinput);
+    if(m != NULL){
+        print_fmatrix(m);
+    } else {
+        cout << endl << "Matrix not found" << endl << endl;
+    }
+}
+
+MNodeptr command_new_matrix(MNodeptr n){
+    string name;
+    cout << "name= "; cin >> name;
+    return insertM(n, name);
 }
 
