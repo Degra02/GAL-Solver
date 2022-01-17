@@ -96,10 +96,11 @@ FVector init_fvector(string name){
     for(int i = 0; i < n; i++){
         cin >> value;
         v->array[i] = str_to_fraction(value);
+        v->array[i] = fraction_simplification(v->array[i]);
     }
     return v;
 }
 
 void print_fvector(FVector v){
-    
+
 }
