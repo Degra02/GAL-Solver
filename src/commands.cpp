@@ -29,12 +29,10 @@ void function_call(Lists list){
         if(userinput[0] == "new"){
             if(userinput[1] == "matrix"){
                 list->Mlist = command_new_matrix(list->Mlist);
-            }
-            else if(userinput[1] == "vector"){
+            } else if(userinput[1] == "vector"){
                 cout << "name= "; fflush(stdin); cin >> name;
                 list->Vlist = insertV(list->Vlist, name);
-            }
-            else{
+            } else{
                 continue;
             }
         } else if(userinput[0] == "calculate"){
@@ -47,14 +45,14 @@ void function_call(Lists list){
                     list->Mlist = command_matrix_difference(list->Mlist);
                 } else if(userinput[2] == "transpose"){
                     list->Mlist = command_matrix_traspose(list->Mlist);
+                } else if(userinput[2] == "scalar"){
+                    list->Mlist = command_matrix_scalar_mult(list->Mlist);
                 } else if(userinput[2] == "stairs"){
-                    list->Mlist = command_matrix_stairs(list->Mlist);
+                    //list->Mlist = command_matrix_stairs(list->Mlist);
                 }
-            }
-            else if(userinput[1] == "vector"){
+            } else if(userinput[1] == "vector"){
 
-            }
-            else {
+            } else {
                 continue;
             }
         } else if(userinput[0] == "print"){
