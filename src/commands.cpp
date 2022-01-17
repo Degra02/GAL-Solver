@@ -47,6 +47,8 @@ void function_call(Lists list){
                     list->Mlist = command_matrix_difference(list->Mlist);
                 } else if(userinput[2] == "transpose"){
                     list->Mlist = command_matrix_traspose(list->Mlist);
+                } else if(userinput[2] == "stairs"){
+                    list->Mlist = command_matrix_stairs(list->Mlist);
                 }
             }
             else if(userinput[1] == "vector"){

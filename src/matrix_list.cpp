@@ -163,3 +163,17 @@ MNodeptr command_matrix_traspose(MNodeptr n){
     print_fmatrix(t);
     return insertFirst(n, t);
 }
+
+/*MNodeptr command_matrix_stairs(MNodeptr n){
+    string name;
+    cout << "Matrix name: "; fflush(stdin); cin >> name;
+    FMatrix m1 = get_search(n, name);
+    if(m1 != NULL){
+        fraction_matrix_gauss_jordan(m1);
+        m1->name = m1->name + "sf"; // means stairs form
+    } else {
+        cout << "No such matrix" << endl << endl;
+    }
+    print_fmatrix(m1);
+    return n;
+}*/
