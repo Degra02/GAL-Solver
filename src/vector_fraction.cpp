@@ -70,6 +70,15 @@ Tfvector::~Tfvector() {
     delete[] array;
 }
 
+Tfvector::Tfvector(int dim, string _name){
+    n = dim;
+    array = new Fraction[n];
+    for(int i = 0; i < n; i++){
+        array[i] = new Tfraction();
+    }
+    name = _name;
+}
+
 FVector init(FVector m) {
     float coe;
     for (int i = 0; i < m->n; i++) {
@@ -78,4 +87,19 @@ FVector init(FVector m) {
         m->array[i] = fraction_simplification(m->array[i]);
     }
     return m;
+}
+
+FVector init_fvector(string name){
+    int n; string value;
+    cout << "dimension= "; cin >> n;
+    FVector v = new Tfvector(n, name);
+    for(int i = 0; i < n; i++){
+        cin >> value;
+        v->array[i] = str_to_fraction(value);
+    }
+    return v;
+}
+
+void print_fvector(FVector v){
+    
 }

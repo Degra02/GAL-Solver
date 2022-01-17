@@ -30,8 +30,7 @@ void function_call(Lists list){
             if(userinput[1] == "matrix"){
                 list->Mlist = command_new_matrix(list->Mlist);
             } else if(userinput[1] == "vector"){
-                cout << "name= "; fflush(stdin); cin >> name;
-                list->Vlist = insertV(list->Vlist, name);
+                list->Vlist = command_new_vector(list->Vlist);
             } else{
                 continue;
             }
