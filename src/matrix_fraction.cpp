@@ -107,6 +107,35 @@ FMatrix init_fmatrix(string name) {
     return m;
 }
 
+void print_fmatrix_float(FMatrix m) { // to update (mettere in file i float!!!)
+    int figures[m->nc];
+    float** f;
+    f = new float*[m->nr];
+    for (int i = 0; i < m->nr; ++i) 
+        f[i] = new float[m->nc];
+
+    cout << "Name: " << "\x1b[38;5;50m" << m->name << "\x1b[0m";
+    cout << endl << endl;
+
+    for (int j = 0; j < m->nr; ++j) {
+        for (int i = 0; i < m->nc; ++i) {
+            f[i][j] = 
+                roundf(((float)m->mat[i][j]->num / m->mat[i][j]->den)*100.0)/100.0;
+        }
+        figures[j] = float_find_max_figures_column(f, m->nr, j);
+    }
+        
+    for (int i = 0; i < m->nr; ++i) {
+        cout << "   ";
+        for (int j = 0; j < m->nc; ++j) {
+            print_format_float(f[i][j], figures[j]);
+        }
+        printf("\n");
+    }
+
+    cout << endl << endl;
+}
+
 /* prende in input un puntatore a Tfmatrix e la visualizza sul prompt */
 void print_fmatrix(FMatrix m) {
     int figures_num[m->nc];
@@ -116,8 +145,8 @@ void print_fmatrix(FMatrix m) {
     cout << endl << endl;
 
     for (int j = 0; j < m->nc; ++j) {
-        figures_num[j] = find_max_figures_column(m, j, 'n');
-        figures_den[j] = find_max_figures_column(m, j, 'd');
+        figures_num[j] = fraction_find_max_figures_column(m, j, 'n');
+        figures_den[j] = fraction_find_max_figures_column(m, j, 'd');
     }
 
     for (int i = 0; i < m->nr; ++i) {
@@ -132,7 +161,7 @@ void print_fmatrix(FMatrix m) {
 }
 
 /* prende in input una matrie m, l'identificatore intero di una colonna e un tipo char per determinare se studiare il denominatore o il numeratore, e restituisce il numero massimo di cifre usate in quella colonna della matrice dal numeratore o denominatore */
-int find_max_figures_column(FMatrix m, int column, char type) {
+int fraction_find_max_figures_column(FMatrix m, int column, char type) {
     int max_c = 0, n, space;
     bool control = (type == 'n');
     for (int i = 0; i < m->nr; ++i) {
@@ -146,6 +175,19 @@ int find_max_figures_column(FMatrix m, int column, char type) {
             space = (control ? (space / 2) : (space - 1) / 2);
         if (n < 0) ++space;
 
+        if (space > max_c) max_c = space;
+    }
+
+    return max_c;
+}
+
+int float_find_max_figures_column(float** f, int dim, int column) {
+    int max_c = figures(abs(f[0][column])); int space;
+    if (f[0][column] < 0.0) ++max_c; 
+    for (int i = 1; i < dim; ++i) {
+        space = figures(abs(f[i][column])); 
+        if (f[i][column] < 0.0) ++space;
+        
         if (space > max_c) max_c = space;
     }
 
@@ -173,7 +215,7 @@ FMatrix fraction_matrix_sum(FMatrix a, FMatrix b) {
     }
     return sum;
 }
-
+ 
 FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
     if(a->nc == b->nr){
         FMatrix multi = new Tfmatrix(a->nr, b->nc);
@@ -194,10 +236,11 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
     }
 }
 
+/* prende in input un puntatore a Tfmatrix e un numero razionale che viene moltiplicato per ogni elemento della matrice */ 
 FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda) {
     Fraction l = new Tfraction(lambda);
-    for (int i=0; i<a->nr; i++) {
-        for (int j=0; j<a->nc; j++) {
+    for (int i = 0; i < a->nr; i++) {
+        for (int j = 0; j < a->nc; j++) {
             a->mat[i][j] = fraction_product(l, a->mat[i][j]);
         }
     }
@@ -224,6 +267,7 @@ void fraction_E(FMatrix m, int d, int s, Fraction lambda) {
         m->mat[d][j] = fraction_sum(m->mat[d][j], v->array[j]);
 }
 
+/* prende in input un puntatore a Tfamtrix e la trasforma la matrice nella sua forma a scalini secondo l'algoritmo di gauss-jordan */
 void fraction_matrix_gauss_jordan(FMatrix m) {
     int zero_column = 0; Fraction lambda;
     for (int j = 0; j < m->nc; ++j) {
