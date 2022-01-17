@@ -38,6 +38,6 @@ void fraction_S(FMatrix m, int a, int b);
 void fraction_D(FMatrix m, int a, Fraction lambda);
 void fraction_E(FMatrix m, int d, int s, Fraction lambda);
 
-void fraction_matrix_gauss_jordan(FMatrix m);
+FMatrix fraction_matrix_gauss_jordan(FMatrix m);
 
 #endif
