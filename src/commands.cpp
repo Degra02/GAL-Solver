@@ -51,7 +51,9 @@ void function_call(Lists list){
                     list->Mlist = command_matrix_stairs(list->Mlist);
                 }
             } else if(userinput[1] == "vector"){
+                if(userinput[2] == "product"){
 
+                }
             } else {
                 continue;
             }
