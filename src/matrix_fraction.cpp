@@ -280,26 +280,28 @@ void fraction_E(FMatrix m, int d, int s, Fraction lambda) {
 }
 
 /* prende in input un puntatore a Tfamtrix e la trasforma la matrice nella sua forma a scalini secondo l'algoritmo di gauss-jordan */
-void fraction_matrix_gauss_jordan(FMatrix m) {
-    int zero_column = 0; Fraction lambda;
-    for (int j = 0; j < m->nc; ++j) {
+FMatrix fraction_matrix_gauss_jordan(FMatrix m) {
+    FMatrix mg = m; Fraction lambda; int zero_column = 0;
+    for (int j = 0; j < mg->nc; ++j) {
         int i = (j - zero_column);
-        while (i < m->nr && m->mat[i][j]->num == 0) ++i;
-        if (i == m->nr) {
+        while (i < mg->nr && mg->mat[i][j]->num == 0) ++i;
+        if (i == mg->nr) {
             ++zero_column;
             continue; // passa alla prossima colonna 
         }
-        if (i != (j - zero_column)) fraction_S(m, i, (j - zero_column)); 
+        if (i != (j - zero_column)) fraction_S(mg, i, (j - zero_column)); 
         i = (j - zero_column);
-        for (int r = i + 1; r < m->nr; ++r) {
-            if (m->mat[r][j]->num != 0) {
+        for (int r = i + 1; r < mg->nr; ++r) {
+            if (mg->mat[r][j]->num != 0) {
                 lambda = fraction_quotient(
-                    fraction_product(new Tfraction(-1, 1), m->mat[r][j]),
-                    m->mat[i][j]
+                    fraction_product(new Tfraction(-1, 1), mg->mat[r][j]),
+                    mg->mat[i][j]
                 );
 
-                fraction_E(m, r, i, lambda);
+                fraction_E(mg, r, i, lambda);
             }
         }
     }
+
+    return mg;
 }
