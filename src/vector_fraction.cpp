@@ -105,8 +105,9 @@ FVector init_fvector(string name){
 
 void print_fvector(FVector v){
     cout << "Name: " << "\x1b[38;5;50m" << v->name << "\x1b[0m = ";
+    cout << endl << endl;
 
-    cout << "("; 
+    cout << "   ("; 
     for(int i = 0; i < v->n; i++){
         v->array[i]->print();
         if (i != (v->n - 1)) cout << ", ";
