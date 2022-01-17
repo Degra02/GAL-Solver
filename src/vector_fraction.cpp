@@ -99,11 +99,11 @@ FVector init_fvector(string name){
         v->array[i] = str_to_fraction(value);
         v->array[i] = fraction_simplification(v->array[i]);
     }
+    cout << endl;
     return v;
 }
 
 void print_fvector(FVector v){
-    cout << endl;
     cout << "Name: " << "\x1b[38;5;50m" << v->name << "\x1b[0m = ";
 
     cout << "("; 

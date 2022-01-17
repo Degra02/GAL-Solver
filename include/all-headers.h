@@ -20,6 +20,7 @@
 #include "database.h"
 #include "matrix_list.h"
 #include "vector_list.h"
+#include "eq_system_list.h"
 #include "commands.h"
 
 #include "utilities.h"

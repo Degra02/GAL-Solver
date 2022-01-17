@@ -37,3 +37,22 @@ FEqsys feq_sys_stairs_form(FEqsys e){
     tmp = fraction_matrix_gauss_jordan(tmp);
     return to_feqsys_from_matrix(tmp);
 }
+
+FEqsys init_feqsys(string name){
+    FEqsys eq = new Tfeqsys();
+    cout << "Coefficients matrix: " << endl;
+    eq->A = init_fmatrix("");
+    cout << "Known terms vector: " << endl;
+    eq->b = new Tfvector(eq->A->nr);
+    string value;
+    for(int i = 0; i < eq->A->nr; i++){
+        cout << "   ";
+        cin >> value;
+        eq->b->array[i] = str_to_fraction(value);
+        eq->b->array[i] = fraction_simplification(eq->b->array[i]);
+    }
+    cout << endl;
+    
+    eq->name = name;
+    return eq;
+}

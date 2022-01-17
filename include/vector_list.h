@@ -26,6 +26,7 @@ typedef struct TVnode{
 typedef TVnode *VNodeptr;
 
 VNodeptr insertFirstV(VNodeptr n, FVector v);
+VNodeptr remove_vsearch(VNodeptr n);
 bool isPresentV(VNodeptr n, string name);
 VNodeptr insertV(VNodeptr n, string name);
 FVector get_vsearch(VNodeptr n, string name);

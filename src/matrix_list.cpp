@@ -71,7 +71,7 @@ MNodeptr insertM(MNodeptr n, string name){
 void command_print_matrix(MNodeptr n, string userinput){
     FMatrix m = get_search(n, userinput);
     string choice;
-    cout << "type of print: "; fflush(stdin); cin >> choice;
+    cout << "Print format: "; fflush(stdin); cin >> choice;
 
     if(m != NULL){
         if(choice  == "fraction"){
@@ -79,7 +79,7 @@ void command_print_matrix(MNodeptr n, string userinput){
         } else if(choice == "float"){
             print_fmatrix_float(m);
         } else {
-            cout << endl << "invalid option" << endl << endl;
+            cout << endl << "Invalid print format" << endl << endl;
         }
     } else {
         cout << endl << "Matrix not found" << endl << endl;

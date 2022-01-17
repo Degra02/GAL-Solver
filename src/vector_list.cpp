@@ -22,6 +22,26 @@ bool isPresentV(VNodeptr n, string name){
     return false;
 }
 
+VNodeptr remove_vsearch(VNodeptr n){
+    string name;
+    cout << "Vector name: "; fflush(stdin); cin >> name;
+    if(n == NULL){
+        return NULL;
+    }
+    VNodeptr t = n;
+    while((t->next != NULL) && (t->next->v->name != name)){
+        t = t->next;
+    }
+    if(t->next != NULL){
+        VNodeptr r = t->next;
+        t->next = t->next->next;
+        delete r;
+        return n;
+    }
+    return n;
+}
+
+
 FVector get_vsearch(VNodeptr n, string name){
     if(n == NULL){
         return NULL;

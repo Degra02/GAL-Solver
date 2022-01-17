@@ -31,8 +31,10 @@ void function_call(Lists list){
                 list->Mlist = command_new_matrix(list->Mlist);
             } else if(userinput[1] == "vector"){
                 list->Vlist = command_new_vector(list->Vlist);
-            } else{
-                continue;
+            } else if(userinput[1] == "system"){
+                list->Eqlist = command_new_system(list->Eqlist);
+            } else {
+                cout << "Invalid function call" << endl << endl;
             }
         } else if(userinput[0] == "calculate"){
             if(userinput[1] == "matrix"){
@@ -52,19 +54,33 @@ void function_call(Lists list){
                     list->Mlist = command_matrix_rref(list->Mlist);
                 } else if(userinput[2] == "rank"){
                     command_matrix_rank(list->Mlist);
+                } else {
+                    cout << "Invalid function call" << endl << endl;
                 }
             } else if(userinput[1] == "vector"){
                 if(userinput[2] == "product"){
 
                 }
             } else {
-                continue;
+                cout << "Invalid function call" << endl << endl;
             }
         } else if(userinput[0] == "print"){
             if(userinput[1] == "matrix"){
                 command_print_matrix(list->Mlist, userinput[2]);
             } else if(userinput[1] == "vector"){
-
+                command_print_vector(list->Vlist, userinput[2]);
+            } else if(userinput[1] == "system"){
+                command_print_system(list->Eqlist, userinput[2]);
+            } else {
+                cout << "Invalid function call" << endl << endl;
+            }
+        } else if(userinput[0] == "remove"){
+            if(userinput[1] == "matrix"){
+                list->Mlist = remove_search(list->Mlist);
+            } else if(userinput[1] == "vector"){
+                list->Vlist = remove_vsearch(list->Vlist);
+            } else if(userinput[1] == "system"){
+                list->Eqlist = remove_esearch(list->Eqlist);
             }
         } else {
             if(userinput[0] != "END")
