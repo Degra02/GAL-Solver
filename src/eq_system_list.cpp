@@ -13,15 +13,20 @@ ENodeptr remove_esearch(ENodeptr n){
     if(n == NULL){
         return NULL;
     }
+    if(n->e->name == name){
+        delete n;
+        return NULL;
+    }
     ENodeptr t = n;
-    while((t->next != NULL) && (t->next->e->name != name)){
-        t = t->next;
+    while(t->next != NULL){
+        if(t->next->e->name == name){
+            ENodeptr r = t->next;
+            t->next = t->next->next;
+            delete r;
+            return n;
+        }
     }
-    if(t->next != NULL){
-        ENodeptr r = t->next;
-        t->next = t->next->next;
-        delete r; return n;
-    }
+    
     return n;
 }
 

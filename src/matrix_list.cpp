@@ -13,6 +13,10 @@ MNodeptr remove_search(MNodeptr n){
     if(n == NULL){
         return NULL;
     }
+    if(n->m->name == name){
+        delete n;
+        return NULL;
+    }
     MNodeptr t = n;
     while((t->next != NULL) && (t->next->m->name != name)){
         t = t->next;

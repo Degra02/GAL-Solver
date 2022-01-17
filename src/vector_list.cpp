@@ -28,6 +28,9 @@ VNodeptr remove_vsearch(VNodeptr n){
     if(n == NULL){
         return NULL;
     }
+    if(n->v->name == name){
+        delete n; return NULL;
+    }
     VNodeptr t = n;
     while((t->next != NULL) && (t->next->v->name != name)){
         t = t->next;
