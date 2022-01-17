@@ -50,8 +50,8 @@ void function_call(Lists list){
                     list->Mlist = command_matrix_stairs(list->Mlist);
                 } else if (userinput[2] == "rref"){
                     list->Mlist = command_matrix_rref(list->Mlist);
-                } else if(userinput[2] == "rg"){
-
+                } else if(userinput[2] == "rank"){
+                    command_matrix_rank(list->Mlist);
                 }
             } else if(userinput[1] == "vector"){
                 if(userinput[2] == "product"){

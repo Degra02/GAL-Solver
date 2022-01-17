@@ -41,5 +41,6 @@ MNodeptr command_matrix_scalar_mult(MNodeptr n);
 MNodeptr command_matrix_traspose(MNodeptr n);
 MNodeptr command_matrix_stairs(MNodeptr n);
 MNodeptr command_matrix_rref(MNodeptr n);
+void command_matrix_rank(MNodeptr n);
 
 #endif

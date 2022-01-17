@@ -206,3 +206,11 @@ MNodeptr command_matrix_rref(MNodeptr n){
     print_fmatrix(r);
     return insertFirst(n, r);
 }
+
+void command_matrix_rank(MNodeptr n){
+    string name;
+    cout << "Matrix name: "; fflush(stdin); cin >> name;
+    FMatrix m = get_search(n, name);
+    cout << "Rank= " << fraction_matrix_rg(m);
+    cout << endl << endl;
+}
