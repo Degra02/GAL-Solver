@@ -24,6 +24,7 @@ typedef Tfmatrix* FMatrix;
 FMatrix init_fmatrix(string name);
 void print_fmatrix(FMatrix m);
 void print_fmatrix_float(FMatrix m);
+FMatrix copy_fmatrix(FMatrix m);
 
 int fraction_find_max_figures_column(FMatrix m, int colummn, char type);
 int float_find_max_figures_column(float** f, int dim, int column);

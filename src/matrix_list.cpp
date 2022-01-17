@@ -164,19 +164,19 @@ MNodeptr command_matrix_traspose(MNodeptr n){
     return insertFirst(n, t);
 }
 
-/*MNodeptr command_matrix_stairs(MNodeptr n){
+MNodeptr command_matrix_stairs(MNodeptr n){
     string name;
     cout << "Matrix name: "; fflush(stdin); cin >> name;
-    FMatrix m1 = get_search(n, name);
+    FMatrix m1 = get_search(n, name); FMatrix s;
     if(m1 != NULL){
-        fraction_matrix_gauss_jordan(m1);
-        m1->name = m1->name + "sf"; // means stairs form
+        s = fraction_matrix_gauss_jordan(m1);
+        s->name = m1->name + "sf"; // means stairs form
     } else {
         cout << "No such matrix" << endl << endl;
     }
-    print_fmatrix(m1);
-    return n;
-}*/
+    print_fmatrix(s);
+    return insertFirst(n, s);
+}
 
 MNodeptr command_matrix_scalar_mult(MNodeptr n){
     string name; float lambda;
@@ -185,7 +185,7 @@ MNodeptr command_matrix_scalar_mult(MNodeptr n){
     FMatrix m1 = get_search(n, name); FMatrix t;
     if(m1 != NULL){
         t = fraction_matrix_scalar_multiplication(m1, lambda);
-        t->name = to_string(lambda)+ "x" + m1->name;
+        t->name = "lambda" + m1->name;
     } else {
         cout << "No such matrix" << endl << endl;
     }

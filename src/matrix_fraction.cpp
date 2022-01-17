@@ -251,12 +251,13 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
 /* prende in input un puntatore a Tfmatrix e un numero razionale che viene moltiplicato per ogni elemento della matrice */ 
 FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda) {
     Fraction l = new Tfraction(lambda);
+    FMatrix res = new Tfmatrix(a->nr, a->nc);
     for (int i = 0; i < a->nr; i++) {
         for (int j = 0; j < a->nc; j++) {
-            a->mat[i][j] = fraction_product(l, a->mat[i][j]);
+            res->mat[i][j] = fraction_product(l, a->mat[i][j]);
         }
     }
-    return a;
+    return res;
 }
 
 /* prende in input un puntatore a Tfmatrix e due indici interi di due righe della matrice, e restituisce la matrice stessa con le righe scambiate */
@@ -281,7 +282,7 @@ void fraction_E(FMatrix m, int d, int s, Fraction lambda) {
 
 /* prende in input un puntatore a Tfamtrix e la trasforma la matrice nella sua forma a scalini secondo l'algoritmo di gauss-jordan */
 FMatrix fraction_matrix_gauss_jordan(FMatrix m) {
-    FMatrix mg = m; Fraction lambda; int zero_column = 0;
+    FMatrix mg = copy_fmatrix(m); Fraction lambda; int zero_column = 0;
     for (int j = 0; j < mg->nc; ++j) {
         int i = (j - zero_column);
         while (i < mg->nr && mg->mat[i][j]->num == 0) ++i;
@@ -304,4 +305,14 @@ FMatrix fraction_matrix_gauss_jordan(FMatrix m) {
     }
 
     return mg;
+}
+
+FMatrix copy_fmatrix(FMatrix m){
+    FMatrix r = new Tfmatrix(m->nr, m->nc);
+    for(int i = 0; i < m->nr; i++){
+        for(int j = 0; j < m->nc; j++){
+            r->mat[i][j] = m->mat[i][j];
+        }
+    }
+    return r;
 }
