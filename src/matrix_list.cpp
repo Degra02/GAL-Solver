@@ -177,3 +177,18 @@ MNodeptr command_matrix_traspose(MNodeptr n){
     print_fmatrix(m1);
     return n;
 }*/
+
+MNodeptr command_matrix_scalar_mult(MNodeptr n){
+    string name; float lambda;
+    cout << "Matrix name: "; fflush(stdin); cin >> name;
+    cout << "Lambda= "; cin >> lambda;
+    FMatrix m1 = get_search(n, name); FMatrix t;
+    if(m1 != NULL){
+        t = fraction_matrix_scalar_multiplication(m1, lambda);
+        t->name = to_string(lambda)+ "x" + m1->name;
+    } else {
+        cout << "No such matrix" << endl << endl;
+    }
+    print_fmatrix(t);
+    return insertFirst(n, t);
+}

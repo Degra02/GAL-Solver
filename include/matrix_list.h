@@ -37,6 +37,7 @@ MNodeptr command_new_matrix(MNodeptr n);
 MNodeptr command_matrix_product(MNodeptr n);
 MNodeptr command_matrix_sum(MNodeptr n);
 MNodeptr command_matrix_difference(MNodeptr n);
+MNodeptr command_matrix_scalar_mult(MNodeptr n);
 MNodeptr command_matrix_traspose(MNodeptr n);
 MNodeptr command_matrix_stairs(MNodeptr n);
 
