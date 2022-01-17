@@ -148,13 +148,13 @@ void print_fmatrix(FMatrix m) {
     }
 
     for (int i = 0; i < m->nr; ++i) {
-        cout << "   ";
+        cout << "   "; 
         for (int j = 0; j < m->nc; ++j) {
             print_format_fraction(m->mat[i][j], figures_num[j], figures_den[j]);
         }
         printf("\n");
     }
-    
+        
     cout << endl << endl;
 }
 
@@ -193,6 +193,7 @@ int float_find_max_figures_column(float** f, int dim, int column) {
     return max_c;
 }
 
+/* prende in input un puntatore a Tfmatrix e restituisce la sua matrice trasposta */
 FMatrix fraction_matrix_transpose(FMatrix m) {
     FMatrix mT = new Tfmatrix(m->nc, m->nr);
     for (int i = 0; i < m->nr; i++) {
@@ -203,6 +204,7 @@ FMatrix fraction_matrix_transpose(FMatrix m) {
     return mT;
 }
 
+/* prende in input due matrici FMatrix e ne restituisce la somma */
 FMatrix fraction_matrix_sum(FMatrix a, FMatrix b) {
     if (a->nr != b->nr || a->nc != b->nc) return new Tfmatrix();
     int r = a->nr, c = a->nc;
@@ -215,6 +217,7 @@ FMatrix fraction_matrix_sum(FMatrix a, FMatrix b) {
     return sum;
 }
 
+/* prende in input due matrici FMatrix e ne restituisce la differenza */
 FMatrix fraction_matrix_difference(FMatrix a, FMatrix b) {
     if (a->nr != b->nr || a->nc != b->nc) return new Tfmatrix();
     int r = a->nr, c = a->nc;
@@ -226,13 +229,13 @@ FMatrix fraction_matrix_difference(FMatrix a, FMatrix b) {
     }
     return sum;
 }
- 
+
 FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
-    if(a->nc == b->nr){
+    if(a->nc == b->nr) {
         FMatrix multi = new Tfmatrix(a->nr, b->nc);
-        for(int i = 0; i < multi->nr; i++){
-            for(int j = 0; j < multi->nc; j++){
-                for(int k = 0; k < multi->nc; k++){
+        for(int i = 0; i < multi->nr; i++) {
+            for(int j = 0; j < multi->nc; j++) {
+                for(int k = 0; k < multi->nc; k++) {
                     multi->mat[i][j] = fraction_sum(
                         multi->mat[i][j], 
                         fraction_product(a->mat[i][k], b->mat[k][j])
@@ -240,7 +243,7 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
                 }
             }
         }
-    return multi;
+        return multi;
     } else {
         cout << "Impossible to multiply the given functions";
         return new Tfmatrix();
@@ -359,6 +362,10 @@ int fraction_matrix_rank(FMatrix m) {
     return counter;
 }
 
-bool fraction_matrix_is_base(FMatrix m){
-    return(m->nc == fraction_matrix_rank(m));
+bool fraction_matrix_is_base(FMatrix m) {
+    return (m->nc == fraction_matrix_rank(m) && matrix_is_square(m));
+}
+
+bool matrix_is_square(FMatrix m) {
+    return (m->nc == m->nr);
 }
