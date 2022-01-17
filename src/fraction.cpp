@@ -14,10 +14,11 @@ Tfraction::Tfraction(int n, int d) {
     num = n;
     if (d != 0) den = d;
     else den = 1;
-    if (n >= 0 && d < 0) {
+    if (n > 0 && d < 0) {
         num = -n;
         den = -d;
     }
+    if (n == 0) d = 1;
 }
 
 /* costruttore dato un numero decimale lo trasforma in frazione richiamando il metodo set */
@@ -65,8 +66,8 @@ Fraction fraction_sum(Fraction a, Fraction b) {
         c->den = mcm(a->den, b->den);
         c->num = (c->den / a->den)*a->num + (c->den / b->den)*b->num;
     }
-    if (c->num == 0) c->den = 1;
-    return c;
+    zero_control(c);
+    return fraction_simplification(c);
 }
 
 /* funzione che prese due strutture Tfraction restituisce un'altra Tfraction defferenza delle precedenti */
@@ -80,8 +81,8 @@ Fraction fraction_difference(Fraction a, Fraction b) {
         c->den = mcm(a->den, b->den);
         c->num = (c->den / a->den)*a->num - (c->den / b->den)*b->num;
     }
-    if (c->num == 0) c->den = 1;
-    return c;
+    zero_control(c);
+    return fraction_simplification(c);
 }
 
 /* funzione che prese due strutture Tfraction restituisce un'altra Tfraction prodotto delle precedenti */
@@ -90,6 +91,7 @@ Fraction fraction_product(Fraction a, Fraction b) {
 
     c->den = a->den * b->den;
     c->num = a->num * b->num;
+    zero_control(c);
     return fraction_simplification(c);
 }
 
@@ -99,6 +101,7 @@ Fraction fraction_quotient(Fraction a, Fraction b) {
 
     c->den = a->den * b->num;
     c->num = a->num * b->den;
+    zero_control(c);
     return fraction_simplification(c);
 }
 
@@ -175,4 +178,8 @@ void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den)
     print_space(max_figures_den - space_den);
     
     cout << " ";
+}
+
+void zero_control(Fraction f) {
+    if (f->num == 0) f->den = 1;
 }

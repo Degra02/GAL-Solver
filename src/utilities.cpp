@@ -38,3 +38,9 @@ int figures(int n) {
 void print_space(int dim) {
     for (int i = 0; i < dim; ++i) cout << " ";
 }
+
+void print_format_float(float f, int max_figures) {
+    int space = figures(abs(f));
+    if (f < 0) ++space;
+    print_space(max_figures - space); printf("%.2f", f); cout << " ";
+}
