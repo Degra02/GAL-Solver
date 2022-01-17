@@ -282,7 +282,7 @@ void fraction_E(FMatrix m, int d, int s, Fraction lambda) {
 
 /* prende in input un puntatore a Tfamtrix e la trasforma la matrice nella sua forma a scalini secondo l'algoritmo di gauss-jordan */
 FMatrix fraction_matrix_gauss_jordan(FMatrix m) {
-    FMatrix mg = copy_fmatrix(m); Fraction lambda; int zero_column = 0;
+    FMatrix mg = fraction_matrix_copy(m); Fraction lambda; int zero_column = 0;
     for (int j = 0; j < mg->nc; ++j) {
         int i = (j - zero_column);
         while (i < mg->nr && mg->mat[i][j]->num == 0) ++i;
@@ -307,7 +307,7 @@ FMatrix fraction_matrix_gauss_jordan(FMatrix m) {
     return mg;
 }
 
-FMatrix copy_fmatrix(FMatrix m){
+FMatrix fraction_matrix_copy(FMatrix m){
     FMatrix r = new Tfmatrix(m->nr, m->nc);
     for(int i = 0; i < m->nr; i++){
         for(int j = 0; j < m->nc; j++){

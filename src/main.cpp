@@ -6,9 +6,11 @@ using namespace std;
 
 int main() {
 	srand(time(0));
-	Lists list = new Tlists();
-	function_call(list);
-
 	
+	FMatrix m = init_fmatrix("A");
+	print_fmatrix(m); print_fmatrix_float(m);
+	FMatrix mg = fraction_matrix_gauss_jordan(m);
+	print_fmatrix(mg); print_fmatrix_float(mg);
+
 	return 0;
 }
