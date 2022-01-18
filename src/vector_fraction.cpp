@@ -43,9 +43,12 @@ Tfvector::Tfvector(int _n, int min, int max) {
 }
 
 void Tfvector::print() const {
+    cout << "(";
     for (int i = 0; i < n; i++) {
-        array[i]->print(); printf(" ");
+        array[i]->print();
+        if (i != (n - 1)) cout << ", ";
     }
+    cout << ")";
 }
 
 void Tfvector::init() {
@@ -79,20 +82,11 @@ Tfvector::Tfvector(int dim, string _name){
     name = _name;
 }
 
-FVector init(FVector m) {
-    float coe;
-    for (int i = 0; i < m->n; i++) {
-        printf("insert number in [%d]: ", i+1); scanf("%f", &coe);
-        m->array[i]->set(coe);
-        m->array[i] = fraction_simplification(m->array[i]);
-    }
-    return m;
-}
-
 FVector init_fvector(string name){
     int n; string value;
-    cout << "dimension= "; cin >> n; cout << endl;
     FVector v = new Tfvector(n, name);
+    cout << "dimension= "; cin >> n; 
+    cout << endl;
     for(int i = 0; i < n; i++){
         cout << "   ";
         cin >> value;
@@ -106,14 +100,7 @@ FVector init_fvector(string name){
 void print_fvector(FVector v){
     cout << "Name: " << "\x1b[38;5;50m" << v->name << "\x1b[0m = ";
     cout << endl << endl;
-
-    cout << "   ("; 
-    for(int i = 0; i < v->n; i++){
-        v->array[i]->print();
-        if (i != (v->n - 1)) cout << ", ";
-    }
-    cout << ")";
-
+    cout << "   "; v->print();
     cout << endl << endl;
 }
 

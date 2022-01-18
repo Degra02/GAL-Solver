@@ -28,7 +28,7 @@ typedef struct Tfeqsys{
 
 } Tfeqsys;
 
-typedef enum Trc {INF_RESULTS, NO_RESULT,ONE_RESULT} Trc;
+typedef enum Trc {INF_RESULTS, NO_RESULT, ONE_RESULT} Trc;
 
 typedef Tfeqsys *FEqsys;
 

@@ -10,9 +10,11 @@ int main() {
 	// Lists list = new Tlists();
 	// function_call(list);
 
-	FEqsys eq = init_feqsys("AB");
-	print_feqsys(eq);
+	// FEqsys eq = init_feqsys("AB");
+	// print_feqsys(eq);
 
+	FBase b = init_fbase("b1");
+	print_fbase(b);
 
 	return 0;
 }

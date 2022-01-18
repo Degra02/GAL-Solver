@@ -25,7 +25,6 @@ typedef Tfvector* FVector;
 FVector init_fvector(string name);
 void print_fvector(FVector v);
 
-FVector init(FVector m);
 FVector fraction_vector_copy(FVector a);
 
 
