@@ -84,9 +84,8 @@ Tfvector::Tfvector(int dim, string _name){
 
 FVector init_fvector(string name){
     int n; string value;
-    FVector v = new Tfvector(n, name);
     cout << "dimension= "; cin >> n; 
-    cout << endl;
+    cout << endl; FVector v = new Tfvector(n, name);
     for(int i = 0; i < n; i++){
         cout << "   ";
         cin >> value;

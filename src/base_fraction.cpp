@@ -28,12 +28,12 @@ void Tfbase::print() const {
 
 FBase init_fbase(string name) {
     int d, g; string value;
-    cout << "vector size="; cin >> g;
-    cout << "dimension="; cin >> d;
+    cout << "Vector size="; cin >> g;
+    cout << "Dimension="; cin >> d;
     cout << endl;
     FBase b = new Tfbase(d, g, name);
     for(int i = 0; i < d; ++i) {
-        cout << "coefficients vector" << i + 1 << ":" << endl;
+        cout << "Coefficients vector" << i + 1 << ":" << endl;
         b->v[i] = new Tfvector(b->n_th);
         for(int j = 0; j < b->n_th; ++j){
             cout << "   ";
