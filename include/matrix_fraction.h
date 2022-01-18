@@ -44,5 +44,6 @@ FMatrix fraction_matrix_gauss_jordan(FMatrix m);
 FMatrix fraction_matrix_rref(FMatrix m);
 int fraction_matrix_rank(FMatrix m);
 bool fraction_matrix_is_base(FMatrix m);
+bool matrix_is_square(FMatrix m);
 
 #endif

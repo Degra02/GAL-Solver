@@ -91,7 +91,7 @@ FVector init(FVector m) {
 
 FVector init_fvector(string name){
     int n; string value;
-    cout << "dimension= "; cin >> n;
+    cout << "dimension= "; cin >> n; cout << endl;
     FVector v = new Tfvector(n, name);
     for(int i = 0; i < n; i++){
         cout << "   ";

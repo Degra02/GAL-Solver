@@ -147,13 +147,13 @@ void print_fmatrix(FMatrix m) {
     }
 
     for (int i = 0; i < r; ++i) {
-        cout << "   ";
+        cout << "   "; 
         for (int j = 0; j < c; ++j) {
             print_format_fraction(m->mat[i][j], figures_num[j], figures_den[j]);
         }
         printf("\n");
     }
-    
+        
     cout << endl << endl;
 }
 
@@ -193,6 +193,7 @@ int float_find_max_figures_column(float** f, int dim, int column) {
     return max_c;
 }
 
+/* prende in input un puntatore a Tfmatrix e restituisce la sua matrice trasposta */
 FMatrix fraction_matrix_transpose(FMatrix m) {
     FMatrix mT = new Tfmatrix(m->nc, m->nr);
     int r = m->nr; int c = m->nc;
@@ -204,6 +205,7 @@ FMatrix fraction_matrix_transpose(FMatrix m) {
     return mT;
 }
 
+/* prende in input due matrici FMatrix e ne restituisce la somma */
 FMatrix fraction_matrix_sum(FMatrix a, FMatrix b) {
     if (a->nr != b->nr || a->nc != b->nc) return new Tfmatrix();
     int r = a->nr, c = a->nc;
@@ -216,6 +218,7 @@ FMatrix fraction_matrix_sum(FMatrix a, FMatrix b) {
     return sum;
 }
 
+/* prende in input due matrici FMatrix e ne restituisce la differenza */
 FMatrix fraction_matrix_difference(FMatrix a, FMatrix b) {
     if (a->nr != b->nr || a->nc != b->nc) return new Tfmatrix();
     int r = a->nr, c = a->nc;
@@ -227,9 +230,9 @@ FMatrix fraction_matrix_difference(FMatrix a, FMatrix b) {
     }
     return sum;
 }
- 
+
 FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
-    if(a->nc == b->nr){
+    if(a->nc == b->nr) {
         FMatrix multi = new Tfmatrix(a->nr, b->nc);
         int r = multi->nr, c = multi->nc;
         for(int i = 0; i < r; i++){
@@ -242,7 +245,7 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
                 }
             }
         }
-    return multi;
+        return multi;
     } else {
         cout << "Impossible to multiply the given functions";
         return new Tfmatrix();
@@ -364,6 +367,10 @@ int fraction_matrix_rank(FMatrix m) {
     return counter;
 }
 
-bool fraction_matrix_is_base(FMatrix m){
-    return(m->nc == fraction_matrix_rank(m));
+bool fraction_matrix_is_base(FMatrix m) {
+    return (m->nc == fraction_matrix_rank(m) && matrix_is_square(m));
+}
+
+bool matrix_is_square(FMatrix m) {
+    return (m->nc == m->nr);
 }
