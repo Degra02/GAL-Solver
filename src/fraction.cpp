@@ -40,6 +40,13 @@ void Tfraction::print() const {
     else printf("%d/%d", num, den);
 }
 
+/* metodo di stampa della frazione in numero razionale con precisione 2 */
+void Tfraction::print_float() const {
+    float f = roundf(((float)num / den)*100.0)/100.0;
+    if (f == 0.0) printf("\x1b[38;5;239m%d\x1b[0m", 0);
+    else printf("%2.f", f);
+}
+
 /* metodo che prende un numero decimale e con arrotondamento 2 cifre dopo la virgola lo trasforma in frazione */
 void Tfraction::set(float n) {
     int m = 1; float f = n;

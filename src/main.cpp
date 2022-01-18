@@ -10,9 +10,8 @@ int main() {
 	// Lists list = new Tlists();
 	// function_call(list);
 
-	FMatrix m = init_fmatrix("m");
-	cout << "det=";
-	det(m)->print();
+	FEqsys eq = init_feqsys("AB");
+	print_feqsys(eq);
 
 
 	return 0;

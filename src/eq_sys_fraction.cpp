@@ -56,3 +56,18 @@ FEqsys init_feqsys(string name){
     eq->name = name;
     return eq;
 }
+
+void print_feqsys(FEqsys e) {
+    FMatrix m = to_fmatrix(e);
+    print_fmatrix(m);
+}
+
+Trc Rouche_Capelli(FEqsys e) {
+    int rankA = fraction_matrix_rank(e->A);
+    int rankAb = fraction_matrix_rank(to_fmatrix(e));
+    int n = e->A->nc;
+
+    if (rankA != rankAb) return NO_RESULT;
+    if (rankA == rankAb && rankAb < n) return INF_RESULTS;
+    return ONE_RESULT;
+}
