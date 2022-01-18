@@ -113,6 +113,7 @@ Fraction fraction_power(Fraction a, int p) {
         c->num *= a->num;
         c->den *= a->den;
     }
+    zero_control(c); sign_control(c);
     return fraction_simplification(c);
 }
 
