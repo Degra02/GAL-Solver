@@ -65,7 +65,9 @@ void function_call(Lists list){
                 }
             } else if(userinput[1] == "system"){
                 if(userinput[2] == "solution"){
-                    list->Eqlist = command_system_solution(list->Eqlist, userinput[3]);
+                    list->Eqlist = command_system_solution(list->Eqlist);
+                } else if(userinput[2] == "build"){
+                    list = command_system_build(list);
                 }
             } else {
                 cout << "Invalid function call" << endl << endl;

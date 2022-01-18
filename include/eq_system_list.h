@@ -25,13 +25,13 @@ typedef struct TEqnode{
 
 typedef TEqnode *ENodeptr;
 
-ENodeptr insertFirstE(ENodeptr n, TEqnode fe);
+ENodeptr insertFirstE(ENodeptr n, FEqsys fe);
 ENodeptr remove_esearch(ENodeptr n);
 bool isPresentE(ENodeptr n, string name);
 ENodeptr insertE(ENodeptr n, string name);
 
 ENodeptr command_new_system(ENodeptr n);
 void command_print_system(ENodeptr n);
-ENodeptr command_system_solution(ENodeptr n, string userinput);
+ENodeptr command_system_solution(ENodeptr n);
 
 #endif

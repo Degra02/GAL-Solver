@@ -89,11 +89,10 @@ FMatrix init_fmatrix(string name) {
 	cout << "columns= "; cin >> c;
     cout << endl;
     FMatrix m = new Tfmatrix(name, r, c);
-    Fraction f;
-    string value;
-    for(int i = 0; i < m->nr; i++) {
+    Fraction f; string value; 
+    for(int i = 0; i < r; i++) {
         cout << "   ";
-        for(int j = 0; j < m->nc; j++) {
+        for(int j = 0; j < c; j++) {
             cin >> value;
             f = str_to_fraction(value);
             m->mat[i][j] = f;
@@ -114,18 +113,18 @@ void print_fmatrix_float(FMatrix m) {
 
     cout << "Name: " << "\x1b[38;5;50m" << m->name << "\x1b[0m";
     cout << endl << endl;
-
-    for (int j = 0; j < m->nc; ++j) {
-        for (int i = 0; i < m->nr; ++i) {
+    int r = m->nr; int c = m->nc;
+    for (int j = 0; j < c; ++j) {
+        for (int i = 0; i < r; ++i) {
             f[i][j] = 
                 roundf(((float)m->mat[i][j]->num / m->mat[i][j]->den)*100.0)/100.0;
         }
         figures[j] = float_find_max_figures_column(f, m->nr, j);
     }
         
-    for (int i = 0; i < m->nr; ++i) {
+    for (int i = 0; i < r; ++i) {
         cout << "   ";
-        for (int j = 0; j < m->nc; ++j) {
+        for (int j = 0; j < c; ++j) {
             print_format_float(f[i][j], figures[j]);
         }
         printf("\n");
@@ -141,15 +140,15 @@ void print_fmatrix(FMatrix m) {
 
     cout << "Name: " << "\x1b[38;5;50m" << m->name << "\x1b[0m";
     cout << endl << endl;
-
-    for (int j = 0; j < m->nc; ++j) {
+    int r = m->nr; int c = m->nc;
+    for (int j = 0; j < c; ++j) {
         figures_num[j] = fraction_find_max_figures_column(m, j, 'n');
         figures_den[j] = fraction_find_max_figures_column(m, j, 'd');
     }
 
-    for (int i = 0; i < m->nr; ++i) {
+    for (int i = 0; i < r; ++i) {
         cout << "   ";
-        for (int j = 0; j < m->nc; ++j) {
+        for (int j = 0; j < c; ++j) {
             print_format_fraction(m->mat[i][j], figures_num[j], figures_den[j]);
         }
         printf("\n");
@@ -162,7 +161,8 @@ void print_fmatrix(FMatrix m) {
 int fraction_find_max_figures_column(FMatrix m, int column, char type) {
     int max_c = 0, n, space;
     bool control = (type == 'n');
-    for (int i = 0; i < m->nr; ++i) {
+    int r = m->nr;
+    for (int i = 0; i < r; ++i) {
         if (m->mat[i][column]->den != 1) {
              n = (control ? m->mat[i][column]->num : m->mat[i][column]->den);
         } else {
@@ -195,8 +195,9 @@ int float_find_max_figures_column(float** f, int dim, int column) {
 
 FMatrix fraction_matrix_transpose(FMatrix m) {
     FMatrix mT = new Tfmatrix(m->nc, m->nr);
-    for (int i = 0; i < m->nr; i++) {
-        for (int j = 0; j < m->nc; j++) {
+    int r = m->nr; int c = m->nc;
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
             mT->mat[j][i] = m->mat[i][j];
         }
     }
@@ -230,9 +231,10 @@ FMatrix fraction_matrix_difference(FMatrix a, FMatrix b) {
 FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
     if(a->nc == b->nr){
         FMatrix multi = new Tfmatrix(a->nr, b->nc);
-        for(int i = 0; i < multi->nr; i++){
-            for(int j = 0; j < multi->nc; j++){
-                for(int k = 0; k < multi->nc; k++){
+        int r = multi->nr, c = multi->nc;
+        for(int i = 0; i < r; i++){
+            for(int j = 0; j < c; j++){
+                for(int k = 0; k < c; k++){
                     multi->mat[i][j] = fraction_sum(
                         multi->mat[i][j], 
                         fraction_product(a->mat[i][k], b->mat[k][j])
@@ -251,8 +253,9 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
 FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda) {
     Fraction l = new Tfraction(lambda);
     FMatrix res = new Tfmatrix(a->nr, a->nc);
-    for (int i = 0; i < a->nr; i++) {
-        for (int j = 0; j < a->nc; j++) {
+    int r = a->nr, c = a->nc;
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
             res->mat[i][j] = fraction_product(l, a->mat[i][j]);
         }
     }
@@ -267,7 +270,8 @@ void fraction_S(FMatrix m, int a, int b) {
 
 /* prende in input un puntatore a Tfmatrix, un indice intero di una riga della matrice e un puntatore a Tfraction, e restituisce la matrice stessa con la riga indicizza moltiplicata per la Tfraction puntata */
 void fraction_D(FMatrix m, int a, Fraction lambda) {
-    for(int j = 0; j < m->nc; j++)
+    int c = m->nc;
+    for(int j = 0; j < c; j++)
         m->mat[a][j] = fraction_product(m->mat[a][j], lambda);
 }
 
@@ -283,16 +287,17 @@ void fraction_E(FMatrix m, int d, int s, Fraction lambda) {
 FMatrix fraction_matrix_gauss_jordan(FMatrix m) {
     FMatrix mg = fraction_matrix_copy(m); 
     Fraction lambda; int zero_column = 0;
-    for (int j = 0; j < mg->nc; ++j) {
+    int rm = mg->nr, c = mg->nc;
+    for (int j = 0; j < c; ++j) {
         int i = (j - zero_column);
-        while (i < mg->nr && mg->mat[i][j]->num == 0) ++i;
-        if (i == mg->nr) {
+        while (i < rm && mg->mat[i][j]->num == 0) ++i;
+        if (i == rm) {
             ++zero_column;
             continue; // passa alla prossima colonna 
         }
         if (i != (j - zero_column)) fraction_S(mg, i, (j - zero_column)); 
         i = (j - zero_column);
-        for (int r = i + 1; r < mg->nr; ++r) {
+        for (int r = i + 1; r < rm; ++r) {
             if (mg->mat[r][j]->num != 0) {
                 lambda = fraction_quotient(
                     fraction_product(new Tfraction(-1, 1), mg->mat[r][j]),

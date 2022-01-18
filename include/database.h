@@ -24,4 +24,6 @@ typedef struct Tlists{
 
 typedef Tlists *Lists;
 
+Lists command_system_build(Lists list);
+
 #endif

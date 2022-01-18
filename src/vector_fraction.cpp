@@ -116,3 +116,12 @@ void print_fvector(FVector v){
 
     cout << endl << endl;
 }
+
+FVector fraction_vector_copy(FVector a){
+    FVector b = new Tfvector(a->n);
+    int dim = a->n;
+    for(int i = 0; i < dim; ++i){
+        b->array[i] = a->array[i];
+    }
+    return b;
+}
