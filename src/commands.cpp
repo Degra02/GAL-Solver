@@ -33,6 +33,8 @@ void function_call(Lists list){
                 list->Vlist = command_new_vector(list->Vlist);
             } else if(userinput[1] == "system"){
                 list->Eqlist = command_new_system(list->Eqlist);
+            } else if(userinput[1] == "base"){
+                list->Blist = command_new_base(list->Blist);
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
@@ -79,6 +81,8 @@ void function_call(Lists list){
                 command_print_vector(list->Vlist);
             } else if(userinput[1] == "system"){
                 command_print_system(list->Eqlist);
+            } else if(userinput[1] == "base"){
+
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
@@ -89,6 +93,8 @@ void function_call(Lists list){
                 list->Vlist = remove_vsearch(list->Vlist);
             } else if(userinput[1] == "system"){
                 list->Eqlist = remove_esearch(list->Eqlist);
+            } else if(userinput[1] == "base"){
+                list->Blist = remove_bsearch(list->Blist);
             }
         } else {
             if(userinput[0] != "END")

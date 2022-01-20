@@ -7,6 +7,7 @@ typedef struct Tfbase {
     string name;
     FVector* v;
 
+    Tfbase();
     Tfbase(int x, int th, string _n);
     ~Tfbase();
     void print() const;

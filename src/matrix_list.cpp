@@ -15,7 +15,7 @@ MNodeptr remove_search(MNodeptr n){
     }
     if(n->m->name == name){
         delete n;
-        return NULL;
+        return n->next;
     }
     MNodeptr t = n;
     while((t->next != NULL) && (t->next->m->name != name)){

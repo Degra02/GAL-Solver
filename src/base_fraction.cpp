@@ -2,6 +2,13 @@
 #include <iostream>
 using namespace std;
 
+Tfbase::Tfbase(){
+    dim = 0;
+    name = "";
+    n_th = 0;
+    v = NULL;
+}
+
 Tfbase::Tfbase(int x, int th, string _n) {
     dim = x; name = _n; n_th = th;
     v = new FVector[dim];
