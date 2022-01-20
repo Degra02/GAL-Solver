@@ -31,6 +31,7 @@ FVector fvector_sum(FVector a, FVector b);
 FVector fvector_subtraction(FVector a, FVector b);
 Fraction fvector_norm_noroot(FVector a);
 string fvector_norm_print(Fraction a);
+float fvector_scalar_product(FVector a, FVector b);
 float fvector_angle(FVector a, FVector b);
 
 #endif
