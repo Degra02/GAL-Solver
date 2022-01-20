@@ -85,8 +85,8 @@ Tfmatrix::~Tfmatrix() {
 /* inizializza una matrice chiedendo il nome, il numero di righe, il numero di colonne e facendo inserire i valori manualmente di tutti i tipi possibili (float, Tfraction o int) */
 FMatrix init_fmatrix(string name) {
     int r, c;
-	cout << "rows= "; cin >> r;
-	cout << "columns= "; cin >> c;
+	cout << "rows= "; fflush(stdin); cin >> r;
+	cout << "columns= "; fflush(stdin); cin >> c;
     cout << endl;
     FMatrix m = new Tfmatrix(name, r, c);
     Fraction f; string value; 
