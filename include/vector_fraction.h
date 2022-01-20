@@ -26,6 +26,11 @@ FVector init_fvector(string name);
 void print_fvector(FVector v);
 
 FVector fraction_vector_copy(FVector a);
-
+bool fvector_same_dimension(FVector a, FVector b);
+FVector fvector_sum(FVector a, FVector b);
+FVector fvector_subtraction(FVector a, FVector b);
+Fraction fvector_norm_noroot(FVector a);
+string fvector_norm_print(Fraction a);
+float fvector_angle(FVector a, FVector b);
 
 #endif

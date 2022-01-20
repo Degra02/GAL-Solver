@@ -17,7 +17,6 @@ void parse_user_input(vector <string> *userinput){
     while(getline(check, call, ' ')){
         (*userinput).push_back(call);
     }
-    
 }
 
 void function_call(Lists list){
