@@ -9,15 +9,16 @@ MNodeptr insertFirst(MNodeptr n, FMatrix m){
 
 MNodeptr remove_search(MNodeptr n){
     string name; 
-    cout << "name= "; cin >> name;
+    cout << "Matrix name= "; fflush(stdin); cin >> name;
     if(n == NULL){
         return NULL;
     }
-    if(n->m->name == name){
-        delete n;
-        return n->next;
-    }
     MNodeptr t = n;
+    if(n->m->name == name){
+        t = n->next;
+        delete n;
+        return t;
+    }
     while((t->next != NULL) && (t->next->m->name != name)){
         t = t->next;
     }
@@ -47,6 +48,7 @@ FMatrix get_search (MNodeptr n, string name){ // returns the matrix with the giv
     } else {
         return t->m;
     }  
+
 }
 
 bool isPresent(MNodeptr n, string name){
