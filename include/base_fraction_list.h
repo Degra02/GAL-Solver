@@ -27,5 +27,6 @@ BNodeptr remove_bsearch(BNodeptr n);
 bool isPresentB(BNodeptr n, string name);
 BNodeptr insertB(BNodeptr n, string name);
 BNodeptr command_new_base(BNodeptr n);
+void command_print_base(BNodeptr n);
 
 #endif

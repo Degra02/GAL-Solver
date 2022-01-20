@@ -65,10 +65,19 @@ BNodeptr insertB(BNodeptr n, string name){
     return n;
 }
 
+void command_print_base(BNodeptr n){
+    string userinput; cout << "Base name: "; fflush(stdin); cin >> userinput;
+    FBase b = get_bsearch(n, userinput);
+    if(b != NULL){
+        print_fbase(b);
+    } else {
+        cout << "Base not found" << endl << endl;
+    }
+}
+
 BNodeptr command_new_base(BNodeptr n){
     string name; cout << "Base name: "; fflush(stdin); cin >> name; 
     return insertB(n, name);
 }
-
 
 

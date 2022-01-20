@@ -82,7 +82,7 @@ void function_call(Lists list){
             } else if(userinput[1] == "system"){
                 command_print_system(list->Eqlist);
             } else if(userinput[1] == "base"){
-
+                command_print_base(list->Blist);
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
