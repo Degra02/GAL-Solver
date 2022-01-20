@@ -61,8 +61,16 @@ void function_call(Lists list){
                     cout << "Invalid function call" << endl << endl;
                 }
             } else if(userinput[1] == "vector"){
-                if(userinput[2] == "product"){
-
+                if(userinput[2] == "scalar"){
+                    command_fvector_scalar_product(list->Vlist);
+                } else if(userinput[2] == "sum"){
+                    list->Vlist = command_fvector_sum(list->Vlist);
+                } else if(userinput[2] == "difference"){
+                    list->Vlist = command_fvector_difference(list->Vlist);
+                } else if(userinput[2] == "norm"){
+                    command_fvector_norm(list->Vlist);
+                } else if(userinput[2] == "angle"){
+                    command_fvector_angle(list->Vlist);
                 }
             } else if(userinput[1] == "system"){
                 if(userinput[2] == "solution"){

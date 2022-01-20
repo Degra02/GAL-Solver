@@ -1,5 +1,6 @@
 #include "all-headers.h"
 #include <bits/stdc++.h>
+#include <locale.h>
 #include <iostream>
 using namespace std;
 
@@ -124,7 +125,7 @@ FVector fvector_sum(FVector a, FVector b){
     return res;
 }
 
-FVector fvector_subtraction(FVector a, FVector b){
+FVector fvector_difference(FVector a, FVector b){
     int n = a->n; FVector res = new Tfvector(n);
     for(int i = 0; i < n; i++){
         res->array[i] = fraction_difference(a->array[i], b->array[i]);
@@ -135,26 +136,38 @@ FVector fvector_subtraction(FVector a, FVector b){
 Fraction fvector_norm_noroot(FVector a){
     int n = a->n; Fraction res = fraction_power(a->array[0], 2);
     for(int i = 1; i < n; i++){
-        fraction_sum(res, fraction_power(a->array[i], 2));
+        res = fraction_sum(res, fraction_power(a->array[i], 2));
     }
+    return res;
 }
 
-float fvector_norm(FVector a){
+float fvector_float_norm(FVector a){
     int n = a->n; Fraction res = fraction_power(a->array[0], 2);
     for(int i = 1; i < n; i++){
-        fraction_sum(res, fraction_power(a->array[i], 2));
+        res = fraction_sum(res, fraction_power(a->array[i], 2));
     }
-    return sqrt( res->num/res->den );
+    return sqrt( (float)res->num / (float)res->den );
 }
 
 string fvector_norm_print(Fraction a){
+    if(a->num == 0){
+        return "0";
+    } else if(a->den == 1){
+        return "sqrt( " + to_string(a->num) + " )";
+    }
     return "sqrt( " + to_string(a->num) + "/" + to_string(a->den) + " )";
 }
 
-float fvector_scalar_product(FVector a, FVector b){
-
+Fraction fvector_scalar_product(FVector a, FVector b){
+    int n = a->n; Fraction res = fraction_sum(a->array[0], b->array[0]);
+    for(int i = 1; i < n; i++){
+        res = fraction_sum(res, fraction_product(a->array[i], b->array[i]));
+    }
+    return res;
 }
 
 float fvector_angle(FVector a, FVector b){
-    return acos(   1  );
+    Fraction res = fvector_scalar_product(a, b);
+    float val = (float)res->num / (float)res->den;
+    return acos( val / (fvector_float_norm(a) * fvector_float_norm(b)));
 }

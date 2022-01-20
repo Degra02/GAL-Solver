@@ -33,5 +33,10 @@ FVector get_vsearch(VNodeptr n, string name);
 
 void command_print_vector(VNodeptr n);
 VNodeptr command_new_vector(VNodeptr n);
+VNodeptr command_fvector_sum(VNodeptr n);
+VNodeptr command_fvector_difference(VNodeptr n);
+void command_fvector_norm(VNodeptr n);
+void command_fvector_scalar_product(VNodeptr n);
+void command_fvector_angle(VNodeptr n);
 
 #endif

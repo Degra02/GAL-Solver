@@ -44,7 +44,7 @@ void Tfraction::print() const {
 void Tfraction::print_float() const {
     float f = roundf(((float)num / den)*100.0)/100.0;
     if (f == 0.0) printf("\x1b[38;5;239m%d\x1b[0m", 0);
-    else printf("%2.f", f);
+    else printf("%2.2f", f);
 }
 
 /* metodo che prende un numero decimale e con arrotondamento 2 cifre dopo la virgola lo trasforma in frazione */
