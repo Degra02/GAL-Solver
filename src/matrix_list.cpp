@@ -105,9 +105,13 @@ MNodeptr command_matrix_product(MNodeptr n){
     cout << "Matrix names: "; fflush(stdin); cin >> n1 >> n2;
     FMatrix m1, m2, res;
     m1 = get_search(n, n1); m2 = get_search(n, n2);
-    if(m1 != NULL && m2 != NULL){
+    if((m1 != NULL) && (m2 != NULL)){
         res = fraction_matrix_multiplication(m1, m2);
-        res->name = m1->name + "x" + m2->name;
+        if(res != NULL){
+            res->name = m1->name + "x" + m2->name;
+            print_fmatrix(res);
+            return insertFirst(n, res);
+        }
     } else if(m1 == NULL){
         cout << "No such matrix with name " << n1 << endl << endl;
     } else if(m2 == NULL){
@@ -115,8 +119,7 @@ MNodeptr command_matrix_product(MNodeptr n){
     } else {
         cout << "No such matrixes" << endl << endl;
     }
-    print_fmatrix(res);
-    return insertFirst(n, res);
+    return n;
 }
 
 MNodeptr command_matrix_sum(MNodeptr n){
@@ -237,5 +240,20 @@ void command_matrix_is_base(MNodeptr n){
         }
     } else {
         cout << "No such matrix" << endl << endl;
+    }
+}
+
+void command_matrix_det(MNodeptr n){
+    string name; cout << "Matrix name: "; fflush(stdin); cin >> name;
+    FMatrix m = get_search(n, name);
+    if(m != NULL){
+        Fraction a = det(m);
+        if(a != NULL){
+            cout << "Det= "; a->print();
+            cout << "  ~  "; a->print_float();
+            cout << endl << endl;
+        }
+    } else {
+        cout << "Matrix not found" << endl << endl;
     }
 }

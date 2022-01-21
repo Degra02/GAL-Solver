@@ -247,8 +247,8 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
         }
         return multi;
     } else {
-        cout << "Impossible to multiply the given functions";
-        return new Tfmatrix();
+        cout << "Impossible to multiply the given functions" << endl << endl;
+        return NULL;
     }
 }
 

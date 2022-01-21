@@ -32,7 +32,7 @@ Fraction det(FMatrix m) {
         }
         return determinante;
     } else {
-        cout << "Cannot calculate the matrix determinant" << endl;
-        exit(1);
+        cout << "Cannot calculate determinant of non-square matrixes" << endl << endl;
+        return NULL;
     }
 }
