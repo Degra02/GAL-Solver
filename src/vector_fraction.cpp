@@ -159,7 +159,7 @@ string fvector_norm_print(Fraction a){
 }
 
 Fraction fvector_scalar_product(FVector a, FVector b){
-    int n = a->n; Fraction res = fraction_sum(a->array[0], b->array[0]);
+    int n = a->n; Fraction res = fraction_product(a->array[0], b->array[0]);
     for(int i = 1; i < n; i++){
         res = fraction_sum(res, fraction_product(a->array[i], b->array[i]));
     }

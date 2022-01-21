@@ -123,7 +123,7 @@ void command_fvector_norm(VNodeptr n){
     FVector a = get_vsearch(n, name);
     if(a == NULL){
         cout << "Vector not found" << endl << endl;
-        exit(1);
+        return ;
     }
     Fraction norm = fvector_norm_noroot(a);
     cout << a->name << " norm = " << fvector_norm_print(norm);
@@ -139,7 +139,7 @@ void command_fvector_scalar_product(VNodeptr n){
     }
     if(v1->n != v2->n){
         cout << "Scalar product not possible with vectors of different dimensions" << endl << endl;
-        exit(1);
+        return ;
     }
     Fraction res = fvector_scalar_product(v1, v2);
     cout << "Scalar product: "; res->print(); cout << " ~ "; res->print_float(); 
@@ -151,11 +151,11 @@ void command_fvector_angle(VNodeptr n){
     cout << "2nd vector name: "; fflush(stdin); cin >> n2;
     FVector v1 = get_vsearch(n, n1), v2 = get_vsearch(n, n2);
     if((v1 == NULL) || (v2 == NULL)){
-        cout << "Vector not found" << endl << endl; exit(1);
+        cout << "Vector not found" << endl << endl; return ;
     }
     if(v1->n != v2->n){
         cout << "Cannot find angle between vectors of different dimensions" << endl << endl;
-        exit(1);
+        return ;
     }
     cout << "Angle= " << fvector_angle(v1, v2) << endl << endl;
 }

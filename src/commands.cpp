@@ -71,6 +71,8 @@ void function_call(Lists list){
                     command_fvector_norm(list->Vlist);
                 } else if(userinput[2] == "angle"){
                     command_fvector_angle(list->Vlist);
+                } else {
+                    cout << "Invalid input" << endl << endl;
                 }
             } else if(userinput[1] == "system"){
                 if(userinput[2] == "solution"){
