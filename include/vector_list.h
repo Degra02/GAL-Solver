@@ -38,5 +38,6 @@ VNodeptr command_fvector_difference(VNodeptr n);
 void command_fvector_norm(VNodeptr n);
 void command_fvector_scalar_product(VNodeptr n);
 void command_fvector_angle(VNodeptr n);
+VNodeptr command_fvector_cross_product(VNodeptr n);
 
 #endif

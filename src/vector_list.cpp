@@ -159,3 +159,20 @@ void command_fvector_angle(VNodeptr n){
     }
     cout << "Angle= " << fvector_angle(v1, v2) << endl << endl;
 }
+
+VNodeptr command_fvector_cross_product(VNodeptr n){
+    string n1, n2; cout << "1st vector name: "; fflush(stdin); cin >> n1;
+    cout << "2nd vector name: "; fflush(stdin); cin >> n2;
+    FVector v1 = get_vsearch(n, n1), v2 = get_vsearch(n, n2);
+     if((v1 == NULL) || (v2 == NULL)){
+        cout << "Vector not found" << endl << endl; return n;
+    }
+    if((v1->n != v2->n) || (v1->n != 3)){
+        cout << "Can only calculate cross product between vectors of the 3rd dimension" << endl << endl;
+        return n;
+    }
+    FVector res = fvector_cross_product(v1, v2);
+    res->name = v1->name + "x" + v2->name;
+    res->print(); cout << endl << endl;
+    return insertFirstV(n, res);
+}

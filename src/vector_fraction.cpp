@@ -166,6 +166,17 @@ Fraction fvector_scalar_product(FVector a, FVector b){
     return res;
 }
 
+FVector fvector_cross_product(FVector a, FVector b){
+    if((a->n == 3) && (b->n == 3)){
+        FVector res = new Tfvector(3);
+        res->array[0] = fraction_difference(fraction_product(a->array[1], b->array[3]), fraction_product(a->array[2], b->array[1]));
+        res->array[1] = fraction_difference(fraction_product(a->array[2], b->array[0]), fraction_product(a->array[0], b->array[2]));
+        res->array[2] = fraction_difference(fraction_product(a->array[0], b->array[1]), fraction_product(a->array[1], b->array[0]));
+        return res;
+    }
+    return NULL;
+}
+
 float fvector_angle(FVector a, FVector b){
     Fraction res = fvector_scalar_product(a, b);
     float val = (float)res->num / (float)res->den;

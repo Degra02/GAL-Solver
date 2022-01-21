@@ -73,8 +73,10 @@ void function_call(Lists list){
                     command_fvector_norm(list->Vlist);
                 } else if(userinput[2] == "angle"){
                     command_fvector_angle(list->Vlist);
+                } else if(userinput[2] == "cross"){
+                    list->Vlist = command_fvector_cross_product(list->Vlist);
                 } else {
-                    cout << "Invalid input" << endl << endl;
+                    cout << "Invalid function call" << endl << endl;
                 }
             } else if(userinput[1] == "system"){
                 if(userinput[2] == "solution"){
