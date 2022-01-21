@@ -106,6 +106,8 @@ void function_call(Lists list){
                 list->Eqlist = remove_esearch(list->Eqlist);
             } else if(userinput[1] == "base"){
                 list->Blist = remove_bsearch(list->Blist);
+            } else {
+                cout << "Invalid function call" << endl << endl;
             }
         } else {
             if(userinput[0] != "END")
