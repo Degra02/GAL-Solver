@@ -8,7 +8,4 @@
 
 # project essentials
 Makefile
-
-# output folder
-output/
 src/main.cpp
