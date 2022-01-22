@@ -40,6 +40,7 @@ bool isPresentE(ENodeptr n, string name){
         if(t->e->name == name){
             return true;
         }
+        t = t->next;
     }
     return false;
 }

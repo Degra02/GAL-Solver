@@ -15,6 +15,7 @@ FMatrix to_fmatrix(FEqsys e) {
             }
         }
     }
+    m->name = e->name;
     return m;
 }
 
