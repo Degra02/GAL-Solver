@@ -121,6 +121,8 @@ void function_call(Lists list){
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
+        } else if(userinput[0] == "cls"){
+            system("cls");
         } else {
             if(userinput[0] != "END")
                 cout << "No such function" << endl << endl;
