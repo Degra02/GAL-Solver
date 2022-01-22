@@ -12,6 +12,7 @@
 #include "eq_sys_fraction.h"
 #include "determinant_fraction.h"
 #include "base_fraction.h"
+#include "set_vectors_fraction.h"
 
 #include "database.h"
 #include "matrix_list.h"
