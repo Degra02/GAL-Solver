@@ -40,7 +40,7 @@ FBase init_fbase(string name) {
     cout << endl;
     FBase b = new Tfbase(d, g, name);
     for(int i = 0; i < d; ++i) {
-        cout << "Coefficients vector" << i + 1 << ":" << endl;
+        cout << "V1: ";
         b->v[i] = new Tfvector(b->n_th);
         for(int j = 0; j < b->n_th; ++j){
             cout << "   ";
