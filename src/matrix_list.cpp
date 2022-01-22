@@ -94,6 +94,17 @@ void command_print_matrix(MNodeptr n){
     }
 }
 
+void command_print_all_matrices(MNodeptr n){
+    if(n == NULL){
+        cout << "No saved matrices" << endl << endl;
+    }
+    MNodeptr t = n;
+    while(t != NULL){
+        print_fmatrix(t->m); cout << endl << endl;
+        t = t->next;
+    }
+}
+
 MNodeptr command_new_matrix(MNodeptr n){
     string name;
     cout << "Name= "; fflush(stdin); cin >> name;

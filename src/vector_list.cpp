@@ -82,6 +82,17 @@ void command_print_vector(VNodeptr n){
     }
 }
 
+void command_print_all_vectors(VNodeptr n){
+    if(n == NULL){
+        cout << "No saved vectors" << endl << endl;
+    }
+    VNodeptr t = n;
+    while(t != NULL){
+        print_fvector(t->v); cout << endl << endl;
+        t = t->next;
+    }
+}
+
 VNodeptr command_new_vector(VNodeptr n){
     string name;
     cout << "Name= "; fflush(stdin); cin >> name;

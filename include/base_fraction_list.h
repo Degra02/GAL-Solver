@@ -29,6 +29,7 @@ bool isPresentS(SNodeptr n, string name);
 SNodeptr insertS(SNodeptr n, string name);
 SNodeptr command_new_vectors_set(SNodeptr n);
 void command_print_vectors_set(SNodeptr n);
+void command_print_all_sets(SNodeptr n);
 void command_set_is_base(SNodeptr n);
 void command_set_is_independent(SNodeptr n);
 void command_set_is_generator(SNodeptr n);

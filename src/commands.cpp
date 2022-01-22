@@ -121,6 +121,18 @@ void function_call(Lists list){
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
+        } else if(userinput[0] == "view"){
+            if(userinput[1] == "matrices"){
+                command_print_all_matrices(list->Mlist);
+            } else if(userinput[1] == "vectors"){
+                command_print_all_vectors(list->Vlist);
+            } else if(userinput[1] == "systems"){
+                command_print_all_systems(list->Eqlist);
+            } else if(userinput[1] == "sets"){
+                command_print_all_sets(list->Slist);
+            } else {
+                cout <<"Invalid function call" << endl << endl;
+            }
         } else if(userinput[0] == "cls"){
             system("cls");
         } else {

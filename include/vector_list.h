@@ -32,6 +32,7 @@ VNodeptr insertV(VNodeptr n, string name);
 FVector get_vsearch(VNodeptr n, string name);
 
 void command_print_vector(VNodeptr n);
+void command_print_all_vectors(VNodeptr n);
 VNodeptr command_new_vector(VNodeptr n);
 VNodeptr command_fvector_sum(VNodeptr n);
 VNodeptr command_fvector_difference(VNodeptr n);

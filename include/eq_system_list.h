@@ -32,6 +32,7 @@ ENodeptr insertE(ENodeptr n, string name);
 
 ENodeptr command_new_system(ENodeptr n);
 void command_print_system(ENodeptr n);
+void command_print_all_systems(ENodeptr n);
 ENodeptr command_system_solution(ENodeptr n);
 
 #endif

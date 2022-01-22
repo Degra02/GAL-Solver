@@ -33,6 +33,7 @@ bool isPresent(MNodeptr n, string name);
 MNodeptr insertM(MNodeptr n, string name);
 
 void command_print_matrix(MNodeptr n);
+void command_print_all_matrices(MNodeptr n);
 MNodeptr command_new_matrix(MNodeptr n);
 MNodeptr command_matrix_product(MNodeptr n);
 MNodeptr command_matrix_sum(MNodeptr n);

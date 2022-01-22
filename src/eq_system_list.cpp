@@ -92,6 +92,17 @@ void command_print_system(ENodeptr n){
     } 
 }
 
+void command_print_all_systems(ENodeptr n){
+    if(n == NULL){
+        cout << "No saved systems" << endl << endl;
+    }
+    ENodeptr t = n;
+    while(t != NULL){
+        print_feqsys(t->e); cout << endl << endl;
+        t = t->next;
+    }
+}
+
 ENodeptr command_system_solution(ENodeptr n){
     string userinput; cout << "System name: "; fflush(stdin); cin >> userinput;
     FEqsys eq = get_esearch(n, userinput); FEqsys sol;

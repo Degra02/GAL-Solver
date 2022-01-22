@@ -74,6 +74,17 @@ void command_print_vectors_set(SNodeptr n){
         cout << "Set not found" << endl << endl;
     }
 }
+void command_print_all_sets(SNodeptr n){
+    if(n == NULL){
+        cout << "No saved sets" << endl << endl;
+    }
+    SNodeptr t = n;
+    while(t != NULL){
+        t->b->print(); cout << endl << endl;
+        t = t->next;
+    }
+}
+
 
 SNodeptr command_new_vectors_set(SNodeptr n){
     string name; cout << "Set name: "; fflush(stdin); cin >> name; 
