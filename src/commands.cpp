@@ -32,8 +32,8 @@ void function_call(Lists list){
                 list->Vlist = command_new_vector(list->Vlist);
             } else if(userinput[1] == "system"){
                 list->Eqlist = command_new_system(list->Eqlist);
-            } else if(userinput[1] == "base"){
-                list->Blist = command_new_base(list->Blist);
+            } else if(userinput[1] == "set"){
+                list->Slist = command_new_vectors_set(list->Slist);
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
@@ -84,6 +84,16 @@ void function_call(Lists list){
                 } else if(userinput[2] == "build"){
                     list = command_system_build(list);
                 }
+            } else if(userinput[1] == "set"){
+                if(userinput[2] == "base"){
+                    command_set_is_base(list->Slist);
+                } else if(userinput[2] == "li"){
+                    command_set_is_independent(list->Slist);
+                } else if(userinput[2] == "gen"){
+                    command_set_is_generator(list->Slist);
+                } else {
+                    cout << "Invalid function call" << endl << endl;
+                }
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
@@ -94,8 +104,8 @@ void function_call(Lists list){
                 command_print_vector(list->Vlist);
             } else if(userinput[1] == "system"){
                 command_print_system(list->Eqlist);
-            } else if(userinput[1] == "base"){
-                command_print_base(list->Blist);
+            } else if(userinput[1] == "set"){
+                command_print_vectors_set(list->Slist);
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
@@ -106,8 +116,8 @@ void function_call(Lists list){
                 list->Vlist = remove_vsearch(list->Vlist);
             } else if(userinput[1] == "system"){
                 list->Eqlist = remove_esearch(list->Eqlist);
-            } else if(userinput[1] == "base"){
-                list->Blist = remove_bsearch(list->Blist);
+            } else if(userinput[1] == "set"){
+                list->Slist = remove_ssearch(list->Slist);
             } else {
                 cout << "Invalid function call" << endl << endl;
             }

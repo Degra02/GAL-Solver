@@ -36,14 +36,13 @@ setFVectorsPtr init_set_fvectors(string name) {
     string value;
     int _dim, _n_th;
     
-    cout << "Vector size="; cin >> _n_th;
-    cout << "Dimension="; cin >> _dim;
+    cout << "Vector size= "; cin >> _n_th;
+    cout << "Dimension= "; cin >> _dim;
     cout << endl;
 
     setFVectorsPtr sv = new TsetFVectors(_dim, _n_th, name);
     for(int i = 0; i < _dim; ++i) {
-        cout << "Coefficients vector" << (i + 1) << ":";
-
+        cout << "V" << (i + 1) << ":";
         sv->v[i] = new Tfvector(_n_th);
         for(int j = 0; j < _n_th; ++j) {
             cout << "  "; cin >> value;
@@ -91,5 +90,5 @@ bool set_fvectors_is_generators(setFVectorsPtr sv) {
 
 bool set_fvectors_is_base(setFVectorsPtr sv) {
     int rank = fraction_matrix_rank(set_vectors_to_fmatrix(sv));
-    return (rank == sv->n_th && rank == sv->dim);
+    return ((rank == sv->n_th) && (rank == sv->dim));
 }

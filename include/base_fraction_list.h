@@ -5,14 +5,14 @@
 #define __BASE_FRACTION_LIST_H__
 
 typedef struct Tbflist{
-    FBase b;
+    setFVectorsPtr b;
     Tbflist *next;
 
     Tbflist(){
         b = NULL; next = NULL;
     }
 
-    Tbflist(FBase _b, Tbflist *_next){
+    Tbflist(setFVectorsPtr _b, Tbflist *_next){
         b = _b; next = _next;
     }
 
@@ -20,13 +20,17 @@ typedef struct Tbflist{
 
 }Tbflist;
 
-typedef Tbflist *BNodeptr;
+typedef Tbflist *SNodeptr;
 
-BNodeptr insertFirstB(BNodeptr n, FBase b);
-BNodeptr remove_bsearch(BNodeptr n);
-bool isPresentB(BNodeptr n, string name);
-BNodeptr insertB(BNodeptr n, string name);
-BNodeptr command_new_base(BNodeptr n);
-void command_print_base(BNodeptr n);
+SNodeptr insertFirstS(SNodeptr n, FBase b);
+setFVectorsPtr get_ssearch(SNodeptr n, string name);
+SNodeptr remove_ssearch(SNodeptr n);
+bool isPresentS(SNodeptr n, string name);
+SNodeptr insertS(SNodeptr n, string name);
+SNodeptr command_new_vectors_set(SNodeptr n);
+void command_print_vectors_set(SNodeptr n);
+void command_set_is_base(SNodeptr n);
+void command_set_is_independent(SNodeptr n);
+void command_set_is_generator(SNodeptr n);
 
 #endif

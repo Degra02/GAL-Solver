@@ -5,7 +5,11 @@
 
 # text editor garbage
 .vscode/
+.idea/
 
 # project essentials
 Makefile
+
+#other
 src/main.cpp
+/lib

@@ -12,13 +12,13 @@ typedef struct Tlists{
     MNodeptr Mlist;
     VNodeptr Vlist;
     ENodeptr Eqlist;
-    BNodeptr Blist;
+    SNodeptr Slist;
 
     Tlists(){
         Mlist = NULL;
         Vlist = NULL;
         Eqlist = NULL;
-        Blist = NULL;
+        Slist = NULL;
     }
 
     ~Tlists(){}
