@@ -92,3 +92,31 @@ bool set_fvectors_is_base(setFVectorsPtr sv) {
     int rank = fraction_matrix_rank(set_vectors_to_fmatrix(sv));
     return ((rank == sv->n_th) && (rank == sv->dim));
 }
+
+setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv) {
+    int _dim = sv->dim, _n_th = sv->n_th;
+    int j;
+    setFVectorsPtr a = new TsetFVectors(_dim, sv->n_th, "");
+    FVector u = new Tfvector(_n_th);
+    for (int i = 0; i < _n_th; ++i) u->array[i] = new Tfraction(0, 1);
+
+    if (!set_fvectors_is_linearly_independent(sv)) {
+        cout << "the set of vectors is not linearly independent." << endl;
+        return sv;
+    } 
+
+    a->v[0] = sv->v[0]; 
+    for (int i = 1; i < _dim; ++i) {
+        j = i;
+        do {
+            --j;
+            u = fvector_sum(u, fvector_product_with_scalar(a->v[j], fraction_quotient(
+                fvector_scalar_product(a->v[j], sv->v[i]),
+                fvector_norm_noroot(a->v[j])
+            )));
+        } while (j != 0);
+        a->v[i] = fvector_difference(sv->v[i], u);
+    }
+
+    return a;
+}

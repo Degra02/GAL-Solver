@@ -29,6 +29,7 @@ FVector fraction_vector_copy(FVector a);
 bool fvector_same_dimension(FVector a, FVector b);
 FVector fvector_sum(FVector a, FVector b);
 FVector fvector_difference(FVector a, FVector b);
+FVector fvector_product_with_scalar(FVector v, Fraction f);
 Fraction fvector_norm_noroot(FVector a);
 string fvector_norm_print(Fraction a);
 Fraction fvector_scalar_product(FVector a, FVector b);
