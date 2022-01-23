@@ -3,6 +3,7 @@
 #include "vector_list.h"
 #include "eq_system_list.h"
 #include "base_fraction_list.h"
+#include "linear_function_list.h"
 using namespace std;
 
 #ifndef __DATABASE_H__
@@ -13,12 +14,14 @@ typedef struct Tlists{
     VNodeptr Vlist;
     ENodeptr Eqlist;
     SNodeptr Slist;
+    FNodeptr Flist;
 
     Tlists(){
         Mlist = NULL;
         Vlist = NULL;
         Eqlist = NULL;
         Slist = NULL;
+        Flist = NULL;
     }
 
     ~Tlists(){}
