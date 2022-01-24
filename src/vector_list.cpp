@@ -76,7 +76,7 @@ void command_print_vector(VNodeptr n){
     string userinput; cout << "Vector name: "; fflush(stdin); cin >> userinput;
     FVector v = get_vsearch(n, userinput);
     if(v != NULL){
-        print_fvector(v);
+        v->print();
     } else {
         cout << "Vector not found" << endl << endl;
     }
@@ -88,7 +88,7 @@ void command_print_all_vectors(VNodeptr n){
     }
     VNodeptr t = n;
     while(t != NULL){
-        print_fvector(t->v); cout << endl << endl;
+        t->v->print(); cout << endl << endl;
         t = t->next;
     }
 }
@@ -109,8 +109,10 @@ VNodeptr command_fvector_sum(VNodeptr n){
     if(v1->n != v2->n){
         cout << "Sum not possible with vectors of different dimensions" << endl << endl; return n;
     }
-    FVector res = fvector_sum(v1, v2); res->name = v1->name + "+" + v2->name;
-    print_fvector(res);
+    FVector res = new Tfvector();
+    *res = *v1 + *v2;
+    res->name = v1->name + "+" + v2->name;
+    res->print();
     return insertFirstV(n, res);
 }
 
@@ -124,8 +126,10 @@ VNodeptr command_fvector_difference(VNodeptr n){
     if(v1->n != v2->n){
         cout << "Difference not possible with vectors of different dimensions" << endl << endl; return n;
     }
-    FVector res = fvector_difference(v1, v2); res->name = v1->name + "-" + v2->name;
-    print_fvector(res);
+    FVector res = new Tfvector();
+    *res = *v1 - *v2;
+    res->name = v1->name + "-" + v2->name;
+    res->print();
     return insertFirstV(n, res);   
 }
 
@@ -136,9 +140,9 @@ void command_fvector_norm(VNodeptr n){
         cout << "Vector not found" << endl << endl;
         return ;
     }
-    Fraction norm = fvector_norm_noroot(a);
-    cout << a->name << " norm = " << fvector_norm_print(norm);
-    printf("  ~  %.2f", fvector_float_norm(a)); cout << endl << endl;
+    Tfraction norm = a->float_norm();
+    cout << a->name << " norm = " << fvector_norm_print(&norm);
+    printf("  ~  %.2f", a->float_norm()); cout << endl << endl;
 }
 
 void command_fvector_scalar_product(VNodeptr n){
@@ -152,8 +156,9 @@ void command_fvector_scalar_product(VNodeptr n){
         cout << "Scalar product not possible with vectors of different dimensions" << endl << endl;
         return ;
     }
-    Fraction res = fvector_scalar_product(v1, v2);
-    cout << "Scalar product: "; res->print(); cout << " ~ "; res->print_float(); 
+    
+    Tfraction res = *v1 * *v2;
+    cout << "Scalar product: "; res.print(); cout << " ~ "; res.print_float(); 
     cout << endl << endl;
 }
 
@@ -168,7 +173,7 @@ void command_fvector_angle(VNodeptr n){
         cout << "Cannot find angle between vectors of different dimensions" << endl << endl;
         return ;
     }
-    cout << "Angle= " << fvector_angle(v1, v2) << endl << endl;
+    cout << "Angle= " << v1->angle(*v2) << endl << endl;
 }
 
 VNodeptr command_fvector_cross_product(VNodeptr n){
@@ -182,7 +187,7 @@ VNodeptr command_fvector_cross_product(VNodeptr n){
         cout << "Can only calculate cross product between vectors of the 3rd dimension" << endl << endl;
         return n;
     }
-    FVector res = fvector_cross_product(v1, v2);
+    FVector res = v1->cross_product(*v2);
     res->name = v1->name + "x" + v2->name;
     res->print(); cout << endl << endl;
     return insertFirstV(n, res);

@@ -46,7 +46,7 @@ FBase init_fbase(string name) {
             cout << "   ";
             cin >> value;
             b->v[i]->array[j] = str_to_fraction(value);
-            b->v[i]->array[j] = fraction_simplification(b->v[i]->array[j]);
+            b->v[i]->array[j] = (b->v[i]->array[j]).simplification();
         }
         cout << endl;
     }

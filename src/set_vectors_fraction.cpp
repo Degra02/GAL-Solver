@@ -47,7 +47,7 @@ setFVectorsPtr init_set_fvectors(string name) {
         for(int j = 0; j < _n_th; ++j) {
             cout << "  "; cin >> value;
             sv->v[i]->array[j] = str_to_fraction(value);
-            sv->v[i]->array[j] = fraction_simplification(sv->v[i]->array[j]);
+            sv->v[i]->array[j] = sv->v[i]->array[j].simplification();
         }
 
         cout << endl;
@@ -98,7 +98,7 @@ setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv) {
     int j;
     setFVectorsPtr a = new TsetFVectors(_dim, sv->n_th, "");
     FVector u = new Tfvector(_n_th);
-    for (int i = 0; i < _n_th; ++i) u->array[i] = new Tfraction(0, 1);
+    for (int i = 0; i < _n_th; ++i) u->array[i] = Tfraction(0, 1);
 
     if (!set_fvectors_is_linearly_independent(sv)) {
         cout << "the set of vectors is not linearly independent." << endl;
@@ -110,12 +110,14 @@ setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv) {
         j = i;
         do {
             --j;
-            u = fvector_sum(u, fvector_product_with_scalar(a->v[j], fraction_quotient(
-                fvector_scalar_product(a->v[j], sv->v[i]),
-                fvector_norm_noroot(a->v[j])
+            // this deference non-sense can be removed if using static types
+            // but this can be accomplished only once every type is threated the same way
+            *u = (*u + (*a->v[j] * (
+                (*a->v[j] * *sv->v[i]) /
+                a->v[j]->norm_noroot()
             )));
         } while (j != 0);
-        a->v[i] = fvector_difference(sv->v[i], u);
+        *(a->v[i]) = *sv->v[i] - *u;
     }
 
     return a;

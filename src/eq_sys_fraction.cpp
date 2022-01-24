@@ -52,7 +52,7 @@ FEqsys init_feqsys(string name) {
         cout << "   "; cin >> value;
 
         eq->b->array[i] = str_to_fraction(value);
-        eq->b->array[i] = fraction_simplification(eq->b->array[i]);
+        eq->b->array[i] = eq->b->array[i].simplification();
     }
 
     cout << endl;
@@ -98,7 +98,7 @@ setFVectorsPtr feq_sys_sol(FEqsys e) {
         for (int j = 0; j < c; ++j) {
             if (rank > 0) {
                  i = (j - zero_control);
-                 if (m->mat[i][j]->num == 0) {
+                 if (m->mat[i][j].num == 0) {
                     ++zero_control;
                     free_var_column_position[count3++] = j;
                     continue; // passa alla prossima colonna
@@ -128,17 +128,17 @@ setFVectorsPtr feq_sys_sol(FEqsys e) {
             count1 = count2 = 0;
             for (int j = 0; j < c; ++j) {
                 if (j == pivot_column_position[count1]) {
-                    res->v[d]->array[j] = fraction_sum(
-                        e->b->array[pivot_row_position[count2]],
-                        fraction_product(
-                            new Tfraction(-1, 1),
+                    res->v[d]->array[j] = (
+                        e->b->array[pivot_row_position[count2]] +
+                        (
+                            Tfraction(-1, 1) *
                             m->mat[pivot_row_position[count2]][free_var_column_position[count3]]
                         )
                     );
 
                     ++count1; ++count2;
                 } else {
-                    res->v[d]->array[j] = (free_var_column_position[count3] == j) ? new Tfraction(1, 1) : new Tfraction(0, 1);
+                    res->v[d]->array[j] = (free_var_column_position[count3] == j) ? Tfraction(1, 1) : Tfraction(0, 1);
                 }
             }
 
