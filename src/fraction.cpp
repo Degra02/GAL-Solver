@@ -14,11 +14,15 @@ Tfraction::Tfraction(int n, int d) {
     num = n;
     if (d != 0) den = d;
     else den = 1;
-    if (n > 0 && d < 0) {
-        num = -n;
-        den = -d;
+    // zero and sign control
+    if (num == 0) den = 1;
+    else if (num < 0 && den < 0) {
+        num = (-1) * num;
+        den = (-1) * den;
+    } else if (den < 0) {
+        num = (-1) * num;
+        den = (-1) * den;
     }
-    if (n == 0) d = 1;
 }
 
 /* costruttore dato un numero decimale lo trasforma in frazione richiamando il metodo set */
@@ -73,7 +77,7 @@ Fraction fraction_sum(Fraction a, Fraction b) {
         c->den = mcm(a->den, b->den);
         c->num = (c->den / a->den)*a->num + (c->den / b->den)*b->num;
     }
-    zero_control(c); sign_control(c);
+    control(c);
     return fraction_simplification(c);
 }
 
@@ -88,7 +92,7 @@ Fraction fraction_difference(Fraction a, Fraction b) {
         c->den = mcm(a->den, b->den);
         c->num = (c->den / a->den)*a->num - (c->den / b->den)*b->num;
     }
-    zero_control(c); sign_control(c);
+    control(c);
     return fraction_simplification(c);
 }
 
@@ -98,7 +102,7 @@ Fraction fraction_product(Fraction a, Fraction b) {
 
     c->den = a->den * b->den;
     c->num = a->num * b->num;
-    zero_control(c); sign_control(c);
+    control(c);
     return fraction_simplification(c);
 }
 
@@ -108,7 +112,7 @@ Fraction fraction_quotient(Fraction a, Fraction b) {
 
     c->den = a->den * b->num;
     c->num = a->num * b->den;
-    zero_control(c); sign_control(c);
+    control(c);
     return fraction_simplification(c);
 }
 
@@ -120,7 +124,7 @@ Fraction fraction_power(Fraction a, int p) {
         c->num *= a->num;
         c->den *= a->den;
     }
-    zero_control(c); sign_control(c);
+    control(c);
     return fraction_simplification(c);
 }
 
@@ -200,4 +204,9 @@ void sign_control(Fraction f) {
         f->num = (-1) * f->num;
         f->den = (-1) * f->den;
     }
+}
+
+void control(Fraction f) {
+    zero_control(f);
+    sign_control(f);
 }

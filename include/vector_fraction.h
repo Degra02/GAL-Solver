@@ -4,9 +4,29 @@
 #define __VECTOR_FRACTION_H__
 using namespace std;
 
+typedef struct Tn {
+    int number;
+    int sqrt;
+
+    Tn();
+    Tn(int _n);
+    Tn(int _n, int _s);
+    void print() const;
+} Tn;
+
+typedef struct Tscalar {
+    Tn num;
+    Tn den;
+
+    Tscalar();
+    Tscalar(Tn n, Tn d);
+    void print() const;
+} Tscalar;
+
 typedef struct Tfvector { 
     Fraction *array; int n;
     string name;
+    Tscalar scl;
 
     Tfvector();
     Tfvector(int _n);
@@ -31,6 +51,7 @@ bool fvector_same_dimension(FVector a, FVector b);
 FVector fvector_sum(FVector a, FVector b);
 FVector fvector_difference(FVector a, FVector b);
 FVector fvector_product_with_scalar(FVector v, Fraction f);
+FVector fvector_normalization(FVector v);
 Fraction fvector_norm_noroot(FVector a);
 string fvector_norm_print(Fraction a);
 Fraction fvector_scalar_product(FVector a, FVector b);

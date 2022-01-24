@@ -4,12 +4,51 @@
 #include <iostream>
 using namespace std;
 
+Tn::Tn() {
+    number = 1; 
+    sqrt = 1;
+}
+
+Tn::Tn(int _n) {
+    number = _n;
+    sqrt = 1;
+}
+
+Tn::Tn(int _n, int _s) {
+    number = _n; 
+    sqrt = _s;
+}
+
+void Tn::print() const {
+    if (number != 1 && sqrt != 1) printf("%dsqrt(%d)", number, sqrt);
+    else if (sqrt != 1) printf("sqrt(%d)", sqrt);
+    else printf("%d", number);
+}
+
+Tscalar::Tscalar() {
+    num = Tn();
+    den = Tn();
+}
+
+Tscalar::Tscalar(Tn n, Tn d) {
+    num = n;
+    den = d;
+}
+
+void Tscalar::print() const {
+    if (den.number == 1 && den.sqrt == 1 && num.number == 1 && num.sqrt == 1);
+    else if (den.number == 1 && den.sqrt == 1) num.print();
+    else { num.print(); printf("/"); den.print(); }
+}
+
 Tfvector::Tfvector() {
     n = 0;
+    scl = Tscalar();
 }
 
 Tfvector::Tfvector(int _n) {
     n = _n;
+    scl = Tscalar();
     array = new Fraction[n];
     for (int i = 0; i < n; i++) {
         array[i] = new Tfraction();
@@ -18,6 +57,7 @@ Tfvector::Tfvector(int _n) {
 
 Tfvector::Tfvector(float *values, int dim) {
     n = dim;
+    scl = Tscalar();
     array = new Fraction[n];
     for(int i = 0; i < n; i++) {
         array[i] = new Tfraction(values[i]);
@@ -26,6 +66,7 @@ Tfvector::Tfvector(float *values, int dim) {
 
 Tfvector::Tfvector(Fraction* values, int dim) {
     n = dim;
+    scl = Tscalar();
     array = new Fraction[n];
     for(int i = 0; i < n; i++) {
         array[i] = values[i];
@@ -34,6 +75,7 @@ Tfvector::Tfvector(Fraction* values, int dim) {
 
 Tfvector::Tfvector(int _n, int min, int max) {
     n = _n;
+    scl = Tscalar();
     array = new Fraction[n];
     for(int i = 0; i < n; i++){
         array[i] = new Tfraction(
@@ -44,6 +86,7 @@ Tfvector::Tfvector(int _n, int min, int max) {
 }
 
 void Tfvector::print() const {
+    scl.print();
     cout << "(";
     for (int i = 0; i < n; i++) {
         array[i]->print();
@@ -194,4 +237,12 @@ FVector fvector_product_with_scalar(FVector v, Fraction f) {
     }
 
     return res;
+}
+
+FVector fvector_normalization(FVector v) {
+    FVector vn = v;
+    Fraction f = fvector_norm_noroot(v);
+    Tscalar sn = Tscalar(Tn(1, f->den), Tn(1, f->num));
+    vn->scl = sn;
+    return vn;
 }

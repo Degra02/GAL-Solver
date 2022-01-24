@@ -98,7 +98,7 @@ setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv) {
     int j;
     setFVectorsPtr a = new TsetFVectors(_dim, sv->n_th, "");
     FVector u = new Tfvector(_n_th);
-    init_to_0(u);
+    for (int i = 0; i < _n_th; ++i) u->array[i] = new Tfraction(0, 1);
 
     if (!set_fvectors_is_linearly_independent(sv)) {
         cout << "the set of vectors is not linearly independent." << endl;
@@ -117,10 +117,10 @@ setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv) {
             
         } while (j != 0);
         a->v[i] = fvector_difference(sv->v[i], u);
-        init_to_0(u);
+        for (int i = 0; i < _n_th; ++i) u->array[i] = new Tfraction(0, 1);
     }
 
-    // Normalizzazione
+    for (int i = 0; i < _dim; ++i) a->v[i] = fvector_normalization(a->v[i]);
 
     return a;
 }
