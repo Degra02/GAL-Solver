@@ -22,7 +22,7 @@ typedef struct Tbflist{
 
 typedef Tbflist *SNodeptr;
 
-SNodeptr insertFirstS(SNodeptr n, FBase b);
+SNodeptr insertFirstS(SNodeptr n, setFVectorsPtr b);
 setFVectorsPtr get_ssearch(SNodeptr n, string name);
 SNodeptr remove_ssearch(SNodeptr n);
 bool isPresentS(SNodeptr n, string name);

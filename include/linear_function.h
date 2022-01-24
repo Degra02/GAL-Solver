@@ -26,7 +26,10 @@ typedef struct Tfunction{
 
 }Tfunction;
 
-typedef Tfunction *PFunction;
+typedef Tfunction *Function;
 
+Function init_function(string name, Lists l);
+Function init_function_from_saved(string name, Lists l);
+void print_function(Function f);
 
 #endif

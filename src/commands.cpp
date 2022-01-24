@@ -34,6 +34,8 @@ void function_call(Lists list){
                 list->Eqlist = command_new_system(list->Eqlist);
             } else if(userinput[1] == "set"){
                 list->Slist = command_new_vectors_set(list->Slist);
+            } else if(userinput[1] == "function"){
+                list = command_new_function(list);
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
@@ -94,6 +96,12 @@ void function_call(Lists list){
                 } else {
                     cout << "Invalid function call" << endl << endl;
                 }
+            } else if(userinput[1] == "function"){
+                if(userinput[2] == "mat"){
+
+                } else {
+                    cout << "Invalid function call" << endl << endl;
+                }
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
@@ -106,6 +114,8 @@ void function_call(Lists list){
                 command_print_system(list->Eqlist);
             } else if(userinput[1] == "set"){
                 command_print_vectors_set(list->Slist);
+            } else if(userinput[1] == "function"){
+                command_print_function(list->Flist);
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
