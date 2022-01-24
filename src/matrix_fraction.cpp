@@ -379,8 +379,8 @@ bool matrix_is_square(FMatrix m) {
 FMatrix fraction_matrix_reverse(FMatrix m) {
     int r = m->nr, c = m->nc;
     if (!matrix_is_square(m) || fraction_matrix_rank(m) != c) {
-        cout << "reverse matrix does not exit." << endl;
-        exit(1);
+        cout << "Reverse matrix does not exit." << endl;
+        return NULL;
     }
 
     FMatrix mr = new Tfmatrix(r, c);
