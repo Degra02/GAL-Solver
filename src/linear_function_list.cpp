@@ -33,18 +33,18 @@ bool isPresentF(FNodeptr n, string name){
     return false;
 }
 
-Lists insertF(Lists l, string name){
-    if(!isPresentF(l->Flist, name)){
-        l->Flist = insertFirstF(l->Flist, init_function(name, l));
+FNodeptr insertF(FNodeptr n, string name){
+    if(!isPresentF(n, name)){
+        n = insertFirstF(n, init_function(name));
     } else {
         cout << "Function with the same name already exists" << endl << endl;
     }
-    return l;
+    return n;
 }
 
-Lists command_new_function(Lists l){
+FNodeptr command_new_function(FNodeptr n){
     string name; cout << "Function name: "; fflush(stdin); cin >> name;
-    return insertF(l, name);
+    return insertF(n, name);
 }
 
 void command_print_function(FNodeptr n){

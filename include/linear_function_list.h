@@ -23,11 +23,11 @@ typedef struct TfunctionList{
 
 typedef TfunctionList *FNodeptr;
 
-Lists insertFirstF(Lists l, Function f);
+FNodeptr insertFirstF(FNodeptr n, Function f);
 Function get_fsearch(FNodeptr n, string name);
 bool isPresentF(FNodeptr n, string name);
-Lists insertF(Lists l, string name);
-Lists command_new_function(Lists l);
+FNodeptr insertF(FNodeptr n, string name);
+FNodeptr command_new_function(FNodeptr n);
 void command_print_function(FNodeptr n);
 
 #endif

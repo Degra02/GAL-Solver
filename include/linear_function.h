@@ -28,8 +28,8 @@ typedef struct Tfunction{
 
 typedef Tfunction *Function;
 
-Function init_function(string name, Lists l);
-Function init_function_from_saved(string name, Lists l);
+Function init_function(string name);
+//Function init_function_from_saved(string name, Lists l);
 void print_function(Function f);
 
 #endif
