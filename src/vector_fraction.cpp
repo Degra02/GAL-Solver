@@ -182,3 +182,11 @@ float fvector_angle(FVector a, FVector b){
     float val = (float)res->num / (float)res->den;
     return acos( val / (fvector_float_norm(a) * fvector_float_norm(b)));
 }
+
+FVector fvector_product_with_scalar(FVector v, Fraction f) {
+    for (int i = 0; i < v->n; ++i){
+        v->array[i] = fraction_product(f, v->array[i]);
+    }
+
+    return v;
+}

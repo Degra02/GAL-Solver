@@ -26,4 +26,6 @@ bool set_fvectors_is_linearly_independent(setFVectorsPtr sv);
 bool set_fvectors_is_generators(setFVectorsPtr sv);
 bool set_fvectors_is_base(setFVectorsPtr sv);
 
+setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv);
+
 #endif
