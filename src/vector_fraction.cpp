@@ -20,8 +20,8 @@ Tn::Tn(int _n, int _s) {
 }
 
 void Tn::print() const {
-    if (number != 1 && sqrt != 1) printf("%dsqrt(%d)", number, sqrt);
-    else if (sqrt != 1) printf("sqrt(%d)", sqrt);
+    if (number != 1 && sqrt != 1) printf("%d\x1b[38;5;197msqrt\x1b[0m(%d)", number, sqrt);
+    else if (sqrt != 1) printf("\x1b[38;5;197msqrt\x1b[0m(%d)", sqrt);
     else printf("%d", number);
 }
 
@@ -138,10 +138,6 @@ FVector init_fvector(string name){
     }
     cout << endl;
     return v;
-}
-
-void init_to_0(FVector v) {
-    for (int i = 0; i < v->n; ++i) v->array[i] = new Tfraction(0, 1);
 }
 
 void print_fvector(FVector v){
