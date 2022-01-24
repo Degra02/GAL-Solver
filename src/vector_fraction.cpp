@@ -97,6 +97,10 @@ FVector init_fvector(string name){
     return v;
 }
 
+void init_to_0(FVector v) {
+    for (int i = 0; i < v->n; ++i) v->array[i] = new Tfraction(0, 1);
+}
+
 void print_fvector(FVector v){
     cout << "Name: " << "\x1b[38;5;50m" << v->name << "\x1b[0m = ";
     cout << endl << endl;
@@ -184,9 +188,10 @@ float fvector_angle(FVector a, FVector b){
 }
 
 FVector fvector_product_with_scalar(FVector v, Fraction f) {
+    FVector res = new Tfvector(v->n);
     for (int i = 0; i < v->n; ++i){
-        v->array[i] = fraction_product(f, v->array[i]);
+        res->array[i] = fraction_product(f, v->array[i]);
     }
 
-    return v;
+    return res;
 }

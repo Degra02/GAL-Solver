@@ -349,6 +349,7 @@ FMatrix fraction_matrix_copy(FMatrix m){
             r->mat[i][j] = m->mat[i][j];
         }
     }
+    
     return r;
 }
 
