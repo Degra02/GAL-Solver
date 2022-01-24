@@ -33,6 +33,7 @@ FMatrix fraction_matrix_sum(FMatrix a, FMatrix b);
 FMatrix fraction_matrix_difference(FMatrix a, FMatrix b);
 FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b);
 FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda);
+FMatrix fraction_matrix_reverse(FMatrix m);
 
 void fraction_S(FMatrix m, int a, int b);
 void fraction_D(FMatrix m, int a, Fraction lambda);

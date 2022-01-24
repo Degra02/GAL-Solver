@@ -7,13 +7,8 @@ using namespace std;
 int main() {
 	srand(time(0));
 
-	// Lists list = new Tlists();
-	// function_call(list);
-
-	setFVectorsPtr sv = init_set_fvectors("b");
-	print_set_fvectors(sv);
-	setFVectorsPtr a = Gram_Schmidt(sv);
-	print_set_fvectors(a);
+	Lists list = new Tlists();
+	function_call(list);
 
 	return 0;
 }

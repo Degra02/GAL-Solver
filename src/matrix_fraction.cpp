@@ -374,3 +374,30 @@ bool fraction_matrix_is_base(FMatrix m) {
 bool matrix_is_square(FMatrix m) {
     return (m->nc == m->nr);
 }
+
+FMatrix fraction_matrix_reverse(FMatrix m) {
+    int r = m->nr, c = m->nc;
+    if (!matrix_is_square(m) || fraction_matrix_rank(m) != c) {
+        cout << "reverse matrix does not exit." << endl;
+        exit(1);
+    }
+
+    FMatrix mr = new Tfmatrix(r, c);
+    FMatrix mI = new Tfmatrix(r, 2 * c);
+    for (int i = 0; i < r; ++i) {
+        for (int j = 0; j < c; ++j) mI->mat[i][j] = m->mat[i][j];
+        for (int j = c; j < (2 * c); ++j) {
+            if (i == (j - 3)) mI->mat[i][j] = new Tfraction(1, 1);
+            else mI->mat[i][j] = new Tfraction(0, 1);
+        }
+    }
+
+    mI = fraction_matrix_rref(mI);
+    for (int i = 0; i < r; ++i) {
+        for (int j = 0; j < c; ++j) {
+            mr->mat[i][j] = mI->mat[i][j + 3];
+        }
+    }
+
+    return mr;
+}
