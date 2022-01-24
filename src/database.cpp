@@ -29,3 +29,15 @@ Lists command_system_build(Lists list){
     list->Eqlist = insertFirstE(list->Eqlist, sys);
     return list;
 }
+
+Lists command_save_function(Lists list){
+    Function f =list->Flist->f;
+    if(f != NULL){
+        list->Mlist = insertFirst(list->Mlist, f->mr);
+        list->Slist = insertFirstS(list->Slist, f->b1);
+        list->Slist = insertFirstS(list->Slist, f->b2);
+    } else {
+        cout << "Function not found" << endl << endl;
+    }
+    return list;
+}
