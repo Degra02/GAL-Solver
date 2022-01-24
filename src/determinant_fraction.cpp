@@ -4,11 +4,13 @@ using namespace std;
 
 Fraction det(FMatrix m) {
     if (m->nr == m->nc) {
-        if (m->nr == 1) return m->mat[0][0];
-        if (m->nr == 2) return fraction_difference(
-                fraction_product(m->mat[0][0], m->mat[1][1]),
-                fraction_product(m->mat[0][1], m->mat[1][0])
-            );
+        Fraction ret = new Tfraction;
+        *ret = m->mat[0][0];
+        if (m->nr == 1) return ret;
+        if (m->nr == 2){
+            *ret = (*ret * m->mat[1][1]) - (m->mat[0][1] * m->mat[1][0]);
+            return ret;
+        }
 
         Fraction determinante = new Tfraction(0, 1);
         // Defined the sub-matrix sub_m (n-1)x(n-1)
@@ -22,12 +24,10 @@ Fraction det(FMatrix m) {
                 }
             }
             // Laplace's theorem to calculate the determinant
-            determinante = fraction_sum(
-                determinante, 
-                fraction_product(
-                    fraction_product(fraction_power(new Tfraction(-1, 1), i), m->mat[i][0]), 
-                    det(sub_m)
-                )
+            *determinante = (
+                *determinante +
+                    (Tfraction(-1, 1).power(i) * m->mat[i][0]) * 
+                    *det(sub_m)
             );
         }
         return determinante;

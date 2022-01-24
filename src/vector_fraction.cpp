@@ -10,23 +10,23 @@ Tfvector::Tfvector() {
 
 Tfvector::Tfvector(int _n) {
     n = _n;
-    array = new Fraction[n];
+    array = new Tfraction[n];
     for (int i = 0; i < n; i++) {
-        array[i] = new Tfraction();
+        array[i] = Tfraction();
     }
 }
 
 Tfvector::Tfvector(float *values, int dim) {
     n = dim;
-    array = new Fraction[n];
+    array = new Tfraction[n];
     for(int i = 0; i < n; i++) {
-        array[i] = new Tfraction(values[i]);
+        array[i] = Tfraction(values[i]);
     }
 } 
 
-Tfvector::Tfvector(Fraction* values, int dim) {
+Tfvector::Tfvector(Fraction values, int dim) {
     n = dim;
-    array = new Fraction[n];
+    array = new Tfraction[n];
     for(int i = 0; i < n; i++) {
         array[i] = values[i];
     }
@@ -34,9 +34,9 @@ Tfvector::Tfvector(Fraction* values, int dim) {
 
 Tfvector::Tfvector(int _n, int min, int max) {
     n = _n;
-    array = new Fraction[n];
+    array = new Tfraction[n];
     for(int i = 0; i < n; i++){
-        array[i] = new Tfraction(
+        array[i] = Tfraction(
             rand() % (max - min + 1) + min, 
             rand() % (max - min + 1) + min
         );
@@ -46,7 +46,7 @@ Tfvector::Tfvector(int _n, int min, int max) {
 void Tfvector::print() const {
     cout << "(";
     for (int i = 0; i < n; i++) {
-        array[i]->print();
+        array[i].print();
         if (i != (n - 1)) cout << ", ";
     }
     cout << ")";
@@ -56,29 +56,29 @@ void Tfvector::init() {
     float coe;
     for (int i = 0; i < n; i++) {
         printf("insert number in [%d]: ", i+1); scanf("%f", &coe);
-        array[i]->set(coe);
-        array[i] = fraction_simplification(array[i]);
+        array[i].set(coe);
+        array[i] = array[i].simplification();
     }
 }
 
-void Tfvector::multiply(Fraction lambda) {
-    for(int i = 0; i < n; i++){
-        array[i] = fraction_product(array[i], lambda);
+Tfvector Tfvector::operator*(const Tfraction& f) const {
+    Tfvector v(n);
+    for (int i = 0; i < n; ++i){
+        array[i] = f * array[i];
     }
+
+    return v;
 }
 
 Tfvector::~Tfvector() {
-    for (int i = 0; i < n; i++) {
-        delete array[i];
-    }
     delete[] array;
 }
 
 Tfvector::Tfvector(int dim, string _name){
     n = dim;
-    array = new Fraction[n];
+    array = new Tfraction[n];
     for(int i = 0; i < n; i++){
-        array[i] = new Tfraction();
+        array[i] = Tfraction();
     }
     name = _name;
 }
@@ -91,24 +91,23 @@ FVector init_fvector(string name){
         cout << "   ";
         cin >> value;
         v->array[i] = str_to_fraction(value);
-        v->array[i] = fraction_simplification(v->array[i]);
+        v->array[i] = v->array[i].simplification();
     }
     cout << endl;
     return v;
 }
 
-void print_fvector(FVector v){
-    cout << "Name: " << "\x1b[38;5;50m" << v->name << "\x1b[0m = ";
+void Tfvector::print(const Tfvector& v) const {
+    cout << "Name: " << "\x1b[38;5;50m" << v.name << "\x1b[0m = ";
     cout << endl << endl;
-    cout << "   "; v->print();
+    cout << "   "; v.print();
     cout << endl << endl;
 }
 
-FVector fraction_vector_copy(FVector a){
-    FVector b = new Tfvector(a->n);
-    int dim = a->n;
-    for(int i = 0; i < dim; ++i){
-        b->array[i] = a->array[i];
+Tfvector Tfvector::copy() const {
+    Tfvector b(n);
+    for(int i = 0; i < n; ++i){
+        b.array[i] = array[i];
     }
     return b;
 }
@@ -117,36 +116,36 @@ bool fvector_same_dimension(FVector a, FVector b){
     return (a->n == b->n);
 }
 
-FVector fvector_sum(FVector a, FVector b){
-    int n = a->n; FVector res = new Tfvector(n);
+Tfvector Tfvector::operator+(const Tfvector& b) const {
+    Tfvector res(n);
     for(int i = 0; i < n; i++){
-        res->array[i] = fraction_sum(a->array[i], b->array[i]);
+        res.array[i] = array[i] + b.array[i];
     }
     return res;
 }
 
-FVector fvector_difference(FVector a, FVector b){
-    int n = a->n; FVector res = new Tfvector(n);
+Tfvector Tfvector::operator-(const Tfvector& b) const {
+    Tfvector res(n);
     for(int i = 0; i < n; i++){
-        res->array[i] = fraction_difference(a->array[i], b->array[i]);
+        res.array[i] = array[i] - b.array[i];
     }
     return res;
 }
 
-Fraction fvector_norm_noroot(FVector a){
-    int n = a->n; Fraction res = fraction_power(a->array[0], 2);
+Tfraction Tfvector::norm_noroot() const {
+    Tfraction res = array[0].power(2);
     for(int i = 1; i < n; i++){
-        res = fraction_sum(res, fraction_power(a->array[i], 2));
+        res = res + array[i].power(2);
     }
     return res;
 }
 
-float fvector_float_norm(FVector a){
-    int n = a->n; Fraction res = fraction_power(a->array[0], 2);
+float Tfvector::float_norm() const {
+    Tfraction res = array[0].power(2);
     for(int i = 1; i < n; i++){
-        res = fraction_sum(res, fraction_power(a->array[i], 2));
+        res = res + array[i].power(2);
     }
-    return sqrt( (float)res->num / (float)res->den );
+    return sqrt( (float)res.num / (float)res.den );
 }
 
 string fvector_norm_print(Fraction a){
@@ -158,35 +157,27 @@ string fvector_norm_print(Fraction a){
     return "sqrt( " + to_string(a->num) + "/" + to_string(a->den) + " )";
 }
 
-Fraction fvector_scalar_product(FVector a, FVector b){
-    int n = a->n; Fraction res = fraction_product(a->array[0], b->array[0]);
+Tfraction Tfvector::operator*(const Tfvector& b) const {
+    Tfraction res = array[0] + b.array[0];
     for(int i = 1; i < n; i++){
-        res = fraction_sum(res, fraction_product(a->array[i], b->array[i]));
+        res = res + (array[i] * b.array[i]);
     }
     return res;
 }
 
-FVector fvector_cross_product(FVector a, FVector b){
-    if((a->n == 3) && (b->n == 3)){
+FVector Tfvector::cross_product(const Tfvector& b) const {
+    if((n == 3) && (b.n == 3)){
         FVector res = new Tfvector(3);
-        res->array[0] = fraction_difference(fraction_product(a->array[1], b->array[3]), fraction_product(a->array[2], b->array[1]));
-        res->array[1] = fraction_difference(fraction_product(a->array[2], b->array[0]), fraction_product(a->array[0], b->array[2]));
-        res->array[2] = fraction_difference(fraction_product(a->array[0], b->array[1]), fraction_product(a->array[1], b->array[0]));
+        res->array[0] = (array[1] * b.array[3]) + (array[2] * b.array[1]);
+        res->array[1] = (array[2] * b.array[0]) + (array[0] * b.array[2]);
+        res->array[2] = (array[0] * b.array[1]) + (array[1] * b.array[0]);
         return res;
     }
     return NULL;
 }
 
-float fvector_angle(FVector a, FVector b){
-    Fraction res = fvector_scalar_product(a, b);
-    float val = (float)res->num / (float)res->den;
-    return acos( val / (fvector_float_norm(a) * fvector_float_norm(b)));
-}
-
-FVector fvector_product_with_scalar(FVector v, Fraction f) {
-    for (int i = 0; i < v->n; ++i){
-        v->array[i] = fraction_product(f, v->array[i]);
-    }
-
-    return v;
+float Tfvector::angle(const Tfvector& b) const{
+    Tfraction res = *this * b;
+    float val = (float)res.num / (float)res.den;
+    return acos( val / ((*this).float_norm() * b.float_norm()));
 }

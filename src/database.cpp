@@ -22,7 +22,10 @@ Lists command_system_build(Lists list){
         return list;
     }
     FMatrix c = fraction_matrix_copy(a);
-    FVector d = fraction_vector_copy(b);
+    
+    // TODO: probably change this to a static form.
+    FVector d = new Tfvector;
+    *d = b->copy();
     FEqsys sys = new Tfeqsys(c, d);
     sys->name = a->name + b->name; 
     cout << "System name:" << "\x1b[38;5;50m" << sys->name << "\x1b[0m" << endl << endl;

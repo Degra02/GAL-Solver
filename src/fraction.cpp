@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 #include "all-headers.h"
 using namespace std;
 
@@ -63,85 +64,92 @@ void Tfraction::set(float n) {
 // Functions
 
 /* funzione che prese due strutture Tfraction restituisce un'altra Tfraction somma delle precedenti */
-Fraction fraction_sum(Fraction a, Fraction b) {
-    Fraction c = new Tfraction();
+Tfraction Tfraction::operator+(const Tfraction& a) const {
+    Tfraction c;
 
-    if (a->den == b->den) {
-        c->den = a->den;
-        c->num = a->num + b->num;
+    if (den == a.den) {
+        c.den = den;
+        c.num = num + a.num;
     } else {
-        c->den = mcm(a->den, b->den);
-        c->num = (c->den / a->den)*a->num + (c->den / b->den)*b->num;
+        c.den = mcm(den, a.den);
+        c.num = (c.den / den)*num + (c.den / a.den)*a.num;
     }
-    zero_control(c); sign_control(c);
-    return fraction_simplification(c);
+    c.zero_control(); c.sign_control();
+    return c.simplification();
 }
 
 /* funzione che prese due strutture Tfraction restituisce un'altra Tfraction defferenza delle precedenti */
-Fraction fraction_difference(Fraction a, Fraction b) {
-    Fraction c = new Tfraction(); 
+Tfraction Tfraction::operator-(const Tfraction& a) const {
+    Tfraction c;
 
-    if (a->den == b->den) {
-        c->den = a->den;
-        c->num = a->num - b->num;
+    if (den == a.den) {
+        c.den = den;
+        c.num = num - a.num;
     } else {
-        c->den = mcm(a->den, b->den);
-        c->num = (c->den / a->den)*a->num - (c->den / b->den)*b->num;
+        c.den = mcm(den, a.den);
+        c.num = (c.den / den)*num - (c.den / a.den)*a.num;
     }
-    zero_control(c); sign_control(c);
-    return fraction_simplification(c);
+    c.zero_control(); c.sign_control();
+    return c.simplification();
 }
 
 /* funzione che prese due strutture Tfraction restituisce un'altra Tfraction prodotto delle precedenti */
-Fraction fraction_product(Fraction a, Fraction b) {
-    Fraction c = new Tfraction();
+Tfraction Tfraction::operator*(const Tfraction& a) const {
+    Tfraction c;
 
-    c->den = a->den * b->den;
-    c->num = a->num * b->num;
-    zero_control(c); sign_control(c);
-    return fraction_simplification(c);
+    c.den = den * a.den;
+    c.num = num * a.num;
+    c.zero_control(); c.sign_control();
+    return c.simplification();
+}
+
+Tfraction Tfraction::operator*(float a) const {
+    Tfraction c;
+
+    c.num = num * a;
+    c.zero_control(); c.sign_control();
+    return c.simplification();
 }
 
 /* funzione che prese due strutture Tfraction restituisce un'altra Tfraction quoziente delle precedenti */
-Fraction fraction_quotient(Fraction a, Fraction b) {
-    Fraction c = new Tfraction();
+Tfraction Tfraction::operator/(const Tfraction& a) const {
+    Tfraction c;
 
-    c->den = a->den * b->num;
-    c->num = a->num * b->den;
-    zero_control(c); sign_control(c);
-    return fraction_simplification(c);
+    c.den = den * a.num;
+    c.num = num * a.den;
+    c.zero_control(); c.sign_control();
+    return c.simplification();
 }
 
 /* funzione che presa una struttura Tfraction e un numero intero restituisce un'altra Tfraction alevata alla potenza data */
-Fraction fraction_power(Fraction a, int p) {
-    Fraction c = new Tfraction(1, 1);
+Tfraction Tfraction::power(int p) const {
+    Tfraction c;
 
-    for (int i=0; i<p; i++) {
-        c->num *= a->num;
-        c->den *= a->den;
-    }
-    zero_control(c); sign_control(c);
-    return fraction_simplification(c);
+    c.num = pow(c.num, p);
+    c.den = pow(c.den, p);
+    
+    c.zero_control(); c.sign_control();
+    return c.simplification();
 }
 
 /* semplifica la Tfraction data */ 
-Fraction fraction_simplification(Fraction a) {
-    int abs_num = abs(a->num), abs_den = abs(a->den);
+Tfraction Tfraction::simplification() {
+    int abs_num = abs(num), abs_den = abs(den);
     int min = abs_num; 
     if (abs_den < abs_num) min = abs_den;
     for (int i=2; i<=min; i++) {
         if (abs_num % i == 0 && abs_den % i == 0) {
-            a->num /= i; a->den /= i;
-            fraction_simplification(a); 
+            num /= i; den /= i;
+            simplification();
             /* serve per velocizzare l'algoritmo quando ormai non serve più iterare */
             break; 
         }
     }
-    return a;
+    return *this;
 }
 
 /* prende in input una stringa value e lo converte in un puntatore a Tfraction */
-Fraction str_to_fraction(string value){
+Tfraction str_to_fraction(string value){
     int i = 0;
     string snum;
     while (value[i] != '\0') {
@@ -152,7 +160,7 @@ Fraction str_to_fraction(string value){
                 sden += value[i];
                 ++i;
             }
-            return new Tfraction(stoi(snum), stoi(sden));
+            return Tfraction(stoi(snum), stoi(sden));
         }
 
         if (value[i] == '.') { 
@@ -160,44 +168,44 @@ Fraction str_to_fraction(string value){
                 snum += value[i];
                 ++i;
             }
-            return new Tfraction(stof(snum));
+            return Tfraction(stof(snum));
         }
 
         snum += value[i];
         ++i;
     }
-    return new Tfraction(stoi(snum), 1);
+    return Tfraction(stoi(snum), 1);
 }
 
 /* prende in input un puntatore a Tfraction e due valori interi che determinano il massimo numero di spazi dati al numeratore e al denominatore per essere stampati, e stampa Tfraction seguendo questo formato */
-void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den) {
+void Tfraction::print_format(int max_figures_num, int max_figures_den) const {
     int space_num, space_den;
-    if (f->den == 1) {
-        int space = figures(abs(f->num));
+    if (den == 1) {
+        int space = figures(abs(num));
         space_num = space / 2;
         space_den = (space - 1) / 2;
     } else {
-        space_num = figures(abs(f->num));
-        space_den = figures(f->den);
+        space_num = figures(abs(num));
+        space_den = figures(den);
     }
-    if (f->num < 0) ++space_num;
+    if (num < 0) ++space_num;
 
-    print_space(max_figures_num - space_num); f->print(); 
+    print_space(max_figures_num - space_num); print(); 
     print_space(max_figures_den - space_den);
     
     cout << " ";
 }
 
-void zero_control(Fraction f) {
-    if (f->num == 0) f->den = 1;
+void Tfraction::zero_control() {
+    if (num == 0) den = 1;
 }
 
-void sign_control(Fraction f) {
-    if (f->num < 0 && f->den < 0) {
-        f->num = (-1) * f->num;
-        f->den = (-1) * f->den;
-    } else if (f->den < 0) {
-        f->num = (-1) * f->num;
-        f->den = (-1) * f->den;
+void Tfraction::sign_control() {
+    if (num < 0 && den < 0) {
+        num = (-1) * num;
+        den = (-1) * den;
+    } else if (den < 0) {
+        num = (-1) * num;
+        den = (-1) * den;
     }
 }

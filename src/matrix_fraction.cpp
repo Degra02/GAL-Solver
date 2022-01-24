@@ -11,11 +11,11 @@ Tfmatrix::Tfmatrix() {
 Tfmatrix::Tfmatrix(int _nr, int _nc) {
     nr = _nr;
     nc = _nc;
-    mat = new Fraction*[nr];
+    mat = new Fraction[nr];
     for (int i = 0; i < nr; i++) {
-        mat[i] = new Fraction[nc];
+        mat[i] = new Tfraction[nc];
         for (int j = 0; j < nc; j++) {
-            mat[i][j] = new Tfraction();
+            mat[i][j] = Tfraction();
         }
     }
 }
@@ -24,11 +24,11 @@ Tfmatrix::Tfmatrix(string _name, int _nr, int _nc) {
     nr = _nr;
     nc = _nc;
     name = _name;
-    mat = new Fraction*[nr];
+    mat = new Fraction[nr];
     for (int i = 0; i < nr; i++) {
-        mat[i] = new Fraction[nc];
+        mat[i] = new Tfraction[nc];
         for (int j = 0; j < nc; j++) {
-            mat[i][j] = new Tfraction();
+            mat[i][j] = Tfraction();
         }
     }
 }
@@ -36,16 +36,16 @@ Tfmatrix::Tfmatrix(string _name, int _nr, int _nc) {
 Tfmatrix::Tfmatrix(int _nr, int _nc, int min, int max) {
     nr = _nr;
     nc = _nc;
-    mat = new Fraction*[nr];
+    mat = new Fraction[nr];
     for (int i = 0; i < nr; i++) {
-        mat[i] = new Fraction[nc];
+        mat[i] = new Tfraction[nc];
         for (int j = 0; j < nc; j++) {
-            mat[i][j] = fraction_simplification(
-                mat[i][j] = new Tfraction(
+            mat[i][j] = (
+                mat[i][j] = Tfraction(
                     rand() % (max - min + 1) + min,
                     1
                 )
-            );
+            ).simplification();
         }
     }
 }
@@ -53,7 +53,7 @@ Tfmatrix::Tfmatrix(int _nr, int _nc, int min, int max) {
 void Tfmatrix::print() const {
     for (int i = 0; i < nr; i++) {
         for (int j = 0; j < nc; j++) {
-            mat[i][j]->print(); printf("  ");
+            mat[i][j].print(); printf("  ");
         }
         printf("\n");
     }
@@ -64,17 +64,14 @@ void Tfmatrix::init() {
     for (int i = 0; i < nr; i++) {
         for (int j = 0; j < nc; j++) {
             printf("insert in position [%d, %d]: ", i+1, j+1); scanf("%f", &coe);
-            mat[i][j]->set(coe);
-            mat[i][j] = fraction_simplification(mat[i][j]);
+            mat[i][j].set(coe);
+            mat[i][j] = mat[i][j].simplification();
         }
     }
 }
 
 Tfmatrix::~Tfmatrix() {
     for (int i = 0; i < nr; i++) {
-        for (int j = 0; j < nc; j++) {
-            delete mat[i][j];
-        }
         delete[] mat[i];
     }
     delete[] mat;
@@ -89,14 +86,14 @@ FMatrix init_fmatrix(string name) {
 	cout << "columns= "; fflush(stdin); cin >> c;
     cout << endl;
     FMatrix m = new Tfmatrix(name, r, c);
-    Fraction f; string value; 
+    Tfraction f; string value; 
     for(int i = 0; i < r; i++) {
         cout << "   ";
         for(int j = 0; j < c; j++) {
             cin >> value;
             f = str_to_fraction(value);
             m->mat[i][j] = f;
-            m->mat[i][j] = fraction_simplification(m->mat[i][j]);
+            m->mat[i][j] = m->mat[i][j].simplification();
         }
     }
     fflush(stdin); cout << endl << endl;
@@ -117,7 +114,7 @@ void print_fmatrix_float(FMatrix m) {
     for (int j = 0; j < c; ++j) {
         for (int i = 0; i < r; ++i) {
             f[i][j] = 
-                roundf(((float)m->mat[i][j]->num / m->mat[i][j]->den)*100.0)/100.0;
+                roundf(((float)m->mat[i][j].num / m->mat[i][j].den)*100.0)/100.0;
         }
         figures[j] = float_find_max_figures_column(f, m->nr, j);
     }
@@ -149,7 +146,7 @@ void print_fmatrix(FMatrix m) {
     for (int i = 0; i < r; ++i) {
         cout << "   "; 
         for (int j = 0; j < c; ++j) {
-            print_format_fraction(m->mat[i][j], figures_num[j], figures_den[j]);
+            m->mat[i][j].print_format(figures_num[j], figures_den[j]);
         }
         printf("\n");
     }
@@ -163,13 +160,13 @@ int fraction_find_max_figures_column(FMatrix m, int column, char type) {
     bool control = (type == 'n');
     int r = m->nr;
     for (int i = 0; i < r; ++i) {
-        if (m->mat[i][column]->den != 1) {
-             n = (control ? m->mat[i][column]->num : m->mat[i][column]->den);
+        if (m->mat[i][column].den != 1) {
+             n = (control ? m->mat[i][column].num : m->mat[i][column].den);
         } else {
-            n = m->mat[i][column]->num;
+            n = m->mat[i][column].num;
         } 
         space = figures(abs(n));
-        if (m->mat[i][column]->den == 1) 
+        if (m->mat[i][column].den == 1) 
             space = (control ? (space / 2) : (space - 1) / 2);
         if (n < 0) ++space;
 
@@ -212,7 +209,7 @@ FMatrix fraction_matrix_sum(FMatrix a, FMatrix b) {
     FMatrix sum = new Tfmatrix(r, c);
     for (int i = 0; i < r; i++) {
         for (int j = 0; j < c; j++) {
-            sum->mat[i][j] = fraction_sum(a->mat[i][j], b->mat[i][j]);
+            sum->mat[i][j] = a->mat[i][j] + b->mat[i][j];
         }
     }
     return sum;
@@ -225,7 +222,7 @@ FMatrix fraction_matrix_difference(FMatrix a, FMatrix b) {
     FMatrix sum = new Tfmatrix(r, c);
     for (int i = 0; i < r; i++) {
         for (int j = 0; j < c; j++) {
-            sum->mat[i][j] = fraction_difference(a->mat[i][j], b->mat[i][j]);
+            sum->mat[i][j] = a->mat[i][j] - b->mat[i][j];
         }
     }
     return sum;
@@ -238,10 +235,7 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
         for(int i = 0; i < r; i++){
             for(int j = 0; j < c; j++){
                 for(int k = 0; k < c; k++){
-                    multi->mat[i][j] = fraction_sum(
-                        multi->mat[i][j], 
-                        fraction_product(a->mat[i][k], b->mat[k][j])
-                    );
+                    multi->mat[i][j] = multi->mat[i][j] + (a->mat[i][k] * b->mat[k][j]);
                 }
             }
         }
@@ -254,12 +248,12 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b) {
 
 /* prende in input un puntatore a Tfmatrix e un numero razionale che viene moltiplicato per ogni elemento della matrice */ 
 FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda) {
-    Fraction l = new Tfraction(lambda);
+    Tfraction l(lambda);
     FMatrix res = new Tfmatrix(a->nr, a->nc);
     int r = a->nr, c = a->nc;
     for (int i = 0; i < r; i++) {
         for (int j = 0; j < c; j++) {
-            res->mat[i][j] = fraction_product(l, a->mat[i][j]);
+            res->mat[i][j] = l * a->mat[i][j];
         }
     }
     return res;
@@ -272,28 +266,28 @@ void fraction_S(FMatrix m, int a, int b) {
 }
 
 /* prende in input un puntatore a Tfmatrix, un indice intero di una riga della matrice e un puntatore a Tfraction, e restituisce la matrice stessa con la riga indicizza moltiplicata per la Tfraction puntata */
-void fraction_D(FMatrix m, int a, Fraction lambda) {
+void fraction_D(FMatrix m, int a, Tfraction& lambda) {
     int c = m->nc;
     for(int j = 0; j < c; j++)
-        m->mat[a][j] = fraction_product(m->mat[a][j], lambda);
+        m->mat[a][j] = m->mat[a][j] * lambda;
 }
 
 /* prendo in  input un puntatore a Tfmatrix, due indici interi di due righe della matrice e un puntatore a Tfraction, e restituisce la matrice stessa con la prima riga indicizzata sommata all'altra riga indicata dal secondo indice moltoplicata per la Tfraction puntata */
-void fraction_E(FMatrix m, int d, int s, Fraction lambda) { 
-    FVector v = new Tfvector(m->mat[s], m->nc);
-    v->multiply(lambda);
+void fraction_E(FMatrix m, int d, int s, Tfraction& lambda) { 
+    Tfvector v(m->mat[s], m->nc);
+    v = v * lambda;
     for(int j = 0; j < m->nc; j++) 
-        m->mat[d][j] = fraction_sum(m->mat[d][j], v->array[j]);
+        m->mat[d][j] = m->mat[d][j] + v.array[j];
 }
 
 /* prende in input un puntatore a Tfamtrix e la trasforma la matrice nella sua forma a scalini secondo l'algoritmo di gauss-jordan */
 FMatrix fraction_matrix_gauss_jordan(FMatrix m) {
     FMatrix mg = fraction_matrix_copy(m); 
-    Fraction lambda; int zero_column = 0;
+    Tfraction lambda; int zero_column = 0;
     int rm = mg->nr, c = mg->nc;
     for (int j = 0; j < c; ++j) {
         int i = (j - zero_column);
-        while (i < rm && mg->mat[i][j]->num == 0) ++i;
+        while (i < rm && mg->mat[i][j].num == 0) ++i;
         if (i == rm) {
             ++zero_column;
             continue; // passa alla prossima colonna 
@@ -301,11 +295,8 @@ FMatrix fraction_matrix_gauss_jordan(FMatrix m) {
         if (i != (j - zero_column)) fraction_S(mg, i, (j - zero_column)); 
         i = (j - zero_column);
         for (int r = i + 1; r < rm; ++r) {
-            if (mg->mat[r][j]->num != 0) {
-                lambda = fraction_quotient(
-                    fraction_product(new Tfraction(-1, 1), mg->mat[r][j]),
-                    mg->mat[i][j]
-                );
+            if (mg->mat[r][j].num != 0) {
+                lambda = Tfraction(-1, 1) * mg->mat[r][j] / mg->mat[i][j];
 
                 fraction_E(mg, r, i, lambda);
             }
@@ -318,22 +309,22 @@ FMatrix fraction_matrix_gauss_jordan(FMatrix m) {
 /* prende in input un punatore a Tfmatrix e restituisce la sue rref */
 FMatrix fraction_matrix_rref(FMatrix m) {
     FMatrix mrr = fraction_matrix_gauss_jordan(m); 
-    Fraction lambda; int no_pivot_column = 0, i; 
+    Tfraction lambda; int no_pivot_column = 0, i; 
     for (int j = 0; j < mrr->nc; ++j) {
         i = (j - no_pivot_column);
         if (i == mrr->nr) break; // termina la rref
-        if (mrr->mat[i][j]->num == 0) {
+        if (mrr->mat[i][j].num == 0) {
             ++no_pivot_column;
             continue; // passa alla prossima colonna 
         }
-        if (mrr->mat[i][j]->num != 0) {
-            lambda = fraction_quotient(new Tfraction(1, 1), mrr->mat[i][j]);
+        if (mrr->mat[i][j].num != 0) {
+            lambda = Tfraction(1, 1) / mrr->mat[i][j];
             fraction_D(mrr, i, lambda);
         }
        
         for (int r = i - 1; r >= 0; --r) {
-            if (mrr->mat[r][j]->num != 0) {
-                lambda = fraction_product(new Tfraction(-1, 1), mrr->mat[r][j]);
+            if (mrr->mat[r][j].num != 0) {
+                lambda = Tfraction(-1, 1) * mrr->mat[r][j];
                 fraction_E(mrr, r, i, lambda);
             }
         }
@@ -358,7 +349,7 @@ int fraction_matrix_rank(FMatrix m) {
     FMatrix my_copy = fraction_matrix_gauss_jordan(m);
     for (int i = 0; i < my_copy->nr; ++i) {
         for (int j = 0; j < my_copy->nc; ++j) {
-            if (my_copy->mat[i][j]->num != 0) {
+            if (my_copy->mat[i][j].num != 0) {
                 ++counter; j = my_copy->nc;
             }
         }

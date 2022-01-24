@@ -6,7 +6,7 @@ using namespace std;
 
 /* TYPE FRACTION MATRIX */
 typedef struct Tfmatrix {
-    Fraction **mat;
+    Tfraction **mat;
     int nr; int nc;
     string name;
 
