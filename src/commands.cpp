@@ -36,6 +36,7 @@ void function_call(Lists list){
                 list->Slist = command_new_vectors_set(list->Slist);
             } else if(userinput[1] == "function"){
                 list->Flist = command_new_function(list->Flist);
+                list = command_save_function(list);
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
