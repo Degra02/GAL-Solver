@@ -79,10 +79,9 @@ setFVectorsPtr feq_sys_sol(FEqsys e) {
     Trc type_res = Rouche_Capelli(e);
     setFVectorsPtr res = new TsetFVectors("");
 
-    if (type_res == NO_RESULT) {
-        cout << "no result." << endl;
-        return res;
-    } else if (type_res == INF_RESULTS) {
+    if (type_res == NO_RESULT) return res;
+    else if (type_res == INF_RESULTS) {
+        /* define all element to create a base solution of the eq system */
         FMatrix m = fraction_matrix_rref(e->A); 
         int rank = fraction_matrix_rank(m);
         int c = m->nc;
@@ -98,8 +97,6 @@ setFVectorsPtr feq_sys_sol(FEqsys e) {
         for (int d = 0; d < __dim_base; ++d) {
             res->v[d] = new Tfvector(c);
         }
-        
-        cout << "infinite results." << endl;
 
         for (int j = 0; j < c; ++j) {
             if (rank > 0) {
@@ -147,9 +144,6 @@ setFVectorsPtr feq_sys_sol(FEqsys e) {
         res->n_th = e->b->n;
         res->v = new FVector[1];
         res->v[0] = e->b;
-
-        cout << "one result." << endl;
-
         return res;
     }
 }
