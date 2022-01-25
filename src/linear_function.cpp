@@ -80,7 +80,20 @@ FMatrix translate_linear_function(){
 FVector parse_linear_function_input(vector <string> *fun, int dim){
     int l = fun->size(), p = 0, j; 
     FVector v = new Tfvector(dim);
-    string tmp, coef; char var = 'x';
+    string tmp, coef; char var = 'a';
+
+    tmp = fun->at(0); int l2 = fun->at(0).size();
+    for(j = 0; j < l2; j++){
+        if(tmp[j] > 'a' && tmp[j] < 'z'){
+            var = tmp[j];
+        }
+    }
+    for(p = 0; p < (var - 'a'); p++){
+        v->array[p] = str_to_fraction("0");
+    }
+
+    //(tmp[j] - 'a')
+
     for(int i = 0; i < l; i++){
         coef = "";
         tmp = fun->at(i);
@@ -101,9 +114,11 @@ FVector parse_linear_function_input(vector <string> *fun, int dim){
             coef = "-1";
         }
         var++;
-        v->array[p] = str_to_fraction(coef); 
-        v->array[p] = fraction_simplification(v->array[p]);
-        p++;
+        if(p < dim){
+            v->array[p] = str_to_fraction(coef); 
+            v->array[p] = fraction_simplification(v->array[p]);
+            p++;
+        } 
     }
     while(p < dim){
         v->array[p] = str_to_fraction("0"); p++;
