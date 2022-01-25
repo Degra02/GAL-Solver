@@ -19,7 +19,7 @@ void parse_user_input(vector <string> *userinput){
     }
 }
 
-void function_call(Lists list){ // ! Gram Schmidt, Orthonormal
+void function_call(Lists list){
     string name;
     vector <string> userinput;
     do{ 
@@ -41,6 +41,8 @@ void function_call(Lists list){ // ! Gram Schmidt, Orthonormal
                 } else if(userinput[2] == "matrix"){
                     list->Flist = command_new_function_from_representative_matrix(list->Flist);
                     //list = command_save_function(list);
+                } else {
+                    cout << "Invalid function call" << endl << endl;
                 }
                 
             } else {
@@ -102,6 +104,10 @@ void function_call(Lists list){ // ! Gram Schmidt, Orthonormal
                     command_set_is_independent(list->Slist);
                 } else if(userinput[2] == "gen"){
                     command_set_is_generator(list->Slist);
+                } else if(userinput[2] == "gs"){
+                    list->Slist = command_gram_schmidt(list->Slist);
+                } else if(userinput[2] == "ort"){
+                    list->Slist = command_orthogonal_complement(list->Slist);
                 } else {
                     cout << "Invalid function call" << endl << endl;
                 }
