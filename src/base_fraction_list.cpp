@@ -132,3 +132,31 @@ void command_set_is_generator(SNodeptr n){
         cout << "Set not found" << endl << endl;
     }
 }
+
+SNodeptr command_gram_schmidt(SNodeptr n){
+    string name; cout << "Set name: "; fflush(stdin); cin >> name;
+    setFVectorsPtr a = get_ssearch(n, name);
+    if(a != NULL){
+       setFVectorsPtr b = Gram_Schmidt(a);
+       b->name = a->name + "gs";
+       print_set_fvectors(b);
+       return insertFirstS(n, b);
+    } else {
+        cout << "Set not found" << endl << endl;
+    }
+    return n;
+}
+
+SNodeptr command_orthogonal_complement(SNodeptr n){
+    string name; cout << "Set name: "; fflush(stdin); cin >> name;
+    setFVectorsPtr a = get_ssearch(n, name);
+    if(a != NULL){
+        setFVectorsPtr b = orthogonal_complement(a);
+        b->name = a->name + "ort";
+        print_set_fvectors(b);
+        return insertFirstS(n, b);
+    } else {
+        cout << "Set not found" << endl << endl;
+    }
+    return n;
+}

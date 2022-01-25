@@ -33,5 +33,7 @@ void command_print_all_sets(SNodeptr n);
 void command_set_is_base(SNodeptr n);
 void command_set_is_independent(SNodeptr n);
 void command_set_is_generator(SNodeptr n);
+SNodeptr command_gram_schmidt(SNodeptr n);
+SNodeptr command_orthogonal_complement(SNodeptr n);
 
 #endif

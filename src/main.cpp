@@ -7,6 +7,7 @@ using namespace std;
 int main() {
 	srand(time(0));
 
+<<<<<<< HEAD
 	// Lists list = new Tlists();
 	// function_call(list);
 
@@ -19,6 +20,10 @@ int main() {
 	// print_set_fvectors(a);
 	// setFVectorsPtr ao = orthogonal_complement(sv);
 	// print_set_fvectors(ao);
+=======
+	Lists list = new Tlists();
+	function_call(list);
+>>>>>>> 2de65aca7dc4e569a227f5ff354abbfe5b2d9c94
 
 	return 0;
 }
