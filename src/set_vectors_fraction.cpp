@@ -33,28 +33,31 @@ void TsetFVectors::print() const {
 }
 
 setFVectorsPtr init_set_fvectors(string name) {
-    string value;
     int _dim, _n_th;
-    
-    cout << "Vector size= "; cin >> _n_th;
-    cout << "Dimension= "; cin >> _dim;
+    cout << "Vector size= "; cin >> _n_th; 
+    cout << "Dimension= "; cin >> _dim; 
     cout << endl;
+    return insert_values_set_fvectors(_dim, _n_th, name);
+}
 
-    setFVectorsPtr sv = new TsetFVectors(_dim, _n_th, name);
-    for(int i = 0; i < _dim; ++i) {
-        cout << "V" << (i + 1) << ":";
-        sv->v[i] = new Tfvector(_n_th);
-        for(int j = 0; j < _n_th; ++j) {
-            cout << "  "; cin >> value;
-            sv->v[i]->array[j] = str_to_fraction(value);
-            sv->v[i]->array[j] = fraction_simplification(sv->v[i]->array[j]);
-        }
-
-        cout << endl;
-    }
-
+setFVectorsPtr init_set_fvectors_base(string name) {
+    int _dim, _n_th; setFVectorsPtr base; bool m = false;
+    cout << "Vector size= "; cin >> _n_th; _dim = _n_th;
     cout << endl;
-    fflush(stdin); 
+    do { if (m) cout << "The set of vectors is not a base." << endl << endl;
+    base = insert_values_set_fvectors(_dim, _n_th, name); m = true; 
+    } while (!set_fvectors_is_base(base));
+    return base;
+}
+
+setFVectorsPtr insert_values_set_fvectors(int _dim, int _n_th, string name) {
+    setFVectorsPtr sv = new TsetFVectors(_dim, _n_th, name); string value;
+    for(int i = 0; i < _dim; ++i) { 
+    cout << "V" << (i + 1) << ":"; sv->v[i] = new Tfvector(_n_th); 
+    for(int j = 0; j < _n_th; ++j) {
+    cout << "  "; cin >> value; sv->v[i]->array[j] = str_to_fraction(value);
+    sv->v[i]->array[j] = fraction_simplification(sv->v[i]->array[j]); }
+    cout << endl; } cout << endl; fflush(stdin); 
     return sv;
 }
 

@@ -7,12 +7,12 @@ using namespace std;
 
 Function init_function(string name){
     string n1, n2, n3;
-    cout << "From base: "; fflush(stdin); cin >> n1; setFVectorsPtr b1 = init_set_fvectors(n1);
-    cout << "To base: "; fflush(stdin); cin >> n2; setFVectorsPtr b2 = init_set_fvectors(n2);
+    cout << "From base: "; fflush(stdin); cin >> n1; setFVectorsPtr b1 = init_set_fvectors_base(n1);
+    cout << "To base: "; fflush(stdin); cin >> n2; setFVectorsPtr b2 = init_set_fvectors_base(n2);
     //l->Slist = insertFirstS(l->Slist, b1); l->Slist = insertFirstS(l->Slist, b2);
-    n3 = "M" + b1->name + b2->name + "(" + name + ")";
+    n3 = "M" + b1->name + "->" + b2->name + "(" + name + ")";
     cout << "Representative matrix" << endl;
-    FMatrix m = init_fmatrix(n3);
+    FMatrix m = init_predefinition_fmatrix(n3, b2->n_th, b1->n_th);
     return new Tfunction(name, b1, b2, m);
 }
 

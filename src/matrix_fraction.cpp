@@ -88,19 +88,22 @@ FMatrix init_fmatrix(string name) {
 	cout << "rows= "; fflush(stdin); cin >> r;
 	cout << "columns= "; fflush(stdin); cin >> c;
     cout << endl;
-    FMatrix m = new Tfmatrix(name, r, c);
-    Fraction f; string value; 
-    for(int i = 0; i < r; i++) {
-        cout << "   ";
-        for(int j = 0; j < c; j++) {
-            cin >> value;
-            f = str_to_fraction(value);
-            m->mat[i][j] = f;
-            m->mat[i][j] = fraction_simplification(m->mat[i][j]);
-        }
-    }
-    fflush(stdin); cout << endl << endl;
+    return insert_values_fmatrix(r, c, name);
+}
 
+FMatrix init_predefinition_fmatrix(string name, int r, int c) {
+    cout << "rows= " << r << endl;
+    cout << "columns= " << c << endl;
+    cout << endl;
+    return insert_values_fmatrix(r, c, name);
+}
+
+FMatrix insert_values_fmatrix(int r, int c, string name) {
+    FMatrix m = new Tfmatrix(name, r, c); Fraction f; string value; 
+    for(int i = 0; i < r; i++) { cout << "   ";
+    for(int j = 0; j < c; j++) { cin >> value; f = str_to_fraction(value);
+    m->mat[i][j] = f; m->mat[i][j] = fraction_simplification(m->mat[i][j]); }
+    } fflush(stdin); cout << endl << endl;
     return m;
 }
 
