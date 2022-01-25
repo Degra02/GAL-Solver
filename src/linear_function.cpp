@@ -41,6 +41,7 @@ void print_function(Function f){
     print_fmatrix(f->mr); cout << endl;
 }
 
+// support function to save the user input
 void collect_linear_function(vector <string> *fun){
     string input, call; fflush(stdin); getline(cin, input);
     stringstream check(input);
@@ -49,6 +50,7 @@ void collect_linear_function(vector <string> *fun){
     }
 }
 
+// Takes a linear function in the expression form and return the representative matrix
 FMatrix translate_linear_function(){
     int dim1, dim2; cout << "Dim \"from\": "; fflush(stdin); cin >> dim1;
     cout << "Dim \"to\": "; fflush(stdin); cin >> dim2; cout << endl;
@@ -72,9 +74,7 @@ FMatrix translate_linear_function(){
         }
     }
 
-    m->name = "test"; // ! Cambia il nome
-
-    return m;
+    return m; // TODO: add name (outside of this function)
 }
 
 FVector parse_linear_function_input(vector <string> *fun, int dim){
@@ -82,6 +82,7 @@ FVector parse_linear_function_input(vector <string> *fun, int dim){
     FVector v = new Tfvector(dim);
     string tmp, coef; char var = 'a';
 
+    // checking at which variable the polynomial starts (default = a)
     tmp = fun->at(0); int l2 = fun->at(0).size();
     for(j = 0; j < l2; j++){
         if(tmp[j] > 'a' && tmp[j] < 'z'){
@@ -92,8 +93,7 @@ FVector parse_linear_function_input(vector <string> *fun, int dim){
         v->array[p] = str_to_fraction("0");
     }
 
-    //(tmp[j] - 'a')
-
+    // parsing the various strings contained in the vector "fun"
     for(int i = 0; i < l; i++){
         coef = "";
         tmp = fun->at(i);
@@ -104,8 +104,7 @@ FVector parse_linear_function_input(vector <string> *fun, int dim){
             } else if(tmp[j] == '-'){
                 coef += "-"; j++;
             } else {
-                coef += tmp[j];
-                j++;
+                coef += tmp[j]; j++;
             }
         }
         if(coef == ""){
