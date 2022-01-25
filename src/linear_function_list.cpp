@@ -59,7 +59,7 @@ void command_print_function(FNodeptr n){
 
 FNodeptr command_new_function_from_representative_matrix(FNodeptr n){
     string name; cout << "Function name: "; fflush(stdin); cin >> name;
-    if(! isPresentV(n, name)){
+    if(! isPresentF(n, name)){
         cout << "Representative matrix name: "; cin >> name;
         FMatrix m = translate_linear_function();
 
