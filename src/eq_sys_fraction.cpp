@@ -90,16 +90,22 @@ setFVectorsPtr feq_sys_sol(FEqsys e) {
         int pivot_row_position[rank];
         int free_var_column_position[c - rank];
         int count1 = 0, count2 = 0, count3 = 0;
-        int i, zero_control = 0; 
-        int __dim_base;
+        int i, free_column = 0; 
+        int __dim_base = c - rank;
+        res->dim = __dim_base;
+        res->n_th = c;
+        res->v = new FVector[__dim_base];
+        for (int d = 0; d < __dim_base; ++d) {
+            res->v[d] = new Tfvector(c);
+        }
         
         cout << "infinite results." << endl;
 
         for (int j = 0; j < c; ++j) {
             if (rank > 0) {
-                 i = (j - zero_control);
-                 if (m->mat[i][j]->num == 0) {
-                    ++zero_control;
+                i = (j - free_column);
+                if (m->mat[i][j]->num == 0) {
+                    ++free_column;
                     free_var_column_position[count3++] = j;
                     continue; // passa alla prossima colonna
                 }
@@ -109,17 +115,6 @@ setFVectorsPtr feq_sys_sol(FEqsys e) {
             }
            
             rank--;
-
-            if (rank == 0) {
-                __dim_base = (c - j - 1);
-                res->dim = __dim_base;
-                res->n_th = c;
-                res->v = new FVector[__dim_base];
-                for (int d = 0; d < __dim_base; ++d) {
-                    res->v[d] = new Tfvector(c);
-                }
-            }
-
             if (rank < 0) free_var_column_position[count3++] = j;
         }
 
