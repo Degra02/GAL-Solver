@@ -36,4 +36,7 @@ FMatrix translate_linear_function();
 FVector parse_linear_function_input(vector <string> *fun, int dim);
 void collect_linear_function(vector <string> *fun);
 
+setFVectorsPtr Ker(Function f);
+setFVectorsPtr Im(Function f);
+
 #endif

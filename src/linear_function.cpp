@@ -126,3 +126,12 @@ FVector parse_linear_function_input(vector <string> *fun, int dim){
 
     return v;
 }
+
+setFVectorsPtr Ker(Function f) {
+    int _n_th = f->b2->n_th;
+    FVector b = new Tfvector(_n_th);
+    for (int i = 0; i < _n_th; ++i) b->array[i] = new Tfraction(0, 1);
+    FEqsys ef = new Tfeqsys(f->mr, b);
+    return feq_sys_sol(ef);
+}
+
