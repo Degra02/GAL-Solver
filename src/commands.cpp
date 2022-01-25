@@ -19,7 +19,7 @@ void parse_user_input(vector <string> *userinput){
     }
 }
 
-void function_call(Lists list){
+void function_call(Lists list){ // ! Gram Schmidt, Orthonormal
     string name;
     vector <string> userinput;
     do{ 

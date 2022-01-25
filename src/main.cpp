@@ -10,13 +10,8 @@ int main() {
 	// Lists list = new Tlists();
 	// function_call(list);
 
-	setFVectorsPtr sv = init_set_fvectors("b");
-	print_set_fvectors(sv);
-	setFVectorsPtr a = Gram_Schmidt(sv);
-	print_set_fvectors(a);
-	setFVectorsPtr ao = orthogonal_complement(sv);
-	print_set_fvectors(ao);
-
+	FMatrix m = translate_linear_function();
+	print_fmatrix(m);
 
 	return 0;
 }

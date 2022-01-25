@@ -1,5 +1,6 @@
 #include <iostream>
 #include "all-headers.h"
+#include <bits/stdc++.h>
 using namespace std;
 
 #ifndef __LINEAR_FUNCTION_H__
@@ -31,5 +32,8 @@ typedef Tfunction *Function;
 Function init_function(string name);
 //Function init_function_from_saved(string name, Lists l);
 void print_function(Function f);
+FMatrix translate_linear_function();
+FVector parse_linear_function_input(vector <string> *fun, int dim);
+void collect_linear_function(vector <string> *fun);
 
 #endif
