@@ -11,6 +11,8 @@ int main() {
 	print_function(f);
 	setFVectorsPtr ker = Ker(f);
 	print_set_fvectors(ker);
+	setFVectorsPtr im = Im(f);
+	print_set_fvectors(im);
 
 	return 0;
 }

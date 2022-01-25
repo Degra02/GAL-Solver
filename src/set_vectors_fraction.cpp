@@ -53,20 +53,18 @@ setFVectorsPtr init_set_fvectors_base(string name) {
 setFVectorsPtr insert_values_set_fvectors(int _dim, int _n_th, string name) {
     setFVectorsPtr sv = new TsetFVectors(_dim, _n_th, name); string value;
     for(int i = 0; i < _dim; ++i) { 
-    cout << "V" << (i + 1) << ":"; sv->v[i] = new Tfvector(_n_th); 
-    for(int j = 0; j < _n_th; ++j) {
-    cout << "  "; cin >> value; sv->v[i]->array[j] = str_to_fraction(value);
-    sv->v[i]->array[j] = fraction_simplification(sv->v[i]->array[j]); }
-    cout << endl; } cout << endl; fflush(stdin); 
+        cout << "V" << (i + 1) << ":"; sv->v[i] = new Tfvector(_n_th); 
+        for(int j = 0; j < _n_th; ++j) { cout << "  "; 
+        cin >> value; sv->v[i]->array[j] = str_to_fraction(value);
+        sv->v[i]->array[j] = fraction_simplification(sv->v[i]->array[j]); }
+        cout << endl; 
+    } cout << endl; fflush(stdin); 
     return sv;
 }
 
 void print_set_fvectors(setFVectorsPtr sv) {
     cout << "Name: " << "\x1b[38;5;50m" << sv->name << "\x1b[0m";
-    cout << endl << endl;
-
-    cout << "   "; sv->print();
-
+    cout << endl << endl; cout << "   "; sv->print();
     cout << endl << endl;
 }
 

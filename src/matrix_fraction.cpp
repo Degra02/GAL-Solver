@@ -100,9 +100,9 @@ FMatrix init_predefinition_fmatrix(string name, int r, int c) {
 
 FMatrix insert_values_fmatrix(int r, int c, string name) {
     FMatrix m = new Tfmatrix(name, r, c); Fraction f; string value; 
-    for(int i = 0; i < r; i++) { cout << "   ";
-    for(int j = 0; j < c; j++) { cin >> value; f = str_to_fraction(value);
-    m->mat[i][j] = f; m->mat[i][j] = fraction_simplification(m->mat[i][j]); }
+    for(int i = 0; i < r; i++) { 
+        cout << "   "; for(int j = 0; j < c; j++) { cin >> value; f = str_to_fraction(value);
+        m->mat[i][j] = f; m->mat[i][j] = fraction_simplification(m->mat[i][j]); }
     } fflush(stdin); cout << endl << endl;
     return m;
 }
