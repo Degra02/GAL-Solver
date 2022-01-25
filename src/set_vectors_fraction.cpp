@@ -96,7 +96,7 @@ bool set_fvectors_is_base(setFVectorsPtr sv) {
 setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv) {
     int _dim = sv->dim, _n_th = sv->n_th;
     int j;
-    setFVectorsPtr a = new TsetFVectors(_dim, sv->n_th, "");
+    setFVectorsPtr a = new TsetFVectors(_dim, _n_th, "");
     FVector u = new Tfvector(_n_th);
 
     if (!set_fvectors_is_linearly_independent(sv)) {
@@ -104,7 +104,7 @@ setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv) {
         return sv;
     } 
 
-    a->v[0] = sv->v[0]; 
+    a->v[0] = sv->v[0];
     for (int i = 1; i < _dim; ++i) {
         for (int i = 0; i < _n_th; ++i) u->array[i] = new Tfraction(0, 1);
         j = i;
@@ -114,7 +114,6 @@ setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv) {
                 fvector_scalar_product(a->v[j], sv->v[i]),
                 fvector_norm_noroot(a->v[j])
             )));
-            
         } while (j != 0);
         a->v[i] = fvector_difference(sv->v[i], u);
     }
@@ -122,4 +121,34 @@ setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv) {
     for (int i = 0; i < _dim; ++i) a->v[i] = fvector_normalization(a->v[i]);
 
     return a;
+}
+
+setFVectorsPtr orthogonal_complement(setFVectorsPtr sv) {
+    setFVectorsPtr res;
+
+    if (!set_fvectors_is_linearly_independent(sv)) {
+        cout << "the set of vectors is not linearly independent." << endl;
+        return sv;
+    }
+
+    if (set_fvectors_is_generators(sv)) {
+        return new TsetFVectors("");
+    }
+
+    sv = Gram_Schmidt(sv);
+    
+    FVector b = new Tfvector(sv->dim);
+    for (int i = 0; i < sv->dim; ++i) b->array[i] = new Tfraction(0, 1);
+
+    FMatrix A = new Tfmatrix(sv->dim, sv->n_th);
+    for (int i = 0; i < sv->dim; ++i) {
+        for (int j = 0; j < sv->n_th; ++j) {
+            A->mat[i][j] = sv->v[i]->array[j];
+        }
+    }
+
+    FEqsys e = new Tfeqsys(A, b); 
+    res = feq_sys_sol(e);
+    res = Gram_Schmidt(res);
+    return res;
 }

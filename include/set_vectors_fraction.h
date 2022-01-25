@@ -27,5 +27,6 @@ bool set_fvectors_is_generators(setFVectorsPtr sv);
 bool set_fvectors_is_base(setFVectorsPtr sv);
 
 setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv);
+setFVectorsPtr orthogonal_complement(setFVectorsPtr sv);
 
 #endif
