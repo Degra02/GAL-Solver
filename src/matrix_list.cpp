@@ -268,3 +268,16 @@ void command_matrix_det(MNodeptr n){
         cout << "Matrix not found" << endl << endl;
     }
 }
+
+MNodeptr command_matrix_reverse(MNodeptr n){
+    string name; cout << "Matrix name: "; fflush(stdin); cin >> name;
+    FMatrix m = get_search(n, name);
+    if(m != NULL){
+        FMatrix m1 = fraction_matrix_reverse(m);
+        m1->name = m->name + "-1";
+        return insertFirst(n, m1);
+    } else {
+        cout << "Matrix not found" << endl << endl;
+    }
+    return n;
+}

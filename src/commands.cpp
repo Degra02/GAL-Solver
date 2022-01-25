@@ -62,6 +62,8 @@ void function_call(Lists list){
                     command_matrix_is_base(list->Mlist);
                 } else if(userinput[2] == "det"){
                     command_matrix_det(list->Mlist);
+                } else if(userinput[2] == "reverse"){
+                    list->Mlist = command_matrix_reverse(list->Mlist);
                 } else {
                     cout << "Invalid function call" << endl << endl;
                 }

@@ -1,7 +1,7 @@
 # Unnecessary files
 
 # object files in the source directory
-/src/*.o
+src/*.o
 
 # text editor garbage
 .vscode/
@@ -12,4 +12,4 @@ Makefile
 
 #other
 src/main.cpp
-/lib
+lib/

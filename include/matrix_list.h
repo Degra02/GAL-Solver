@@ -45,5 +45,6 @@ MNodeptr command_matrix_rref(MNodeptr n);
 void command_matrix_rank(MNodeptr n);
 void command_matrix_is_base(MNodeptr n);
 void command_matrix_det(MNodeptr n);
+MNodeptr command_matrix_reverse(MNodeptr n);
 
 #endif
