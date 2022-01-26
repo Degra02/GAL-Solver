@@ -101,13 +101,12 @@ setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv) {
     if (!set_fvectors_is_linearly_independent(sv))
     { cout << "the set of vectors is not linearly independent." << endl; return sv; } 
     a->v[0] = sv->v[0];
-    for (int i = 1; i < _dim; ++i) {
-        j = i; for (int h = 0; h < _n_th; ++h) u->array[h] = new Tfraction(0, 1); 
-        do { --j; u = fvector_sum(u, fvector_product_with_scalar(a->v[j], 
-        fraction_quotient(fvector_scalar_product(a->v[j], sv->v[i]), fvector_norm_noroot(a->v[j]))));
-        } while (j != 0);
-        a->v[i] = fvector_difference(sv->v[i], u);
-    }
+    for (int i = 1; i < _dim; ++i) 
+    { j = i; for (int h = 0; h < _n_th; ++h) u->array[h] = new Tfraction(0, 1); 
+    do { --j; u = fvector_sum(u, fvector_product_with_scalar(
+    a->v[j], fraction_quotient(fvector_scalar_product(a->v[j], sv->v[i]), fvector_norm_noroot(a->v[j]))));
+    } while (j != 0);
+    a->v[i] = fvector_difference(sv->v[i], u); }
     for (int i = 0; i < _dim; ++i) a->v[i] = fvector_normalization(a->v[i]);
     return a;
 }

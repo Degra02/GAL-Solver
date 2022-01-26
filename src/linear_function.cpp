@@ -139,10 +139,9 @@ setFVectorsPtr Im(Function f) {
     int rank = fraction_matrix_rank(mrg), i, zero_column = 0;
     setFVectorsPtr im = new TsetFVectors(rank, f->b2->n_th, "");
     for (int j = 0; j < mrg->nc; ++j) 
-    {   i = j - zero_column; if (i >= mrg->nc) break;
-        if (mrg->mat[i][j]->num == 0) ++zero_column;
-        else { --rank; for (int h = 0; h < mrg->nr; ++h) im->v[i]->array[h] = f->mr->mat[h][j]; }  
-    } 
+    { i = j - zero_column; if (i >= mrg->nc) break;
+    if (mrg->mat[i][j]->num == 0) ++zero_column;
+    else { --rank; for (int h = 0; h < mrg->nr; ++h) im->v[i]->array[h] = f->mr->mat[h][j]; } } 
     return im;
 }
 
