@@ -3,40 +3,30 @@
 using namespace std;
 
 TsetFVectors::TsetFVectors(string _n) {
-    dim = 0; n_th = 0; 
-    name = _n;
+    dim = 0; n_th = 0; name = _n;
 }
 
 TsetFVectors::TsetFVectors(int x, int y, string _n) {
-    dim = x; n_th = y;
-    name = _n;
-    v = new FVector[dim];
-    for (int i = 0; i < dim; ++i) {
-        v[i] = new Tfvector(n_th);
-    }
+    dim = x; n_th = y; name = _n; v = new FVector[dim];
+    for (int i = 0; i < dim; ++i) v[i] = new Tfvector(n_th);
 }
 
 TsetFVectors::~TsetFVectors() {
-    for (int i = 0; i < dim; ++i) {
-        delete v[i];
-    } 
+    for (int i = 0; i < dim; ++i) delete v[i];
     delete[] v;
 }
 
 void TsetFVectors::print() const {
     cout << "{ ";
-    for (int i = 0; i < dim; ++i) {
-        v[i]->print();
-        if (i != (dim - 1)) cout << ", ";
-    }
+    for (int i = 0; i < dim; ++i) 
+    { v[i]->print(); if (i != (dim - 1)) cout << ", "; }
     cout << " }";
 }
 
 setFVectorsPtr init_set_fvectors(string name) {
     int _dim, _n_th;
     cout << "Vector size= "; cin >> _n_th; 
-    cout << "Dimension= "; cin >> _dim; 
-    cout << endl;
+    cout << "Dimension= "; cin >> _dim; cout << endl;
     return insert_values_set_fvectors(_dim, _n_th, name);
 }
 
@@ -70,12 +60,8 @@ void print_set_fvectors(setFVectorsPtr sv) {
 
 FMatrix set_vectors_to_fmatrix(setFVectorsPtr sv) {
     FMatrix m = new Tfmatrix(sv->n_th, sv->dim);
-    for (int j = 0; j < m->nc; ++j) {
-       for (int i = 0; i < m->nr; ++i) {
-           m->mat[i][j] = sv->v[j]->array[i];
-       }
-    }
-
+    for (int j = 0; j < m->nc; ++j) 
+    { for (int i = 0; i < m->nr; ++i) m->mat[i][j] = sv->v[j]->array[i]; }
     return m;
 }
 
