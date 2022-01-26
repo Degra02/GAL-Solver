@@ -131,8 +131,8 @@ setFVectorsPtr completion_of_base(setFVectorsPtr sv) {
     int _n_th = sv->n_th, _dim = sv->dim, r, free_column = 0;
     setFVectorsPtr res = new TsetFVectors(_n_th, _n_th, "");
     if (!set_fvectors_is_linearly_independent(sv)) 
-    { cout << "the set of vectors is not linearly independent." << endl; return sv; }
-    if (set_fvectors_is_generators(sv)) return sv; 
+    { cout << "the set of vectors is not linearly independent." << endl; return NULL; }
+    if (set_fvectors_is_generators(sv)) return NULL; 
     FMatrix m = set_vectors_to_fmatrix(sv);
     FMatrix mid = new Tfmatrix(_n_th, _dim + _n_th); 
     for (int i = 0; i < _n_th; ++i) 

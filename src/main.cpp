@@ -6,13 +6,10 @@ using namespace std;
 
 int main() {
 	srand(time(0));
-	// Lists list = new Tlists();
-	// function_call(list);
+	Lists list = new Tlists();
+	function_call(list);
 
-	setFVectorsPtr sv = init_set_fvectors("a");
-	print_set_fvectors(sv);
-	setFVectorsPtr b = completion_of_base(sv);
-	print_set_fvectors(b);
+	// TODO: save all the objects in the function structure when created new
 
 	return 0;
 }

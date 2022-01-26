@@ -35,7 +35,7 @@ void function_call(Lists list){
             } else if(userinput[1] == "set"){
                 list->Slist = command_new_vectors_set(list->Slist);
             } else if(userinput[1] == "function"){
-                list->Flist = command_new_function(list->Flist); // ! save the new elements created
+                list = command_new_function(list);
                 list = command_save_function(list);
             } else {
                 cout << "Invalid function call" << endl << endl;
@@ -100,6 +100,8 @@ void function_call(Lists list){
                     list->Slist = command_gram_schmidt(list->Slist);
                 } else if(userinput[2] == "ort"){
                     list->Slist = command_orthogonal_complement(list->Slist);
+                } else if(userinput[2] == "complete"){
+                    list->Slist = command_base_completion(list->Slist);
                 } else {
                     cout << "Invalid function call" << endl << endl;
                 }
@@ -108,6 +110,10 @@ void function_call(Lists list){
                     
                 } else if(userinput[2] == "apply"){
                     list = command_apply_function(list);
+                } else if(userinput[2] == "ker"){
+                    list = command_function_ker(list);
+                } else if(userinput[2] == "im"){
+                    list = command_function_im(list);
                 } else {
                     cout << "Invalid function call" << endl << endl;
                 }

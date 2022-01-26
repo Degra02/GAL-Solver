@@ -27,7 +27,6 @@ FNodeptr insertFirstF(FNodeptr n, Function f);
 Function get_fsearch(FNodeptr n, string name);
 bool isPresentF(FNodeptr n, string name);
 FNodeptr insertF(FNodeptr n, string name);
-FNodeptr command_new_function(FNodeptr n);
 void command_print_function(FNodeptr n);
 FNodeptr command_new_function_from_representative_matrix(FNodeptr n);
 

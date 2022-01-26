@@ -29,6 +29,7 @@ bool isPresentF(FNodeptr n, string name){
         if(t->f->name == name){
             return true;
         }
+        t = t->next;
     }
     return false;
 }
@@ -38,21 +39,6 @@ FNodeptr insertF(FNodeptr n, string name){
         n = insertFirstF(n, init_function(name));
     } else {
         cout << "Function with the same name already exists" << endl << endl;
-    }
-    return n;
-}
-
-FNodeptr command_new_function(FNodeptr n){
-    string choice;
-    printf("From \x01b[1;38;5;3mexisting\x01b[0m bases and representative matrix or \x01b[1;38;5;3mnew\x01b[0m ones?: ");
-    fflush(stdin); cin >> choice;
-    if(choice == "existing"){
-        return command_new_function_from_representative_matrix(n);
-    } else if(choice == "new"){
-        string name; cout << "Function name: "; fflush(stdin); cin >> name;
-        return insertF(n, name);
-    } else {
-        cout << "Invalid function call" << endl << endl;
     }
     return n;
 }

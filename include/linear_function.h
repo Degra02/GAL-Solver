@@ -30,7 +30,6 @@ typedef struct Tfunction{
 typedef Tfunction *Function;
 
 Function init_function(string name);
-//Function init_function_from_saved(string name, Lists l);
 void print_function(Function f);
 FMatrix translate_linear_function();
 FVector parse_linear_function_input(vector <string> *fun, int dim);

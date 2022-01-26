@@ -80,7 +80,7 @@ void command_print_all_sets(SNodeptr n){
     }
     SNodeptr t = n;
     while(t != NULL){
-        t->b->print(); cout << endl << endl;
+        print_set_fvectors(t->b); cout << endl << endl;
         t = t->next;
     }
 }
@@ -155,6 +155,23 @@ SNodeptr command_orthogonal_complement(SNodeptr n){
         b->name = a->name + "ort";
         print_set_fvectors(b);
         return insertFirstS(n, b);
+    } else {
+        cout << "Set not found" << endl << endl;
+    }
+    return n;
+}
+
+SNodeptr command_base_completion(SNodeptr n){
+    string name; cout << "Set name: "; fflush(stdin); cin >> name;
+    setFVectorsPtr a = get_ssearch(n, name);
+    if(a != NULL){
+        setFVectorsPtr b = completion_of_base(a);
+        if(b != NULL){
+            b->name = a->name + "_C";
+            print_set_fvectors(b); return insertFirstS(n, b);
+        } else {
+            return n;
+        }
     } else {
         cout << "Set not found" << endl << endl;
     }

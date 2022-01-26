@@ -42,6 +42,22 @@ Lists command_save_function(Lists list){
     return list;
 }
 
+/*Lists command_new_function(Lists list){
+    string choice;
+    printf("From \x01b[1;38;5;3mexisting\x01b[0m bases and representative matrix or \x01b[1;38;5;3mnew\x01b[0m ones?: ");
+    fflush(stdin); cin >> choice;
+    if(choice == "existing"){
+        list->Flist = command_new_function_from_representative_matrix(list->Flist);
+        
+    } else if(choice == "new"){
+        string name; cout << "Function name: "; fflush(stdin); cin >> name;
+        return insertF(n, name);
+    } else {
+        cout << "Invalid function call" << endl << endl;
+    }
+    return n;
+}*/
+
 Lists command_apply_function(Lists list){
     string n1, n2, choice; cout << "Function name: "; fflush(stdin); cin >> n1;
     Function f = get_fsearch(list->Flist, n1);
@@ -81,6 +97,79 @@ Lists command_apply_function(Lists list){
         }
     } else {
         cout << "Function not found" << endl << endl;
+    }
+    return list;
+}
+
+Lists command_function_ker(Lists list){
+    string name; cout << "Function name: "; fflush(stdin); cin >> name;
+    Function f = get_fsearch(list->Flist, name);
+    if(f != NULL){
+        setFVectorsPtr k = Ker(f); k->name = "ker(" + f->name + ")";
+        print_set_fvectors(k);
+        list->Slist = insertFirstS(list->Slist, k); return list;
+    } else {
+        cout << "Function not found: " << endl << endl;
+    }
+    return list;
+}
+
+Lists command_function_im(Lists list){
+    string name; cout << "Function name: "; fflush(stdin); cin >> name;
+    Function f = get_fsearch(list->Flist, name);
+    if(f != NULL){
+        setFVectorsPtr i = Im(f); i->name = "Im(" + f->name + ")";
+        print_set_fvectors(i);
+        list->Slist = insertFirstS(list->Slist, i); return list;
+    } else {
+        cout << "Function not found: " << endl << endl;
+    }
+    return list;
+}
+
+Function init_function_from_saved(string name, Lists l){
+    string n1, n2, n3;
+    cout << "From base: "; fflush(stdin); cin >> n1;
+    cout << "To base: "; fflush(stdin); cin >> n2;
+    setFVectorsPtr b1 = get_ssearch(l->Slist, n1), b2 = get_ssearch(l->Slist, n2);
+    if((b1 == NULL) || (b2 == NULL)){
+        cout << "Base not found" << endl << endl; return NULL;
+    }
+    cout << "Representative matrix name: "; fflush(stdin); cin >> n3;
+    FMatrix m1 = get_search(l->Mlist, n3);
+    if(m1 != NULL){
+        FMatrix m2 = fraction_matrix_copy(m1);
+        m2->name = "M" + b1->name + b2->name + "( " + name + " )";
+        return new Tfunction(name, b1, b2, m2);
+    } else {
+        cout << "Matrix not found" << endl << endl; return NULL;
+    }
+}
+
+Lists command_new_function(Lists list){
+    string choice, choice2, name;
+    printf("From \x01b[1;38;5;3mexisting\x01b[0m bases and representative matrix or \x01b[1;38;5;3mnew\x01b[0m ones?: ");
+    fflush(stdin); cin >> choice;
+    if(choice == "existing"){
+        cout << "Function name: "; fflush(stdin); cin >> name;
+        Function f = init_function_from_saved(name, list);
+        if(f != NULL){
+            print_function(f);
+            list->Flist = insertFirstF(list->Flist, f); return list;
+        }
+    } else if(choice == "new"){
+        cout << "Knowing the representative matrix or not? (y/n): "; fflush(stdin); cin >> choice2;
+        if(choice2 == "y"){
+            string name; cout << "Function name: "; fflush(stdin); cin >> name;
+            list->Flist = insertF(list->Flist, name); return list;
+        } else if(choice2 == "n"){
+            list->Flist = command_new_function_from_representative_matrix(list->Flist);
+            return list;
+        } else {
+            cout << "Invalid function call" << endl << endl; return list;
+        }
+    } else {
+        cout << "Invalid function call" << endl << endl;
     }
     return list;
 }
