@@ -39,4 +39,6 @@ void collect_linear_function(vector <string> *fun);
 setFVectorsPtr Ker(Function f);
 setFVectorsPtr Im(Function f);
 
+bool function_is_bijective(Function f);
+
 #endif

@@ -146,3 +146,8 @@ setFVectorsPtr Im(Function f) {
     } 
     return im;
 }
+
+bool function_is_bijective(Function f) {
+    setFVectorsPtr im = Im(f), ker = Ker(f);
+    return set_fvectors_is_base(im) && ker->dim == 0;
+}
