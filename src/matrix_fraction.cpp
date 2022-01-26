@@ -381,8 +381,8 @@ bool matrix_is_square(FMatrix m) {
 
 FMatrix fraction_matrix_reverse(FMatrix m) {
     int r = m->nr, c = m->nc;
-    if (!matrix_is_square(m) || fraction_matrix_rank(m) != c) {
-        cout << "Reverse matrix does not exit." << endl;
+    if ((!matrix_is_square(m)) || (fraction_matrix_rank(m) != c)) {
+        cout << "Reverse matrix does not exit." << endl << endl;
         return NULL;
     }
 

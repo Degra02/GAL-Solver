@@ -274,8 +274,12 @@ MNodeptr command_matrix_reverse(MNodeptr n){
     FMatrix m = get_search(n, name);
     if(m != NULL){
         FMatrix m1 = fraction_matrix_reverse(m);
-        m1->name = m->name + "-1";
-        return insertFirst(n, m1);
+        if(m1 != NULL){
+            m1->name = m->name + "-1";
+            return insertFirst(n, m1);
+        } else {
+            return n;
+        }
     } else {
         cout << "Matrix not found" << endl << endl;
     }
