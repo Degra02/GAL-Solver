@@ -32,6 +32,20 @@ void TsetFVectors::print() const {
     cout << " }";
 }
 
+setFVectorsPtr id(int dim){
+    setFVectorsPtr a = new TsetFVectors(dim, dim, "id" + to_string(dim));
+    for(int i = 0; i < dim; i++){
+        for(int j = 0; j < dim; j++){
+            if(j == i){
+                a->v[i]->array[j] = str_to_fraction("1");
+            } else {
+                a->v[i]->array[j] = str_to_fraction("0");
+            }
+        }
+    }
+    return a;
+}
+
 setFVectorsPtr init_set_fvectors(string name) {
     int _dim, _n_th;
     cout << "Vector size= "; cin >> _n_th; 
