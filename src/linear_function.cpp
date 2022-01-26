@@ -149,5 +149,9 @@ setFVectorsPtr Im(Function f) {
 
 bool function_is_bijective(Function f) {
     setFVectorsPtr im = Im(f), ker = Ker(f);
-    return set_fvectors_is_base(im) && ker->dim == 0;
+    return (set_fvectors_is_base(im) && ker->dim == 0);
+}
+
+FVector apply_linear_function(Function f, FVector v){
+    return fraction_matrix_fvector_product(f->mr, v);
 }

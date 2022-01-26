@@ -32,5 +32,6 @@ typedef Tlists *Lists;
 
 Lists command_system_build(Lists list);
 Lists command_save_function(Lists list);
+Lists command_apply_function(Lists list);
 
 #endif

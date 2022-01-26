@@ -405,3 +405,21 @@ FMatrix fraction_matrix_reverse(FMatrix m) {
 
     return mr;
 }
+
+FVector fraction_matrix_fvector_product(FMatrix m, FVector v){
+    int r = m->nr, c = m->nc;
+    if(v->n == c){
+        FVector vm = new Tfvector(r); //dim = m->nr
+        for(int i = 0; i < vm->n; i++){
+            vm->array[i] = str_to_fraction("0");
+        }
+        for(int i = 0; i < r; ++i){
+            for(int j = 0; j < c; ++j){
+                vm->array[i] = fraction_sum( vm->array[i],  
+                ( fraction_product(v->array[i], m->mat[i][j]) ) );
+            }
+        }
+        return vm;
+    }
+    return NULL;
+}

@@ -40,5 +40,6 @@ setFVectorsPtr Ker(Function f);
 setFVectorsPtr Im(Function f);
 
 bool function_is_bijective(Function f);
+FVector apply_linear_function(Function f, FVector v);
 
 #endif

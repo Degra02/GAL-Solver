@@ -35,16 +35,8 @@ void function_call(Lists list){
             } else if(userinput[1] == "set"){
                 list->Slist = command_new_vectors_set(list->Slist);
             } else if(userinput[1] == "function"){
-                if(userinput[2] == "base"){
-                    list->Flist = command_new_function(list->Flist);
-                    list = command_save_function(list);
-                } else if(userinput[2] == "matrix"){
-                    list->Flist = command_new_function_from_representative_matrix(list->Flist);
-                    //list = command_save_function(list);
-                } else {
-                    cout << "Invalid function call" << endl << endl;
-                }
-                
+                list->Flist = command_new_function(list->Flist); // ! save the new elements created
+                list = command_save_function(list);
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
@@ -114,6 +106,8 @@ void function_call(Lists list){
             } else if(userinput[1] == "function"){
                 if(userinput[2] == "matrix"){
                     
+                } else if(userinput[2] == "apply"){
+                    list = command_apply_function(list);
                 } else {
                     cout << "Invalid function call" << endl << endl;
                 }

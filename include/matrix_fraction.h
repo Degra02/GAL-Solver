@@ -1,4 +1,5 @@
 #include "all-headers.h"
+#include "vector_fraction.h"
 #include <iostream>
 #ifndef __MATRIX_FRACTION_H__
 #define __MATRIX_FRACTION_H__
@@ -48,5 +49,6 @@ FMatrix fraction_matrix_rref(FMatrix m);
 int fraction_matrix_rank(FMatrix m);
 bool fraction_matrix_is_base(FMatrix m);
 bool matrix_is_square(FMatrix m);
+FVector fraction_matrix_fvector_product(FMatrix m, FVector v);
 
 #endif
