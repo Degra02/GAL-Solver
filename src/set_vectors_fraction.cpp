@@ -56,14 +56,14 @@ setFVectorsPtr init_set_fvectors_base(string name) {
 
 setFVectorsPtr insert_values_set_fvectors(int _dim, int _n_th, string name) {
     setFVectorsPtr sv = new TsetFVectors(_dim, _n_th, name); string value;
-    for(int i = 0; i < _dim; ++i) { 
-        cout << "V" << (i + 1) << ":"; sv->v[i] = new Tfvector(_n_th); 
+    for(int i = 0; i < _dim; ++i)
+    {   cout << "V" << (i + 1) << ":"; sv->v[i] = new Tfvector(_n_th); 
         for(int j = 0; j < _n_th; ++j) { cout << "  "; 
         cin >> value; sv->v[i]->array[j] = str_to_fraction(value);
         sv->v[i]->array[j] = fraction_simplification(sv->v[i]->array[j]); }
         cout << endl; 
-    } cout << endl; fflush(stdin); 
-    return sv;
+    } 
+    cout << endl; fflush(stdin); return sv;
 }
 
 void print_set_fvectors(setFVectorsPtr sv) {
@@ -125,5 +125,26 @@ setFVectorsPtr orthogonal_complement(setFVectorsPtr sv) {
     { for (int j = 0; j < sv->n_th; ++j) A->mat[i][j] = sv->v[i]->array[j]; }
     FEqsys e = new Tfeqsys(A, b); 
     res = feq_sys_sol(e); res = Gram_Schmidt(res);
+    return res;
+}
+
+setFVectorsPtr completion_of_base(setFVectorsPtr sv) {
+    int _n_th = sv->n_th, _dim = sv->dim, r, free_column = 0;
+    setFVectorsPtr res = new TsetFVectors(_n_th, _n_th, "");
+    if (!set_fvectors_is_linearly_independent(sv)) 
+    { cout << "the set of vectors is not linearly independent." << endl; return sv; }
+    if (set_fvectors_is_generators(sv)) return sv; 
+    FMatrix m = set_vectors_to_fmatrix(sv);
+    FMatrix mid = new Tfmatrix(_n_th, _dim + _n_th); 
+    for (int i = 0; i < _n_th; ++i) 
+    { for (int j = 0; j < _dim; ++j) mid->mat[i][j] = m->mat[i][j];
+    for (int j = _dim; j < _dim + _n_th; ++j) 
+        if (i == (j - _dim)) mid->mat[i][j] = new Tfraction(1, 0);
+        else mid->mat[i][j] = new Tfraction(0, 1); }
+    FMatrix midg = fraction_matrix_gauss_jordan(mid);
+    for (int j = 0; j < (_dim + _n_th); ++j) 
+    { r = j - free_column; if (r >= _n_th) break;
+    if (midg->mat[r][j]->num == 0) ++free_column;
+    else for (int h = 0; h < mid->nr; ++h) res->v[r]->array[h] = mid->mat[h][j]; }
     return res;
 }
