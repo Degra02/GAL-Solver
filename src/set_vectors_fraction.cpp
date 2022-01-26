@@ -88,7 +88,7 @@ setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv) {
     { cout << "the set of vectors is not linearly independent." << endl; return sv; } 
     a->v[0] = sv->v[0];
     for (int i = 1; i < _dim; ++i) {
-        for (int i = 0; i < _n_th; ++i) u->array[i] = new Tfraction(0, 1); j = i;
+        j = i; for (int h = 0; h < _n_th; ++h) u->array[h] = new Tfraction(0, 1); 
         do { --j; u = fvector_sum(u, fvector_product_with_scalar(a->v[j], 
         fraction_quotient(fvector_scalar_product(a->v[j], sv->v[i]), fvector_norm_noroot(a->v[j]))));
         } while (j != 0);
@@ -108,7 +108,7 @@ setFVectorsPtr orthogonal_complement(setFVectorsPtr sv) {
     for (int i = 0; i < sv->dim; ++i) b->array[i] = new Tfraction(0, 1);
     FMatrix A = new Tfmatrix(sv->dim, sv->n_th);
     for (int i = 0; i < sv->dim; ++i)
-        { for (int j = 0; j < sv->n_th; ++j) A->mat[i][j] = sv->v[i]->array[j]; }
+    { for (int j = 0; j < sv->n_th; ++j) A->mat[i][j] = sv->v[i]->array[j]; }
     FEqsys e = new Tfeqsys(A, b); 
     res = feq_sys_sol(e); res = Gram_Schmidt(res);
     return res;
