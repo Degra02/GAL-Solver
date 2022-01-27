@@ -11,7 +11,6 @@
 #include "vector_fraction.h"
 #include "eq_sys_fraction.h"
 #include "determinant_fraction.h"
-#include "base_fraction.h"
 #include "set_vectors_fraction.h"
 #include "linear_function.h"
 

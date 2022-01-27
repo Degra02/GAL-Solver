@@ -224,3 +224,7 @@ Lists command_base_change(Lists list){
     }
     return list;
 }
+
+Lists command_representative_matrix_from_formula(Lists list){
+    
+}
