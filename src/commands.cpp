@@ -113,6 +113,8 @@ void function_call(Lists list){
                     list = command_function_ker(list);
                 } else if(userinput[2] == "im"){
                     list = command_function_im(list);
+                } else if(userinput[2] == "bc"){ // stands for base change
+                    list = command_base_change(list);
                 } else {
                     cout << "Invalid function call" << endl << endl;
                 }
@@ -155,7 +157,7 @@ void function_call(Lists list){
             } else if(userinput[1] == "sets"){
                 command_print_all_sets(list->Slist);
             } else if(userinput[1] == "functions"){
-                
+
             } else {
                 cout <<"Invalid function call" << endl << endl;
             }

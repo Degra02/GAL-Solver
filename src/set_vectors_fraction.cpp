@@ -95,8 +95,8 @@ void print_set_fvectors(setFVectorsPtr sv) {
 FMatrix set_vectors_to_fmatrix(setFVectorsPtr sv) {
     FMatrix m = new Tfmatrix(sv->n_th, sv->dim);
     for (int j = 0; j < m->nc; ++j) 
-    { for (int i = 0; i < m->nr; ++i) m->mat[i][j] = sv->v[j]->array[i]; }
-    return m;
+    { for (int i = 0; i < m->nr; ++i) m->mat[i][j] = fraction_copy(sv->v[j]->array[i]); }
+    return m; 
 }
 
 bool set_fvectors_is_linearly_independent(setFVectorsPtr sv) {

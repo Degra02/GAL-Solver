@@ -210,3 +210,7 @@ void control(Fraction f) {
     zero_control(f);
     sign_control(f);
 }
+
+Fraction fraction_copy(Fraction a){
+    return new Tfraction(a->num, a->den);
+}

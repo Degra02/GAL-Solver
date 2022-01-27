@@ -171,3 +171,56 @@ Lists command_new_function(Lists list){
     }
     return command_save_function(list);
 }
+
+FMatrix base_change(setFVectorsPtr b1, setFVectorsPtr b2){ // ! Check if the sets are bases of the same vectorial space
+    FMatrix m1 = set_vectors_to_fmatrix(b1), m2 = set_vectors_to_fmatrix(b2);
+    FMatrix full = new Tfmatrix(m1->nr, (m1->nc + m2->nc));
+    int r = m1->nr, c1 = m1->nc, c2 = m2->nc, tot = c1 + c2;
+    for(int i = 0; i < r; i++){
+        for(int j = 0; j < tot; j++){
+            if(j < c1){
+                //full->mat[i][j] = fraction_copy(m1->mat[i][j]);
+                full->mat[i][j]->num = m1->mat[i][j]->num;
+                full->mat[i][j]->den = m1->mat[i][j]->den;
+            } else {
+                //full->mat[i][j] = fraction_copy(m2->mat[i][j - c1]);
+                full->mat[i][j]->num = m2->mat[i][j - c1]->num;
+                full->mat[i][j]->den = m2->mat[i][j - c1]->den;
+            }
+        }
+    }
+    FMatrix rref = fraction_matrix_rref(full); FMatrix res = new Tfmatrix(r, c1);
+    for(int i = 0; i < r; i++){
+        for(int j = c1; j < tot; j++){
+            res->mat[i][j - c1] = rref->mat[i][j];
+        }
+        cout << endl;
+    }
+    return res;
+}
+
+Lists command_base_change(Lists list){
+    string name; cout << "Function name: "; fflush(stdin); cin >> name;
+    Function f = get_fsearch(list->Flist, name);
+    if(f != NULL){
+        FMatrix bs; int choice; cout << "From which base to which?" << endl;
+        cout << "1) " << f->b1->name << " to " << f->b2->name << endl;
+        cout << "2) " << f->b2->name << " to " << f->b1->name << endl;
+        cout << ">> "; fflush(stdin); cin >> choice;
+        if(choice == 1){
+            bs = base_change(f->b1, f->b2);
+            bs->name = "M" + f->b1->name + f->b2->name;
+        } else if(choice == 2){
+            bs = base_change(f->b2, f->b1);
+            bs->name = "M" + f->b2->name + f->b1->name;
+        } else {
+            cout << "Invalid choice" << endl; return list;
+        }
+        print_fmatrix(bs);
+        list->Mlist = insertFirst(list->Mlist, bs);
+        return list;
+    } else {
+        cout << "Function not found" << endl << endl;
+    }
+    return list;
+}
