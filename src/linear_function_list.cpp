@@ -62,7 +62,6 @@ void command_print_all_functions(FNodeptr n){
         print_function(t->f); cout << endl << endl;
         t = t->next;
     }
-
 }
 
 FNodeptr command_new_function_from_representative_matrix(FNodeptr n){

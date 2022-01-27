@@ -115,7 +115,8 @@ void function_call(Lists list){
                 } else if(userinput[2] == "im"){
                     list = command_function_im(list);
                 } else if(userinput[2] == "bc"){ // stands for base change
-                    list = command_base_change(list);
+                    list = command_representative_matrix_formula(list);
+                    //list = command_base_change(list);
                 } else {
                     cout << "Invalid function call" << endl << endl;
                 }
@@ -158,7 +159,7 @@ void function_call(Lists list){
             } else if(userinput[1] == "sets"){
                 command_print_all_sets(list->Slist);
             } else if(userinput[1] == "functions"){
-
+                command_print_all_functions(list->Flist);
             } else {
                 cout <<"Invalid function call" << endl << endl;
             }
