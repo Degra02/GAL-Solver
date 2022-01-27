@@ -40,22 +40,6 @@ Lists command_save_function(Lists list){
     return list;
 }
 
-/*Lists command_new_function(Lists list){
-    string choice;
-    printf("From \x01b[1;38;5;3mexisting\x01b[0m bases and representative matrix or \x01b[1;38;5;3mnew\x01b[0m ones?: ");
-    fflush(stdin); cin >> choice;
-    if(choice == "existing"){
-        list->Flist = command_new_function_from_representative_matrix(list->Flist);
-        
-    } else if(choice == "new"){
-        string name; cout << "Function name: "; fflush(stdin); cin >> name;
-        return insertF(n, name);
-    } else {
-        cout << "Invalid function call" << endl << endl;
-    }
-    return n;
-}*/
-
 Lists command_apply_function(Lists list){
     string n1, n2, choice; cout << "Function name: "; fflush(stdin); cin >> n1;
     Function f = get_fsearch(list->Flist, n1);
@@ -180,12 +164,12 @@ FMatrix base_change(setFVectorsPtr b1, setFVectorsPtr b2){ // ! Check if the set
         for(int j = 0; j < tot; j++){
             if(j < c1){
                 //full->mat[i][j] = fraction_copy(m1->mat[i][j]);
-                full->mat[i][j]->num = m1->mat[i][j]->num;
-                full->mat[i][j]->den = m1->mat[i][j]->den;
+                full->mat[i][j]->num = m2->mat[i][j]->num;
+                full->mat[i][j]->den = m2->mat[i][j]->den;
             } else {
                 //full->mat[i][j] = fraction_copy(m2->mat[i][j - c1]);
-                full->mat[i][j]->num = m2->mat[i][j - c1]->num;
-                full->mat[i][j]->den = m2->mat[i][j - c1]->den;
+                full->mat[i][j]->num = m1->mat[i][j - c1]->num;
+                full->mat[i][j]->den = m1->mat[i][j - c1]->den;
             }
         }
     }
@@ -225,6 +209,39 @@ Lists command_base_change(Lists list){
     return list;
 }
 
-Lists command_representative_matrix_from_formula(Lists list){
-    
+Lists command_representative_matrix_formula(Lists list){ // ! Da fixare
+    string name; cout << "Function name: "; fflush(stdin); cin >> name;
+    Function f = get_fsearch(list->Flist, name);
+    if(f != NULL){
+        string n1, n2; cout << "Base \"from\" name >> "; fflush(stdin); cin >> n1;
+        setFVectorsPtr b1, b2;
+        if(isPresentS(list->Slist, n1)){
+            b1 = get_ssearch(list->Slist, n1);
+        } else {
+            b1 = init_set_fvectors_base(n1);
+            list->Slist = insertFirstS(list->Slist, b1);
+        }
+        cout << "Base \"to\" name >> "; fflush(stdin); cin >> n2;
+        if(isPresentS(list->Slist, n2)){
+            b2 = get_ssearch(list->Slist, n2);
+        } else {
+            b2 = init_set_fvectors_base(n2);
+            list->Slist = insertFirstS(list->Slist, b2);
+        }
+        FMatrix m1 = base_change( f->b1 , b1), m2 = base_change(b2, f->b1);
+        FMatrix tot = fraction_matrix_multiplication(fraction_matrix_multiplication(m1, f->mr), m2);
+        tot->name = "M"+b1->name + "(" + f->name + ")";
+        list->Mlist = insertFirst(list->Mlist, tot); print_fmatrix(tot); cout << endl;
+        return list;
+    } else {
+        cout << "Function not found" << endl << endl;
+    }
+    return list;
 }
+
+// int n = b1->dim; setFVectorsPtr c1 = new TsetFVectors(b1->dim, b1->n_th, b1->name);
+//         for(int i = 0; i < n; i++){
+//             c1->v[i] = apply_linear_function(f, b1->v[i]);
+//         }
+//         FMatrix res = base_change(c1, b2); list->Mlist = insertFirst(list->Mlist, res);
+//     print_fmatrix(res);
