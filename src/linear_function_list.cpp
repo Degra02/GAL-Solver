@@ -58,8 +58,7 @@ FNodeptr command_new_function_from_representative_matrix(FNodeptr n){
     Function f = new Tfunction();
     if(! isPresentF(n, name)){
         f->name = name;
-        f->mr = translate_linear_function(); f->mr->name = "M";
-        f->mr->name.append("(" + f->name + ")"); 
+        f->mr = translate_linear_function(); f->mr->name = "M"; f->mr->name.append("(" + f->name + ")"); 
         f->b1 = id(f->mr->nc); f->b2 = id(f->mr->nr); 
         cout << endl; print_function(f); cout << endl;
         return insertFirstF(n, f);

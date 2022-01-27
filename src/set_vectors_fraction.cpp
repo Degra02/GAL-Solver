@@ -24,7 +24,7 @@ void TsetFVectors::print() const {
 }
 
 setFVectorsPtr id(int dim){
-    setFVectorsPtr a = new TsetFVectors(dim, dim, "id" + to_string(dim));
+    setFVectorsPtr a = new TsetFVectors(dim, dim, "C" + to_string(dim));
     for(int i = 0; i < dim; i++){
         for(int j = 0; j < dim; j++){
             if(j == i){
@@ -37,14 +37,34 @@ setFVectorsPtr id(int dim){
     return a;
 }
 
-setFVectorsPtr init_set_fvectors(string name) {
+int parse_canonical_base(string name){
+    int i = 0; string val = ""; 
+    while(name[i] != '\0'){
+        if(name[i] >= '0' && name[i] <= '9'){
+            val += name[i];
+        }
+        i++;
+    }
+    return stoi(val);
+}
+
+setFVectorsPtr init_set_fvectors(string name){
     int _dim, _n_th;
-    cout << "Vector size= "; cin >> _n_th; 
-    cout << "Dimension= "; cin >> _dim; cout << endl;
-    return insert_values_set_fvectors(_dim, _n_th, name);
+    if(name[0] == 'C'){
+        _dim = parse_canonical_base(name);
+        setFVectorsPtr i = id(_dim);
+        print_set_fvectors(i); cout << endl; return i;
+    } else {
+        cout << "Vector size= "; cin >> _n_th; 
+        cout << "Dimension= "; cin >> _dim; cout << endl;
+        return insert_values_set_fvectors(_dim, _n_th, name);
+    }
 }
 
 setFVectorsPtr init_set_fvectors_base(string name) {
+    if(name[0] == 'C'){
+        return id(parse_canonical_base(name));
+    }
     int _dim, _n_th; setFVectorsPtr base; bool m = false;
     cout << "Vector size= "; cin >> _n_th; _dim = _n_th;
     cout << endl;

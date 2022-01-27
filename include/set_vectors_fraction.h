@@ -22,6 +22,7 @@ setFVectorsPtr init_set_fvectors_base(string name);
 setFVectorsPtr insert_values_set_fvectors(int _dim, int _n_th, string name);
 void print_set_fvectors(setFVectorsPtr sv);
 setFVectorsPtr id(int dim);
+int parse_canonical_base(string name);
 
 FMatrix set_vectors_to_fmatrix(setFVectorsPtr sv);
 

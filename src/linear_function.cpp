@@ -56,7 +56,7 @@ FMatrix translate_linear_function(){
         }
     }
 
-    return m; // TODO: add name (outside of this function)
+    return m;
 }
 
 FVector parse_linear_function_input(vector <string> *fun, int dim){
