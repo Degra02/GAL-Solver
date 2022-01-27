@@ -36,7 +36,6 @@ void function_call(Lists list){
                 list->Slist = command_new_vectors_set(list->Slist);
             } else if(userinput[1] == "function"){
                 list = command_new_function(list);
-                list = command_save_function(list);
             } else {
                 cout << "Invalid function call" << endl << endl;
             }
@@ -155,6 +154,8 @@ void function_call(Lists list){
                 command_print_all_systems(list->Eqlist);
             } else if(userinput[1] == "sets"){
                 command_print_all_sets(list->Slist);
+            } else if(userinput[1] == "functions"){
+                
             } else {
                 cout <<"Invalid function call" << endl << endl;
             }

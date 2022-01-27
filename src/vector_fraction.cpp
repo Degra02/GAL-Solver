@@ -142,8 +142,7 @@ FVector init_fvector(string name){
 
 void print_fvector(FVector v){
     cout << "Name: " << "\x1b[38;5;50m" << v->name << "\x1b[0m = ";
-    cout << endl << endl;
-    cout << "   "; v->print();
+    cout << endl << "   "; v->print();
     cout << endl << endl;
 }
 

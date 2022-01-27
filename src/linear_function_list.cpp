@@ -53,6 +53,18 @@ void command_print_function(FNodeptr n){
     }
 }
 
+void command_print_all_functions(FNodeptr n){
+    if(n == NULL){
+        cout << "No saved functions" << endl << endl; return;
+    }
+    FNodeptr t = n;
+    while(t != NULL){
+        print_function(t->f); cout << endl << endl;
+        t = t->next;
+    }
+
+}
+
 FNodeptr command_new_function_from_representative_matrix(FNodeptr n){
     string name; cout << "Function name: "; fflush(stdin); cin >> name;
     Function f = new Tfunction();

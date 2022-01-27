@@ -36,8 +36,6 @@ Lists command_save_function(Lists list){
         list->Mlist = insertFirst(list->Mlist, f->mr);
         list->Slist = insertFirstS(list->Slist, f->b1);
         list->Slist = insertFirstS(list->Slist, f->b2);
-    } else {
-        cout << "Function not found" << endl << endl;
     }
     return list;
 }
@@ -171,5 +169,5 @@ Lists command_new_function(Lists list){
     } else {
         cout << "Invalid function call" << endl << endl;
     }
-    return list;
+    return command_save_function(list);
 }
