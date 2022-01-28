@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  ============================================================
+  ============================================================<br>
   A [WIP] project to help students solve Linear Algebra excercises.
 </p>
 
