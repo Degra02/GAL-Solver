@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./Icon/logo_removebg.png" width="350" title="logo">
+  <img src="GAL-Library/Icon/logo_removebg.png" width="350" title="logo">
 </p>
 
 
