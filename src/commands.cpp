@@ -147,6 +147,8 @@ void function_call(Lists list){
                 list->Eqlist = remove_esearch(list->Eqlist);
             } else if(userinput[1] == "set"){
                 list->Slist = remove_ssearch(list->Slist);
+            } else if(userinput[1] == "function"){
+                list->Flist = remove_fsearch(list->Flist);
             } else {
                 cout << "Invalid function call" << endl << endl;
             }

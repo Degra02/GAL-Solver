@@ -22,6 +22,30 @@ Function get_fsearch(FNodeptr n, string name){
     return NULL;
 }
 
+FNodeptr remove_fsearch(FNodeptr n){
+    string name; 
+    cout << "Function name= "; fflush(stdin); cin >> name;
+    if(n == NULL){
+        return NULL;
+    }
+    FNodeptr t = n;
+    if(n->f->name == name){
+        t = n->next;
+        delete n;
+        return t;
+    }
+    while((t->next != NULL) && (t->next->f->name != name)){
+        t = t->next;
+    }
+    if(t->next != NULL){
+        FNodeptr r = t->next;
+        t->next = t->next->next;
+        delete r;
+        return n;
+    }
+    return n;
+}
+
 bool isPresentF(FNodeptr n, string name){
     if(n == NULL) return false;
     FNodeptr t = n;
@@ -63,4 +87,3 @@ void command_print_all_functions(FNodeptr n){
         t = t->next;
     }
 }
-
