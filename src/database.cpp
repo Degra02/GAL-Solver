@@ -109,6 +109,31 @@ Lists command_function_im(Lists list){
     return list;
 }
 
+Lists command_counter_image(Lists list){
+    string name; cout << "Function name: "; fflush(stdin); cin >> name;
+    Function f = get_fsearch(list->Flist, name);
+    if(f != NULL){
+        string vname; cout << "Vector name: "; fflush(stdin); cin >> vname;
+        if(isPresentV(list->Vlist, vname)){
+            FVector v = get_vsearch(list->Vlist, vname);
+            setFVectorsPtr cim = Counter_Im(f, v);
+            cim->name = v->name + "cim"; // stands for counter image
+            list->Slist = insertFirstS(list->Slist, cim);
+            print_set_fvectors(cim); cout << endl;
+        } else {
+            FVector v = init_fvector(name);
+            setFVectorsPtr cim = Counter_Im(f, v);
+            cim->name = v->name + "cim";
+            list->Slist = insertFirstS(list->Slist, cim);
+            print_set_fvectors(cim); cout << endl;
+        }
+        return list;
+    } else {
+        cout << "Function not found: " << endl << endl;
+    }
+    return list;
+}
+
 Function init_function_from_saved(string name, Lists l){
     string n1, n2, n3;
     cout << "From base: "; fflush(stdin); cin >> n1;
@@ -129,31 +154,45 @@ Function init_function_from_saved(string name, Lists l){
 }
 
 Lists command_new_function(Lists list){
-    string choice, choice2, name;
-    printf("From \x01b[1;38;5;3mexisting\x01b[0m bases and representative matrix or \x01b[1;38;5;3mnew\x01b[0m ones?: ");
-    fflush(stdin); cin >> choice;
-    if(choice == "existing"){
-        cout << "Function name: "; fflush(stdin); cin >> name;
-        Function f = init_function_from_saved(name, list);
-        if(f != NULL){
-            print_function(f);
-            list->Flist = insertFirstF(list->Flist, f); return list;
-        }
-    } else if(choice == "new"){
-        cout << "Knowing the representative matrix or not? (y/n): "; fflush(stdin); cin >> choice2;
-        if(choice2 == "y"){
-            string name; cout << "Function name: "; fflush(stdin); cin >> name;
-            list->Flist = insertF(list->Flist, name); return list;
-        } else if(choice2 == "n"){
-            list->Flist = command_new_function_from_representative_matrix(list->Flist);
-            return list;
+    string name; cout << "Function name: "; fflush(stdin); cin >> name;
+    if(! isPresentF(list->Flist, name)){
+        string n1, n2, n3; cout << "Base \"from\": "; fflush(stdin); cin >> n1;
+        setFVectorsPtr b1, b2; FMatrix m;
+        if(isPresentS(list->Slist, n1)){
+            b1 = get_ssearch(list->Slist, n1);
         } else {
-            cout << "Invalid function call" << endl << endl; return list;
+            b1 = init_set_fvectors(n1);
+            list->Slist = insertFirstS(list->Slist, b1);
         }
+        cout << "Base \"to\": "; fflush(stdin); cin >> n2;
+        if(isPresentS(list->Slist, n2)){
+            b2 = get_ssearch(list->Slist, n2);
+        } else {
+            b2 = init_set_fvectors(n2);
+            list->Slist = insertFirstS(list->Slist, b2);
+        }
+        string choice; cout << "Function in \x01b[1;38;5;3mexpression\x01b[0m form or \x01b[1;38;5;3mmatrix\x01b[0m?: ";
+        fflush(stdin); cin >> choice;
+        if(choice == "matrix"){
+            cout << "Representative matrix name: "; fflush(stdin); cin >> n3;
+            if(isPresent(list->Mlist, n3)){
+                m = get_search(list->Mlist, n3);
+            } else {
+                m = init_fmatrix(n3); list->Mlist = insertFirst(list->Mlist, m);
+            }
+            Function f = new Tfunction(name, b1, b2, m); list->Flist = insertFirstF(list->Flist, f);
+            return list;
+        } else if(choice == "expression"){
+            list->Flist = command_new_function_from_representative_matrix(list->Flist);
+            list = command_save_function(list);
+        } else {
+            cout << "Invalid choice" << endl << endl;
+        }
+        return list;
     } else {
-        cout << "Invalid function call" << endl << endl;
+        cout << "Function with the same name already exists" << endl << endl;
     }
-    return command_save_function(list);
+    return list;
 }
 
 FMatrix base_change(setFVectorsPtr b1, setFVectorsPtr b2){ // ! Check if the sets are bases of the same vectorial space
@@ -227,7 +266,7 @@ Lists command_representative_matrix_formula(Lists list){ // ! Da fixare
         } else {
             b2 = init_set_fvectors_base(n2);
             list->Slist = insertFirstS(list->Slist, b2);
-        }
+        } // TODO: Add a check for the bases (if they are the same)
         FMatrix m1 = base_change( f->b1 , b1), m2 = base_change(b2, f->b1);
         FMatrix tot = fraction_matrix_multiplication(fraction_matrix_multiplication(m1, f->mr), m2);
         tot->name = "M"+b1->name + "(" + f->name + ")";

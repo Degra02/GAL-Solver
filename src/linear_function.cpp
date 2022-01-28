@@ -127,12 +127,12 @@ setFVectorsPtr Im(Function f) {
     return im;
 }
 
-setFVectorsPtr Counter_Im(Function f, FVector v) {
+setFVectorsPtr Counter_Im(Function f, FVector v){
     FEqsys e = new Tfeqsys(f->mr, v);
     return feq_sys_sol(e);
 }
 
-bool function_is_bijective(Function f) {
+bool function_is_bijective(Function f){
     setFVectorsPtr im = Im(f), ker = Ker(f);
     return (set_fvectors_is_base(im) && ker->dim == 0);
 }

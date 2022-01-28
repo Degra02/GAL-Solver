@@ -80,6 +80,8 @@ void function_call(Lists list){
                     command_fvector_angle(list->Vlist);
                 } else if(userinput[2] == "cross"){
                     list->Vlist = command_fvector_cross_product(list->Vlist);
+                } else if(userinput[2] == "cim"){ // stands for counter image
+                    list = command_counter_image(list); // set of generators for all the counter images
                 } else {
                     cout << "Invalid function call" << endl << endl;
                 }
@@ -106,8 +108,8 @@ void function_call(Lists list){
                     cout << "Invalid function call" << endl << endl;
                 }
             } else if(userinput[1] == "function"){
-                if(userinput[2] == "matrix"){
-                    
+                if(userinput[2] == "rm"){ // stands for representative matrix
+                    list = command_representative_matrix_formula(list);
                 } else if(userinput[2] == "apply"){
                     list = command_apply_function(list);
                 } else if(userinput[2] == "ker"){
@@ -115,8 +117,7 @@ void function_call(Lists list){
                 } else if(userinput[2] == "im"){
                     list = command_function_im(list);
                 } else if(userinput[2] == "bc"){ // stands for base change
-                    list = command_representative_matrix_formula(list);
-                    //list = command_base_change(list);
+                    list = command_base_change(list);
                 } else {
                     cout << "Invalid function call" << endl << endl;
                 }
