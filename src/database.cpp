@@ -134,48 +134,6 @@ Lists command_counter_image(Lists list){
     return list;
 }
 
-/*Lists command_new_function(Lists list){
-    string name; cout << "Function name: "; fflush(stdin); cin >> name;
-    if(! isPresentF(list->Flist, name)){
-        string n1, n2, n3; cout << "Base \"from\": "; fflush(stdin); cin >> n1;
-        setFVectorsPtr b1, b2; FMatrix m;
-        if(isPresentS(list->Slist, n1)){
-            b1 = get_ssearch(list->Slist, n1);
-        } else {
-            b1 = init_set_fvectors(n1);
-            list->Slist = insertFirstS(list->Slist, b1);
-        }
-        cout << "Base \"to\": "; fflush(stdin); cin >> n2;
-        if(isPresentS(list->Slist, n2)){
-            b2 = get_ssearch(list->Slist, n2);
-        } else {
-            b2 = init_set_fvectors(n2);
-            list->Slist = insertFirstS(list->Slist, b2);
-        }
-        string choice; cout << "Function in \x01b[1;38;5;3mexpression\x01b[0m form or \x01b[1;38;5;3mmatrix\x01b[0m?: ";
-        fflush(stdin); cin >> choice;
-        if(choice == "matrix"){
-            cout << "Representative matrix name: "; fflush(stdin); cin >> n3;
-            if(isPresent(list->Mlist, n3)){
-                m = get_search(list->Mlist, n3);
-            } else {
-                m = init_fmatrix(n3); list->Mlist = insertFirst(list->Mlist, m);
-            }
-            Function f = new Tfunction(name, b1, b2, m); list->Flist = insertFirstF(list->Flist, f);
-            return list;
-        } else if(choice == "expression"){
-            list->Flist = command_new_function_from_representative_matrix(list->Flist);
-            list = command_save_function(list);
-        } else {
-            cout << "Invalid choice" << endl << endl;
-        }
-        return list;
-    } else {
-        cout << "Function with the same name already exists" << endl << endl;
-    }
-    return list;
-}*/
-
 Lists command_new_function_from_representative_matrix(Lists list){
     string name, n1, n2; cout << "Function name: "; fflush(stdin); cin >> name;
     if(! isPresentF(list->Flist, name)){
