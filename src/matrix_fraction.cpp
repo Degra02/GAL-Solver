@@ -115,6 +115,35 @@ void print_fmatrix_float(FMatrix m){
     cout << endl;
 }
 
+void print_fmatrix_float_system(FMatrix m){
+    int r = m->nr; int c = m->nc; 
+    int figures[c];
+    float** f = new float*[r];
+    for(int i = 0; i < r; ++i) f[i] = new float[c];
+    cout << "Name: " << "\x1b[38;5;50m" << m->name << "\x1b[0m";
+    cout << endl << endl;
+    for(int j = 0; j < c; ++j){
+        for(int i = 0; i < r; ++i){
+            f[i][j] = 
+                roundf(((float)m->mat[i][j]->num / m->mat[i][j]->den)*100.0)/100.0;
+        }
+        figures[j] = float_find_max_figures_column(f, r, j);
+    }
+    for(int i = 0; i < r; ++i){
+        cout << "   ";
+        for(int j = 0; j < c; ++j){
+            if(j == c-1){
+                printf("%c", 179);
+                print_format_float(f[i][j], figures[j]);
+            } else {
+                print_format_float(f[i][j], figures[j]);
+            }
+        }
+        printf("\n");
+    }
+    cout << endl;
+}
+
 /* prende in input un puntatore a Tfmatrix e la visualizza sul prompt */
 void print_fmatrix(FMatrix m){
     int r = m->nr; int c = m->nc;
@@ -130,6 +159,31 @@ void print_fmatrix(FMatrix m){
         cout << "   "; 
         for(int j = 0; j < c; ++j){
             print_format_fraction(m->mat[i][j], figures_num[j], figures_den[j]);
+        }
+        printf("\n");
+    }
+    cout << endl;
+}
+
+void print_fmatrix_system(FMatrix m){
+    int r = m->nr; int c = m->nc;
+    int figures_num[c];
+    int figures_den[c];
+    cout << "Name: " << "\x1b[38;5;50m" << m->name << "\x1b[0m";
+    cout << endl << endl;
+    for(int j = 0; j < c; ++j){
+        figures_num[j] = fraction_find_max_figures_column(m, j, 'n');
+        figures_den[j] = fraction_find_max_figures_column(m, j, 'd');
+    }
+    for(int i = 0; i < r; ++i){
+        cout << "   "; 
+        for(int j = 0; j < c; ++j){
+            if(j == c-1){
+                printf("%c", 179);
+                print_format_fraction(m->mat[i][j], figures_num[j], figures_den[j]);
+            } else {
+                print_format_fraction(m->mat[i][j], figures_num[j], figures_den[j]);
+            }
         }
         printf("\n");
     }

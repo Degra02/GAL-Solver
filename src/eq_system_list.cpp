@@ -69,11 +69,6 @@ ENodeptr insertE(ENodeptr n, string name){
     return n;
 }
 
-ENodeptr command_new_system(ENodeptr n){
-    string name; cout << "Name= "; fflush(stdin); cin >> name;
-    return insertE(n, name);
-}
-
 void command_print_system(ENodeptr n){
     string userinput; cout << "System name: "; fflush(stdin); cin >> userinput;
     FEqsys eq = get_esearch(n, userinput);
@@ -82,7 +77,7 @@ void command_print_system(ENodeptr n){
         tmp = to_fmatrix(eq); tmp->name = eq->name;
         cout << "Print format: "; fflush(stdin); cin >> choice;
         if(choice == "fraction"){
-            print_fmatrix(tmp);
+            print_fmatrix_system(tmp);
         } else if(choice == "float"){
             print_fmatrix_float(tmp);
         } else {

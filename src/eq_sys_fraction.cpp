@@ -47,7 +47,7 @@ FEqsys init_feqsys(string name) {
 
 void print_feqsys(FEqsys e) {
     FMatrix m = to_fmatrix(e);
-    print_fmatrix(m);
+    print_fmatrix_system(m);
 }
 
 Trc Rouche_Capelli(FEqsys e) {

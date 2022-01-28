@@ -31,6 +31,7 @@ typedef struct Tlists{
 typedef Tlists *Lists;
 
 Lists command_system_build(Lists list);
+Lists command_new_system(Lists list);
 Lists command_save_function(Lists list);
 Lists command_apply_function(Lists list);
 Lists command_function_ker(Lists list);

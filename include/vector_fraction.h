@@ -43,6 +43,7 @@ typedef struct Tfvector {
 typedef Tfvector* FVector;
 
 FVector init_fvector(string name);
+FVector init_fvector_system(string name, int n);
 void print_fvector(FVector v);
 
 FVector fraction_vector_copy(FVector a);

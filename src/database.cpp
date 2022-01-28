@@ -30,6 +30,35 @@ Lists command_system_build(Lists list){
     return list;
 }
 
+Lists command_new_system(Lists list){
+    string name; cout << "Name= "; fflush(stdin); cin >> name;
+    if(!isPresentE(list->Eqlist, name)){
+        FMatrix m; FVector v;
+        string mn, vn; cout << "Coefficients matrix name: "; fflush(stdin); cin >> mn;
+        if(isPresent(list->Mlist, mn)){
+            m = get_search(list->Mlist, mn);
+        } else {
+            m = init_fmatrix(mn); list->Mlist = insertFirst(list->Mlist, m);
+        }
+        cout << "Vector name: "; fflush(stdin); cin >> vn;
+        if(isPresentV(list->Vlist, vn)){
+            v = get_vsearch(list->Vlist, vn);
+            if(v->n != m->nr){
+                cout << "The selected vector is incompatible with the selected matrix" << endl << endl;
+                return list;
+            }
+        } else {
+            v = init_fvector_system(vn, m->nr); list->Vlist = insertFirstV(list->Vlist, v);
+        }
+        FEqsys s = new Tfeqsys(m, v); s->name = name;
+        list->Eqlist = insertFirstE(list->Eqlist, s);
+        print_feqsys(s);
+    } else {
+        cout << "System with the same name already present" << endl << endl;
+    }
+    return list;
+}
+
 Lists command_save_function(Lists list){
     Function f =list->Flist->f;
     if(f != NULL){

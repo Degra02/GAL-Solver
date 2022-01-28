@@ -32,7 +32,7 @@ void function_call(Lists list){
             } else if(userinput[1] == "vector"){
                 list->Vlist = command_new_vector(list->Vlist);
             } else if(userinput[1] == "system"){
-                list->Eqlist = command_new_system(list->Eqlist);
+                list = command_new_system(list);
             } else if(userinput[1] == "set"){
                 list->Slist = command_new_vectors_set(list->Slist);
             } else if(userinput[1] == "function"){

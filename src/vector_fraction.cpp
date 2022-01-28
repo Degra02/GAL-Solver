@@ -140,6 +140,18 @@ FVector init_fvector(string name){
     return v;
 }
 
+FVector init_fvector_system(string name, int n){
+    string value; cout << endl; FVector v = new Tfvector(n, name);
+    for(int i = 0; i < n; i++){
+        cout << "   ";
+        cin >> value;
+        v->array[i] = str_to_fraction(value);
+        v->array[i] = fraction_simplification(v->array[i]);
+    }
+    cout << endl;
+    return v;
+}
+
 void print_fvector(FVector v){
     cout << "Name: " << "\x1b[38;5;50m" << v->name << "\x1b[0m = ";
     cout << "   "; v->print();
