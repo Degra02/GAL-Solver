@@ -64,17 +64,3 @@ void command_print_all_functions(FNodeptr n){
     }
 }
 
-FNodeptr command_new_function_from_representative_matrix(FNodeptr n){
-    string name; cout << "Function name: "; fflush(stdin); cin >> name;
-    Function f = new Tfunction();
-    if(! isPresentF(n, name)){
-        f->name = name;
-        f->mr = translate_linear_function(); f->mr->name = "M"; f->mr->name.append("(" + f->name + ")"); 
-        f->b1 = id(f->mr->nc); f->b2 = id(f->mr->nr); 
-        cout << endl; print_function(f); cout << endl;
-        return insertFirstF(n, f);
-    } else {
-        cout << "Function with the same name already exists" << endl << endl;
-    }
-    return n;
-}

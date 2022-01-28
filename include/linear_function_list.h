@@ -29,6 +29,5 @@ bool isPresentF(FNodeptr n, string name);
 FNodeptr insertF(FNodeptr n, string name);
 void command_print_function(FNodeptr n);
 void command_print_all_functions(FNodeptr n);
-FNodeptr command_new_function_from_representative_matrix(FNodeptr n);
 
 #endif

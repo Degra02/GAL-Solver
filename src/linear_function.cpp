@@ -33,9 +33,7 @@ void collect_linear_function(vector <string> *fun){
 }
 
 // Takes a linear function in the expression form and return the representative matrix
-FMatrix translate_linear_function(){
-    int dim1, dim2; cout << "Dim \"from\": "; fflush(stdin); cin >> dim1;
-    cout << "Dim \"to\": "; fflush(stdin); cin >> dim2; cout << endl;
+FMatrix translate_linear_function(int dim1, int dim2){
     vector <string> fun[dim2];
     for(int i = 0; i < dim2; i++){
         cout << "Coord." << i+1 << ": ";
@@ -104,7 +102,6 @@ FVector parse_linear_function_input(vector <string> *fun, int dim){
     while(p < dim){
         v->array[p] = str_to_fraction("0"); p++;
     }
-
     return v;
 }
 

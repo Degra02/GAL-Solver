@@ -11,7 +11,7 @@ void parse_user_input(vector <string> *userinput){
         }
     }
     string input, call;
-    printf("\x01b[1;38;5;3mFunction: \x1b[0m"); fflush(stdin); getline(cin, input);
+    printf("\x01b[1;38;5;3mFunction >>\x1b[0m "); fflush(stdin); getline(cin, input);
     stringstream check(input);
 
     while(getline(check, call, ' ')){

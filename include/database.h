@@ -36,10 +36,11 @@ Lists command_apply_function(Lists list);
 Lists command_function_ker(Lists list);
 Lists command_function_im(Lists list);
 Lists command_counter_image(Lists list);
-Function init_function_from_saved(string name, Lists l);
+Lists command_new_function_from_representative_matrix(Lists list);
 Lists command_new_function(Lists list);
 Lists command_base_change(Lists list);
 FMatrix base_change(setFVectorsPtr b1, setFVectorsPtr b2);
 Lists command_representative_matrix_formula(Lists list);
+
 
 #endif

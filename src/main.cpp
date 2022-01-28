@@ -9,7 +9,6 @@ int main() {
 	Lists list = new Tlists();
 	function_call(list);
 
-	// TODO: Change function of new matrix command >> only select name and not existing/new
 	// TODO: improve the parse_linear_function_input() function adapting the variable names
 
 	return 0;
