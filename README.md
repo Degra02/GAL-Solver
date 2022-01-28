@@ -4,8 +4,9 @@
 
 <p align="center">
   ============================================================
+  A [WIP] project to help students solve Linear Algebra excercises.
 </p>
 
-A [WIP] project to help students solve Linear Algebra excercises.
+
 
 
