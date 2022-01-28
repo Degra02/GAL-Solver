@@ -111,7 +111,7 @@ ENodeptr command_system_solution(ENodeptr n){
         sol = feq_sys_rref(eq);
         sol->name = eq->name + "S";
     } else {
-        cout << "No such system" << endl << endl;
+        cout << "No such system" << endl << endl; return n;
     }
     n = insertFirstE(n, sol);
     FMatrix m = to_fmatrix(sol);

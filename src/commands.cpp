@@ -166,10 +166,31 @@ void function_call(Lists list){
             }
         } else if(userinput[0] == "cls"){
             system("cls");
+        } else if(userinput[0] == "/help"){
+            command_help();
         } else {
             if(userinput[0] != "END")
                 cout << "No such function" << endl << endl;
         }
 
     }while(userinput[0] != "END");
+}
+
+void command_help(){
+    cout << "\x01b[38;5;241m";
+    cout << "new\n   " << "matrix: create a new matrix\n   " << "vector: create a new vector\n   " << "set: create a new set of vectors\n   " << "function: create a new linear function\n";
+    cout << endl << "calculate\n   " << "matrix:\n      ";
+    cout << "product: product between two matrices\n      " << "sum: sum between two matrices\n      " << "difference: difference between two matrices\n      " << "transpose: calculate transpose matrix from a given one\n      ";
+    cout << "scalar: scalar product of a matrix\n      " << "stairs: stairs form of a matrix\n      " << "rref: rref form of a matrix\n      " << "rank: rank of a matrix\n      " << "base: tells if the columns are a base\n      ";
+    cout << "det: determinant of a matrix\n      " << "reverse: calculates the reverse of a given matrix\n\n   ";
+    cout << "vector:\n      " << "scalar: scalar product of a vector\n      " << "sum: sum between two vectors\n      " << "difference between two vector\n      " << "norm: vector norm\n      " << "angle: angle between two vectors\n      ";
+    cout << "cros: cross product between two vectors (R3)\n      " << "cim: counter image of a vector (involves linear function)\n\n   ";
+    cout << "system:\n      " << "solution: solutions of a linear system\n\n   ";
+    cout << "set:\n      " << "base: tells if the set is a base\n      " << "li: tells if the set is linearly independent\n      " << "gen: tells if the set is a generator\n      " << "gs: calculates an orthonormal base from the set (Gram Schmidt)\n      "; 
+    cout << "ort: calculates the orthogonal complement of the set\n      " << "complete: completes the set to a base of Rn\n\n   ";
+    cout << "function:\n      " << "rm: finds the representative matrix of a function (from Base to same Base)\n      " << "apply: applies the function to a vector\n      " << "ker: calculates function kernel\n       " << "im: calculates function image\n      " << "bc: calculates base change matrix\n\n";
+    cout << "remove:\n      " << "matrix: remove the chosen matrix\n      " << "vector: remove the chosen vector\n      " << "set: remove the chosen set\n      " << "system: remove the chosen system\n      " << "function: remove the chosen function\n\n";
+    cout << "print:\n      " << "matrix: prints the chosen matrix\n      " << "vector: prints the chosen vector\n      " << "set: prints the chosen set\n      " << "system: prints the chosen system\n      " << "function: prints the chosen function \n\n";
+    cout << "view:\n      " << "matrices: prints all saved matrices\n      " << "vectors: prints all saved vectors\n      " << "sets: prints all saved sets\n      " << "systems: prints all saved systems\n      " << "functions: prints all saved functions\n\n";
+    cout << endl << "\x01b[0m";
 }

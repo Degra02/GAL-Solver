@@ -8,6 +8,7 @@ using namespace std;
 
 void parse_user_input(vector <string> *userinput);
 void function_call(Lists lists);
+void command_help();
 
 
 #endif
