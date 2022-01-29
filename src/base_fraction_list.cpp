@@ -177,3 +177,33 @@ SNodeptr command_base_completion(SNodeptr n){
     }
     return n;
 }
+
+FMatrix base_change(setFVectorsPtr b1, setFVectorsPtr b2){
+    FMatrix m1 = set_vectors_to_fmatrix(b1), m2 = set_vectors_to_fmatrix(b2);
+    if(fraction_matrix_is_base(m1) && fraction_matrix_is_base(m2) && (m1->nc == m2->nc)){
+        FMatrix full = new Tfmatrix(m1->nr, (m1->nc + m2->nc));
+        int r = m1->nr, c1 = m1->nc, c2 = m2->nc, tot = c1 + c2;
+        for(int i = 0; i < r; i++){
+            for(int j = 0; j < tot; j++){
+                if(j < c1){
+                    full->mat[i][j]->num = m2->mat[i][j]->num;
+                    full->mat[i][j]->den = m2->mat[i][j]->den;
+                } else {
+                    full->mat[i][j]->num = m1->mat[i][j - c1]->num;
+                    full->mat[i][j]->den = m1->mat[i][j - c1]->den;
+                }
+            }
+        }
+        FMatrix rref = fraction_matrix_rref(full); FMatrix res = new Tfmatrix(r, c1);
+        for(int i = 0; i < r; i++){
+            for(int j = c1; j < tot; j++){
+                res->mat[i][j - c1] = rref->mat[i][j];
+            }
+            cout << endl;
+        }
+        return res;
+    } else {
+        cout << "The sets need to be a base of the same vectorial space" << endl << endl;
+    }
+    return NULL;
+}
