@@ -253,6 +253,9 @@ void command_matrix_is_base(MNodeptr n){
     if(m != NULL){ 
         if(fraction_matrix_is_base(m)){
             printf("The columns are a base of R%d\n\n", fraction_matrix_rank(m)); 
+            cout << endl << endl;
+        } else {
+            cout << "The matrix is not a base" << endl << endl;
         }
     } else {
         cout << "No such matrix" << endl << endl;
