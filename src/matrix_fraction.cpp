@@ -83,7 +83,7 @@ FMatrix insert_values_fmatrix(int r, int c, string name){
         cout << "   "; 
         for(int j = 0; j < c; j++){ 
             cin >> value; f = str_to_fraction(value);
-            m->mat[i][j] = f; m->mat[i][j] = fraction_simplification(m->mat[i][j]); 
+            m->mat[i][j] = fraction_simplification(f); 
         }
     } 
     fflush(stdin); cout << endl;
