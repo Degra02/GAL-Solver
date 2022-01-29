@@ -207,7 +207,12 @@ MNodeptr command_matrix_scalar_mult(MNodeptr n){
     FMatrix m1 = get_search(n, name); FMatrix t;
     if(m1 != NULL){
         t = fraction_matrix_scalar_multiplication(m1, lambda);
-        t->name = "lambda" + m1->name;
+        Fraction a = fraction_simplification(str_to_fraction(to_string(lambda)));
+        if(a->den == 1){
+            t->name = to_string(a->num) + m1->name;
+        } else {
+            t->name = to_string(a->num) + "/" + to_string(a->den) + m1->name;
+        }
     } else {
         cout << "No such matrix" << endl << endl;
     }

@@ -10,6 +10,7 @@ int main() {
 	function_call(list);
 
 	// TODO: improve the parse_linear_function_input() function adapting the variable names
+	// TODO: change bc function to be a "matrix" function instead of a "function" function
 
 	return 0;
 }
