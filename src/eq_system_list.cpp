@@ -79,7 +79,7 @@ void command_print_system(ENodeptr n){
         if(choice == "fraction"){
             print_fmatrix_system(tmp);
         } else if(choice == "float"){
-            print_fmatrix_float(tmp);
+            print_fmatrix_float_system(tmp);
         } else {
             cout << "Invalid print format" << endl << endl;
         }
