@@ -35,12 +35,9 @@ typedef Tfeqsys *FEqsys;
 
 FEqsys init_feqsys(string name);
 void print_feqsys(FEqsys e);
-
 FMatrix to_fmatrix(FEqsys e);
-
 FEqsys feq_sys_rref(FEqsys e);
 FEqsys to_feqsys_from_matrix(FMatrix m);
-
 Trc Rouche_Capelli(FEqsys e);
 setFVectorsPtr feq_sys_sol(FEqsys e);
 
