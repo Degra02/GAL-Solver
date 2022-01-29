@@ -4,32 +4,6 @@
 #include "all-headers.h"
 using namespace std;
 
-Lists command_system_build(Lists list){
-    string mn; cout << "Matrix name: "; fflush(stdin); cin >> mn;
-    FMatrix a = get_search(list->Mlist, mn);
-    if(a == NULL){
-        cout << "No such matrix" << endl << endl;
-        return list;
-    }
-    string vn; cout << "Vector name: "; fflush(stdin); cin >> vn;
-    FVector b = get_vsearch(list->Vlist, vn);
-    if(b == NULL){
-        cout << "No such vector" << endl << endl;
-        return list;
-    }
-    if(b->n != a->nr){
-        cout << "Invalid vector (wrong size)" << endl << endl;
-        return list;
-    }
-    FMatrix c = fraction_matrix_copy(a);
-    FVector d = fraction_vector_copy(b);
-    FEqsys sys = new Tfeqsys(c, d);
-    sys->name = a->name + b->name; 
-    cout << "System name:" << "\x1b[38;5;50m" << sys->name << "\x1b[0m" << endl << endl;
-    list->Eqlist = insertFirstE(list->Eqlist, sys);
-    return list;
-}
-
 Lists command_new_system(Lists list){
     string name; cout << "Name= "; fflush(stdin); cin >> name;
     if(!isPresentE(list->Eqlist, name)){
@@ -69,7 +43,7 @@ Lists command_save_function(Lists list){
     return list;
 }
 
-Lists command_apply_function(Lists list){
+/*Lists command_apply_function(Lists list){
     string n1, n2, choice; cout << "Function name: "; fflush(stdin); cin >> n1;
     Function f = get_fsearch(list->Flist, n1);
     if(f != NULL){
@@ -106,6 +80,26 @@ Lists command_apply_function(Lists list){
         } else {
             cout << "Invalid choice" << endl << endl; return list;
         }
+    } else {
+        cout << "Function not found" << endl << endl;
+    }
+    return list;
+}*/
+
+Lists command_apply_function(Lists list){
+    string n1, n2; cout << "Function name: "; fflush(stdin); cin >> n1;
+    Function f = get_fsearch(list->Flist, n1);
+    if(f != NULL){
+        cout << "Vector name: "; cin >> n2; FVector v;
+        if(isPresentV(list->Vlist, n2)){
+            v = get_vsearch(list->Vlist, n2);
+        } else {
+            cout << "Vector dimension: " << f->b1->n_th << endl;
+            v = init_fvector_system(n2, f->b1->n_th); list->Vlist = insertFirstV(list->Vlist, v);
+        }
+        FVector vf = apply_linear_function(f, v); vf->name = f->name + "(" + v->name + ")";
+        print_fvector(vf); list->Vlist = insertFirstV(list->Vlist, vf);
+        return list;
     } else {
         cout << "Function not found" << endl << endl;
     }
@@ -150,7 +144,8 @@ Lists command_counter_image(Lists list){
             list->Slist = insertFirstS(list->Slist, cim);
             print_set_fvectors(cim); cout << endl;
         } else {
-            FVector v = init_fvector(name);
+            cout << "Vector dimension: " << f->mr->nr;
+            FVector v = init_fvector_system(name, f->mr->nr);
             setFVectorsPtr cim = Counter_Im(f, v);
             cim->name = v->name + "cim";
             list->Slist = insertFirstS(list->Slist, cim);
@@ -216,7 +211,8 @@ Lists command_new_function(Lists list){
             if(isPresent(list->Mlist, n3)){
                 m = get_search(list->Mlist, n3);
             } else {
-                m = init_fmatrix(n3); list->Mlist = insertFirst(list->Mlist, m);
+                cout << "Rows= " << b2->n_th << endl << "Columns= " << b1->n_th << endl << endl;
+                m = init_fmatrix_known_dim(n3, b2->n_th, b1->n_th); list->Mlist = insertFirst(list->Mlist, m);
             }
             Function f = new Tfunction(name, b1, b2, m); list->Flist = insertFirstF(list->Flist, f);
             return list; 

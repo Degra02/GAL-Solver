@@ -184,6 +184,6 @@ VNodeptr command_fvector_cross_product(VNodeptr n){
     }
     FVector res = fvector_cross_product(v1, v2);
     res->name = v1->name + "x" + v2->name;
-    res->print(); cout << endl << endl;
+    print_fvector(res); cout << endl << endl;
     return insertFirstV(n, res);
 }

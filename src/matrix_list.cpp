@@ -284,6 +284,7 @@ MNodeptr command_matrix_reverse(MNodeptr n){
         FMatrix m1 = fraction_matrix_reverse(m);
         if(m1 != NULL){
             m1->name = m->name + "-1";
+            print_fmatrix(m1);
             return insertFirst(n, m1);
         } else {
             return n;

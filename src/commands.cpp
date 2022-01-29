@@ -82,14 +82,16 @@ void function_call(Lists list){
                     list->Vlist = command_fvector_cross_product(list->Vlist);
                 } else if(userinput[2] == "cim"){ // stands for counter image
                     list = command_counter_image(list); // set of generators for all the counter images
+                } else if(userinput[2] == "apply"){
+                    list = command_apply_function(list);
                 } else {
                     cout << "Invalid function call" << endl << endl;
                 }
             } else if(userinput[1] == "system"){
                 if(userinput[2] == "solution"){
                     list->Eqlist = command_system_solution(list->Eqlist);
-                } else if(userinput[2] == "build"){
-                    list = command_system_build(list);
+                } else {
+                    cout << "Invalid function call" << endl << endl;
                 }
             } else if(userinput[1] == "set"){
                 if(userinput[2] == "base"){
@@ -110,8 +112,6 @@ void function_call(Lists list){
             } else if(userinput[1] == "function"){
                 if(userinput[2] == "rm"){ // stands for representative matrix
                     list = command_representative_matrix_formula(list);
-                } else if(userinput[2] == "apply"){
-                    list = command_apply_function(list);
                 } else if(userinput[2] == "ker"){
                     list = command_function_ker(list);
                 } else if(userinput[2] == "im"){
@@ -186,7 +186,7 @@ void command_help(){
     cout << "scalar: scalar product of a matrix\n      " << "stairs: stairs form of a matrix\n      " << "rref: rref form of a matrix\n      " << "rank: rank of a matrix\n      " << "base: tells if the columns are a base\n      ";
     cout << "det: determinant of a matrix\n      " << "reverse: calculates the reverse of a given matrix\n\n   ";
     cout << "vector:\n      " << "scalar: scalar product of a vector\n      " << "sum: sum between two vectors\n      " << "difference between two vector\n      " << "norm: vector norm\n      " << "angle: angle between two vectors\n      ";
-    cout << "cros: cross product between two vectors (R3)\n      " << "cim: counter image of a vector (involves linear function)\n\n   ";
+    cout << "cross: cross product between two vectors (R3)\n      " << "cim: counter image of a vector (involves linear function)\n      " << "apply: applies the chosen lineat function to a vector(new or existing)\n\n   ";
     cout << "system:\n      " << "solution: solutions of a linear system\n\n   ";
     cout << "set:\n      " << "base: tells if the set is a base\n      " << "li: tells if the set is linearly independent\n      " << "gen: tells if the set is a generator\n      " << "gs: calculates an orthonormal base from the set (Gram Schmidt)\n      "; 
     cout << "ort: calculates the orthogonal complement of the set\n      " << "complete: completes the set to a base of Rn\n\n   ";

@@ -68,6 +68,10 @@ FMatrix init_fmatrix(string name){
     return insert_values_fmatrix(r, c, name);
 }
 
+FMatrix init_fmatrix_known_dim(string name, int r, int c){
+    return insert_values_fmatrix(r, c, name);
+}
+
 /* inizializza una matrice inserendo il numero di colonne e di righe direttamente come parametri */
 FMatrix init_predefinition_fmatrix(string name, int r, int c){
     cout << "rows= " << r << endl;
@@ -433,8 +437,7 @@ FVector fraction_matrix_fvector_product(FMatrix m, FVector v){
         }
         for(int i = 0; i < r; ++i){
             for(int j = 0; j < c; ++j){
-                vm->array[i] = fraction_sum(vm->array[i], 
-                    (fraction_product(v->array[i], m->mat[i][j])));
+                vm->array[i] = fraction_sum(vm->array[i], (fraction_product(v->array[j], m->mat[i][j])));
             }
         }
         return vm;

@@ -111,7 +111,6 @@ ENodeptr command_system_solution(ENodeptr n){
     n = insertFirstE(n, sol);
     FMatrix m = to_fmatrix(sol);
     m->name = sol->name;
-    print_fmatrix(m);
-
+    print_fmatrix_system(m);
     return n;
 }

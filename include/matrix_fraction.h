@@ -21,6 +21,7 @@ typedef struct Tfmatrix{
 typedef Tfmatrix* FMatrix; 
 
 FMatrix init_fmatrix(string name);
+FMatrix init_fmatrix_known_dim(string name, int r, int c);
 FMatrix init_predefinition_fmatrix(string name, int r, int c);
 FMatrix insert_values_fmatrix(int r, int c, string name);
 void print_fmatrix(FMatrix m);
