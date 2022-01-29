@@ -39,7 +39,6 @@ Lists command_counter_image(Lists list);
 Lists command_new_function_from_representative_matrix(Lists list);
 Lists command_new_function(Lists list);
 Lists command_base_change(Lists list);
-FMatrix base_change(setFVectorsPtr b1, setFVectorsPtr b2);
 Lists command_representative_matrix_formula(Lists list);
 
 

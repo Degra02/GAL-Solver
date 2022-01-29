@@ -6,6 +6,12 @@ TsetFVectors::TsetFVectors(string _n) {
     dim = 0; n_th = 0; name = _n;
 }
 
+TsetFVectors::TsetFVectors(int _dim, int _n_th){
+    dim = _dim; n_th = _n_th; name = "";
+    v = new FVector[dim];
+    for (int i = 0; i < dim; ++i) v[i] = new Tfvector(n_th);
+}
+
 TsetFVectors::TsetFVectors(int x, int y, string _n) {
     dim = x; n_th = y; name = _n; v = new FVector[dim];
     for (int i = 0; i < dim; ++i) v[i] = new Tfvector(n_th);

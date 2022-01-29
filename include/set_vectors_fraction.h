@@ -9,6 +9,7 @@ typedef struct TsetFVectors {
     int n_th;
 
     TsetFVectors(string _n);
+    TsetFVectors(int _dim, int _n_th);
     TsetFVectors(int x, int y, string _n);
     ~TsetFVectors();
     void print() const;

@@ -227,55 +227,27 @@ Lists command_new_function(Lists list){
     return list;
 }
 
-FMatrix base_change(setFVectorsPtr b1, setFVectorsPtr b2){ // ! Check if the sets are bases of the same vectorial space
-    FMatrix m1 = set_vectors_to_fmatrix(b1), m2 = set_vectors_to_fmatrix(b2);
-    FMatrix full = new Tfmatrix(m1->nr, (m1->nc + m2->nc));
-    int r = m1->nr, c1 = m1->nc, c2 = m2->nc, tot = c1 + c2;
-    for(int i = 0; i < r; i++){
-        for(int j = 0; j < tot; j++){
-            if(j < c1){
-                //full->mat[i][j] = fraction_copy(m1->mat[i][j]);
-                full->mat[i][j]->num = m2->mat[i][j]->num;
-                full->mat[i][j]->den = m2->mat[i][j]->den;
-            } else {
-                //full->mat[i][j] = fraction_copy(m2->mat[i][j - c1]);
-                full->mat[i][j]->num = m1->mat[i][j - c1]->num;
-                full->mat[i][j]->den = m1->mat[i][j - c1]->den;
-            }
-        }
-    }
-    FMatrix rref = fraction_matrix_rref(full); FMatrix res = new Tfmatrix(r, c1);
-    for(int i = 0; i < r; i++){
-        for(int j = c1; j < tot; j++){
-            res->mat[i][j - c1] = rref->mat[i][j];
-        }
-        cout << endl;
-    }
-    return res;
-}
-
 Lists command_base_change(Lists list){
-    string name; cout << "Function name: "; fflush(stdin); cin >> name;
-    Function f = get_fsearch(list->Flist, name);
-    if(f != NULL){
-        FMatrix bs; int choice; cout << "From which base to which?" << endl;
-        cout << "1) " << f->b1->name << " to " << f->b2->name << endl;
-        cout << "2) " << f->b2->name << " to " << f->b1->name << endl;
-        cout << ">> "; fflush(stdin); cin >> choice;
-        if(choice == 1){
-            bs = base_change(f->b1, f->b2);
-            bs->name = "M" + f->b1->name + f->b2->name;
-        } else if(choice == 2){
-            bs = base_change(f->b2, f->b1);
-            bs->name = "M" + f->b2->name + f->b1->name;
-        } else {
-            cout << "Invalid choice" << endl; return list;
-        }
-        print_fmatrix(bs);
-        list->Mlist = insertFirst(list->Mlist, bs);
-        return list;
+    string n1, n2; cout << "1st set name: "; fflush(stdin); cin >> n1;
+    setFVectorsPtr b1, b2;
+    if(isPresentS(list->Slist, n1)){
+        b1 = get_ssearch(list->Slist, n1);
     } else {
-        cout << "Function not found" << endl << endl;
+        b1 = init_set_fvectors(n1); list->Slist = insertFirstS(list->Slist, b1);
+    }
+    cout << "2nd set name: "; fflush(stdin); cin >> n2;
+    if(isPresentS(list->Slist, n2)){
+        b2 = get_ssearch(list->Slist, n2);
+    } else {
+        b2 = init_set_fvectors(n2); list->Slist = insertFirstS(list->Slist, b2);
+    }
+
+    FMatrix bc = base_change(b1, b2); bc->name = "M" + b1->name + b2->name;
+    print_fmatrix(bc); cout << endl << endl;
+    if(!isPresent(list->Mlist, bc->name)){
+        list->Mlist = insertFirst(list->Mlist, bc);
+    } else {
+        cout << "Matrix already calculated" << endl << endl;
     }
     return list;
 }
@@ -298,11 +270,21 @@ Lists command_representative_matrix_formula(Lists list){ // ! Da fixare
         } else {
             b2 = init_set_fvectors_base(n2);
             list->Slist = insertFirstS(list->Slist, b2);
-        } // TODO: Add a check for the bases (if they are the same)
-        FMatrix m1 = base_change( f->b1 , b1), m2 = base_change(b2, f->b1);
-        FMatrix tot = fraction_matrix_multiplication(fraction_matrix_multiplication(m1, f->mr), m2);
-        tot->name = "M"+b1->name + "(" + f->name + ")";
-        list->Mlist = insertFirst(list->Mlist, tot); print_fmatrix(tot); cout << endl;
+        } 
+        if(b1->name == b2->name){
+            FMatrix m1 = base_change( f->b1 , b1), m2 = base_change(b2, f->b1);
+            FMatrix tot = fraction_matrix_multiplication(fraction_matrix_multiplication(m1, f->mr), m2);
+            tot->name = "M"+b1->name + "(" + f->name + ")";
+            list->Mlist = insertFirst(list->Mlist, tot); print_fmatrix(tot); cout << endl;
+        } else {
+            setFVectorsPtr app = new TsetFVectors(b1->dim, b1->dim);
+            for(int i = 0; i < b1->dim; i++){
+                app->v[i] = apply_linear_function(f, b1->v[i]);
+            }
+            FMatrix res = base_change(app, b2);
+            res->name = "M"+b1->name+b2->name+"("+f->name+")";
+            list->Mlist = insertFirst(list->Mlist, res); print_fmatrix(res); cout << endl;
+        }
         return list;
     } else {
         cout << "Function not found" << endl << endl;
