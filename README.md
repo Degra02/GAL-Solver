@@ -8,7 +8,7 @@
 </p>
 
 <p align="left">
-  The Guide can be downloaded from here >> <a href=Degra02.GAL-Library/GAL_Solver_User_Guide.pdf> User-Guide </a>  
+  The Guide can be downloaded from here >> <a href=GAL_Solver_User_Guide.pdf> User-Guide </a>  
   
 </p>
 
