@@ -9,7 +9,7 @@
 </p>
 
 <p align="left">
-  <title>User Guide </title>
+  <h1>User Guide </h1>
   The Guide with every command in detail can be downloaded from here >> <a href=./GAL_Solver_User_Guide.pdf> User-Guide </a>  
   
 </p>
