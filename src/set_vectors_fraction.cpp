@@ -56,7 +56,7 @@ int parse_canonical_base(string name){
 
 setFVectorsPtr init_set_fvectors(string name){
     int _dim, _n_th;
-    if(name[0] == 'C'){
+    if(name[0] == 'C' && (name.length() > 1)){
         _dim = parse_canonical_base(name);
         setFVectorsPtr i = id(_dim);
         print_set_fvectors(i); cout << endl; return i;
@@ -68,7 +68,7 @@ setFVectorsPtr init_set_fvectors(string name){
 }
 
 setFVectorsPtr init_set_fvectors_base(string name) {
-    if(name[0] == 'C'){
+    if(name[0] == 'C' && (name.length() > 1)){
         return id(parse_canonical_base(name));
     }
     int _dim, _n_th; setFVectorsPtr base; bool m = false;
@@ -76,6 +76,17 @@ setFVectorsPtr init_set_fvectors_base(string name) {
     cout << endl;
     do { if (m) cout << "The set of vectors is not a base." << endl << endl;
     base = insert_values_set_fvectors(_dim, _n_th, name); m = true; 
+    } while (!set_fvectors_is_base(base));
+    return base;
+}
+
+setFVectorsPtr init_set_fvectors_base_function(string name, int _n_th){
+    if(name[0] == 'C' && (name.length() > 1)){
+        return id(parse_canonical_base(name));
+    }
+    setFVectorsPtr base; bool m = false;
+    do { if (m) cout << "The set of vectors is not a base." << endl << endl;
+    base = insert_values_set_fvectors(_n_th, _n_th, name); m = true; 
     } while (!set_fvectors_is_base(base));
     return base;
 }

@@ -123,7 +123,7 @@ Lists command_function_im(Lists list){
     string name; cout << "Function name: "; fflush(stdin); cin >> name;
     Function f = get_fsearch(list->Flist, name);
     if(f != NULL){
-        setFVectorsPtr i = Im(f); i->name = "Im(" + f->name + ")";
+        setFVectorsPtr i = Im(f); i->name = "im(" + f->name + ")";
         print_set_fvectors(i);
         list->Slist = insertFirstS(list->Slist, i); return list;
     } else {
@@ -210,6 +210,9 @@ Lists command_new_function(Lists list){
             cout << "Representative matrix name: "; fflush(stdin); cin >> n3;
             if(isPresent(list->Mlist, n3)){
                 m = get_search(list->Mlist, n3);
+                if((m->nc != b1->n_th) || (m->nr != b2->n_th)){
+                    cout << "Incompatible matrix" << endl << endl; return list;
+                }
             } else {
                 cout << "Rows= " << b2->n_th << endl << "Columns= " << b1->n_th << endl << endl;
                 m = init_fmatrix_known_dim(n3, b2->n_th, b1->n_th); list->Mlist = insertFirst(list->Mlist, m);
@@ -252,7 +255,7 @@ Lists command_base_change(Lists list){
     return list;
 }
 
-Lists command_representative_matrix_formula(Lists list){ // ! Da fixare
+Lists command_representative_matrix_formula(Lists list){
     string name; cout << "Function name: "; fflush(stdin); cin >> name;
     Function f = get_fsearch(list->Flist, name);
     if(f != NULL){
@@ -261,14 +264,16 @@ Lists command_representative_matrix_formula(Lists list){ // ! Da fixare
         if(isPresentS(list->Slist, n1)){
             b1 = get_ssearch(list->Slist, n1);
         } else {
-            b1 = init_set_fvectors_base(n1);
+            cout << "Vector dimension: " << f->b1->n_th << endl;
+            b1 = init_set_fvectors_base_function(n1, f->b1->n_th);
             list->Slist = insertFirstS(list->Slist, b1);
         }
         cout << "Base \"to\" name >> "; fflush(stdin); cin >> n2;
         if(isPresentS(list->Slist, n2)){
             b2 = get_ssearch(list->Slist, n2);
         } else {
-            b2 = init_set_fvectors_base(n2);
+            cout << "Vector dimension: " << f->b1->n_th << endl;
+            b2 = init_set_fvectors_base_function(n2, f->b1->n_th);
             list->Slist = insertFirstS(list->Slist, b2);
         } 
         if(b1->name == b2->name){
