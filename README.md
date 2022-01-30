@@ -4,11 +4,13 @@
 
 <p align="center">
   ============================================================<br>
-  A program that helps students solve Linear Algebra excercises.
+  A program that helps students solve Linear Algebra excercises.<br>
+  ============================================================
 </p>
 
 <p align="left">
-  The Guide can be downloaded from here >> <a href=GAL_Solver_User_Guide.pdf> User-Guide </a>  
+  <title>User Guide </title>
+  The Guide with every command in detail can be downloaded from here >> <a href=./GAL_Solver_User_Guide.pdf> User-Guide </a>  
   
 </p>
 
