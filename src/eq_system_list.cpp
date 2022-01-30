@@ -98,19 +98,3 @@ void command_print_all_systems(ENodeptr n){
         t = t->next;
     }
 }
-
-ENodeptr command_system_solution(ENodeptr n){
-    string userinput; cout << "System name: "; fflush(stdin); cin >> userinput;
-    FEqsys eq = get_esearch(n, userinput); FEqsys sol;
-    if(eq != NULL){
-        sol = feq_sys_rref(eq);
-        sol->name = eq->name + "S";
-    } else {
-        cout << "No such system" << endl << endl; return n;
-    }
-    n = insertFirstE(n, sol);
-    FMatrix m = to_fmatrix(sol);
-    m->name = sol->name;
-    print_fmatrix_system(m);
-    return n;
-}
