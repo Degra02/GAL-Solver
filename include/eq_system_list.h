@@ -29,9 +29,9 @@ ENodeptr insertFirstE(ENodeptr n, FEqsys fe);
 ENodeptr remove_esearch(ENodeptr n);
 bool isPresentE(ENodeptr n, string name);
 ENodeptr insertE(ENodeptr n, string name);
+FEqsys get_esearch(ENodeptr n, string name);
 
 void command_print_system(ENodeptr n);
 void command_print_all_systems(ENodeptr n);
-ENodeptr command_system_solution(ENodeptr n);
 
 #endif

@@ -40,6 +40,6 @@ Lists command_new_function_from_representative_matrix(Lists list);
 Lists command_new_function(Lists list);
 Lists command_base_change(Lists list);
 Lists command_representative_matrix_formula(Lists list);
-
+Lists command_system_solution(Lists list);
 
 #endif

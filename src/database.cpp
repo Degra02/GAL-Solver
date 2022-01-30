@@ -43,49 +43,6 @@ Lists command_save_function(Lists list){
     return list;
 }
 
-/*Lists command_apply_function(Lists list){
-    string n1, n2, choice; cout << "Function name: "; fflush(stdin); cin >> n1;
-    Function f = get_fsearch(list->Flist, n1);
-    if(f != NULL){
-        printf("\x01b[1;38;5;3mExisting\x01b[0m vector or \x01b[1;38;5;3mnew\x01b[0m: ");
-        fflush(stdin); cin >> choice;
-        if(choice == "existing"){
-            cout << "Vector name: "; fflush(stdin); cin >> n2;
-            FVector v = get_vsearch(list->Vlist, n2);
-            if(v != NULL){
-                FVector v2 = apply_linear_function(f, v);
-                if(v2 != NULL){
-                    v2->name = f->name + "(" + v->name + ")";
-                    print_fvector(v2);
-                    list->Vlist = insertFirstV(list->Vlist, v2);
-                    return list;
-                } else {
-                    cout << "The vector does not belong to the domain of the function" << endl << endl;
-                    return list;
-                }
-            } else {
-                cout << "Vector not found" << endl << endl; return list;
-            }
-        } else if(choice == "new"){
-            FVector v2 = new Tfvector(f->mr->nc); string value;
-            cout << "Vector name: "; fflush(stdin); cin >> n2; cout << "    "; v2->name = n2;
-            for(int i = 0; i < v2->n; ++i){
-                cin >> value;
-                v2->array[i] = fraction_simplification(str_to_fraction(value));
-            }
-            list->Vlist = insertFirstV(list->Vlist, v2);
-            FVector vf = apply_linear_function(f, v2); vf->name = f->name + "(" + v2->name + ")";
-            print_fvector(vf); list->Vlist = insertFirstV(list->Vlist, vf);
-            return list;
-        } else {
-            cout << "Invalid choice" << endl << endl; return list;
-        }
-    } else {
-        cout << "Function not found" << endl << endl;
-    }
-    return list;
-}*/
-
 Lists command_apply_function(Lists list){
     string n1, n2; cout << "Function name: "; fflush(stdin); cin >> n1;
     Function f = get_fsearch(list->Flist, n1);
@@ -294,5 +251,20 @@ Lists command_representative_matrix_formula(Lists list){
     } else {
         cout << "Function not found" << endl << endl;
     }
+    return list;
+}
+
+Lists command_system_solution(Lists list){
+    string userinput; cout << "System name: "; fflush(stdin); cin >> userinput;
+    FEqsys eq = get_esearch(list->Eqlist, userinput); setFVectorsPtr sol;
+    if(eq != NULL){
+        sol = feq_sys_sol(eq);
+        sol->name = eq->name + "S";
+    } else {
+        cout << "No such system" << endl << endl; return list;
+    }
+    list->Slist = insertFirstS(list->Slist, sol);
+    FMatrix m = set_vectors_to_fmatrix(sol); m->name = sol->name;
+    print_fmatrix_system(m);
     return list;
 }
