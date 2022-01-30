@@ -17,7 +17,7 @@
 <p align="left">
   <h1>Get Started</h1>
   In order to get started with the program, just download the .zip file and extract all in a folder.<br>
-  Then just click on the *GAL-Solver* link and the program will start.
+  Then just click on the **GAL-Solver** link and the program will start.
 </p>
 
 
