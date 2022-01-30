@@ -256,15 +256,21 @@ Lists command_representative_matrix_formula(Lists list){
 
 Lists command_system_solution(Lists list){
     string userinput; cout << "System name: "; fflush(stdin); cin >> userinput;
-    FEqsys eq = get_esearch(list->Eqlist, userinput); setFVectorsPtr sol;
+    FEqsys eq = get_esearch(list->Eqlist, userinput); setFVectorsPtr sol; Trc t;
     if(eq != NULL){
-        sol = feq_sys_sol(eq);
-        sol->name = eq->name + "S";
+        t = Rouche_Capelli(eq);
+        if(t == NO_RESULT){
+            cout << endl << "The system has no solution" << endl << endl; return list;
+        } else if(t == INF_RESULTS){
+            cout << endl << "Infinite solutions, linear combination of the following set:" << endl << endl;
+            sol = feq_sys_sol(eq);
+        } else {
+            cout << endl << "One solution" << endl << endl; sol = feq_sys_sol(eq);
+        }
     } else {
         cout << "No such system" << endl << endl; return list;
     }
+    sol->name = eq->name + "S"; print_set_fvectors(sol); 
     list->Slist = insertFirstS(list->Slist, sol);
-    FMatrix m = set_vectors_to_fmatrix(sol); m->name = sol->name;
-    print_fmatrix_system(m);
     return list;
 }

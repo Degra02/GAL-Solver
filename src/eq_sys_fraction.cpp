@@ -88,7 +88,7 @@ Trc Rouche_Capelli(FEqsys e){
 /* risolve un sistema lineare */
 setFVectorsPtr feq_sys_sol(FEqsys e){
     Trc type_res = Rouche_Capelli(e);
-    setFVectorsPtr res = new TsetFVectors("");
+    setFVectorsPtr res = NULL;
     if(type_res == NO_RESULT){
         return res;
     } else if(type_res == INF_RESULTS){
@@ -96,8 +96,8 @@ setFVectorsPtr feq_sys_sol(FEqsys e){
         int rank = fraction_matrix_rank(m), c = m->nc;
         int pivot_column_position[rank], pivot_row_position[rank], free_var_column_position[c - rank]; 
         int count1 = 0, count2 = 0, count3 = 0;
-        int i, free_column = 0, __dim_base = c - rank; res->dim = __dim_base;
-        res->n_th = c; 
+        int i, free_column = 0, __dim_base = c - rank; 
+        res = new TsetFVectors(""); res->dim = __dim_base; res->n_th = c; 
         res->v = new FVector[__dim_base];
         for(int d = 0; d < __dim_base; ++d){
             res->v[d] = new Tfvector(c);
@@ -142,7 +142,7 @@ setFVectorsPtr feq_sys_sol(FEqsys e){
         }
         return res; 
     } else {
-        e = feq_sys_rref(e);
+        e = feq_sys_rref(e); res = new TsetFVectors("");
         res->dim = 1; res->v = new FVector[1];
         if(e->A->nc > e->b->n){
             int rankA = fraction_matrix_rank(e->A);
