@@ -6,7 +6,7 @@ using namespace std;
 
 // Functions
 
-/* trasforma un sistema lineare in una matrice */
+/* turns a linear equations system into a matrix */
 FMatrix to_fmatrix(FEqsys e){
     FMatrix m = new Tfmatrix(e->A->nr, e->A->nc + 1);
     for(int i = 0; i < m->nr; i++){
@@ -19,7 +19,7 @@ FMatrix to_fmatrix(FEqsys e){
     return m;
 }
 
-/* trafmorma una matrice in un sistema lineare */
+/* turns a matrix into a linear equations sytem */
 FEqsys to_feqsys_from_matrix(FMatrix m){
     FEqsys res = new Tfeqsys(new Tfmatrix(m->nr, m->nc - 1), new Tfvector(m->nr));
     for(int i = 0; i < m->nr; i++){
@@ -31,14 +31,14 @@ FEqsys to_feqsys_from_matrix(FMatrix m){
     return res;
 }
 
-/* riduce a scalini un sistema lineare */
+/* rref form of a linear equations system */
 FEqsys feq_sys_rref(FEqsys e){
     FMatrix tmp = to_fmatrix(e);
     tmp = fraction_matrix_rref(tmp);
     return to_feqsys_from_matrix(tmp);
 }
 
-/* inizializza un sistema lineare */
+/* linear equation system init */
 FEqsys init_feqsys(string name){
     FEqsys eq = new Tfeqsys(); string value;
     cout << "Coefficients matrix:" << endl;
@@ -54,13 +54,13 @@ FEqsys init_feqsys(string name){
     return eq;
 }
 
-/* visualizza sul prompt una sistema lineare */
+/* prints a linear equation system on the console buffer */
 void print_feqsys(FEqsys e){
     FMatrix m = to_fmatrix(e);
     print_fmatrix_system(m);
 }
 
-/* dato un sistema lineare ridorma il tipo di risultato che può avere */
+/* given a linear equations system returns the class of solution of that system */
 Trc Rouche_Capelli(FEqsys e){
     int n = e->A->nc, rankA = fraction_matrix_rank(e->A);
     int rankAb = fraction_matrix_rank(to_fmatrix(e));

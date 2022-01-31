@@ -4,12 +4,12 @@ using namespace std;
 
 // Methods
 
-/* costruttore di default */
+/* default constructor */
 Tfraction::Tfraction(){
     num = 0; den = 1;
 }
 
-/* costruttore dati due numeri interi, uno diventa numeratore e l'altro denominatore */
+/* numerator and denominator constructor */
 Tfraction::Tfraction(int n, int d){
     num = n;
     if(d != 0) den = d;
@@ -25,17 +25,17 @@ Tfraction::Tfraction(int n, int d){
     }
 }
 
-/* costruttore dato un numero decimale lo trasforma in frazione richiamando il metodo set */
+/* constructor that given a float number turns it into a fraction */
 Tfraction::Tfraction(float n){
     set(n);
 }
 
-/* costruttore date due stringhe li convete in numeratore e denominatore */
+/* constructor that turns two strings in numerator and denominator */
 Tfraction::Tfraction(string n, string d){
     num = stoi(n); den = stoi(d);
 }
 
-/* metodo di stampa della frazione */
+/* fraction print method */
 void Tfraction::print() const {
     if(den == 1){
         if(num == 0) printf("\x1b[38;5;239m%d\x1b[0m", 0);
@@ -44,14 +44,14 @@ void Tfraction::print() const {
     else printf("%d/%d", num, den);
 }
 
-/* metodo di stampa della frazione in numero razionale con precisione 2 */
+/* print method of a function into a float approximated to 2 decimal digits */
 void Tfraction::print_float() const {
     float f = roundf(((float)num / den)*100.0)/100.0;
     if(f == 0.0) printf("\x1b[38;5;239m%d\x1b[0m", 0);
     else printf("%2.2f", f);
 }
 
-/* metodo che prende un numero decimale e con arrotondamento 2 cifre dopo la virgola lo trasforma in frazione */
+/* turns a two decimal digits float number into a fraction*/
 void Tfraction::set(float n){
     float f = n;
     int m = 1;
@@ -67,7 +67,7 @@ void Tfraction::set(float n){
 
 // Functions
 
-/* prese due strutture Tfraction restituisce un'altra Tfraction somma delle precedenti */
+/* sum of two fraction */
 Fraction fraction_sum(Fraction a, Fraction b) {
     Fraction c = new Tfraction();
     if(a->den == b->den){
@@ -80,7 +80,7 @@ Fraction fraction_sum(Fraction a, Fraction b) {
     control(c); return fraction_simplification(c);
 }
 
-/* prese due strutture Tfraction restituisce un'altra Tfraction defferenza delle precedenti */
+/* difference of two fractions */
 Fraction fraction_difference(Fraction a, Fraction b){
     Fraction c = new Tfraction();  
     if(a->den == b->den){
@@ -93,7 +93,7 @@ Fraction fraction_difference(Fraction a, Fraction b){
     control(c); return fraction_simplification(c);
 }
 
-/* prese due strutture Tfraction restituisce un'altra Tfraction prodotto delle precedenti */
+/* product of two fractions */
 Fraction fraction_product(Fraction a, Fraction b){
     Fraction c = new Tfraction(); 
     c->den = a->den * b->den;
@@ -101,7 +101,7 @@ Fraction fraction_product(Fraction a, Fraction b){
     control(c); return fraction_simplification(c);
 }
 
-/* prese due strutture Tfraction restituisce un'altra Tfraction quoziente delle precedenti */
+/* quotient of two fractions */
 Fraction fraction_quotient(Fraction a, Fraction b){
     Fraction c = new Tfraction();
     c->den = a->den * b->num;
@@ -109,7 +109,7 @@ Fraction fraction_quotient(Fraction a, Fraction b){
     control(c); return fraction_simplification(c);
 }
 
-/* presa una struttura Tfraction e un numero intero restituisce un'altra Tfraction alevata alla potenza data */
+/* returns the fraction to the power of the int parameter */
 Fraction fraction_power(Fraction a, int p) {
     Fraction c = new Tfraction(1, 1);
     for(int i = 0; i < p; i++){
@@ -119,7 +119,7 @@ Fraction fraction_power(Fraction a, int p) {
     control(c); return fraction_simplification(c);
 }
 
-/* semplifica la Tfraction data */ 
+/* simplifies the given fraction */ 
 Fraction fraction_simplification(Fraction a){
     int abs_num = abs(a->num), abs_den = abs(a->den);
     int min = abs_num; 
@@ -135,7 +135,7 @@ Fraction fraction_simplification(Fraction a){
     return a;
 }
 
-/* prende in input una stringa value e lo converte in un puntatore a Tfraction */
+/* turns a string value into a fraction */
 Fraction str_to_fraction(string value){
     int i = 0; string snum;
     while(value[i] != '\0'){
@@ -154,7 +154,9 @@ Fraction str_to_fraction(string value){
     return new Tfraction(stoi(snum), 1);
 }
 
-/* prende in input un puntatore a Tfraction e due valori interi che determinano il massimo numero di spazi dati al numeratore e al denominatore per essere stampati, e stampa Tfraction seguendo questo formato */
+/* takes two integer values and a fraction that set the 
+max n° of spaces given to the numerator and the denominator to be printed, 
+and prints the fraction given this format*/
 void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den){
     int space_num, space_den;
     if(f->den == 1){
@@ -171,12 +173,12 @@ void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den)
     cout << " ";
 }
 
-/* se il numeratore è uguale a 0 allora imposta il denominatore a 1 */
+/* if num == 0, then the den == 1 to avoid quotient errors */
 void zero_control(Fraction f){
     if(f->num == 0) f->den = 1;
 }
 
-/* controlla che il segno negativo venga imposto al numeratore se necessario */
+/* checks the sign of a given fraction */
 void sign_control(Fraction f){
     if(f->num < 0 && f->den < 0){
         f->num = (-1) * f->num;
@@ -187,13 +189,13 @@ void sign_control(Fraction f){
     }
 }
 
-/* applica il controllo dello zero e del segno alla frazione */
+/* checks both zero presence or negative values */
 void control(Fraction f){
     zero_control(f);
     sign_control(f);
 }
 
-/* restituisce una frazione identica a quella data */
+/* returns a copy of the given fraction */
 Fraction fraction_copy(Fraction a){
     return new Tfraction(a->num, a->den);
 }

@@ -105,7 +105,7 @@ FVector parse_linear_function_input(vector <string> *fun, int dim){
     return v;
 }
 
-setFVectorsPtr Ker(Function f) {
+setFVectorsPtr Ker(Function f) { // calculates the kernel of the given function
     int _n_th = f->b2->n_th;
     FVector b = new Tfvector(_n_th);
     for (int i = 0; i < _n_th; ++i) b->array[i] = new Tfraction(0, 1);
@@ -113,7 +113,7 @@ setFVectorsPtr Ker(Function f) {
     return feq_sys_sol(ef);
 }
 
-setFVectorsPtr Im(Function f) {
+setFVectorsPtr Im(Function f) { // calculates the image of the given function
     FMatrix mrg = fraction_matrix_gauss_jordan(f->mr);
     int rank = fraction_matrix_rank(mrg), i, zero_column = 0;
     setFVectorsPtr im = new TsetFVectors(rank, f->b2->n_th, "");
@@ -130,16 +130,16 @@ setFVectorsPtr Im(Function f) {
     return im;
 }
 
-setFVectorsPtr Counter_Im(Function f, FVector v){
+setFVectorsPtr Counter_Im(Function f, FVector v){ // calculates the counter image of the given vector
     FEqsys e = new Tfeqsys(f->mr, v);
     return feq_sys_sol(e);
 }
 
-bool function_is_bijective(Function f){
+bool function_is_bijective(Function f){ //checks if the function is bijective
     setFVectorsPtr im = Im(f), ker = Ker(f);
     return (set_fvectors_is_base(im) && ker->dim == 0);
 }
 
-FVector apply_linear_function(Function f, FVector v){
+FVector apply_linear_function(Function f, FVector v){ // applies the given linear function to the given vector
     return fraction_matrix_fvector_product(f->mr, v);
 }
