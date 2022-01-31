@@ -85,88 +85,81 @@ Trc Rouche_Capelli(FEqsys e){
     return ONE_RESULT;
 }
 
+setFVectorsPtr set_base_inf_sol(FEqsys e, FreeColumnsPtr fc, PivotRowsColumnsPtr pcr){
+    e = feq_sys_rref(e);
+    FMatrix m = e->A; 
+    int num_columns = m->nc;
+    setFVectorsPtr res = new TsetFVectors(fc->dim, num_columns);
+    int fc_counter, pcr_counter;
+    fc_counter = pcr_counter = 0;
+    for(int d = 0; d < res->dim; ++d){ 
+        for(int j = 0; j < num_columns; ++j){
+            if(j == pcr->pivot_columns[pcr_counter]){ 
+                res->v[d]->array[j] = 
+                    fraction_sum(e->b->array[pcr->pivot_rows[pcr_counter]], fraction_product(
+                            new Tfraction(-1, 1), 
+                            m->mat[pcr->pivot_rows[pcr_counter]][fc->free_columns[fc_counter]]
+                        )
+                    ); 
+                ++pcr_counter; 
+            } 
+            else { 
+                res->v[d]->array[j] = 
+                    (fc->free_columns[fc_counter] == j) ? new Tfraction(1, 1) : new Tfraction(0, 1); 
+            }
+        } 
+        ++fc_counter;
+    }
+    return res; 
+}
+
+setFVectorsPtr feq_sys_inf_sol(FEqsys e){
+    if (Rouche_Capelli(e) != INF_RESULTS) exit(1);
+    FMatrix m = fraction_matrix_rref(e->A); 
+    FreeColumnsPtr fc = free_columns(m);
+    PivotRowsColumnsPtr pcr = pivot_rows_columns(m);
+    return set_base_inf_sol(e, fc, pcr);
+}
+
+setFVectorsPtr feq_sys_one_sol(FEqsys e){
+    if (Rouche_Capelli(e) != ONE_RESULT) exit(1);
+    e = feq_sys_rref(e); 
+    setFVectorsPtr res = new TsetFVectors("");
+    res->dim = 1; res->v = new FVector[1];
+    if(e->A->nc > e->b->n){
+        int rankA = fraction_matrix_rank(e->A);
+        int i, j = 0, zero_column = 0;
+        res->n_th = e->A->nc;
+        res->v[0] = new Tfvector(res->n_th);
+        while(rankA > 0){
+            i = j - zero_column;
+            if(e->A->mat[i][j]->num == 0) {
+                res->v[0]->array[j] = new Tfraction(0, 1);
+                ++zero_column;
+            } else {
+                res->v[0]->array[j] = e->b->array[i];
+                --rankA;
+            }
+            ++j; 
+        }
+        for(int rest = j; rest < res->n_th; ++rest){
+            res->v[0]->array[rest] = new Tfraction(0, 1);
+        }
+    } else {
+        res->n_th = e->b->n;
+        res->v[0] = e->b;
+    }  
+    return res;
+}
+
 /* risolve un sistema lineare */
 setFVectorsPtr feq_sys_sol(FEqsys e){
     Trc type_res = Rouche_Capelli(e);
-    setFVectorsPtr res = NULL;
     if(type_res == NO_RESULT){
-        return res;
+        return NULL;
     } else if(type_res == INF_RESULTS){
-        FMatrix m = fraction_matrix_rref(e->A); 
-        int rank = fraction_matrix_rank(m), c = m->nc;
-        int pivot_column_position[rank], pivot_row_position[rank], free_var_column_position[c - rank]; 
-        int count1 = 0, count2 = 0, count3 = 0;
-        int i, free_column = 0, __dim_base = c - rank; 
-        res = new TsetFVectors(""); res->dim = __dim_base; res->n_th = c; 
-        res->v = new FVector[__dim_base];
-        for(int d = 0; d < __dim_base; ++d){
-            res->v[d] = new Tfvector(c);
-        } 
-        for(int j = 0; j < c; ++j){
-            if(rank > 0){ 
-                i = j - free_column;
-                if(m->mat[i][j]->num == 0){ 
-                    ++free_column; free_var_column_position[count3++] = j;
-                    continue; /* passa alla prossima colonna */ 
-                }
-                pivot_column_position[count1++] = j; 
-                pivot_row_position[count2++] = i;
-            }
-            rank--; 
-            if(rank < 0){
-                free_var_column_position[count3++] = j;
-            }
-        } 
-        count3 = 0;
-        for(int d = 0; d < __dim_base; ++d){ 
-            count1 = count2 = 0;
-            for(int j = 0; j < c; ++j){
-                if(j == pivot_column_position[count1]){ 
-                    res->v[d]->array[j] = 
-                        fraction_sum(
-                            e->b->array[pivot_row_position[count2]], 
-                            fraction_product(
-                                new Tfraction(-1, 1), 
-                                m->mat[pivot_row_position[count2]][free_var_column_position[count3]]
-                            )
-                        ); 
-                    ++count1; 
-                    ++count2; 
-                } 
-                else { 
-                    res->v[d]->array[j] = 
-                        (free_var_column_position[count3] == j) ? new Tfraction(1, 1) : new Tfraction(0, 1); 
-                }
-            } 
-            ++count3;
-        }
-        return res; 
+        return feq_sys_inf_sol(e);
     } else {
-        e = feq_sys_rref(e); res = new TsetFVectors("");
-        res->dim = 1; res->v = new FVector[1];
-        if(e->A->nc > e->b->n){
-            int rankA = fraction_matrix_rank(e->A);
-            int i, j = 0, zero_column = 0;
-            res->n_th = e->A->nc;
-            res->v[0] = new Tfvector(res->n_th);
-            while(rankA > 0){
-                i = j - zero_column;
-                if(e->A->mat[i][j]->num == 0) {
-                    res->v[0]->array[j] = new Tfraction(0, 1);
-                    ++zero_column;
-                } else {
-                    res->v[0]->array[j] = e->b->array[i];
-                    --rankA;
-                }
-                ++j; 
-            }
-            for(int rest = j; rest < res->n_th; ++rest){
-                res->v[0]->array[rest] = new Tfraction(0, 1);
-            }
-        } else {
-            res->n_th = e->b->n;
-            res->v[0] = e->b;
-        }  
-        return res;
+        return feq_sys_one_sol(e);
     }
 }

@@ -444,3 +444,42 @@ FVector fraction_matrix_fvector_product(FMatrix m, FVector v){
     }
     return NULL;
 }
+
+PivotRowsColumnsPtr pivot_rows_columns(FMatrix m){ 
+    int rank = fraction_matrix_rank(m);
+    PivotRowsColumnsPtr info = new TpivotRowsColmuns(rank);
+    int num_columns = m->nc;
+    int i = 0, j = 0, free_column = 0;
+    while(j < num_columns && i < m->nr){
+        i = j - free_column;
+        if(i == m->nr);
+        else if(m->mat[i][j]->num == 0){
+            ++free_column;
+        } else {
+            info->pivot_columns[i] = j;
+            info->pivot_rows[i] = i; 
+        }
+        ++j;
+    }
+    return info;
+}
+
+FreeColumnsPtr free_columns(FMatrix m){
+    int rank = fraction_matrix_rank(m); 
+    int num_columns = m->nc; 
+    FreeColumnsPtr info = new TfreeColumns(num_columns - rank);
+    int i = 0, j = 0, free_columns = 0, counter = 0;
+    while(j < num_columns){
+        i = j - free_columns;
+        if(i >= m->nr){
+            info->free_columns[counter] = j;
+            ++counter;
+        } else if(m->mat[i][j]->num == 0){
+            info->free_columns[counter] = j;
+            ++counter;
+            ++free_columns;
+        }
+        ++j;
+    }
+    return info;
+}

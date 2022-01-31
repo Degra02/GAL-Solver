@@ -5,6 +5,51 @@
 #define __MATRIX_FRACTION_H__
 using namespace std;
 
+typedef struct TfreeColumns{
+    int* free_columns;
+    int dim;
+
+    TfreeColumns(){
+        dim = 0;
+    }
+
+    TfreeColumns(int x){
+        dim = x;
+        free_columns = new int[dim];
+    }
+
+    ~TfreeColumns(){
+        delete[] free_columns;
+    }
+
+}TfreeColumns;
+
+typedef TfreeColumns* FreeColumnsPtr;
+
+typedef struct TpivotRowsColmuns{
+    int* pivot_rows;
+    int* pivot_columns;
+    int dim;
+
+    TpivotRowsColmuns(){
+        dim = 0;
+    }
+
+    TpivotRowsColmuns(int x){
+        dim = x;
+        pivot_rows = new int[dim];
+        pivot_columns = new int[dim];
+    }
+
+    ~TpivotRowsColmuns(){
+        delete[] pivot_rows;
+        delete[] pivot_columns;
+    }
+
+}TpivotRowsColmuns;
+
+typedef TpivotRowsColmuns* PivotRowsColumnsPtr;
+
 /* TYPE FRACTION MATRIX */
 typedef struct Tfmatrix{
     Fraction **mat;
@@ -46,5 +91,7 @@ int fraction_matrix_rank(FMatrix m);
 bool fraction_matrix_is_base(FMatrix m);
 bool matrix_is_square(FMatrix m);
 FVector fraction_matrix_fvector_product(FMatrix m, FVector v);
+PivotRowsColumnsPtr pivot_rows_columns(FMatrix m);
+FreeColumnsPtr free_columns(FMatrix m);
 
 #endif

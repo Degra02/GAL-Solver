@@ -40,5 +40,8 @@ FEqsys feq_sys_rref(FEqsys e);
 FEqsys to_feqsys_from_matrix(FMatrix m);
 Trc Rouche_Capelli(FEqsys e);
 setFVectorsPtr feq_sys_sol(FEqsys e);
+setFVectorsPtr feq_sys_inf_sol(FEqsys e);
+setFVectorsPtr feq_sys_one_sol(FEqsys e);
+setFVectorsPtr set_base_inf_sol(FEqsys e, FreeColumnsPtr fc, PivotRowsColumnsPtr pcr);
 
 #endif
