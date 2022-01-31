@@ -4,7 +4,7 @@
 #include "all-headers.h"
 using namespace std;
 
-Lists command_new_system(Lists list){
+Lists command_new_system(Lists list){ // also saves every element of the system in the corresponding list
     string name; cout << "Name= "; fflush(stdin); cin >> name;
     if(!isPresentE(list->Eqlist, name)){
         FMatrix m; FVector v;
