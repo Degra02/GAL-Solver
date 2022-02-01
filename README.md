@@ -20,10 +20,13 @@
   <a href="https://github.com/Degra02/GAL-Library/blob/main/User-Guide/User_Guide.pdf" target="_blank"> User_Guide </a> 
 </p>
 
-<p align="left">
-  <h1> What's missing </h1>
-  Unfortunately as for right now, eigenvalues and eigenvectors are not a part of the program, we still have to find a way to correctly solve the whole polinomial
-  calculus problem.<br>
-  If you have any idea on how to solve this, don't hesitate to contact us.
-</p>
+#What's mussing
+##Eigenvalues & eigenvectors
+Unfortunately as for right now, eigenvalues and eigenvectors are not a part of the program, we still have to find a way to correctly solve the whole polinomial
+calculus problem.
+If you have any idea on how to solve this, do not hesitate to contact us.
+
+##Problems with parameter
+Solving matrices with a 'k' parameter is still something we have not found a way to solve. We will be working on it.
+Just like with eigenvalues and eigenvectors, do not hesitate to contact us.
 
