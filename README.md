@@ -23,7 +23,7 @@ Unfortunately as for right now, eigenvalues and eigenvectors are not a part of t
 calculus problem.<br>
 If you have any idea on how to solve this, do not hesitate to contact us.<br>
 <h2>Problems with parameter</h2>
-Solving matrices with a 'k' parameter is still something we have not found a way to solve. We will be working on it.zbr>
+Solving matrices with a 'k' parameter is still something we have not found a way to solve but we will be working on it.<br>
 Just like with eigenvalues and eigenvectors, do not hesitate to contact us.
 
 </p>
