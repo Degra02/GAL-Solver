@@ -166,8 +166,17 @@ void function_call(Lists list){
             } else {
                 cout <<"Invalid function call" << endl << endl;
             }
-        } else if(userinput[0] == "cls"){
+        } else if(userinput[0] == "cls" || userinput[0] == "clear"){
+            #if defined(_WIN32)
             system("cls");
+            #endif
+            #if defined(__linux__)
+            system("clear");
+            #endif 
+            #if defined(__unix__)
+            system("clear");
+            #endif
+
         } else if(userinput[0] == "/help"){
             command_help();
         } else {
