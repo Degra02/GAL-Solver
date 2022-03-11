@@ -2,8 +2,9 @@
 #ifndef __SET_VECTORS_FRACTION_H__
 #define __SET_VECTORS_FRACTION_H__
 
-typedef struct TsetFVectors {
-    FVector* v;
+typedef struct TsetFVectors
+{
+    FVector *v;
     string name;
     int dim;
     int n_th;
@@ -16,12 +17,12 @@ typedef struct TsetFVectors {
 
 } TsetFVectors;
 
-typedef TsetFVectors* setFVectorsPtr;
+typedef TsetFVectors *setFVectorsPtr;
 
 setFVectorsPtr init_set_fvectors(string name);
 setFVectorsPtr init_set_fvectors_base(string name);
 setFVectorsPtr init_set_fvectors_base_function(string name, int _n_th);
-setFVectorsPtr init_base(int _dim, int _n_th);
+setFVectorsPtr init_base(int _dim, int _n_th, string name);
 setFVectorsPtr insert_values_set_fvectors(int _dim, int _n_th, string name);
 void print_set_fvectors(setFVectorsPtr sv);
 setFVectorsPtr id(int dim);
