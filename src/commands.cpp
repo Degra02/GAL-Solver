@@ -181,7 +181,7 @@ void function_call(Lists list){
             command_help();
         } else {
             if(userinput[0] != "END")
-                cout << "No such function" << endl << endl;
+                cout << "No such function >> " << userinput[0] << endl << endl;
         }
 
     }while(userinput[0] != "END");
