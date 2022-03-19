@@ -9,17 +9,37 @@
 </p>
 
 # Get Started 
-  In order to get started with the program, just download the .zip file and extract all in a folder.  
+## Windows
+  In order to get started with the program, just download the .zip file and extract all in a folder or clone the repository using **git clone**.    
   Then just click on the GAL-Solver link and the program will start.  
+  <br>
+  <br>
+
+## Linux
+  If you're using Linux, you probably know the drill. Select the folder where you want to clone the repo and use the following command:
+
+```c++
+git clone "https://github.com/Degra02/GAL-Library.git"
+```
+
+Then go inside the Gal-Library directory and run
+
+```c++
+output/main
+```
+<br>
+<br>
 
 # User Guide
-  The Guide with every command in detail can be downloaded from here >> [User Guide](User-Guide/User_Guide.pdf)  
+  The Guide with every command in detail can be downloaded from here >> [User Guide](User-Guide/User_Guide.pdf)    
+  <br>
 
 # What's missing
 ## Eigenvalues & eigenvectors
 Unfortunately as for right now, eigenvalues and eigenvectors are not a part of the program, we still have to find a way to correctly solve the whole polinomial
 calculus problem.  
 If you have any idea on how to solve this, do not hesitate to contact us.  
+<br>
 
 ## Problems with parameter
 Solving matrices with a 'k' parameter is still something we have not found a way to solve but we will be working on it.  
