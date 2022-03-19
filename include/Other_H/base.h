@@ -1,8 +1,8 @@
 #include <iostream>
 #include <all-headers.h>
 
-#ifndef __BASE_FRACTION_LIST_H__
-#define __BASE_FRACTION_LIST_H__
+#ifndef __BASE_H__
+#define __BASE_H__
 
 typedef struct Tbflist{
     setFVectorsPtr b;

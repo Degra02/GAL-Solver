@@ -1,6 +1,6 @@
 #include "all-headers.h"
-#ifndef __SET_VECTORS_FRACTION_H__
-#define __SET_VECTORS_FRACTION_H__
+#ifndef __SET_H__
+#define __SET_H__
 
 typedef struct TsetFVectors
 {

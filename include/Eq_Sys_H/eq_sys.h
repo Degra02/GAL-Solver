@@ -1,10 +1,10 @@
 #include <iostream>
 #include "all-headers.h"
-#include "set_vectors_fraction.h"
+#include "Other_H/set.h"
 using namespace std;
 
-#ifndef __EQ_SYS_FRACTION_H__
-#define __EQ_SYS_FRACTION_H__
+#ifndef __EQ_SYS_H__
+#define __EQ_SYS_H__
 
 typedef struct Tfeqsys{
     FMatrix A;

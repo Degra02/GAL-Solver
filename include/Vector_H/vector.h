@@ -1,7 +1,7 @@
 #include "all-headers.h"
 #include <iostream>
-#ifndef __VECTOR_FRACTION_H__
-#define __VECTOR_FRACTION_H__
+#ifndef __VECTOR_H__
+#define __VECTOR_H__
 using namespace std;
 
 typedef struct Tn {

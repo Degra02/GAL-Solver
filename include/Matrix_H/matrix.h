@@ -1,8 +1,8 @@
 #include "all-headers.h"
-#include "vector_fraction.h"
+#include "Vector_H/vector.h"
 #include <iostream>
-#ifndef __MATRIX_FRACTION_H__
-#define __MATRIX_FRACTION_H__
+#ifndef __MATRIX_H__
+#define __MATRIX_H__
 using namespace std;
 
 typedef struct TfreeColumns{

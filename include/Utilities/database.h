@@ -1,9 +1,9 @@
 #include <iostream>
-#include "matrix_list.h"
-#include "vector_list.h"
-#include "eq_system_list.h"
-#include "base_fraction_list.h"
-#include "linear_function_list.h"
+#include "Matrix_H/matrix_list.h"
+#include "Vector_H/vector_list.h"
+#include "Eq_Sys_H/eq_system_list.h"
+#include "Other_H/base.h"
+#include "Linear_Function_H/linear_function_list.h"
 using namespace std;
 
 #ifndef __DATABASE_H__
