@@ -7,6 +7,7 @@
   A program that helps students solve Linear Algebra excercises.<br>
   ============================================================
 </p>
+<br>
 
 # Get Started 
 ## Windows
