@@ -32,7 +32,7 @@ output/main
 <br>
 
 # User Guide
-  The Guide with every command in detail can be downloaded from here >> [User Guide](User-Guide/User_Guide.pdf)    
+  The Guide with every command in detail can be downloaded from here --> [User Guide](User-Guide/User_Guide.pdf)    
   <br>
 
 # What's missing
