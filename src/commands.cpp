@@ -1,8 +1,17 @@
 #include <iostream>
 #include <bits/stdc++.h>
 #include "all-headers.h"
+#include <termios.h>
+#include <unistd.h>
 
 using namespace std;
+
+void clean_stdin(){
+    int stdin_copy = dup(STDIN_FILENO);
+    tcdrain(stdin_copy);
+    tcflush(stdin_copy, TCIFLUSH);
+    close(stdin_copy);
+}
 
 void parse_user_input(vector <string> *userinput){
     if(userinput->size() != 0){
@@ -15,7 +24,13 @@ void parse_user_input(vector <string> *userinput){
     
     #if defined(_WIN32)
     fflush(stdin); 
-    #endif 
+    #endif
+    #if defined(__linux__)
+    clean_stdin();
+    #endif
+    #if defined(__unix__)
+    clean_stdin();
+    #endif
     
     getline(cin, input);
     stringstream check(input);
@@ -185,11 +200,12 @@ void function_call(Lists list){
 
         } else if(userinput[0] == "/help"){
             command_help();
+        } else if(userinput[0] == "logo"){
+            print_ascii_art();
         } else {
             if(userinput[0] != "END")
                 cout << "No such function >> " << userinput[0] << endl << endl;
         }
-
     }while(userinput[0] != "END");
 }
 
@@ -210,4 +226,40 @@ void command_help(){
     cout << "print:\n      " << "matrix: prints the chosen matrix\n      " << "vector: prints the chosen vector\n      " << "set: prints the chosen set\n      " << "system: prints the chosen system\n      " << "function: prints the chosen function \n\n";
     cout << "view:\n      " << "matrices: prints all saved matrices\n      " << "vectors: prints all saved vectors\n      " << "sets: prints all saved sets\n      " << "systems: prints all saved systems\n      " << "functions: prints all saved functions\n\n";
     cout << endl << "\x01b[0m";
+}
+
+void print_ascii_art(){
+    printf("\x1b[107;40m\x1b[38;5;m                                                                               \x1b[38;5;m\n");
+printf("\x1b[38;5;m                                                                               \x1b[38;5;m\n"); 
+printf("\x1b[38;5;m                            \x01b[38;5;233m \x1b[38;5;053m,\x1b[38;5;091m**/*\x1b[38;5;005m*\x1b[38;5;233m \x1b[38;5;m,       *\x1b[38;5;233m \x1b[38;5;053m,,\x1b[38;5;234m.\x1b[38;5;091m/*\x1b[38;5;234m.\x1b[38;5;m.                          \x1b[38;5;m\n"); 
+printf("\x1b[38;5;m                       #\x1b[38;5;091m**\x1b[38;5;090m*\x1b[38;5;234m.\x1b[38;5;233m \x1b[38;5;235m.\x1b[38;5;090m**\x1b[38;5;091m/**\x1b[38;5;234m \x1b[38;5;052m \x1b[38;5;053m.\x1b[38;5;054m,\x1b[38;5;053m,\x1b[38;5;054m,\x1b[38;5;053m,\x1b[38;5;054m,,,,,\x1b[38;5;233m \x1b[38;5;091m*******/\x1b[38;5;234m.\x1b[38;5;m,                     \x1b[38;5;m\n");
+printf("\x1b[38;5;m                       \x1b[38;5;091m*/\/******\x1b[38;5;235m.\x1b[38;5;054m,,,,,,,,\x1b[38;5;053m,\x1b[38;5;054m,,,,\x1b[38;5;236m.\x1b[38;5;091m*/*******\x1b[38;5;234m \x1b[38;5;233m \x1b[38;5;m                     \x1b[38;5;m\n"); 
+printf("\x1b[38;5;m                      \x1b[38;5;234m.\x1b[38;5;091m********\x1b[38;5;233m \x1b[38;5;054m,,,,,\x1b[38;5;053m,,\x1b[38;5;054m,,,\x1b[38;5;053m,\x1b[38;5;054m,\x1b[38;5;053m,\x1b[38;5;233m  \x1b[38;5;235m.\x1b[38;5;090m*\x1b[38;5;091m*****/\x1b[38;5;233m    \x1b[38;5;m                    \x1b[38;5;m \n");
+printf("\x1b[38;5;m                     *\x1b[38;5;233m \x1b[38;5;053m.\x1b[38;5;091m***/*/\x1b[38;5;052m \x1b[38;5;054m,,,\x1b[38;5;053m,\x1b[38;5;054m,\x1b[38;5;234m.\x1b[38;5;m.  \x1b[38;5;233m \x1b[38;5;234m.\x1b[38;5;233m \x1b[38;5;234m. \x1b[38;5;233m  \x1b[38;5;053m,\x1b[38;5;054m,,\x1b[38;5;053m,\x1b[38;5;054m,,\x1b[38;5;053m,\x1b[38;5;233m \x1b[38;5;234m \x1b[38;5;233m  \x1b[38;5;234m \x1b[38;5;m,                   \x1b[38;5;m \n");
+printf("\x1b[38;5;m                      \x1b[38;5;233m \x1b[38;5;054m,,,\x1b[38;5;053m,\x1b[38;5;054m,,\x1b[38;5;053m,\x1b[38;5;233m    \x1b[38;5;m              \x1b[38;5;053m,\x1b[38;5;054m,,,,,,\x1b[38;5;233m \x1b[38;5;234m \x1b[38;5;233m  \x1b[38;5;m                    \x1b[38;5;m \n");
+printf("\x1b[38;5;m                       \x1b[38;5;053m,\x1b[38;5;054m,,,,,,\x1b[38;5;053m,\x1b[38;5;233m  \x1b[38;5;m.               \x1b[38;5;053m,\x1b[38;5;054m,,,,,\x1b[38;5;053m,\x1b[38;5;233m  \x1b[38;5;m                     \x1b[38;5;m \n");
+printf("\x1b[38;5;m                        \x1b[38;5;053m,\x1b[38;5;054m,,,,,,\x1b[38;5;233m  \x1b[38;5;m               \x1b[38;5;235m..\x1b[38;5;054m,,,,,,\x1b[38;5;053m,\x1b[38;5;m                      \x1b[38;5;m \n");
+printf("\x1b[38;5;m                       \x1b[38;5;233m  \x1b[38;5;054m,\x1b[38;5;053m,\x1b[38;5;054m,,,,,\x1b[38;5;m,               \x1b[38;5;054m*\x1b[38;5;053m,\x1b[38;5;054m,\x1b[38;5;053m,\x1b[38;5;054m,,,\x1b[38;5;053m,,\x1b[38;5;234m \x1b[38;5;m                     \x1b[38;5;m \n");
+printf("\x1b[38;5;m                      ,\x1b[38;5;053m,\x1b[38;5;054m,\x1b[38;5;233m \x1b[38;5;053m,\x1b[38;5;054m,,,,,\x1b[38;5;053m,\x1b[38;5;m              \x1b[38;5;233m \x1b[38;5;054m**\x1b[38;5;233m \x1b[38;5;054m,\x1b[38;5;053m,,\x1b[38;5;054m,,,\x1b[38;5;053m,\x1b[38;5;m.                    \x1b[38;5;m \n");
+printf("\x1b[38;5;m                      \x1b[38;5;053m,\x1b[38;5;054m,,\x1b[38;5;053m,,,,\x1b[38;5;233m  \x1b[38;5;234m.\x1b[38;5;054m,\x1b[38;5;053m,\x1b[38;5;054m,\x1b[38;5;053m,\x1b[38;5;235m.\x1b[38;5;m ,      .\x1b[38;5;234m \x1b[38;5;053m,,,\x1b[38;5;233m \x1b[38;5;091m///\x1b[38;5;096m/\x1b[38;5;234m \x1b[38;5;233m \x1b[38;5;235m.\x1b[38;5;054m,\x1b[38;5;m                    \x1b[38;5;m \n");
+printf("\x1b[38;5;m                      \x1b[38;5;053m,\x1b[38;5;054m,,\x1b[38;5;053m.\x1b[38;5;091m***/\x1b[38;5;005m*\x1b[38;5;233m  \x1b[38;5;053m.\x1b[38;5;054m*,\x1b[38;5;235m.\x1b[38;5;233m \x1b[38;5;234m.\x1b[38;5;053m,\x1b[38;5;054m,,,,,,,,\x1b[38;5;053m,\x1b[38;5;235m.\x1b[38;5;091m/\/\/\/\/\/\/\//\x1b[38;5;m                    \x1b[38;5;m \n");
+printf("\x1b[38;5;m                      .\x1b[38;5;054m,,\x1b[38;5;235m.\x1b[38;5;091m/*****/*\x1b[38;5;233m \x1b[38;5;054m,,,,,,,,,,,,,,\x1b[38;5;053m,\x1b[38;5;091m/\/\/\/\/\/\/\/\x1b[38;5;m,                    \x1b[38;5;m  \n");
+printf("\x1b[38;5;m                       \x1b[38;5;233m  \x1b[38;5;091m********\x1b[38;5;233m \x1b[38;5;054m,,,,,,,,,,\x1b[38;5;053m,,\x1b[38;5;233m  \x1b[38;5;234m \x1b[38;5;233m  \x1b[38;5;053m*\x1b[38;5;091m/\/\/\/\/\x1b[38;5;233m \x1b[38;5;m                     \x1b[38;5;m \n");
+printf("\x1b[38;5;m                         .\x1b[38;5;233m \x1b[38;5;005m*\x1b[38;5;091m**/**\x1b[38;5;053m,,\x1b[38;5;054m,,\x1b[38;5;053m.\x1b[38;5;m    .\x1b[38;5;233m \x1b[38;5;234m  \x1b[38;5;233m \x1b[38;5;234m  \x1b[38;5;233m \x1b[38;5;234m \x1b[38;5;233m  \x1b[38;5;234m \x1b[38;5;233m \x1b[38;5;m*                       \x1b[38;5;m \n");
+printf("\x1b[38;5;m                       ,                                                       \x1b[38;5;m \n");
+printf("\x1b[38;5;m                                                                               \x1b[38;5;m \n");
+printf("\x1b[38;5;m                    \x1b[38;5;214m((((((((((\x1b[38;5;m      #\x1b[38;5;214m(((((((\x1b[38;5;220m#\x1b[38;5;m     \x1b[38;5;214m((((\x1b[38;5;m&                        \x1b[38;5;m \n");
+printf("\x1b[38;5;m                   \x1b[38;5;214m((\x1b[38;5;m \x1b[38;5;214m((\x1b[38;5;m%,%,&%     %\x1b[38;5;214m(\x1b[38;5;m%\x1b[38;5;214m((\x1b[38;5;m,\x1b[38;5;214m((\x1b[38;5;m%\x1b[38;5;220m(\x1b[38;5;m#    \x1b[38;5;214m((\x1b[38;5;m#\x1b[38;5;214m(\x1b[38;5;m&                        \x1b[38;5;m \n");
+printf("\x1b[38;5;m                   \x1b[38;5;214m((\x1b[38;5;m \x1b[38;5;214m((\x1b[38;5;m          #\x1b[38;5;214m(\x1b[38;5;m#\x1b[38;5;214m((\x1b[38;5;m   \x1b[38;5;214m((\x1b[38;5;m#\x1b[38;5;214m(\x1b[38;5;m#   \x1b[38;5;214m((\x1b[38;5;m#\x1b[38;5;214m(\x1b[38;5;m&                        \x1b[38;5;m \n");
+printf("\x1b[38;5;m                   \x1b[38;5;214m((\x1b[38;5;m \x1b[38;5;214m((\x1b[38;5;m   \x1b[38;5;214m((\x1b[38;5;m%\x1b[38;5;214m(\x1b[38;5;m#  \x1b[38;5;214m((\x1b[38;5;m&\x1b[38;5;214m(((\x1b[38;5;178m(\x1b[38;5;214m(((\x1b[38;5;m#\x1b[38;5;214m((\x1b[38;5;m   \x1b[38;5;214m((\x1b[38;5;m#\x1b[38;5;214m(\x1b[38;5;m&  %\x1b[38;5;214m(\x1b[38;5;m#\x1b[38;5;214m((\x1b[38;5;m                 \x1b[38;5;m \n");
+printf("\x1b[38;5;m                   \x1b[38;5;214m((\x1b[38;5;m \x1b[38;5;214m(((((\x1b[38;5;220m(\x1b[38;5;214m(\x1b[38;5;m%\x1b[38;5;214m(\x1b[38;5;m#  \x1b[38;5;214m((\x1b[38;5;m&\x1b[38;5;214m(\x1b[38;5;m% (/%\x1b[38;5;214m(\x1b[38;5;m#\x1b[38;5;214m((\x1b[38;5;m   \x1b[38;5;214m((\x1b[38;5;m(\x1b[38;5;214m(\x1b[38;5;220m(\x1b[38;5;214m((\x1b[38;5;220m(\x1b[38;5;214m(\x1b[38;5;m#\x1b[38;5;214m((\x1b[38;5;m                 \x1b[38;5;m \n");
+printf("\x1b[38;5;m                    #\x1b[38;5;214m(((((((\x1b[38;5;220m(\x1b[38;5;214m((\x1b[38;5;m#  \x1b[38;5;214m(\x1b[38;5;178m(\x1b[38;5;214m((\x1b[38;5;m%   %\x1b[38;5;214m(#((\x1b[38;5;m   \x1b[38;5;214m((((((\x1b[38;5;220m(\x1b[38;5;214m(((((\x1b[38;5;m                 \x1b[38;5;m \n");
+printf("\x1b[38;5;m                                                                               \x1b[38;5;m \n");
+printf("\x1b[38;5;m                                                                               \x1b[38;5;m \n");
+printf("\x1b[38;5;m               \x1b[38;5;091m/**/*****\x1b[38;5;m            \x1b[38;5;091m**\x1b[38;5;m                                         \x1b[38;5;m \n");
+printf("\x1b[38;5;m               \x1b[38;5;091m**\x1b[38;5;m         \x1b[38;5;091m********\x1b[38;5;m  \x1b[38;5;091m**\x1b[38;5;m  *\x1b[38;5;091m*\x1b[38;5;m(    \x1b[38;5;091m/*\x1b[38;5;m \x1b[38;5;091m/**/*\x1b[38;5;090m*\x1b[38;5;091m/*\x1b[38;5;m  \x1b[38;5;091m//\/***\x1b[38;5;m(            \x1b[38;5;m \n");
+printf("\x1b[38;5;m                      (\x1b[38;5;091m*/\x1b[38;5;m \x1b[38;5;091m**\x1b[38;5;m    (\x1b[38;5;091m*\x1b[38;5;m* \x1b[38;5;091m*\x1b[38;5;090m*\x1b[38;5;m  *\x1b[38;5;091m*\x1b[38;5;m,  (\x1b[38;5;091m**\x1b[38;5;m  \x1b[38;5;091m**\x1b[38;5;m#\x1b[38;5;091m***//\x1b[38;5;m %\x1b[38;5;091m*\x1b[38;5;m*                 \x1b[38;5;m \n");
+printf("\x1b[38;5;m               \x1b[38;5;091m/\//\/*/*/*\x1b[38;5;m/ \x1b[38;5;091m/*/\/\/\/\/*\x1b[38;5;m  \x1b[38;5;091m///\x1b[38;5;m**\x1b[38;5;091m*/\/*\x1b[38;5;m/    \x1b[38;5;091m*/***/\x1b[38;5;m   %\x1b[38;5;091m*\x1b[38;5;m*                 \x1b[38;5;m \n");
+printf("\x1b[38;5;m                                                                               \x1b[38;5;m \n");
+printf("\x1b[0m");
 }
