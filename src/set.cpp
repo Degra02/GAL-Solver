@@ -117,8 +117,8 @@ void print_set_fvectors(setFVectorsPtr sv){
     cout << endl << endl;
 }
 
-FMatrix set_vectors_to_fmatrix(setFVectorsPtr sv){
-    FMatrix m = new Tfmatrix(sv->n_th, sv->dim);
+Matrix set_vectors_to_fmatrix(setFVectorsPtr sv){
+    Matrix m = new Tfmatrix(sv->n_th, sv->dim);
     for(int j = 0; j < m->nc; ++j){
         for (int i = 0; i < m->nr; ++i){
             m->mat[i][j] = fraction_copy(sv->v[j]->array[i]); 
@@ -186,7 +186,7 @@ setFVectorsPtr orthogonal_complement(setFVectorsPtr sv){
     for(int i = 0; i < sv->dim; ++i){
         b->array[i] = new Tfraction(0, 1);
     } 
-    FMatrix A = new Tfmatrix(sv->dim, sv->n_th);
+    Matrix A = new Tfmatrix(sv->dim, sv->n_th);
     for (int i = 0; i < sv->dim; ++i){
         for (int j = 0; j < sv->n_th; ++j){
             A->mat[i][j] = sv->v[i]->array[j];
@@ -205,8 +205,8 @@ setFVectorsPtr completion_of_base(setFVectorsPtr sv){
         return NULL; 
     }
     if(set_fvectors_is_generators(sv)) return NULL; 
-    FMatrix m = set_vectors_to_fmatrix(sv);
-    FMatrix mid = new Tfmatrix(_n_th, _dim + _n_th); 
+    Matrix m = set_vectors_to_fmatrix(sv);
+    Matrix mid = new Tfmatrix(_n_th, _dim + _n_th); 
     for(int i = 0; i < _n_th; ++i){
         for(int j = 0; j < _dim; ++j){
             mid->mat[i][j] = m->mat[i][j];
@@ -216,7 +216,7 @@ setFVectorsPtr completion_of_base(setFVectorsPtr sv){
             else mid->mat[i][j] = new Tfraction(0, 1);
         }
     }
-    FMatrix midg = fraction_matrix_gauss_jordan(mid);
+    Matrix midg = fraction_matrix_gauss_jordan(mid);
     for(int j = 0; j < (_dim + _n_th); ++j){ 
         r = j - free_column; 
         if (r >= _n_th) break;

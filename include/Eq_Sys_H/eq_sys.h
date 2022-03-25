@@ -7,7 +7,7 @@ using namespace std;
 #define __EQ_SYS_H__
 
 typedef struct Tfeqsys{
-    FMatrix A;
+    Matrix A;
     FVector b;
     string name;
 
@@ -16,12 +16,12 @@ typedef struct Tfeqsys{
         b = NULL;
     }
 
-    Tfeqsys(FMatrix _A, FVector _b) {
+    Tfeqsys(Matrix _A, FVector _b) {
         A = _A;
         b = _b;
     }
 
-    Tfeqsys(FMatrix _A, FVector _b, string _name) {
+    Tfeqsys(Matrix _A, FVector _b, string _name) {
         A = _A;
         b = _b;
         name = _name;
@@ -35,9 +35,9 @@ typedef Tfeqsys *FEqsys;
 
 FEqsys init_feqsys(string name);
 void print_feqsys(FEqsys e);
-FMatrix to_fmatrix(FEqsys e);
+Matrix to_fmatrix(FEqsys e);
 FEqsys feq_sys_rref(FEqsys e);
-FEqsys to_feqsys_from_matrix(FMatrix m);
+FEqsys to_feqsys_from_matrix(Matrix m);
 Trc Rouche_Capelli(FEqsys e);
 setFVectorsPtr feq_sys_sol(FEqsys e);
 setFVectorsPtr feq_sys_inf_sol(FEqsys e);

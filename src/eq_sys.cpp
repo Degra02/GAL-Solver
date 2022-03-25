@@ -7,8 +7,8 @@ using namespace std;
 // Functions
 
 /* turns a linear equations system into a matrix */
-FMatrix to_fmatrix(FEqsys e){
-    FMatrix m = new Tfmatrix(e->A->nr, e->A->nc + 1);
+Matrix to_fmatrix(FEqsys e){
+    Matrix m = new Tfmatrix(e->A->nr, e->A->nc + 1);
     for(int i = 0; i < m->nr; i++){
         for(int j = 0; j < m->nc; j++){
             if(j == (m->nc - 1)) m->mat[i][j] = e->b->array[i];
@@ -20,7 +20,7 @@ FMatrix to_fmatrix(FEqsys e){
 }
 
 /* turns a matrix into a linear equations sytem */
-FEqsys to_feqsys_from_matrix(FMatrix m){
+FEqsys to_feqsys_from_matrix(Matrix m){
     FEqsys res = new Tfeqsys(new Tfmatrix(m->nr, m->nc - 1), new Tfvector(m->nr));
     for(int i = 0; i < m->nr; i++){
         for(int j = 0; j < m->nc; j++){
@@ -33,7 +33,7 @@ FEqsys to_feqsys_from_matrix(FMatrix m){
 
 /* rref form of a linear equations system */
 FEqsys feq_sys_rref(FEqsys e){
-    FMatrix tmp = to_fmatrix(e);
+    Matrix tmp = to_fmatrix(e);
     tmp = fraction_matrix_rref(tmp);
     return to_feqsys_from_matrix(tmp);
 }
@@ -56,7 +56,7 @@ FEqsys init_feqsys(string name){
 
 /* prints a linear equation system on the console buffer */
 void print_feqsys(FEqsys e){
-    FMatrix m = to_fmatrix(e);
+    Matrix m = to_fmatrix(e);
     print_fmatrix_system(m);
 }
 
@@ -66,7 +66,7 @@ Trc Rouche_Capelli(FEqsys e){
     int rankAb = fraction_matrix_rank(to_fmatrix(e));
     if(rankA != rankAb) return NO_RESULT;
     if(rankA == rankAb && rankAb < n){
-        FMatrix m = fraction_matrix_rref(e->A); int i, zero_column = 0;
+        Matrix m = fraction_matrix_rref(e->A); int i, zero_column = 0;
         for(int j = 0; j < m->nc; ++j){
             i = j - zero_column; 
             if(i == m->nr){
@@ -87,7 +87,7 @@ Trc Rouche_Capelli(FEqsys e){
 
 setFVectorsPtr set_base_inf_sol(FEqsys e, FreeColumnsPtr fc, PivotRowsColumnsPtr pcr){
     e = feq_sys_rref(e);
-    FMatrix m = e->A; 
+    Matrix m = e->A; 
     int num_columns = m->nc;
     setFVectorsPtr res = new TsetFVectors(fc->dim, num_columns);
     int fc_counter, pcr_counter;
@@ -115,7 +115,7 @@ setFVectorsPtr set_base_inf_sol(FEqsys e, FreeColumnsPtr fc, PivotRowsColumnsPtr
 
 setFVectorsPtr feq_sys_inf_sol(FEqsys e){
     if (Rouche_Capelli(e) != INF_RESULTS) exit(1);
-    FMatrix m = fraction_matrix_rref(e->A); 
+    Matrix m = fraction_matrix_rref(e->A); 
     FreeColumnsPtr fc = free_columns(m);
     PivotRowsColumnsPtr pcr = pivot_rows_columns(m);
     return set_base_inf_sol(e, fc, pcr);

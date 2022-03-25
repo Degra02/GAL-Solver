@@ -7,7 +7,7 @@ using namespace std;
 Lists command_new_system(Lists list){ // also saves every element of the system in the corresponding list
     string name; cout << "Name= "; fflush(stdin); cin >> name;
     if(!isPresentE(list->Eqlist, name)){
-        FMatrix m; FVector v;
+        Matrix m; FVector v;
         string mn, vn; cout << "Coefficients matrix name: "; fflush(stdin); cin >> mn;
         if(isPresent(list->Mlist, mn)){
             m = get_search(list->Mlist, mn);
@@ -150,7 +150,7 @@ Lists command_new_function(Lists list){
         string name; cout << "Function name: "; fflush(stdin); cin >> name;
         if(! isPresentF(list->Flist, name)){
             string n1, n2, n3; cout << "Base \"from\": "; fflush(stdin); cin >> n1;
-            setFVectorsPtr b1, b2; FMatrix m;
+            setFVectorsPtr b1, b2; Matrix m;
             if(isPresentS(list->Slist, n1)){
                 b1 = get_ssearch(list->Slist, n1);
             } else {
@@ -202,7 +202,7 @@ Lists command_base_change(Lists list){
         b2 = init_set_fvectors(n2); list->Slist = insertFirstS(list->Slist, b2);
     }
 
-    FMatrix bc = base_change(b1, b2); bc->name = "M" + b1->name + b2->name;
+    Matrix bc = base_change(b1, b2); bc->name = "M" + b1->name + b2->name;
     print_fmatrix(bc); cout << endl << endl;
     if(!isPresent(list->Mlist, bc->name)){
         list->Mlist = insertFirst(list->Mlist, bc);
@@ -234,8 +234,8 @@ Lists command_representative_matrix_formula(Lists list){
             list->Slist = insertFirstS(list->Slist, b2);
         } 
         if(b1->name == b2->name){
-            FMatrix m1 = base_change( f->b1 , b1), m2 = base_change(b2, f->b1);
-            FMatrix tot = fraction_matrix_multiplication(fraction_matrix_multiplication(m1, f->mr), m2);
+            Matrix m1 = base_change( f->b1 , b1), m2 = base_change(b2, f->b1);
+            Matrix tot = fraction_matrix_multiplication(fraction_matrix_multiplication(m1, f->mr), m2);
             tot->name = "M"+b1->name + "(" + f->name + ")";
             list->Mlist = insertFirst(list->Mlist, tot); print_fmatrix(tot); cout << endl;
         } else {
@@ -243,7 +243,7 @@ Lists command_representative_matrix_formula(Lists list){
             for(int i = 0; i < b1->dim; i++){
                 app->v[i] = apply_linear_function(f, b1->v[i]);
             }
-            FMatrix res = base_change(app, b2);
+            Matrix res = base_change(app, b2);
             res->name = "M"+b1->name+b2->name+"("+f->name+")";
             list->Mlist = insertFirst(list->Mlist, res); print_fmatrix(res); cout << endl;
         }

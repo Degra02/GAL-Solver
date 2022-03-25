@@ -2,7 +2,7 @@
 #include "all-headers.h"
 using namespace std;
 
-Fraction det(FMatrix m) {
+Fraction det(Matrix m) {
     if (m->nr == m->nc) {
         if (m->nr == 1) return m->mat[0][0];
         if (m->nr == 2) return fraction_difference(
@@ -12,7 +12,7 @@ Fraction det(FMatrix m) {
 
         Fraction determinante = new Tfraction(0, 1);
         // Defined the sub-matrix sub_m (n-1)x(n-1)
-        FMatrix sub_m = new Tfmatrix(m->nr - 1, m->nc - 1); 
+        Matrix sub_m = new Tfmatrix(m->nr - 1, m->nc - 1); 
 
         // Fill the sub-matrix sub_m by removing the i-row and the 0-column of the m matrix
         for (int i = 0; i < m->nr; ++i) {

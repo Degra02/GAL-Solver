@@ -2,6 +2,6 @@
 #ifndef __DETERMINANT_H__
 #define __DETERMINANT_H__
 
-Fraction det(FMatrix m);
+Fraction det(Matrix m);
 
 #endif

@@ -12,7 +12,7 @@ Function init_function(string name){
     //l->Slist = insertFirstS(l->Slist, b1); l->Slist = insertFirstS(l->Slist, b2);
     n3 = "M" + b1->name + "->" + b2->name + "(" + name + ")";
     cout << "Representative matrix" << endl;
-    FMatrix m = init_predefinition_fmatrix(n3, b2->n_th, b1->n_th);
+    Matrix m = init_predefinition_fmatrix(n3, b2->n_th, b1->n_th);
     return new Tfunction(name, b1, b2, m);
 }
 
@@ -33,7 +33,7 @@ void collect_linear_function(vector <string> *fun){
 }
 
 // Takes a linear function in the expression form and return the representative matrix
-FMatrix translate_linear_function(int dim1, int dim2){
+Matrix translate_linear_function(int dim1, int dim2){
     vector <string> fun[dim2];
     for(int i = 0; i < dim2; i++){
         cout << "Coord." << i+1 << ": ";
@@ -46,7 +46,7 @@ FMatrix translate_linear_function(int dim1, int dim2){
         v[i] = parse_linear_function_input(&fun[i], dim1);
     }
 
-    FMatrix m = new Tfmatrix(dim2, dim1);
+    Matrix m = new Tfmatrix(dim2, dim1);
 
     for(int i = 0; i < dim2; i++){
         for(int j = 0; j < dim1; j++){
@@ -114,7 +114,7 @@ setFVectorsPtr Ker(Function f) { // calculates the kernel of the given function
 }
 
 setFVectorsPtr Im(Function f) { // calculates the image of the given function
-    FMatrix mrg = fraction_matrix_gauss_jordan(f->mr);
+    Matrix mrg = fraction_matrix_gauss_jordan(f->mr);
     int rank = fraction_matrix_rank(mrg), i, zero_column = 0;
     setFVectorsPtr im = new TsetFVectors(rank, f->b2->n_th, "");
     for (int j = 0; j < mrg->nc; j++) {

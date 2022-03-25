@@ -1,4 +1,5 @@
 #include "all-headers.h"
+#include "jacobi_pd.hpp"
 #include <iostream>
 using namespace std;
 
@@ -60,7 +61,7 @@ Tfmatrix::~Tfmatrix(){
 // Functions
 
 /* initializes the matrix asking rows and columns */
-FMatrix init_fmatrix(string name){
+Matrix init_fmatrix(string name){
     int r, c;
 	cout << "rows= "; fflush(stdin); cin >> r;
 	cout << "columns= "; fflush(stdin); cin >> c;
@@ -68,12 +69,12 @@ FMatrix init_fmatrix(string name){
     return insert_values_fmatrix(r, c, name);
 }
 
-FMatrix init_fmatrix_known_dim(string name, int r, int c){
+Matrix init_fmatrix_known_dim(string name, int r, int c){
     return insert_values_fmatrix(r, c, name);
 }
 
 /* initializes matrix with predefined n° of rows and columns */
-FMatrix init_predefinition_fmatrix(string name, int r, int c){
+Matrix init_predefinition_fmatrix(string name, int r, int c){
     cout << "rows= " << r << endl;
     cout << "columns= " << c << endl;
     cout << endl;
@@ -81,8 +82,8 @@ FMatrix init_predefinition_fmatrix(string name, int r, int c){
 }
 
 /* lets the user insert int, float or fraction values inside a matrix */
-FMatrix insert_values_fmatrix(int r, int c, string name){
-    FMatrix m = new Tfmatrix(name, r, c); Fraction f; string value; 
+Matrix insert_values_fmatrix(int r, int c, string name){
+    Matrix m = new Tfmatrix(name, r, c); Fraction f; string value; 
     for(int i = 0; i < r; i++){ 
         cout << "   "; 
         for(int j = 0; j < c; j++){ 
@@ -95,7 +96,7 @@ FMatrix insert_values_fmatrix(int r, int c, string name){
 }
 
 /* float print of the given matrix, with 2 decimal digits */
-void print_fmatrix_float(FMatrix m){
+void print_fmatrix_float(Matrix m){
     int r = m->nr; int c = m->nc; 
     int figures[c];
     float** f = new float*[r];
@@ -119,7 +120,7 @@ void print_fmatrix_float(FMatrix m){
     cout << endl;
 }
 
-void print_fmatrix_float_system(FMatrix m){ // support function for linear equations systems
+void print_fmatrix_float_system(Matrix m){ // support function for linear equations systems
     int r = m->nr; int c = m->nc; 
     int figures[c];
     float** f = new float*[r];
@@ -149,7 +150,7 @@ void print_fmatrix_float_system(FMatrix m){ // support function for linear equat
 }
 
 /* prints the given Matrix */
-void print_fmatrix(FMatrix m){
+void print_fmatrix(Matrix m){
     int r = m->nr; int c = m->nc;
     int figures_num[c];
     int figures_den[c];
@@ -169,7 +170,7 @@ void print_fmatrix(FMatrix m){
     cout << endl;
 }
 
-void print_fmatrix_system(FMatrix m){ // support function for printing linear equations systems
+void print_fmatrix_system(Matrix m){ // support function for printing linear equations systems
     int r = m->nr; int c = m->nc;
     int figures_num[c];
     int figures_den[c];
@@ -197,7 +198,7 @@ void print_fmatrix_system(FMatrix m){ // support function for printing linear eq
 /* takes a matrix, the column number 
 and a char that tells the function to check the numerator or the denominator, 
 and returns the maximum number of spaces used to print that fraction */
-int fraction_find_max_figures_column(FMatrix m, int column, char type){
+int fraction_find_max_figures_column(Matrix m, int column, char type){
     int max_c = 0, n, space;
     bool control = (type == 'n');
     int r = m->nr;
@@ -230,8 +231,8 @@ int float_find_max_figures_column(float** f, int dim, int column){
 }
 
 /* returns a new matrix, transpose of the given matrix */
-FMatrix fraction_matrix_transpose(FMatrix m){
-    FMatrix mT = new Tfmatrix(m->nc, m->nr);
+Matrix fraction_matrix_transpose(Matrix m){
+    Matrix mT = new Tfmatrix(m->nc, m->nr);
     int r = m->nr, c = m->nc;
     for(int i = 0; i < r; i++){
         for(int j = 0; j < c; j++){
@@ -242,10 +243,10 @@ FMatrix fraction_matrix_transpose(FMatrix m){
 }
 
 /* sum of two matrices */
-FMatrix fraction_matrix_sum(FMatrix a, FMatrix b){
+Matrix fraction_matrix_sum(Matrix a, Matrix b){
     if(a->nr != b->nr || a->nc != b->nc) return new Tfmatrix();
     int r = a->nr, c = a->nc;
-    FMatrix sum = new Tfmatrix(r, c);
+    Matrix sum = new Tfmatrix(r, c);
     for(int i = 0; i < r; i++){
         for(int j = 0; j < c; j++){
             sum->mat[i][j] = fraction_sum(a->mat[i][j], b->mat[i][j]);
@@ -255,10 +256,10 @@ FMatrix fraction_matrix_sum(FMatrix a, FMatrix b){
 }
 
 /* difference of two matrices */
-FMatrix fraction_matrix_difference(FMatrix a, FMatrix b){
+Matrix fraction_matrix_difference(Matrix a, Matrix b){
     if(a->nr != b->nr || a->nc != b->nc) return new Tfmatrix();
     int r = a->nr, c = a->nc;
-    FMatrix sum = new Tfmatrix(r, c);
+    Matrix sum = new Tfmatrix(r, c);
     for(int i = 0; i < r; i++){
         for(int j = 0; j < c; j++){
             sum->mat[i][j] = fraction_difference(a->mat[i][j], b->mat[i][j]);
@@ -268,9 +269,9 @@ FMatrix fraction_matrix_difference(FMatrix a, FMatrix b){
 }
 
 /* product (if possible) of two matrices */
-FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b){
+Matrix fraction_matrix_multiplication(Matrix a, Matrix b){
     if(a->nc == b->nr){
-        FMatrix multi = new Tfmatrix(a->nr, b->nc);
+        Matrix multi = new Tfmatrix(a->nr, b->nc);
         int r = multi->nr, c = multi->nc;
         for(int i = 0; i < r; i++){
             for(int j = 0; j < c; j++){
@@ -288,9 +289,9 @@ FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b){
 }
 
 /* scalar product of the given matrix */ 
-FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda){
+Matrix fraction_matrix_scalar_multiplication(Matrix a, float lambda){
     Fraction l = new Tfraction(lambda);
-    FMatrix res = new Tfmatrix(a->nr, a->nc);
+    Matrix res = new Tfmatrix(a->nr, a->nc);
     int r = a->nr, c = a->nc;
     for (int i = 0; i < r; i++){
         for (int j = 0; j < c; j++){
@@ -301,20 +302,20 @@ FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda){
 }
 
 /* S opeartion for Gauss Jordan algorithm */
-void fraction_S(FMatrix m, int a, int b){
+void fraction_S(Matrix m, int a, int b){
     FVector v = new Tfvector(m->mat[a], m->nc);
     m->mat[a] = m->mat[b]; m->mat[b] = v->array;
 }
 
 /* D opeartion for Gauss Jordan algorithm */
-void fraction_D(FMatrix m, int a, Fraction lambda){
+void fraction_D(Matrix m, int a, Fraction lambda){
     int c = m->nc;
     for(int j = 0; j < c; j++)
         m->mat[a][j] = fraction_product(m->mat[a][j], lambda);
 }
 
 /* E operation for Gauss Jordan algorithm */
-void fraction_E(FMatrix m, int d, int s, Fraction lambda){ 
+void fraction_E(Matrix m, int d, int s, Fraction lambda){ 
     FVector v = new Tfvector(m->mat[s], m->nc);
     v->multiply(lambda);
     for(int j = 0; j < m->nc; j++) 
@@ -322,8 +323,8 @@ void fraction_E(FMatrix m, int d, int s, Fraction lambda){
 }
 
 /* Gauss Jordan algorithm to turn the given matrix into its stairs form */
-FMatrix fraction_matrix_gauss_jordan(FMatrix m){
-    FMatrix mg = fraction_matrix_copy(m); 
+Matrix fraction_matrix_gauss_jordan(Matrix m){
+    Matrix mg = fraction_matrix_copy(m); 
     Fraction lambda; int zero_column = 0;
     int rm = mg->nr, c = mg->nc;
     for(int j = 0; j < c; ++j){
@@ -349,8 +350,8 @@ FMatrix fraction_matrix_gauss_jordan(FMatrix m){
 }
 
 /* algorithm to calculate the rref of the given matrix */
-FMatrix fraction_matrix_rref(FMatrix m){
-    FMatrix mrr = fraction_matrix_gauss_jordan(m); 
+Matrix fraction_matrix_rref(Matrix m){
+    Matrix mrr = fraction_matrix_gauss_jordan(m); 
     Fraction lambda; int no_pivot_column = 0, i; 
     for (int j = 0; j < mrr->nc; ++j){
         i = (j - no_pivot_column);
@@ -374,8 +375,8 @@ FMatrix fraction_matrix_rref(FMatrix m){
 }
 
 /* copies a matrix into a new one */
-FMatrix fraction_matrix_copy(FMatrix m){
-    FMatrix r = new Tfmatrix(m->nr, m->nc);
+Matrix fraction_matrix_copy(Matrix m){
+    Matrix r = new Tfmatrix(m->nr, m->nc);
     for(int i = 0; i < m->nr; i++){
         for(int j = 0; j < m->nc; j++){
             r->mat[i][j] = m->mat[i][j];
@@ -385,9 +386,9 @@ FMatrix fraction_matrix_copy(FMatrix m){
 }
 
 /* returns the rank of the given matrix */
-int fraction_matrix_rank(FMatrix m){
+int fraction_matrix_rank(Matrix m){
     int counter = 0;
-    FMatrix my_copy = fraction_matrix_gauss_jordan(m);
+    Matrix my_copy = fraction_matrix_gauss_jordan(m);
     for(int i = 0; i < my_copy->nr; ++i){
         for(int j = 0; j < my_copy->nc; ++j)
             if(my_copy->mat[i][j]->num != 0){ ++counter; j = my_copy->nc; }
@@ -396,24 +397,24 @@ int fraction_matrix_rank(FMatrix m){
 }
 
 /* checks if the columns of the given matrix form a base */
-bool fraction_matrix_is_base(FMatrix m){
+bool fraction_matrix_is_base(Matrix m){
     return (m->nc == fraction_matrix_rank(m) && matrix_is_square(m));
 }
 
 /* checks if the matrix is squared */
-bool matrix_is_square(FMatrix m){
+bool matrix_is_square(Matrix m){
     return (m->nc == m->nr);
 }
 
 /* takes a matrix and returns the reverse matrix (if possible) */
-FMatrix fraction_matrix_reverse(FMatrix m){
+Matrix fraction_matrix_reverse(Matrix m){
     int r = m->nr, c = m->nc;
     if((!matrix_is_square(m)) || (fraction_matrix_rank(m) != c)){
         cout << "Reverse matrix does not exit." << endl << endl;
         return NULL;
     }
-    FMatrix mr = new Tfmatrix(r, c);
-    FMatrix mI = new Tfmatrix(r, 2 * c);
+    Matrix mr = new Tfmatrix(r, c);
+    Matrix mI = new Tfmatrix(r, 2 * c);
     for(int i = 0; i < r; ++i){
         for(int j = 0; j < c; ++j) mI->mat[i][j] = m->mat[i][j];
         for(int j = c; j < 2 * c; ++j){
@@ -431,7 +432,7 @@ FMatrix fraction_matrix_reverse(FMatrix m){
 }
 
 /* product between matrix and vector (if possible) */
-FVector fraction_matrix_fvector_product(FMatrix m, FVector v){
+FVector fraction_matrix_fvector_product(Matrix m, FVector v){
     int r = m->nr, c = m->nc;
     if(v->n == c){
         FVector vm = new Tfvector(r); //dim = m->nr
@@ -448,7 +449,7 @@ FVector fraction_matrix_fvector_product(FMatrix m, FVector v){
     return NULL;
 }
 
-PivotRowsColumnsPtr pivot_rows_columns(FMatrix m){ 
+PivotRowsColumnsPtr pivot_rows_columns(Matrix m){ 
     int rank = fraction_matrix_rank(m);
     PivotRowsColumnsPtr info = new TpivotRowsColmuns(rank);
     int num_columns = m->nc;
@@ -467,7 +468,7 @@ PivotRowsColumnsPtr pivot_rows_columns(FMatrix m){
     return info;
 }
 
-FreeColumnsPtr free_columns(FMatrix m){
+FreeColumnsPtr free_columns(Matrix m){
     int rank = fraction_matrix_rank(m); 
     int num_columns = m->nc; 
     FreeColumnsPtr info = new TfreeColumns(num_columns - rank);

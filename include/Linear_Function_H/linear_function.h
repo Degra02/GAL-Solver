@@ -9,7 +9,7 @@ using namespace std;
 typedef struct Tfunction{
     string name;
     setFVectorsPtr b1, b2;
-    FMatrix mr;
+    Matrix mr;
 
     Tfunction(){
         name = "";
@@ -21,7 +21,7 @@ typedef struct Tfunction{
         name = _name; b1 = _b1; b2 = _b2;
     }
 
-    Tfunction(string _name, setFVectorsPtr _b1, setFVectorsPtr _b2, FMatrix _mr){
+    Tfunction(string _name, setFVectorsPtr _b1, setFVectorsPtr _b2, Matrix _mr){
         name = _name;
         b1 = _b1; b2 = _b2; 
         mr = _mr;
@@ -35,7 +35,7 @@ typedef Tfunction *Function;
 
 Function init_function(string name);
 void print_function(Function f);
-FMatrix translate_linear_function(int dim1, int dim2);
+Matrix translate_linear_function(int dim1, int dim2);
 FVector parse_linear_function_input(vector <string> *fun, int dim);
 void collect_linear_function(vector <string> *fun);
 

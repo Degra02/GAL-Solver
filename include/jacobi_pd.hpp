@@ -232,9 +232,10 @@ CalcRot(Scalar const *const *M,    // matrix
   s = c*t;
 }
 
-/// brief  Perform a similarity transformation by multiplying matrix M on both
+/// @brief  Perform a similarity transformation by multiplying matrix M on both
 ///         sides by a rotation matrix (and its transpose) to eliminate M[i][j].
-/// details This rotation matrix performs a rotation in the i,j plane by
+
+/// @details This rotation matrix performs a rotation in the i,j plane by
 ///         angle θ.  This function assumes that c=cos(θ). s=sin(θ), t=tan(θ)
 ///         have been calculated in advance (using the CalcRot() function).
 ///         It also assumes that i<j.  The max_idx_row[] array is also updated.
