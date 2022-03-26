@@ -8,12 +8,12 @@ TsetFVectors::TsetFVectors(string _n){
 
 TsetFVectors::TsetFVectors(int _dim, int _n_th){
     dim = _dim; n_th = _n_th; name = "";
-    v = new FVector[dim];
+    v = new Vector[dim];
     for(int i = 0; i < dim; ++i) v[i] = new Tfvector(n_th);
 }
 
 TsetFVectors::TsetFVectors(int x, int y, string _n){
-    dim = x; n_th = y; name = _n; v = new FVector[dim];
+    dim = x; n_th = y; name = _n; v = new Vector[dim];
     for(int i = 0; i < dim; ++i) v[i] = new Tfvector(n_th);
 }
 
@@ -30,8 +30,8 @@ void TsetFVectors::print() const {
     cout << " }";
 }
 
-setFVectorsPtr id(int dim){
-    setFVectorsPtr a = new TsetFVectors(dim, dim, "C" + to_string(dim));
+Set id(int dim){
+    Set a = new TsetFVectors(dim, dim, "C" + to_string(dim));
     for(int i = 0; i < dim; i++){
         for(int j = 0; j < dim; j++){
             if(j == i){
@@ -55,11 +55,11 @@ int parse_canonical_base(string name){
     return stoi(val);
 }
 
-setFVectorsPtr init_set_fvectors(string name){
+Set init_set_fvectors(string name){
     int _dim, _n_th;
     if(name[0] == 'C' && (name.length() > 1)){
         _dim = parse_canonical_base(name);
-        setFVectorsPtr i = id(_dim);
+        Set i = id(_dim);
         print_set_fvectors(i); cout << endl; return i;
     } else {
         cout << "Vector size= "; cin >> _n_th; 
@@ -68,25 +68,25 @@ setFVectorsPtr init_set_fvectors(string name){
     }
 }
 
-setFVectorsPtr init_set_fvectors_base(string name){
+Set init_set_fvectors_base(string name){
     if(name[0] == 'C' && (name.length() > 1)){
         return id(parse_canonical_base(name));
     }
-    int _dim, _n_th; setFVectorsPtr base; bool m = false;
+    int _dim, _n_th; Set base; bool m = false;
     cout << "Vector size= "; cin >> _n_th; _dim = _n_th;
     cout << endl;
     return init_base(_dim, _n_th, name);
 }
 
-setFVectorsPtr init_set_fvectors_base_function(string name, int _n_th){
+Set init_set_fvectors_base_function(string name, int _n_th){
     if(name[0] == 'C' && (name.length() > 1)){
         return id(parse_canonical_base(name));
     }
     return init_base(_n_th, _n_th, name);
 }
 
-setFVectorsPtr init_base(int _dim, int _n_th, string name){
-    setFVectorsPtr base; bool m = false;
+Set init_base(int _dim, int _n_th, string name){
+    Set base; bool m = false;
     do{ 
         if(m) cout << "The set of vectors is not a base." << endl;
         base = insert_values_set_fvectors(_dim, _n_th, name); 
@@ -95,8 +95,8 @@ setFVectorsPtr init_base(int _dim, int _n_th, string name){
     return base;
 }
 
-setFVectorsPtr insert_values_set_fvectors(int _dim, int _n_th, string name){
-    setFVectorsPtr sv = new TsetFVectors(_dim, _n_th, name); 
+Set insert_values_set_fvectors(int _dim, int _n_th, string name){
+    Set sv = new TsetFVectors(_dim, _n_th, name); 
     string value;
     for(int i = 0; i < _dim; ++i){  
         cout << "V" << i + 1 << ":"; 
@@ -111,13 +111,13 @@ setFVectorsPtr insert_values_set_fvectors(int _dim, int _n_th, string name){
     return sv;
 }
 
-void print_set_fvectors(setFVectorsPtr sv){
+void print_set_fvectors(Set sv){
     cout << "Name: " << "\x1b[38;5;50m" << sv->name << "\x1b[0m";
     cout << endl << endl; cout << "   "; sv->print();
     cout << endl << endl;
 }
 
-Matrix set_vectors_to_fmatrix(setFVectorsPtr sv){
+Matrix set_vectors_to_fmatrix(Set sv){
     Matrix m = new Tfmatrix(sv->n_th, sv->dim);
     for(int j = 0; j < m->nc; ++j){
         for (int i = 0; i < m->nr; ++i){
@@ -127,25 +127,25 @@ Matrix set_vectors_to_fmatrix(setFVectorsPtr sv){
     return m; 
 }
 
-bool set_fvectors_is_linearly_independent(setFVectorsPtr sv) {
+bool set_fvectors_is_linearly_independent(Set sv) {
     int rank = fraction_matrix_rank(set_vectors_to_fmatrix(sv));
     return (rank == sv->dim);
 }
 
-bool set_fvectors_is_generators(setFVectorsPtr sv) {
+bool set_fvectors_is_generators(Set sv) {
     int rank = fraction_matrix_rank(set_vectors_to_fmatrix(sv));
     return (rank == sv->n_th);
 }
 
-bool set_fvectors_is_base(setFVectorsPtr sv) {
+bool set_fvectors_is_base(Set sv) {
     int rank = fraction_matrix_rank(set_vectors_to_fmatrix(sv));
     return ((rank == sv->n_th) && (rank == sv->dim));
 }
 
-setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv){
+Set Gram_Schmidt(Set sv){
     int _dim = sv->dim, _n_th = sv->n_th, j;
-    setFVectorsPtr a = new TsetFVectors(_dim, _n_th, "");
-    FVector u = new Tfvector(_n_th);
+    Set a = new TsetFVectors(_dim, _n_th, "");
+    Vector u = new Tfvector(_n_th);
     if(!set_fvectors_is_linearly_independent(sv)){ 
         cout << "the set of vectors is not linearly independent." << endl;
         return sv; 
@@ -172,8 +172,8 @@ setFVectorsPtr Gram_Schmidt(setFVectorsPtr sv){
     return a;
 }
 
-setFVectorsPtr orthogonal_complement(setFVectorsPtr sv){
-    setFVectorsPtr res;
+Set orthogonal_complement(Set sv){
+    Set res;
     if(!set_fvectors_is_linearly_independent(sv)){ 
         cout << "the set of vectors is not linearly independent." << endl; 
         return sv; 
@@ -182,7 +182,7 @@ setFVectorsPtr orthogonal_complement(setFVectorsPtr sv){
         return new TsetFVectors(""); 
     }
     sv = Gram_Schmidt(sv);
-    FVector b = new Tfvector(sv->dim);
+    Vector b = new Tfvector(sv->dim);
     for(int i = 0; i < sv->dim; ++i){
         b->array[i] = new Tfraction(0, 1);
     } 
@@ -197,9 +197,9 @@ setFVectorsPtr orthogonal_complement(setFVectorsPtr sv){
     return res;
 }
 
-setFVectorsPtr completion_of_base(setFVectorsPtr sv){
+Set completion_of_base(Set sv){
     int _n_th = sv->n_th, _dim = sv->dim, r, free_column = 0;
-    setFVectorsPtr res = new TsetFVectors(_n_th, _n_th, "");
+    Set res = new TsetFVectors(_n_th, _n_th, "");
     if(!set_fvectors_is_linearly_independent(sv)){ 
         cout << "the set of vectors is not linearly independent." << endl; 
         return NULL; 

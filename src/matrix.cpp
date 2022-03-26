@@ -1,6 +1,7 @@
 #include "all-headers.h"
 #include "jacobi_pd.hpp"
 #include <iostream>
+#include <string>
 using namespace std;
 
 // Methods
@@ -303,7 +304,7 @@ Matrix fraction_matrix_scalar_multiplication(Matrix a, float lambda){
 
 /* S opeartion for Gauss Jordan algorithm */
 void fraction_S(Matrix m, int a, int b){
-    FVector v = new Tfvector(m->mat[a], m->nc);
+    Vector v = new Tfvector(m->mat[a], m->nc);
     m->mat[a] = m->mat[b]; m->mat[b] = v->array;
 }
 
@@ -316,7 +317,7 @@ void fraction_D(Matrix m, int a, Fraction lambda){
 
 /* E operation for Gauss Jordan algorithm */
 void fraction_E(Matrix m, int d, int s, Fraction lambda){ 
-    FVector v = new Tfvector(m->mat[s], m->nc);
+    Vector v = new Tfvector(m->mat[s], m->nc);
     v->multiply(lambda);
     for(int j = 0; j < m->nc; j++) 
         m->mat[d][j] = fraction_sum(m->mat[d][j], v->array[j]);
@@ -432,10 +433,10 @@ Matrix fraction_matrix_reverse(Matrix m){
 }
 
 /* product between matrix and vector (if possible) */
-FVector fraction_matrix_fvector_product(Matrix m, FVector v){
+Vector fraction_matrix_fvector_product(Matrix m, Vector v){
     int r = m->nr, c = m->nc;
     if(v->n == c){
-        FVector vm = new Tfvector(r); //dim = m->nr
+        Vector vm = new Tfvector(r); //dim = m->nr
         for(int i = 0; i < vm->n; i++){
             vm->array[i] = str_to_fraction("0");
         }
@@ -486,4 +487,41 @@ FreeColumnsPtr free_columns(Matrix m){
         ++j;
     }
     return info;
+}
+
+Matrix check_symmetry(Matrix m, Set a, Set b){
+    if(m->nr == m->nc){
+        bool symmetric = is_symmetric(m);
+        if(symmetric == false){
+            if(a->name == "C" + to_string(m->nr)){
+                return NULL; // The matrix is not symmetric from and to othonormal bases of Rn, so return NULL
+            } else {
+                if(a->name == b->name){
+                    Set c = id(m->nr);
+                    Matrix m1 = base_change(a , c), m2 = base_change(c, a);
+                    Matrix tot = fraction_matrix_multiplication(fraction_matrix_multiplication(m1, m), m2);
+                    tot->name = m->name + "sym";
+                    (is_symmetric(tot)) ? tot : NULL; // returns the new calculated matrix only if its symmetric
+                } else {
+                    // TODO: find out how to calculate MC->C(F) if the starting bases are not the same (i.e. MA->N(F))
+                }
+            }
+        } else {
+            return m;
+        }
+    } else {
+        return NULL;
+    }
+}
+
+bool is_symmetric(Matrix m){
+    int n = m->nr;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            if(!same_fraction(m->mat[i][j], m->mat[j][i])){
+                return false;
+            }
+        }
+    }
+    return true;
 }

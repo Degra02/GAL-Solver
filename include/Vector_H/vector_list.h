@@ -6,7 +6,7 @@ using namespace std;
 #define __VECTOR_LIST_H__
 
 typedef struct TVnode{
-    FVector v;
+    Vector v;
     TVnode *next;
 
     TVnode(){
@@ -14,7 +14,7 @@ typedef struct TVnode{
         next = NULL;
     }
 
-    TVnode(FVector _v, TVnode *_next){
+    TVnode(Vector _v, TVnode *_next){
         v = _v;
         next = _next;
     }
@@ -25,11 +25,11 @@ typedef struct TVnode{
 
 typedef TVnode *VNodeptr;
 
-VNodeptr insertFirstV(VNodeptr n, FVector v);
+VNodeptr insertFirstV(VNodeptr n, Vector v);
 VNodeptr remove_vsearch(VNodeptr n);
 bool isPresentV(VNodeptr n, string name);
 VNodeptr insertV(VNodeptr n, string name);
-FVector get_vsearch(VNodeptr n, string name);
+Vector get_vsearch(VNodeptr n, string name);
 
 void command_print_vector(VNodeptr n);
 void command_print_all_vectors(VNodeptr n);

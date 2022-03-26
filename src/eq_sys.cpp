@@ -85,11 +85,11 @@ Trc Rouche_Capelli(FEqsys e){
     return ONE_RESULT;
 }
 
-setFVectorsPtr set_base_inf_sol(FEqsys e, FreeColumnsPtr fc, PivotRowsColumnsPtr pcr){
+Set set_base_inf_sol(FEqsys e, FreeColumnsPtr fc, PivotRowsColumnsPtr pcr){
     e = feq_sys_rref(e);
     Matrix m = e->A; 
     int num_columns = m->nc;
-    setFVectorsPtr res = new TsetFVectors(fc->dim, num_columns);
+    Set res = new TsetFVectors(fc->dim, num_columns);
     int fc_counter, pcr_counter;
     fc_counter = pcr_counter = 0;
     for(int d = 0; d < res->dim; ++d){ 
@@ -113,7 +113,7 @@ setFVectorsPtr set_base_inf_sol(FEqsys e, FreeColumnsPtr fc, PivotRowsColumnsPtr
     return res; 
 }
 
-setFVectorsPtr feq_sys_inf_sol(FEqsys e){
+Set feq_sys_inf_sol(FEqsys e){
     if (Rouche_Capelli(e) != INF_RESULTS) exit(1);
     Matrix m = fraction_matrix_rref(e->A); 
     FreeColumnsPtr fc = free_columns(m);
@@ -121,11 +121,11 @@ setFVectorsPtr feq_sys_inf_sol(FEqsys e){
     return set_base_inf_sol(e, fc, pcr);
 }
 
-setFVectorsPtr feq_sys_one_sol(FEqsys e){
+Set feq_sys_one_sol(FEqsys e){
     if (Rouche_Capelli(e) != ONE_RESULT) exit(1);
     e = feq_sys_rref(e); 
-    setFVectorsPtr res = new TsetFVectors("");
-    res->dim = 1; res->v = new FVector[1];
+    Set res = new TsetFVectors("");
+    res->dim = 1; res->v = new Vector[1];
     if(e->A->nc > e->b->n){
         int rankA = fraction_matrix_rank(e->A);
         int i, j = 0, zero_column = 0;
@@ -153,7 +153,7 @@ setFVectorsPtr feq_sys_one_sol(FEqsys e){
 }
 
 /* risolve un sistema lineare */
-setFVectorsPtr feq_sys_sol(FEqsys e){
+Set feq_sys_sol(FEqsys e){
     Trc type_res = Rouche_Capelli(e);
     if(type_res == NO_RESULT){
         return NULL;

@@ -90,8 +90,10 @@ Matrix fraction_matrix_rref(Matrix m);
 int fraction_matrix_rank(Matrix m);
 bool fraction_matrix_is_base(Matrix m);
 bool matrix_is_square(Matrix m);
-FVector fraction_matrix_fvector_product(Matrix m, FVector v);
+Vector fraction_matrix_fvector_product(Matrix m, Vector v);
 PivotRowsColumnsPtr pivot_rows_columns(Matrix m);
 FreeColumnsPtr free_columns(Matrix m);
+Matrix check_symmetry(Matrix m);
+bool is_symmetric(Matrix m);
 
 #endif

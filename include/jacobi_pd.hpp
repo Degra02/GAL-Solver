@@ -241,7 +241,7 @@ CalcRot(Scalar const *const *M,    // matrix
 ///         It also assumes that i<j.  The max_idx_row[] array is also updated.
 ///         To save time, since the matrix is symmetric, the elements
 ///         below the diagonal (ie. M[u][v] where u>v) are not computed.
-/// verbatim
+/// @verbatim
 ///   M' = R^T * M * R
 /// where R the rotation in the i,j plane and ^T denotes the transpose.
 ///                 i         j
@@ -259,14 +259,14 @@ CalcRot(Scalar const *const *M,    // matrix
 ///      |                        .      |
 ///      |                          .    |
 ///      |_                           1 _|
-/// endverbatim
+/// @endverbatim
 ///
 /// Let M' denote the matrix M after multiplication by R^T and R.
 /// The components of M' are:
 ///
-/// verbatim
+/// @verbatim
 ///   M'_uv =  Σ_w  Σ_z   R_wu * M_wz * R_zv
-/// endverbatim
+/// @endverbatim
 ///
 /// Note that a the rotation at location i,j will modify all of the matrix
 /// elements containing at least one index which is either i or j

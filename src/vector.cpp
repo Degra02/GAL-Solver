@@ -126,10 +126,10 @@ Tfvector::Tfvector(int dim, string _name){
     name = _name;
 }
 
-FVector init_fvector(string name){
+Vector init_fvector(string name){
     int n; string value;
     cout << "dimension= "; cin >> n; 
-    cout << endl; FVector v = new Tfvector(n, name);
+    cout << endl; Vector v = new Tfvector(n, name);
     for(int i = 0; i < n; i++){
         cout << "   ";
         cin >> value;
@@ -140,8 +140,8 @@ FVector init_fvector(string name){
     return v;
 }
 
-FVector init_fvector_system(string name, int n){
-    string value; cout << endl; FVector v = new Tfvector(n, name);
+Vector init_fvector_system(string name, int n){
+    string value; cout << endl; Vector v = new Tfvector(n, name);
     for(int i = 0; i < n; i++){
         cout << "   ";
         cin >> value;
@@ -152,14 +152,14 @@ FVector init_fvector_system(string name, int n){
     return v;
 }
 
-void print_fvector(FVector v){
+void print_fvector(Vector v){
     cout << "Name: " << "\x1b[38;5;50m" << v->name << "\x1b[0m = ";
     cout << "   "; v->print();
     cout << endl << endl;
 }
 
-FVector fraction_vector_copy(FVector a){
-    FVector b = new Tfvector(a->n);
+Vector fraction_vector_copy(Vector a){
+    Vector b = new Tfvector(a->n);
     int dim = a->n;
     for(int i = 0; i < dim; ++i){
         b->array[i] = a->array[i];
@@ -167,27 +167,27 @@ FVector fraction_vector_copy(FVector a){
     return b;
 }
 
-bool fvector_same_dimension(FVector a, FVector b){
+bool fvector_same_dimension(Vector a, Vector b){
     return (a->n == b->n);
 }
 
-FVector fvector_sum(FVector a, FVector b){
-    int n = a->n; FVector res = new Tfvector(n);
+Vector fvector_sum(Vector a, Vector b){
+    int n = a->n; Vector res = new Tfvector(n);
     for(int i = 0; i < n; i++){
         res->array[i] = fraction_sum(a->array[i], b->array[i]);
     }
     return res;
 }
 
-FVector fvector_difference(FVector a, FVector b){
-    int n = a->n; FVector res = new Tfvector(n);
+Vector fvector_difference(Vector a, Vector b){
+    int n = a->n; Vector res = new Tfvector(n);
     for(int i = 0; i < n; i++){
         res->array[i] = fraction_difference(a->array[i], b->array[i]);
     }
     return res;
 }
 
-Fraction fvector_norm_noroot(FVector a){
+Fraction fvector_norm_noroot(Vector a){
     int n = a->n; Fraction res = fraction_power(a->array[0], 2);
     for(int i = 1; i < n; i++){
         res = fraction_sum(res, fraction_power(a->array[i], 2));
@@ -195,7 +195,7 @@ Fraction fvector_norm_noroot(FVector a){
     return res;
 }
 
-float fvector_float_norm(FVector a){
+float fvector_float_norm(Vector a){
     int n = a->n; Fraction res = fraction_power(a->array[0], 2);
     for(int i = 1; i < n; i++){
         res = fraction_sum(res, fraction_power(a->array[i], 2));
@@ -212,7 +212,7 @@ string fvector_norm_print(Fraction a){
     return "sqrt( " + to_string(a->num) + "/" + to_string(a->den) + " )";
 }
 
-Fraction fvector_scalar_product(FVector a, FVector b){
+Fraction fvector_scalar_product(Vector a, Vector b){
     int n = a->n; Fraction res = fraction_product(a->array[0], b->array[0]);
     for(int i = 1; i < n; i++){
         res = fraction_sum(res, fraction_product(a->array[i], b->array[i]));
@@ -220,9 +220,9 @@ Fraction fvector_scalar_product(FVector a, FVector b){
     return res;
 }
 
-FVector fvector_cross_product(FVector a, FVector b){
+Vector fvector_cross_product(Vector a, Vector b){
     if((a->n == 3) && (b->n == 3)){
-        FVector res = new Tfvector(3);
+        Vector res = new Tfvector(3);
         res->array[0] = fraction_difference(fraction_product(a->array[1], b->array[2]), fraction_product(a->array[2], b->array[1]));
         res->array[1] = fraction_difference(fraction_product(a->array[2], b->array[0]), fraction_product(a->array[0], b->array[2]));
         res->array[2] = fraction_difference(fraction_product(a->array[0], b->array[1]), fraction_product(a->array[1], b->array[0]));
@@ -231,14 +231,14 @@ FVector fvector_cross_product(FVector a, FVector b){
     return NULL;
 }
 
-float fvector_angle(FVector a, FVector b){
+float fvector_angle(Vector a, Vector b){
     Fraction res = fvector_scalar_product(a, b);
     float val = (float)res->num / (float)res->den;
     return acos( val / (fvector_float_norm(a) * fvector_float_norm(b)));
 }
 
-FVector fvector_product_with_scalar(FVector v, Fraction f) {
-    FVector res = new Tfvector(v->n);
+Vector fvector_product_with_scalar(Vector v, Fraction f) {
+    Vector res = new Tfvector(v->n);
     for (int i = 0; i < v->n; ++i){
         res->array[i] = fraction_product(f, v->array[i]);
     }
@@ -246,8 +246,8 @@ FVector fvector_product_with_scalar(FVector v, Fraction f) {
     return res;
 }
 
-FVector fvector_normalization(FVector v) {
-    FVector vn = v;
+Vector fvector_normalization(Vector v) {
+    Vector vn = v;
     Fraction f = fvector_norm_noroot(v);
     Tscalar sn = Tscalar(Tn(1, f->den), Tn(1, f->num));
     vn->scl = sn;

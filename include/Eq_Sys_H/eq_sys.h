@@ -8,7 +8,7 @@ using namespace std;
 
 typedef struct Tfeqsys{
     Matrix A;
-    FVector b;
+    Vector b;
     string name;
 
     Tfeqsys() {
@@ -16,12 +16,12 @@ typedef struct Tfeqsys{
         b = NULL;
     }
 
-    Tfeqsys(Matrix _A, FVector _b) {
+    Tfeqsys(Matrix _A, Vector _b) {
         A = _A;
         b = _b;
     }
 
-    Tfeqsys(Matrix _A, FVector _b, string _name) {
+    Tfeqsys(Matrix _A, Vector _b, string _name) {
         A = _A;
         b = _b;
         name = _name;
@@ -39,9 +39,9 @@ Matrix to_fmatrix(FEqsys e);
 FEqsys feq_sys_rref(FEqsys e);
 FEqsys to_feqsys_from_matrix(Matrix m);
 Trc Rouche_Capelli(FEqsys e);
-setFVectorsPtr feq_sys_sol(FEqsys e);
-setFVectorsPtr feq_sys_inf_sol(FEqsys e);
-setFVectorsPtr feq_sys_one_sol(FEqsys e);
-setFVectorsPtr set_base_inf_sol(FEqsys e, FreeColumnsPtr fc, PivotRowsColumnsPtr pcr);
+Set feq_sys_sol(FEqsys e);
+Set feq_sys_inf_sol(FEqsys e);
+Set feq_sys_one_sol(FEqsys e);
+Set set_base_inf_sol(FEqsys e, FreeColumnsPtr fc, PivotRowsColumnsPtr pcr);
 
 #endif

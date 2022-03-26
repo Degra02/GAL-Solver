@@ -199,3 +199,7 @@ void control(Fraction f){
 Fraction fraction_copy(Fraction a){
     return new Tfraction(a->num, a->den);
 }
+
+bool same_fraction(Fraction a, Fraction b){
+    return ((a->num == b->num) && (a->den == b->den));
+}

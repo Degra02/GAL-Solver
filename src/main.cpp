@@ -50,8 +50,8 @@ int main() {
 	/*
 		If you're reading this, then it means that you're interested in how the code works.
 		Structures are the pillars of the program, meaning that everything is centered around them.
-		If you find any errors, bugs or want to suggest some improvements, just ask a pull request or report an issue
-		on GitHub.
+		If you find any errors, bugs or want to suggest some improvements, just ask a pull request or create
+		an issue on GitHub.
 	*/
 
 	return 0;

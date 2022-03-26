@@ -3,7 +3,7 @@
 #include "all-headers.h"
 using namespace std;
 
-SNodeptr insertFirstS(SNodeptr n, setFVectorsPtr b){
+SNodeptr insertFirstS(SNodeptr n, Set b){
     return new Tbflist(b, n);
 }
 
@@ -33,7 +33,7 @@ SNodeptr remove_ssearch(SNodeptr n){
     return n;
 }
 
-setFVectorsPtr get_ssearch(SNodeptr n, string name){
+Set get_ssearch(SNodeptr n, string name){
     if (n == NULL){
         return NULL;
     }
@@ -77,7 +77,7 @@ void command_print_vectors_set(SNodeptr n){
     cout << "Set name: ";
     fflush(stdin);
     cin >> userinput;
-    setFVectorsPtr b = get_ssearch(n, userinput);
+    Set b = get_ssearch(n, userinput);
     if (b != NULL){
         cout << endl;
         b->print();
@@ -117,7 +117,7 @@ void command_set_is_base(SNodeptr n){
     cout << "Set name: ";
     fflush(stdin);
     cin >> name;
-    setFVectorsPtr a = get_ssearch(n, name);
+    Set a = get_ssearch(n, name);
     if (a != NULL){
         if (set_fvectors_is_base(a)){
             cout << "The set is a base of R" << a->n_th << endl
@@ -137,7 +137,7 @@ void command_set_is_independent(SNodeptr n){
     cout << "Set name: ";
     fflush(stdin);
     cin >> name;
-    setFVectorsPtr a = get_ssearch(n, name);
+    Set a = get_ssearch(n, name);
     if (a != NULL){
         if (set_fvectors_is_linearly_independent(a)){
             cout << "The set is l.independent" << endl
@@ -157,7 +157,7 @@ void command_set_is_generator(SNodeptr n){
     cout << "Set name: ";
     fflush(stdin);
     cin >> name;
-    setFVectorsPtr a = get_ssearch(n, name);
+    Set a = get_ssearch(n, name);
     if (a != NULL){
         if (set_fvectors_is_linearly_independent(a)){
             cout << "The set is generator of R" << a->n_th << endl
@@ -177,9 +177,9 @@ SNodeptr command_gram_schmidt(SNodeptr n){
     cout << "Set name: ";
     fflush(stdin);
     cin >> name;
-    setFVectorsPtr a = get_ssearch(n, name);
+    Set a = get_ssearch(n, name);
     if (a != NULL){
-        setFVectorsPtr b = Gram_Schmidt(a);
+        Set b = Gram_Schmidt(a);
         b->name = a->name + "gs";
         print_set_fvectors(b);
         return insertFirstS(n, b);
@@ -195,9 +195,9 @@ SNodeptr command_orthogonal_complement(SNodeptr n){
     cout << "Set name: ";
     fflush(stdin);
     cin >> name;
-    setFVectorsPtr a = get_ssearch(n, name);
+    Set a = get_ssearch(n, name);
     if (a != NULL){
-        setFVectorsPtr b = orthogonal_complement(a);
+        Set b = orthogonal_complement(a);
         b->name = a->name + "ort";
         print_set_fvectors(b);
         return insertFirstS(n, b);
@@ -213,9 +213,9 @@ SNodeptr command_base_completion(SNodeptr n){
     cout << "Set name: ";
     fflush(stdin);
     cin >> name;
-    setFVectorsPtr a = get_ssearch(n, name);
+    Set a = get_ssearch(n, name);
     if (a != NULL){
-        setFVectorsPtr b = completion_of_base(a);
+        Set b = completion_of_base(a);
         if (b != NULL){
             b->name = a->name + "_C";
             print_set_fvectors(b);
@@ -230,7 +230,7 @@ SNodeptr command_base_completion(SNodeptr n){
     return n;
 }
 
-Matrix base_change(setFVectorsPtr b1, setFVectorsPtr b2){
+Matrix base_change(Set b1, Set b2){
     Matrix m1 = set_vectors_to_fmatrix(b1), m2 = set_vectors_to_fmatrix(b2);
     if (fraction_matrix_is_base(m1) && fraction_matrix_is_base(m2) && (m1->nc == m2->nc)){
         Matrix full = new Tfmatrix(m1->nr, (m1->nc + m2->nc));
