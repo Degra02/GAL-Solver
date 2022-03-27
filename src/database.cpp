@@ -293,7 +293,7 @@ Lists command_find_eigenvalues(Lists list){
             if(eigen_calc.Diagonalize(dm, eigenvalues, eigenvectors) > 0){
                 cout << endl << "Eigenvalues: " << endl;
                 for(int i = 0; i < n; i++){
-                    printf("%.2f ", eigenvalues[i]);
+                    printf("%.5f ", eigenvalues[i]);
                 }
                 printf("\n\n");
                 return list;

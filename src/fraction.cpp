@@ -205,5 +205,5 @@ bool same_fraction(Fraction a, Fraction b){
 }
 
 double to_float(Fraction f){
-    return (f->num / f->den);
+    return (((double)f->num) / ((double)f->den));
 }
