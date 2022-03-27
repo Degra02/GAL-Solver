@@ -1,8 +1,8 @@
 #include <iostream>
 #include <all-headers.h>
 
-#ifndef __BASE_H__
-#define __BASE_H__
+#ifndef __SET_LIST_H__
+#define __SET_LIST_H__
 
 typedef struct Tbflist{
     Set b;

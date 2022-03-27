@@ -1,6 +1,7 @@
 #include <iostream>
 #include <bits/stdc++.h>
-#include "all-headers.h"
+#include "Utilities/database.h"
+#include "Utilities/commands.h"
 #include <termios.h>
 #include <unistd.h>
 
@@ -137,6 +138,8 @@ void function_call(Lists list){
                     list = command_representative_matrix_formula(list);
                 } else if(userinput[2] == "ker"){
                     list = command_function_ker(list);
+                } else if(userinput[2]  == "eig"){
+                    list = command_find_eigenvalues(list);
                 } else if(userinput[2] == "im"){
                     list = command_function_im(list);
                 } else {

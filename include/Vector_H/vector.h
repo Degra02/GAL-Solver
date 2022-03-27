@@ -1,5 +1,5 @@
-#include "all-headers.h"
 #include <iostream>
+#include "Other_H/fraction.h"
 #ifndef __VECTOR_H__
 #define __VECTOR_H__
 using namespace std;

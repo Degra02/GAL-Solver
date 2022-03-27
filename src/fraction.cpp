@@ -203,3 +203,7 @@ Fraction fraction_copy(Fraction a){
 bool same_fraction(Fraction a, Fraction b){
     return ((a->num == b->num) && (a->den == b->den));
 }
+
+double to_float(Fraction f){
+    return (f->num / f->den);
+}

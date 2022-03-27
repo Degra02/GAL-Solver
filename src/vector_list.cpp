@@ -1,7 +1,8 @@
 #include <iostream>
 #include <ctime>
 #include <bits/stdc++.h>
-#include "all-headers.h"
+#include "Vector_H/vector_list.h"
+#include "Vector_H/vector.h"
 using namespace std;
 
 VNodeptr insertFirstV(VNodeptr n, Vector v){

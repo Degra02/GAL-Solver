@@ -1,5 +1,4 @@
 #include "all-headers.h"
-#include "jacobi_pd.hpp"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -489,7 +488,17 @@ FreeColumnsPtr free_columns(Matrix m){
     return info;
 }
 
-Matrix check_symmetry(Matrix m, Set a, Set b){
+Matrix set_vectors_to_fmatrix(Set sv){
+    Matrix m = new Tfmatrix(sv->n_th, sv->dim);
+    for(int j = 0; j < m->nc; ++j){
+        for (int i = 0; i < m->nr; ++i){
+            m->mat[i][j] = fraction_copy(sv->v[j]->array[i]); 
+        }
+    }
+    return m; 
+}
+
+Matrix check_matrix_symmetry(Matrix m, Set a, Set b){
     if(m->nr == m->nc){
         bool symmetric = is_symmetric(m);
         if(symmetric == false){
@@ -503,7 +512,7 @@ Matrix check_symmetry(Matrix m, Set a, Set b){
                     tot->name = m->name + "sym";
                     (is_symmetric(tot)) ? tot : NULL; // returns the new calculated matrix only if its symmetric
                 } else {
-                    // TODO: find out how to calculate MC->C(F) if the starting bases are not the same (i.e. MA->N(F))
+                    // TODO: find out how to calculate MC->C(F) if the starting bases are not the same (i.e. MA->B(F))
                 }
             }
         } else {
@@ -524,4 +533,16 @@ bool is_symmetric(Matrix m){
         }
     }
     return true;
+}
+
+double** fraction_matrix_to_float(Matrix m){
+    int r = m->nr, c = m->nc;
+    double** res = new double*[r];
+    for(int i = 0; i < r; i++){
+        res[i] = new double[c];
+        for(int j = 0; j < c; j++){
+            res[i][j] = to_float(m->mat[i][j]);
+        }
+    }
+    return res;
 }

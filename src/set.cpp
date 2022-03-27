@@ -1,4 +1,7 @@
-#include "all-headers.h"
+#include "Other_H/set.h"
+#include "Other_H/fraction.h"
+#include "Matrix_H/matrix.h"
+#include "Eq_Sys_H/eq_sys.h"
 #include <iostream>
 using namespace std;
 
@@ -115,16 +118,6 @@ void print_set_fvectors(Set sv){
     cout << "Name: " << "\x1b[38;5;50m" << sv->name << "\x1b[0m";
     cout << endl << endl; cout << "   "; sv->print();
     cout << endl << endl;
-}
-
-Matrix set_vectors_to_fmatrix(Set sv){
-    Matrix m = new Tfmatrix(sv->n_th, sv->dim);
-    for(int j = 0; j < m->nc; ++j){
-        for (int i = 0; i < m->nr; ++i){
-            m->mat[i][j] = fraction_copy(sv->v[j]->array[i]); 
-        }
-    }
-    return m; 
 }
 
 bool set_fvectors_is_linearly_independent(Set sv) {

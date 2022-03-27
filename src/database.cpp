@@ -2,7 +2,8 @@
 #include <ctime>
 #include <bits/stdc++.h>
 #include "all-headers.h"
-using namespace std;
+#include "jacobi_pd.hpp"
+using namespace jacobi_pd;
 
 Lists command_new_system(Lists list){ // also saves every element of the system in the corresponding list
     string name; cout << "Name= "; fflush(stdin); cin >> name;
@@ -272,5 +273,38 @@ Lists command_system_solution(Lists list){
     }
     sol->name = eq->name + "S"; print_set_fvectors(sol); 
     list->Slist = insertFirstS(list->Slist, sol);
+    return list;
+}
+
+Lists command_find_eigenvalues(Lists list){
+    string name; cout << "Function name: "; fflush(stdin); cin >> name;
+    Function f = get_fsearch(list->Flist, name);
+    if(f != NULL){
+        Matrix m = check_matrix_symmetry(f->mr, f->b1, f->b2);
+        if(m != NULL){
+            int n = f->mr->nr;
+            double** dm = fraction_matrix_to_float(f->mr);
+            double* eigenvalues = new double[n];
+            double** eigenvectors = new double*[n];
+            for(int i = 0; i < n; i++){
+                eigenvectors[i] = new double[n];
+            }
+            Jacobi<double, double*, double**> eigen_calc(n);
+            if(eigen_calc.Diagonalize(dm, eigenvalues, eigenvectors) > 0){
+                cout << endl << "Eigenvalues: " << endl;
+                for(int i = 0; i < n; i++){
+                    printf("%.2f ", eigenvalues[i]);
+                }
+                printf("\n\n");
+                return list;
+            } else {
+                cout << endl << "Convergence failed" << endl << endl;
+                return list;
+            }
+
+        } else {
+            return list;
+        }
+    }
     return list;
 }

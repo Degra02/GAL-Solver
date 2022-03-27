@@ -1,5 +1,6 @@
-#include "all-headers.h"
 #include "Vector_H/vector.h"
+#include "Other_H/set.h"
+#include "Other_H/fraction.h"
 #include <iostream>
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
@@ -93,7 +94,9 @@ bool matrix_is_square(Matrix m);
 Vector fraction_matrix_fvector_product(Matrix m, Vector v);
 PivotRowsColumnsPtr pivot_rows_columns(Matrix m);
 FreeColumnsPtr free_columns(Matrix m);
-Matrix check_symmetry(Matrix m);
+Matrix set_vectors_to_fmatrix(Set sv);
+Matrix check_matrix_symmetry(Matrix m, Set a, Set b);
 bool is_symmetric(Matrix m);
+double** fraction_matrix_to_float(Matrix m);
 
 #endif

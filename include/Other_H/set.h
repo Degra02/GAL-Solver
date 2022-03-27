@@ -1,4 +1,4 @@
-#include "all-headers.h"
+#include "Vector_H/vector.h"
 #ifndef __SET_H__
 #define __SET_H__
 
@@ -27,7 +27,6 @@ Set insert_values_set_fvectors(int _dim, int _n_th, string name);
 void print_set_fvectors(Set sv);
 Set id(int dim);
 int parse_canonical_base(string name);
-Matrix set_vectors_to_fmatrix(Set sv);
 bool set_fvectors_is_linearly_independent(Set sv);
 bool set_fvectors_is_generators(Set sv);
 bool set_fvectors_is_base(Set sv);
