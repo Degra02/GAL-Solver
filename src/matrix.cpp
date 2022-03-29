@@ -513,14 +513,17 @@ Matrix check_matrix_symmetry(Matrix m, Set a, Set b){
                     (is_symmetric(tot)) ? tot : NULL; // returns the new calculated matrix only if its symmetric
                 } else {
                     // TODO: find out how to calculate MC->C(F) if the starting bases are not the same (i.e. MA->B(F))
+                    Set c = id(m->nr);
+                    Matrix m1 = base_change(a, c), m2 = base_change(c, b);
+                    Matrix tot = fraction_matrix_multiplication(fraction_matrix_multiplication(m1, m), m2);
+                    (is_symmetric(tot)) ? tot : NULL;
                 }
             }
         } else {
             return m;
         }
-    } else {
-        return NULL;
     }
+    return NULL;
 }
 
 bool is_symmetric(Matrix m){
