@@ -291,11 +291,19 @@ Lists command_find_eigenvalues(Lists list){
             }
             Jacobi<double, double*, double**> eigen_calc(n);
             if(eigen_calc.Diagonalize(dm, eigenvalues, eigenvectors) > 0){
-                cout << endl << "Eigenvalues: " << endl;
+                cout << endl << "Eigenvalues: " << endl << endl;
                 for(int i = 0; i < n; i++){
                     printf("%.5f ", eigenvalues[i]);
                 }
-                printf("\n\n");
+                cout << endl << endl << "Eigenvectors: " << endl << endl;
+                for(int i = 0; i < n; i++){
+                    for(int j = 0; j < n; j++){
+                        printf(" %4.5f ", eigenvectors[i][j]);
+                    }
+                    cout << endl;
+                }
+                cout << endl << endl;
+
                 return list;
             } else {
                 cout << endl << "Convergence failed" << endl << endl;
