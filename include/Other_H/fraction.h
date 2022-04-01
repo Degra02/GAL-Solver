@@ -29,5 +29,7 @@ void print_format_fraction(Fraction f, int max_figures_num, int max_figures_den)
 void zero_control(Fraction f);
 void sign_control(Fraction f);
 void control(Fraction f);
+bool same_fraction(Fraction a, Fraction b);
+double to_float(Fraction f);
 
 #endif

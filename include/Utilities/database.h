@@ -2,7 +2,7 @@
 #include "Matrix_H/matrix_list.h"
 #include "Vector_H/vector_list.h"
 #include "Eq_Sys_H/eq_system_list.h"
-#include "Other_H/base.h"
+#include "Other_H/set_list.h"
 #include "Linear_Function_H/linear_function_list.h"
 using namespace std;
 
@@ -41,5 +41,6 @@ Lists command_new_function(Lists list);
 Lists command_base_change(Lists list);
 Lists command_representative_matrix_formula(Lists list);
 Lists command_system_solution(Lists list);
+Lists command_find_eigenvalues(Lists list);
 
 #endif

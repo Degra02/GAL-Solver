@@ -6,7 +6,7 @@ using namespace std;
 #define __MATRIX_LIST__
 
 typedef struct TMnode{
-    FMatrix m;
+    Matrix m;
     TMnode *next;
 
     TMnode(){
@@ -14,7 +14,7 @@ typedef struct TMnode{
         next = NULL;
     }
 
-    TMnode(FMatrix _m, TMnode *_next){
+    TMnode(Matrix _m, TMnode *_next){
         m = _m;
         next = _next;
     }
@@ -25,10 +25,10 @@ typedef struct TMnode{
 
 typedef TMnode *MNodeptr;
 
-MNodeptr insertFirst(MNodeptr n, FMatrix m);
+MNodeptr insertFirst(MNodeptr n, Matrix m);
 MNodeptr remove_search(MNodeptr n);
-FMatrix get(MNodeptr n);
-FMatrix get_search(MNodeptr n, string name);
+Matrix get(MNodeptr n);
+Matrix get_search(MNodeptr n, string name);
 bool isPresent(MNodeptr n, string name);
 MNodeptr insertM(MNodeptr n, string name);
 

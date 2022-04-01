@@ -1,10 +1,11 @@
 #include <iostream>
 #include <ctime>
 #include <bits/stdc++.h>
-#include "all-headers.h"
+#include "Vector_H/vector_list.h"
+#include "Vector_H/vector.h"
 using namespace std;
 
-VNodeptr insertFirstV(VNodeptr n, FVector v){
+VNodeptr insertFirstV(VNodeptr n, Vector v){
     return new TVnode(v, n);
 }
 
@@ -47,7 +48,7 @@ VNodeptr remove_vsearch(VNodeptr n){
 }
 
 
-FVector get_vsearch(VNodeptr n, string name){
+Vector get_vsearch(VNodeptr n, string name){
     if(n == NULL){
         return NULL;
     }
@@ -74,7 +75,7 @@ VNodeptr insertV(VNodeptr n, string name){
 
 void command_print_vector(VNodeptr n){
     string userinput; cout << "Vector name: "; fflush(stdin); cin >> userinput;
-    FVector v = get_vsearch(n, userinput);
+    Vector v = get_vsearch(n, userinput);
     if(v != NULL){
         print_fvector(v);
     } else {
@@ -102,14 +103,14 @@ VNodeptr command_new_vector(VNodeptr n){
 VNodeptr command_fvector_sum(VNodeptr n){
     string n1, n2; cout << "1st vector name: "; fflush(stdin); cin >> n1;
     cout << "2nd vector name: "; fflush(stdin); cin >> n2;
-    FVector v1 = get_vsearch(n, n1), v2 = get_vsearch(n, n2);
+    Vector v1 = get_vsearch(n, n1), v2 = get_vsearch(n, n2);
     if((v1 == NULL) || (v2 == NULL)){
         cout << "Vector not found" << endl << endl; return n;
     }
     if(v1->n != v2->n){
         cout << "Sum not possible with vectors of different dimensions" << endl << endl; return n;
     }
-    FVector res = fvector_sum(v1, v2); res->name = v1->name + "+" + v2->name;
+    Vector res = fvector_sum(v1, v2); res->name = v1->name + "+" + v2->name;
     print_fvector(res);
     return insertFirstV(n, res);
 }
@@ -117,21 +118,21 @@ VNodeptr command_fvector_sum(VNodeptr n){
 VNodeptr command_fvector_difference(VNodeptr n){
     string n1, n2; cout << "1st vector name: "; fflush(stdin); cin >> n1;
     cout << "2nd vector name: "; fflush(stdin); cin >> n2;
-    FVector v1 = get_vsearch(n, n1), v2 = get_vsearch(n, n2);
+    Vector v1 = get_vsearch(n, n1), v2 = get_vsearch(n, n2);
     if((v1 == NULL) || (v2 == NULL)){
         cout << "Vector not found" << endl << endl; return n;
     }
     if(v1->n != v2->n){
         cout << "Difference not possible with vectors of different dimensions" << endl << endl; return n;
     }
-    FVector res = fvector_difference(v1, v2); res->name = v1->name + "-" + v2->name;
+    Vector res = fvector_difference(v1, v2); res->name = v1->name + "-" + v2->name;
     print_fvector(res);
     return insertFirstV(n, res);   
 }
 
 void command_fvector_norm(VNodeptr n){
     string name; cout << "Vector name: "; fflush(stdin); cin >> name;
-    FVector a = get_vsearch(n, name);
+    Vector a = get_vsearch(n, name);
     if(a == NULL){
         cout << "Vector not found" << endl << endl;
         return ;
@@ -144,7 +145,7 @@ void command_fvector_norm(VNodeptr n){
 void command_fvector_scalar_product(VNodeptr n){
     string n1, n2; cout << "1st vector name: "; fflush(stdin); cin >> n1;
     cout << "2nd vector name: "; fflush(stdin); cin >> n2;
-    FVector v1 = get_vsearch(n, n1), v2 = get_vsearch(n, n2);
+    Vector v1 = get_vsearch(n, n1), v2 = get_vsearch(n, n2);
     if((v1 == NULL) || (v2 == NULL)){
         cout << "Vector not found" << endl << endl; exit(1);
     }
@@ -160,7 +161,7 @@ void command_fvector_scalar_product(VNodeptr n){
 void command_fvector_angle(VNodeptr n){
     string n1, n2; cout << "1st vector name: "; fflush(stdin); cin >> n1;
     cout << "2nd vector name: "; fflush(stdin); cin >> n2;
-    FVector v1 = get_vsearch(n, n1), v2 = get_vsearch(n, n2);
+    Vector v1 = get_vsearch(n, n1), v2 = get_vsearch(n, n2);
     if((v1 == NULL) || (v2 == NULL)){
         cout << "Vector not found" << endl << endl; return ;
     }
@@ -174,7 +175,7 @@ void command_fvector_angle(VNodeptr n){
 VNodeptr command_fvector_cross_product(VNodeptr n){
     string n1, n2; cout << "1st vector name: "; fflush(stdin); cin >> n1;
     cout << "2nd vector name: "; fflush(stdin); cin >> n2;
-    FVector v1 = get_vsearch(n, n1), v2 = get_vsearch(n, n2);
+    Vector v1 = get_vsearch(n, n1), v2 = get_vsearch(n, n2);
      if((v1 == NULL) || (v2 == NULL)){
         cout << "Vector not found" << endl << endl; return n;
     }
@@ -182,7 +183,7 @@ VNodeptr command_fvector_cross_product(VNodeptr n){
         cout << "Can only calculate cross product between vectors of the 3rd dimension" << endl << endl;
         return n;
     }
-    FVector res = fvector_cross_product(v1, v2);
+    Vector res = fvector_cross_product(v1, v2);
     res->name = v1->name + "x" + v2->name;
     print_fvector(res); cout << endl << endl;
     return insertFirstV(n, res);

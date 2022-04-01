@@ -2,12 +2,13 @@
 #include <ctime>
 #include <bits/stdc++.h>
 #include "all-headers.h"
-using namespace std;
+#include "jacobi_pd.hpp"
+using namespace jacobi_pd;
 
 Lists command_new_system(Lists list){ // also saves every element of the system in the corresponding list
     string name; cout << "Name= "; fflush(stdin); cin >> name;
     if(!isPresentE(list->Eqlist, name)){
-        FMatrix m; FVector v;
+        Matrix m; Vector v;
         string mn, vn; cout << "Coefficients matrix name: "; fflush(stdin); cin >> mn;
         if(isPresent(list->Mlist, mn)){
             m = get_search(list->Mlist, mn);
@@ -47,14 +48,14 @@ Lists command_apply_function(Lists list){
     string n1, n2; cout << "Function name: "; fflush(stdin); cin >> n1;
     Function f = get_fsearch(list->Flist, n1);
     if(f != NULL){
-        cout << "Vector name: "; cin >> n2; FVector v;
+        cout << "Vector name: "; cin >> n2; Vector v;
         if(isPresentV(list->Vlist, n2)){
             v = get_vsearch(list->Vlist, n2);
         } else {
             cout << "Vector dimension: " << f->b1->n_th << endl;
             v = init_fvector_system(n2, f->b1->n_th); list->Vlist = insertFirstV(list->Vlist, v);
         }
-        FVector vf = apply_linear_function(f, v); vf->name = f->name + "(" + v->name + ")";
+        Vector vf = apply_linear_function(f, v); vf->name = f->name + "(" + v->name + ")";
         print_fvector(vf); list->Vlist = insertFirstV(list->Vlist, vf);
         return list;
     } else {
@@ -67,7 +68,7 @@ Lists command_function_ker(Lists list){
     string name; cout << "Function name: "; fflush(stdin); cin >> name;
     Function f = get_fsearch(list->Flist, name);
     if(f != NULL){
-        setFVectorsPtr k = Ker(f); k->name = "ker(" + f->name + ")";
+        Set k = Ker(f); k->name = "ker(" + f->name + ")";
         print_set_fvectors(k);
         list->Slist = insertFirstS(list->Slist, k); return list;
     } else {
@@ -80,7 +81,7 @@ Lists command_function_im(Lists list){
     string name; cout << "Function name: "; fflush(stdin); cin >> name;
     Function f = get_fsearch(list->Flist, name);
     if(f != NULL){
-        setFVectorsPtr i = Im(f); i->name = "im(" + f->name + ")";
+        Set i = Im(f); i->name = "im(" + f->name + ")";
         print_set_fvectors(i);
         list->Slist = insertFirstS(list->Slist, i); return list;
     } else {
@@ -95,15 +96,15 @@ Lists command_counter_image(Lists list){
     if(f != NULL){
         string vname; cout << "Vector name: "; fflush(stdin); cin >> vname;
         if(isPresentV(list->Vlist, vname)){
-            FVector v = get_vsearch(list->Vlist, vname);
-            setFVectorsPtr cim = Counter_Im(f, v);
+            Vector v = get_vsearch(list->Vlist, vname);
+            Set cim = Counter_Im(f, v);
             cim->name = v->name + "cim"; // stands for counter image
             list->Slist = insertFirstS(list->Slist, cim);
             print_set_fvectors(cim); cout << endl;
         } else {
             cout << "Vector dimension: " << f->mr->nr;
-            FVector v = init_fvector_system(name, f->mr->nr);
-            setFVectorsPtr cim = Counter_Im(f, v);
+            Vector v = init_fvector_system(name, f->mr->nr);
+            Set cim = Counter_Im(f, v);
             cim->name = v->name + "cim";
             list->Slist = insertFirstS(list->Slist, cim);
             print_set_fvectors(cim); cout << endl;
@@ -118,7 +119,7 @@ Lists command_counter_image(Lists list){
 Lists command_new_function_from_representative_matrix(Lists list){
     string name, n1, n2; cout << "Function name: "; fflush(stdin); cin >> name;
     if(! isPresentF(list->Flist, name)){
-        setFVectorsPtr b1, b2;
+        Set b1, b2;
         cout << "Base \"from\": "; fflush(stdin); cin >> n1;
         if(isPresentS(list->Slist, n1)){
             b1 = get_ssearch(list->Slist, n1);
@@ -150,7 +151,7 @@ Lists command_new_function(Lists list){
         string name; cout << "Function name: "; fflush(stdin); cin >> name;
         if(! isPresentF(list->Flist, name)){
             string n1, n2, n3; cout << "Base \"from\": "; fflush(stdin); cin >> n1;
-            setFVectorsPtr b1, b2; FMatrix m;
+            Set b1, b2; Matrix m;
             if(isPresentS(list->Slist, n1)){
                 b1 = get_ssearch(list->Slist, n1);
             } else {
@@ -189,7 +190,7 @@ Lists command_new_function(Lists list){
 
 Lists command_base_change(Lists list){
     string n1, n2; cout << "1st set name: "; fflush(stdin); cin >> n1;
-    setFVectorsPtr b1, b2;
+    Set b1, b2;
     if(isPresentS(list->Slist, n1)){
         b1 = get_ssearch(list->Slist, n1);
     } else {
@@ -202,7 +203,7 @@ Lists command_base_change(Lists list){
         b2 = init_set_fvectors(n2); list->Slist = insertFirstS(list->Slist, b2);
     }
 
-    FMatrix bc = base_change(b1, b2); bc->name = "M" + b1->name + b2->name;
+    Matrix bc = base_change(b1, b2); bc->name = "M" + b1->name + b2->name;
     print_fmatrix(bc); cout << endl << endl;
     if(!isPresent(list->Mlist, bc->name)){
         list->Mlist = insertFirst(list->Mlist, bc);
@@ -217,7 +218,7 @@ Lists command_representative_matrix_formula(Lists list){
     Function f = get_fsearch(list->Flist, name);
     if(f != NULL){
         string n1, n2; cout << "Base \"from\" name >> "; fflush(stdin); cin >> n1;
-        setFVectorsPtr b1, b2;
+        Set b1, b2;
         if(isPresentS(list->Slist, n1)){
             b1 = get_ssearch(list->Slist, n1);
         } else {
@@ -234,16 +235,16 @@ Lists command_representative_matrix_formula(Lists list){
             list->Slist = insertFirstS(list->Slist, b2);
         } 
         if(b1->name == b2->name){
-            FMatrix m1 = base_change( f->b1 , b1), m2 = base_change(b2, f->b1);
-            FMatrix tot = fraction_matrix_multiplication(fraction_matrix_multiplication(m1, f->mr), m2);
+            Matrix m1 = base_change( f->b1 , b1), m2 = base_change(b2, f->b1);
+            Matrix tot = fraction_matrix_multiplication(fraction_matrix_multiplication(m1, f->mr), m2);
             tot->name = "M"+b1->name + "(" + f->name + ")";
             list->Mlist = insertFirst(list->Mlist, tot); print_fmatrix(tot); cout << endl;
         } else {
-            setFVectorsPtr app = new TsetFVectors(b1->dim, b1->dim);
+            Set app = new TsetFVectors(b1->dim, b1->dim);
             for(int i = 0; i < b1->dim; i++){
                 app->v[i] = apply_linear_function(f, b1->v[i]);
             }
-            FMatrix res = base_change(app, b2);
+            Matrix res = base_change(app, b2);
             res->name = "M"+b1->name+b2->name+"("+f->name+")";
             list->Mlist = insertFirst(list->Mlist, res); print_fmatrix(res); cout << endl;
         }
@@ -256,7 +257,7 @@ Lists command_representative_matrix_formula(Lists list){
 
 Lists command_system_solution(Lists list){
     string userinput; cout << "System name: "; fflush(stdin); cin >> userinput;
-    FEqsys eq = get_esearch(list->Eqlist, userinput); setFVectorsPtr sol; Trc t;
+    FEqsys eq = get_esearch(list->Eqlist, userinput); Set sol; Trc t;
     if(eq != NULL){
         t = Rouche_Capelli(eq);
         if(t == NO_RESULT){
@@ -272,5 +273,46 @@ Lists command_system_solution(Lists list){
     }
     sol->name = eq->name + "S"; print_set_fvectors(sol); 
     list->Slist = insertFirstS(list->Slist, sol);
+    return list;
+}
+
+Lists command_find_eigenvalues(Lists list){
+    string name; cout << "Function name: "; fflush(stdin); cin >> name;
+    Function f = get_fsearch(list->Flist, name);
+    if(f != NULL){
+        Matrix m = check_matrix_symmetry(f->mr, f->b1, f->b2);
+        if(m != NULL){
+            int n = f->mr->nr;
+            double** dm = fraction_matrix_to_float(f->mr);
+            double* eigenvalues = new double[n];
+            double** eigenvectors = new double*[n];
+            for(int i = 0; i < n; i++){
+                eigenvectors[i] = new double[n];
+            }
+            Jacobi<double, double*, double**> eigen_calc(n);
+            if(eigen_calc.Diagonalize(dm, eigenvalues, eigenvectors) > 0){
+                cout << endl << "Eigenvalues: " << endl << endl;
+                for(int i = 0; i < n; i++){
+                    printf("%.5f ", eigenvalues[i]);
+                }
+                cout << endl << endl << "Eigenvectors: " << endl << endl;
+                for(int i = 0; i < n; i++){
+                    for(int j = 0; j < n; j++){
+                        printf(" %4.5f ", eigenvectors[i][j]);
+                    }
+                    cout << endl;
+                }
+                cout << endl << endl;
+
+                return list;
+            } else {
+                cout << endl << "Convergence failed" << endl << endl;
+                return list;
+            }
+
+        } else {
+            return list;
+        }
+    }
     return list;
 }
