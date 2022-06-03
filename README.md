@@ -30,6 +30,10 @@ output/main
 ```
 <br>
 
+# User Guide
+  The Guide with every command in detail can be downloaded from here --> [User Guide](User-Guide/User_Guide.pdf)    
+  <br>
+
 # Compiling the Program  
   In order to compile all the files, just run the following command in the root directory of the program:  
 ```bash
@@ -38,10 +42,6 @@ g++ -Wall -Wextra src/*.cpp -Iinclude -o output/main
 
 <br>
 <br>
-
-# User Guide
-  The Guide with every command in detail can be downloaded from here --> [User Guide](User-Guide/User_Guide.pdf)    
-  <br>
 
 # What's missing
 
