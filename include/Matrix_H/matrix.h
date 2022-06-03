@@ -1,5 +1,6 @@
-#include "all-headers.h"
 #include "Vector_H/vector.h"
+#include "Other_H/set.h"
+#include "Other_H/fraction.h"
 #include <iostream>
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
@@ -63,35 +64,39 @@ typedef struct Tfmatrix{
     ~Tfmatrix();
 }Tfmatrix;
 
-typedef Tfmatrix* FMatrix; 
+typedef Tfmatrix* Matrix; 
 
-FMatrix init_fmatrix(string name);
-FMatrix init_fmatrix_known_dim(string name, int r, int c);
-FMatrix init_predefinition_fmatrix(string name, int r, int c);
-FMatrix insert_values_fmatrix(int r, int c, string name);
-void print_fmatrix(FMatrix m);
-void print_fmatrix_system(FMatrix m);
-void print_fmatrix_float(FMatrix m);
-void print_fmatrix_float_system(FMatrix m);
-int fraction_find_max_figures_column(FMatrix m, int colummn, char type);
+Matrix init_fmatrix(string name);
+Matrix init_fmatrix_known_dim(string name, int r, int c);
+Matrix init_predefinition_fmatrix(string name, int r, int c);
+Matrix insert_values_fmatrix(int r, int c, string name);
+void print_fmatrix(Matrix m);
+void print_fmatrix_system(Matrix m);
+void print_fmatrix_float(Matrix m);
+void print_fmatrix_float_system(Matrix m);
+int fraction_find_max_figures_column(Matrix m, int colummn, char type);
 int float_find_max_figures_column(float** f, int dim, int column);
-FMatrix fraction_matrix_transpose(FMatrix m);
-FMatrix fraction_matrix_sum(FMatrix a, FMatrix b);
-FMatrix fraction_matrix_difference(FMatrix a, FMatrix b);
-FMatrix fraction_matrix_multiplication(FMatrix a, FMatrix b);
-FMatrix fraction_matrix_scalar_multiplication(FMatrix a, float lambda);
-FMatrix fraction_matrix_reverse(FMatrix m);
-void fraction_S(FMatrix m, int a, int b);
-void fraction_D(FMatrix m, int a, Fraction lambda);
-void fraction_E(FMatrix m, int d, int s, Fraction lambda);
-FMatrix fraction_matrix_copy(FMatrix m);
-FMatrix fraction_matrix_gauss_jordan(FMatrix m);
-FMatrix fraction_matrix_rref(FMatrix m);
-int fraction_matrix_rank(FMatrix m);
-bool fraction_matrix_is_base(FMatrix m);
-bool matrix_is_square(FMatrix m);
-FVector fraction_matrix_fvector_product(FMatrix m, FVector v);
-PivotRowsColumnsPtr pivot_rows_columns(FMatrix m);
-FreeColumnsPtr free_columns(FMatrix m);
+Matrix fraction_matrix_transpose(Matrix m);
+Matrix fraction_matrix_sum(Matrix a, Matrix b);
+Matrix fraction_matrix_difference(Matrix a, Matrix b);
+Matrix fraction_matrix_multiplication(Matrix a, Matrix b);
+Matrix fraction_matrix_scalar_multiplication(Matrix a, float lambda);
+Matrix fraction_matrix_reverse(Matrix m);
+void fraction_S(Matrix m, int a, int b);
+void fraction_D(Matrix m, int a, Fraction lambda);
+void fraction_E(Matrix m, int d, int s, Fraction lambda);
+Matrix fraction_matrix_copy(Matrix m);
+Matrix fraction_matrix_gauss_jordan(Matrix m);
+Matrix fraction_matrix_rref(Matrix m);
+int fraction_matrix_rank(Matrix m);
+bool fraction_matrix_is_base(Matrix m);
+bool matrix_is_square(Matrix m);
+Vector fraction_matrix_fvector_product(Matrix m, Vector v);
+PivotRowsColumnsPtr pivot_rows_columns(Matrix m);
+FreeColumnsPtr free_columns(Matrix m);
+Matrix set_vectors_to_fmatrix(Set sv);
+Matrix check_matrix_symmetry(Matrix m, Set a, Set b);
+bool is_symmetric(Matrix m);
+double** fraction_matrix_to_float(Matrix m);
 
 #endif

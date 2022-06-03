@@ -36,11 +36,6 @@ output/main
   <br>
 
 # What's missing
-## Eigenvalues & eigenvectors
-Unfortunately as for right now, eigenvalues and eigenvectors are not a part of the program, we still have to find a way to correctly solve the whole polinomial
-calculus problem.  
-If you have any idea on how to solve this, do not hesitate to contact us.  
-<br>
 
 ## Problems with parameter
 Solving matrices with a 'k' parameter is still something we have not found a way to solve but we will be working on it.  

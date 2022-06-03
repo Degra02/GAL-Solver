@@ -1,18 +1,18 @@
 #include <iostream>
 #include <all-headers.h>
 
-#ifndef __BASE_H__
-#define __BASE_H__
+#ifndef __SET_LIST_H__
+#define __SET_LIST_H__
 
 typedef struct Tbflist{
-    setFVectorsPtr b;
+    Set b;
     Tbflist *next;
 
     Tbflist(){
         b = NULL; next = NULL;
     }
 
-    Tbflist(setFVectorsPtr _b, Tbflist *_next){
+    Tbflist(Set _b, Tbflist *_next){
         b = _b; next = _next;
     }
 
@@ -22,8 +22,8 @@ typedef struct Tbflist{
 
 typedef Tbflist *SNodeptr;
 
-SNodeptr insertFirstS(SNodeptr n, setFVectorsPtr b);
-setFVectorsPtr get_ssearch(SNodeptr n, string name);
+SNodeptr insertFirstS(SNodeptr n, Set b);
+Set get_ssearch(SNodeptr n, string name);
 SNodeptr remove_ssearch(SNodeptr n);
 bool isPresentS(SNodeptr n, string name);
 SNodeptr insertS(SNodeptr n, string name);
@@ -36,6 +36,6 @@ void command_set_is_generator(SNodeptr n);
 SNodeptr command_gram_schmidt(SNodeptr n);
 SNodeptr command_orthogonal_complement(SNodeptr n);
 SNodeptr command_base_completion(SNodeptr n);
-FMatrix base_change(setFVectorsPtr b1, setFVectorsPtr b2);
+Matrix base_change(Set b1, Set b2);
 
 #endif

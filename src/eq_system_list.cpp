@@ -72,7 +72,7 @@ ENodeptr insertE(ENodeptr n, string name){
 void command_print_system(ENodeptr n){
     string userinput; cout << "System name: "; fflush(stdin); cin >> userinput;
     FEqsys eq = get_esearch(n, userinput);
-    string choice; FMatrix tmp;
+    string choice; Matrix tmp;
     if(eq != NULL){
         tmp = to_fmatrix(eq); tmp->name = eq->name;
         cout << "Print format: "; fflush(stdin); cin >> choice;

@@ -3,7 +3,7 @@
 #include "all-headers.h"
 using namespace std;
 
-MNodeptr insertFirst(MNodeptr n, FMatrix m){
+MNodeptr insertFirst(MNodeptr n, Matrix m){
     return new TMnode(m, n);
 }
 
@@ -31,11 +31,11 @@ MNodeptr remove_search(MNodeptr n){
     return n;
 }
 
-FMatrix get(MNodeptr n){
+Matrix get(MNodeptr n){
     return n->m;
 }
 
-FMatrix get_search (MNodeptr n, string name){ // returns the matrix with the given name, NULL otherwise
+Matrix get_search (MNodeptr n, string name){ // returns the matrix with the given name, NULL otherwise
     if(n == NULL){
         return NULL;
     }
@@ -77,7 +77,7 @@ MNodeptr insertM(MNodeptr n, string name){
 void command_print_matrix(MNodeptr n){
     string userinput;
     cout << "Matrix name: "; fflush(stdin); cin >> userinput;
-    FMatrix m = get_search(n, userinput);
+    Matrix m = get_search(n, userinput);
     string choice;
     cout << "Print format: "; fflush(stdin); cin >> choice;
 
@@ -114,7 +114,7 @@ MNodeptr command_new_matrix(MNodeptr n){
 MNodeptr command_matrix_product(MNodeptr n){
     string n1, n2;
     cout << "Matrix names: "; fflush(stdin); cin >> n1 >> n2;
-    FMatrix m1, m2, res;
+    Matrix m1, m2, res;
     m1 = get_search(n, n1); m2 = get_search(n, n2);
     if((m1 != NULL) && (m2 != NULL)){
         res = fraction_matrix_multiplication(m1, m2);
@@ -136,7 +136,7 @@ MNodeptr command_matrix_product(MNodeptr n){
 MNodeptr command_matrix_sum(MNodeptr n){
     string n1, n2;
     cout << "Matrix names: "; fflush(stdin); cin >> n1 >> n2;
-    FMatrix m1, m2, res;
+    Matrix m1, m2, res;
     m1 = get_search(n, n1); m2 = get_search(n, n2);
     if(m1 != NULL && m2 != NULL){
         res = fraction_matrix_sum(m1, m2);
@@ -155,7 +155,7 @@ MNodeptr command_matrix_sum(MNodeptr n){
 MNodeptr command_matrix_difference(MNodeptr n){
     string n1, n2;
     cout << "Matrix names: "; fflush(stdin); cin >> n1 >> n2;
-    FMatrix m1, m2, res;
+    Matrix m1, m2, res;
     m1 = get_search(n, n1); m2 = get_search(n, n2);
     if(m1 != NULL && m2 != NULL){
         res = fraction_matrix_difference(m1, m2);
@@ -174,8 +174,8 @@ MNodeptr command_matrix_difference(MNodeptr n){
 MNodeptr command_matrix_traspose(MNodeptr n){
     string name;
     cout << "Matrix name: "; fflush(stdin); cin >> name;
-    FMatrix m1 = get_search(n, name);
-    FMatrix t;
+    Matrix m1 = get_search(n, name);
+    Matrix t;
     if(m1 != NULL){
         t = fraction_matrix_transpose(m1);
         t->name = m1->name + "T";
@@ -189,7 +189,7 @@ MNodeptr command_matrix_traspose(MNodeptr n){
 MNodeptr command_matrix_stairs(MNodeptr n){
     string name;
     cout << "Matrix name: "; fflush(stdin); cin >> name;
-    FMatrix m1 = get_search(n, name); FMatrix s;
+    Matrix m1 = get_search(n, name); Matrix s;
     if(m1 != NULL){
         s = fraction_matrix_gauss_jordan(m1);
         s->name = m1->name + "sf"; // means stairs form
@@ -204,7 +204,7 @@ MNodeptr command_matrix_scalar_mult(MNodeptr n){
     string name; float lambda;
     cout << "Matrix name: "; fflush(stdin); cin >> name;
     cout << "Lambda= "; cin >> lambda;
-    FMatrix m1 = get_search(n, name); FMatrix t;
+    Matrix m1 = get_search(n, name); Matrix t;
     if(m1 != NULL){
         t = fraction_matrix_scalar_multiplication(m1, lambda);
         Fraction a = fraction_simplification(str_to_fraction(to_string(lambda)));
@@ -223,7 +223,7 @@ MNodeptr command_matrix_scalar_mult(MNodeptr n){
 MNodeptr command_matrix_rref(MNodeptr n){
     string name;
     cout << "Matrix name: "; fflush(stdin); cin >> name;
-    FMatrix m = get_search(n, name); FMatrix r;
+    Matrix m = get_search(n, name); Matrix r;
     if(m != NULL){
         r = fraction_matrix_rref(m);
         r->name = m->name + "rf"; // means row reduced echelon form
@@ -237,7 +237,7 @@ MNodeptr command_matrix_rref(MNodeptr n){
 void command_matrix_rank(MNodeptr n){
     string name;
     cout << "Matrix name: "; fflush(stdin); cin >> name;
-    FMatrix m = get_search(n, name);
+    Matrix m = get_search(n, name);
     if(m != NULL){
         cout << "Rank= " << fraction_matrix_rank(m);
         cout << endl << endl;
@@ -249,7 +249,7 @@ void command_matrix_rank(MNodeptr n){
 
 void command_matrix_is_base(MNodeptr n){
     string name; cout << "Matrix name: "; fflush(stdin); cin >> name;
-    FMatrix m = get_search(n, name);
+    Matrix m = get_search(n, name);
     if(m != NULL){ 
         if(fraction_matrix_is_base(m)){
             printf("The columns are a base of R%d\n\n", fraction_matrix_rank(m)); 
@@ -264,7 +264,7 @@ void command_matrix_is_base(MNodeptr n){
 
 void command_matrix_det(MNodeptr n){
     string name; cout << "Matrix name: "; fflush(stdin); cin >> name;
-    FMatrix m = get_search(n, name);
+    Matrix m = get_search(n, name);
     if(m != NULL){
         Fraction a = det(m);
         if(a != NULL){
@@ -279,9 +279,9 @@ void command_matrix_det(MNodeptr n){
 
 MNodeptr command_matrix_reverse(MNodeptr n){
     string name; cout << "Matrix name: "; fflush(stdin); cin >> name;
-    FMatrix m = get_search(n, name);
+    Matrix m = get_search(n, name);
     if(m != NULL){
-        FMatrix m1 = fraction_matrix_reverse(m);
+        Matrix m1 = fraction_matrix_reverse(m);
         if(m1 != NULL){
             m1->name = m->name + "-1";
             print_fmatrix(m1);
