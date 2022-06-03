@@ -19,15 +19,22 @@
 ## Linux
   If you're using Linux, you probably know the drill. Select the folder where you want to clone the repo and use the following command:
 
-```c++
+```bash
 git clone "https://github.com/Degra02/GAL-Library.git"
 ```
 
 Then go inside the Gal-Library directory and run
 
-```c++
+```bash
 output/main
 ```
+
+# Compiling the Program  
+  In order to compile all the files, just run the following command in the root directory of the program:  
+```bash
+g++ -Wall -Wextra src/*.cpp -Iinclude -o output/main  
+```
+
 <br>
 <br>
 
