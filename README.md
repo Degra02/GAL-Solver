@@ -39,4 +39,4 @@ output/main
 
 ## Problems with parameter
 Solving matrices with a 'k' parameter is still something we have not found a way to solve but we will be working on it.  
-Just like with eigenvalues and eigenvectors, do not hesitate to contact us.
+Do not hesitate to contact us.
