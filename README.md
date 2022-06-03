@@ -28,6 +28,7 @@ Then go inside the Gal-Library directory and run
 ```bash
 output/main
 ```
+<br>
 
 # Compiling the Program  
   In order to compile all the files, just run the following command in the root directory of the program:  
