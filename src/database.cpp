@@ -172,8 +172,8 @@ Lists command_new_function(Lists list){
                     cout << "Incompatible matrix" << endl << endl; return list;
                 }
             } else {
-                cout << "Rows= " << b2->n_th << endl << "Columns= " << b1->n_th << endl << endl;
-                m = init_fmatrix_known_dim(n3, b2->n_th, b1->n_th); list->Mlist = insertFirst(list->Mlist, m);
+                cout << "Rows= " << b1->n_th << endl << "Columns= " << b2->n_th << endl << endl;
+                m = init_fmatrix_known_dim(n3, b1->n_th, b2->n_th); list->Mlist = insertFirst(list->Mlist, m);
             }
             Function f = new Tfunction(name, b1, b2, m); list->Flist = insertFirstF(list->Flist, f);
             return list; 

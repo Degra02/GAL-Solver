@@ -12,7 +12,7 @@ Function init_function(string name){
     //l->Slist = insertFirstS(l->Slist, b1); l->Slist = insertFirstS(l->Slist, b2);
     n3 = "M" + b1->name + "->" + b2->name + "(" + name + ")";
     cout << "Representative matrix" << endl;
-    Matrix m = init_predefinition_fmatrix(n3, b2->n_th, b1->n_th);
+    Matrix m = init_predefinition_fmatrix(n3, b1->n_th, b2->n_th);
     return new Tfunction(name, b1, b2, m);
 }
 
